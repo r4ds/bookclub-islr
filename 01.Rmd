@@ -1,0 +1,31 @@
+# Introduction
+
+**Learning objectives:**
+
+- Recognize various types of statistical learning.
+- Understand why this book is useful for you.
+- Be able to read mathematical notation used throughout this book.
+- Describe the overall layout of this book.
+- Be able to find data used in examples throughout the book.
+
+## Slide 1
+
+Slide contents
+
+## Slide 2
+
+More slide contents
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>

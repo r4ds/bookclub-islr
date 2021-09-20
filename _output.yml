@@ -1,0 +1,17 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: section
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">Introduction to Statistical Learning Using R Book Club</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit:
+      link: https://github.com/r4ds/bookclub-islr/edit/main/%s
+      text: "Edit"
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no

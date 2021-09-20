@@ -1,0 +1,64 @@
+--- 
+title: "Introduction to Statistical Learning Using R Book Club"
+author: "The R4DS Online Learning Community"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: book.bib
+biblio-style: apalike
+link-citations: yes
+github-repo: r4ds/bookclub-islr
+description: "This is the product of the R4DS Online Learning Community's Introduction to Statistical Learning Using R Book Club."
+---
+
+# Welcome {-}
+
+This is a companion for the book [_Introduction to Statistical Learning Using R_](https://www.statlearning.com) by Gareth James, Daniela Witten, Trevor Hastie, and Rob Tibshirani (Springer Science+Business Media, LLC, part of Springer Nature, copyright 2021, 978-1-0716-1418-1_1).
+This companion is available at [r4ds.io/islr](https://r4ds.io/islr).
+
+This website is being developed by the [R4DS Online Learning Community](https://rfordatasci.com). Follow along, and [join the community](https://r4ds.io/join) to participate.
+
+This companion follows the [R4DS Online Learning Community Code of Conduct](https://r4ds.io/conduct).
+
+## Book club meetings {-}
+
+- Each week, a volunteer will present a chapter from the book (or part of a chapter).
+  - **This is the best way to learn the material.**
+- Presentations will usually consist of a review of the material, a discussion, and/or a demonstration of the principles presented in that chapter.
+- More information about how to present is available in the [github repo](https://github.com/r4ds/bookclub-islr).
+- Presentations will be recorded, and will be available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
+
+## Sample code {-}
+
+You can install all packages used by these notes and recommended by the book authors[^1]:
+
+```{r install-book, eval = FALSE}
+install.packages("remotes")
+remotes::install_github("r4ds/bookclub-islr")
+remove.packages("islr") # This isn't really a package.
+```
+
+## 1st edition vs 2nd edition {-}
+
+This club is reading the digital version of the second edition of this book (2e).
+
+## Pace {-}
+
+- This book is often used for two-semester-long courses.
+- We'll _try_ to cover 1 chapter/week, but...
+- ...It's ok to split chapters when they feel like too much.
+- We will try to meet every week, but will likely take some breaks for holidays, etc.
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+WILL ADD THE LOG ONCE WE HAVE ONE
+```
+</details>

@@ -1,0 +1,18 @@
+Package: islr
+Title: Introduction to Statistical Learning Using R Book Club
+Version: 0.0.0.9000
+Authors@R: c(
+  person(
+    "R4DS Online Learning Community",
+    email = "rfordatasci@gmail.com",
+    role = c("aut", "cre", "cph")
+  )
+  )
+URL: https://r4ds.github.io/bookclub-islr, https://github.com/r4ds/bookclub-islr
+Depends:
+    R (>= 3.1.0)
+Imports: 
+    bookdown,
+    ISLR2,
+    rmarkdown,
+    tidyverse

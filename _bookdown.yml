@@ -1,0 +1,8 @@
+book_filename: "bookclub-islr"
+repo: https://github.com/r4ds/bookclub-islr
+edit: "https://github.com/r4ds/bookclub-islr/edit/main/%s"
+output_dir: "_book"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
