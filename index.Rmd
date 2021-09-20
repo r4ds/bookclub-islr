@@ -28,16 +28,6 @@ This companion follows the [R4DS Online Learning Community Code of Conduct](http
 - More information about how to present is available in the [github repo](https://github.com/r4ds/bookclub-islr).
 - Presentations will be recorded, and will be available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
 
-## Sample code {-}
-
-You can install all packages used by these notes and recommended by the book authors[^1]:
-
-```{r install-book, eval = FALSE}
-install.packages("remotes")
-remotes::install_github("r4ds/bookclub-islr")
-remove.packages("islr") # This isn't really a package.
-```
-
 ## 1st edition vs 2nd edition {-}
 
 This club is reading the digital version of the second edition of this book (2e).

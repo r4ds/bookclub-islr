@@ -8,13 +8,51 @@
 - Describe the overall layout of this book.
 - Be able to find data used in examples throughout the book.
 
-## Slide 1
+## What is statistical learning?
 
-Slide contents
+- More about this in Chapter 2.
+- **Supervised:** "Building a model to **predict an *output* from *inputs*.**"
+  - Predict `wage` from `age`, `education`, and `year`.
+  - Predict `market direction` from `previous days' performance`.
+- **Unsupervised:** Inputs but no specific outputs, **find relationships and structure.**
+  - Identify `clusters` within `cancer cell lines`.
 
-## Slide 2
+## Why ISLR?
 
-More slide contents
+- "Facilitate the transition of statistical learning from an academic to a mainstream field."
+- Machine learning* is useful to everyone, let's all learn enough to use it responsibly.
+- R "labs" make this make sense for this community!
+
+## Notation
+
+- *n* = number of observations (rows)
+- *p* = number of features/variables (columns)
+- We'll come back here if we need to as we go!
+- Some symbols they assume we know:
+  - $\in$ = "is an element of", "in"
+  - ${\rm I\!R}$ = "real numbers"
+
+## What have we gotten ourselves into?
+
+- 2: Terminology & main concepts
+- 3-4: Classic linear methods
+- 5: Resampling (so we can choose the best method)
+- 6: Modern updates to linear methods
+- 7+: Beyond Linearity (we can worry about details as we get there)
+
+## Where's the data?
+
+```{r 01-install, eval = FALSE}
+install.github("ISLR2")
+```
+
+Or "install" this book.
+
+```{r 01-install-book, eval = FALSE}
+install.packages("remotes")
+remotes::install_github("r4ds/bookclub-islr")
+remove.packages("bookclubislr") # This isn't really a package.
+```
 
 ## Meeting Videos
 
