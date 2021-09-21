@@ -43,7 +43,7 @@
 ## Where's the data?
 
 ```{r 01-install, eval = FALSE}
-install.github("ISLR2")
+install.packages("ISLR2")
 ```
 
 Or "install" this book.
