@@ -14,29 +14,29 @@ If you would like to present, please add your name next to a chapter using the [
 
 - 2021-09-21: Chapter 1: Introduction - Jon Harmon
 - 2021-09-28: Chapter 2: Statistical Learning (part 1) - Ray Balise
-- 2021-10-05: Chapter 2: Statistical Learning - TBD
-- 2021-10-12: Chapter 3: Linear Regression - TBD
-- 2021-10-19: Chapter 3: Linear Regression - TBD
-- 2021-10-26: Chapter 4: Classification - TBD
-- 2021-11-02: Chapter 4: Classification - TBD
-- 2021-11-09: Chapter 5: Resampling Methods - TBD
-- 2021-11-16: Chapter 5: Resampling Methods - TBD
-- 2021-11-23: Chapter 6: Linear Model Selection and Regularization - TBD
-- 2021-11-30: Chapter 6: Linear Model Selection and Regularization - TBD
-- 2021-12-07: Chapter 7: Moving Beyond Linearity - TBD
-- 2021-12-14: Chapter 7: Moving Beyond Linearity - TBD
-- 2021-12-21: Chapter 8: Tree-Based Methods - TBD
-- 2021-12-28: Chapter 8: Tree-Based Methods - TBD
-- 2022-01-04: Chapter 9: Support Vector Machines - TBD
-- 2022-01-11: Chapter 9: Support Vector Machines - TBD
-- 2022-01-18: Chapter 10: Deep Learning - TBD
-- 2022-01-25: Chapter 10: Deep Learning - TBD
-- 2022-02-01: Chapter 11: Survival Analysis and Censored Data - TBD
-- 2022-02-08: Chapter 11: Survival Analysis and Censored Data - TBD
-- 2022-02-15: Chapter 12: Unsupervised Learning - TBD
-- 2022-02-22: Chapter 12: Unsupervised Learning - TBD
-- 2022-03-01: Chapter 13: Multiple Testing - TBD
-- 2022-03-08: Chapter 13: Multiple Testing - TBD
+- 2021-10-05: Chapter 2: Statistical Learning (part 2) - TBD
+- 2021-10-12: Chapter 3: Linear Regression (part 1) - TBD
+- 2021-10-19: Chapter 3: Linear Regression (part 2) - TBD
+- 2021-10-26: Chapter 4: Classification (part 1) - TBD
+- 2021-11-02: Chapter 4: Classification (part 2) - TBD
+- 2021-11-09: Chapter 5: Resampling Methods (part 1) - TBD
+- 2021-11-16: Chapter 5: Resampling Methods (part 2) - TBD
+- 2021-11-23: Chapter 6: Linear Model Selection and Regularization (part 1) - TBD
+- 2021-11-30: Chapter 6: Linear Model Selection and Regularization (part 2) - TBD
+- 2021-12-07: Chapter 7: Moving Beyond Linearity (part 1) - TBD
+- 2021-12-14: Chapter 7: Moving Beyond Linearity (part 2) - TBD
+- 2021-12-21: Chapter 8: Tree-Based Methods (part 1) - TBD
+- 2021-12-28: Chapter 8: Tree-Based Methods (part 2) - TBD
+- 2022-01-04: Chapter 9: Support Vector Machines (part 1) - TBD
+- 2022-01-11: Chapter 9: Support Vector Machines (part 2) - TBD
+- 2022-01-18: Chapter 10: Deep Learning (part 1) - TBD
+- 2022-01-25: Chapter 10: Deep Learning (part 2) - TBD
+- 2022-02-01: Chapter 11: Survival Analysis and Censored Data (part 1) - TBD
+- 2022-02-08: Chapter 11: Survival Analysis and Censored Data (part 2) - TBD
+- 2022-02-15: Chapter 12: Unsupervised Learning (part 1) - TBD
+- 2022-02-22: Chapter 12: Unsupervised Learning (part 2) - TBD
+- 2022-03-01: Chapter 13: Multiple Testing (part 1) - TBD
+- 2022-03-08: Chapter 13: Multiple Testing (part 2) - TBD
 
 <hr>
 
