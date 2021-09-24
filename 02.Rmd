@@ -2,7 +2,6 @@
 
 **Learning objectives:**
 
-- Define Statistical Learning.
 - Understand the limits on the accuracy of statistical models.
 - Describe the trade-off between more accurate models and more interpretable models.
 - Compare and contrast supervised and unsupervised learning.
