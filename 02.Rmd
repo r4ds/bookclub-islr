@@ -1,0 +1,23 @@
+# Statistical Learning
+
+**Learning objectives:**
+
+- Understand the limits on the accuracy of statistical models.
+- Describe the trade-off between more accurate models and more interpretable models.
+- Compare and contrast supervised and unsupervised learning.
+- Compare and contrast regression and classification problems.
+- Measure the goodness of regression model fits.
+- Measure the goodness of classification model fits.
+- Describe how bias and variance contribute to the model error.
+
+
+
+
+## Slide 1
+
+Slide contents. 
+Keep it short and slide-like!
+
+## Slide 2
+
+Slide contents.
