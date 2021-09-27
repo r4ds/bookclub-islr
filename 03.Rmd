@@ -1,4 +1,4 @@
-# Linear Regression
+# Linear Regression {#linear}
 
 **Learning objectives:**
 

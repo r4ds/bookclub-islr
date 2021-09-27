@@ -124,7 +124,7 @@ Instead of having to estimate an entirely arbitrary $p$-dimensional function $f(
 ## Parametric methods $_{(2)}$
 
 We need a procedure that uses the training data to fit or train the model. In the case of the linear model, we need to estimate the parameters $\beta_0, \beta_1,\dots, \beta_p$. That is, we want to find values of these parameters such that $$Y \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_pX_p.$$
-The most common approach to fitting the model is referred to as <mark>*(ordinary) least squares*</mark>, which we discuss in [Chapter 3](#x3).
+The most common approach to fitting the model is referred to as <mark>*(ordinary) least squares*</mark>, which we discuss in [Chapter 3](#linear).
 
 ## Parametric methods $_{(3)}$ - Easier than an arbitray function
 
