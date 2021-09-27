@@ -1,0 +1,9 @@
+# Abbreviations {.unnumbered}
+
+| Abbreviation | Term                    |
+|:-------------|:------------------------|
+| RSE          | residual standard error |
+| RSS          | residual sum of squares |
+| TSS          | total sum of squares    |
+
+
