@@ -1,0 +1,266 @@
+# Appendix: Bookdown and LaTeX Notes{.unnumbered #latex}
+
+Ray's Formatting Notes: version 2021-09-22
+https://gist.github.com/RaymondBalise/ee4b7da0a70087317dc52bf479a4e2b6
+
+```{=html}
+<style>
+  .col2 {
+    columns: 2 150px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 150px; /* chrome, safari */
+    -moz-columns: 2 150px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+```
+
+## Markdown highlighting {.unnumbered}
+
+| Formatting | Code         |
+|:-----------|:-------------|
+| **bold**   | \*\*bold\*\* |
+| __bold__   | \_\_bold\_\_ |
+| *italic*   | \*italic\*   |
+| _italic_   | \_italic\_   |
+
+## Text coloring {.unnumbered}
+
+To add color you can use CSS or R code like this:
+
+```{r, include=TRUE}
+color_text <- function(x, color){
+  if(knitr::is_latex_output())
+    paste("\\textcolor{",color,"}{",x,"}",sep="")
+  else if(knitr::is_html_output())
+    paste("<font color='",color,"'>",x,"</font>",sep="")
+  else
+    x
+}
+
+red <- function(x){
+  if(knitr::is_latex_output())
+    paste("\\textcolor{",'red',"}{",x,"}",sep="")
+  else if(knitr::is_html_output())
+    paste("<font color='red'>",x,"</font>",sep="")
+  else
+    x
+}
+```
+
+The strng `r red("This is colored with the red function")` comes from:
+
+```{r eval=FALSE}
+`r red("This is colored with the red function")`
+```
+
+The string `r color_text("This is colored with the color_text function set to mauve", "#E0B0FF")` comes from:
+
+```{r eval=FALSE}
+`r color_text("This is colored with the color_text function set to mauve", "#E0B0FF")`
+```
+
+## Section references {.unnumbered #x99-4}
+
+Section [99.4](#x99-4) comes from `Section [99.4](#x99-4)`
+
+## Footnotes {.unnumbered}
+
+^[A footnote] comes from `^[A footnote]`
+
+## Formatting Text {.unnumbered}
+
+| Appearance                                               | Code                                                   |
+|:---------------------------------------------------------|:-------------------------------------------------------|
+| `r xfun::n2w(3, cap = TRUE)`                             | `xfun::n2w(3, cap = TRUE)`                             |
+| `r scales::percent(0.1447, accuracy= .1)`                | `scales::percent(0.1447, accuracy= .1)`                |
+| `r scales::pvalue(0.1447, accuracy= .001, add_p = TRUE)` | `scales::pvalue(0.1447, accuracy= .001, add_p =TRUE)`  |
+
+## Figures {.unnumbered}
+
+Name a figure chunk with a name like figure99-1 and include fig.cap="something" then reference it like this: `\@ref(fig:figure99-1)`
+
+## Displaying Formula {.unnumbered}
+
+### Formatting {.unnumbered}
+
+To tweak the appearance of words use these formats:
+
+| Formatting        | Code                    | Looks like              |
+|:------------------|:------------------------|-------------------------|
+| plain text        | \\text{text Pr}         | $\text{text Pr}$        |
+| bold Greek symbol | \\boldsymbol{\\epsilon} | $\boldsymbol{\epsilon}$ |
+| typewriter        | \\tt{blah}              | $\tt{blah}$             |
+| slide font        | \\sf{blah}              | $\sf{blah}$             |
+| bold              | \\mathbf{x}             | $\mathbf{x}$            |
+| plain             | \\mathrm{text Pr}       | $\mathrm{text Pr}$      |
+| cursive           | \\mathcal{S}            | $\mathcal{S}$           |
+| Blackboard bold   | \\mathbb{R}             | $\mathbb{R}$            |
+
+### Symbols {.unnumbered}
+
+| Symbols                    | Code                       |
+|:---------------------------|:---------------------------|
+| $\stackrel{\text{def}}{=}$ | \\stackrel{\\text{def}}{=} |
+
+### Notation {.unnumbered}
+
+Based on: <https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html>
+
+| Math                                                          | Code                                                               |
+|:--------------------------------------------------------------|:-------------------------------------------------------------------|
+| $x = y$                                                       | `$x = y$`                                                          |
+| $x \approx y$                                                 | `$x \approx y$`                                                    |
+| $x < y$                                                       | `$x < y$`                                                          |
+| $x > y$                                                       | `$x > y$`                                                          |
+| $x \le y$                                                     | `$x \le y$`                                                        |
+| $x \ge y$                                                     | `$x \ge y$`                                                        |
+| $x \ge y$                                                     | `$x \ge y$`                                                        |
+| $x \times y$                                                  | `$x \times y$`                                                     |
+| $x^{n}$                                                       | `$x^{n}$`                                                          |
+| $x_{n}$                                                       | `$x_{n}$`                                                          |
+| $\overline{x}$                                                | `$\overline{x}$`                                                   |
+| $\hat{x}$                                                     | `$\hat{x}$`                                                        |
+| $\widehat{SE}$                                                | `$\widehat{SE}$`                                                   |
+| $\tilde{x}$                                                   | `$\tilde{x}$`                                                      |
+| $\frac{a}{b}$                                                 | `$\frac{a}{b}$`                                                    |
+| $\displaystyle \frac{a}{b}$                                   | `$\displaystyle \frac{a}{b}$`                                      |
+| $\binom{n}{k}$                                                | `$\binom{n}{k}$`                                                   |
+| $x_{1} + x_{2} + \cdots + x_{n}$                              | `$x_{1} + x_{2} + \cdots + x_{n}$`                                 |
+| $x_{1}, x_{2}, \dots, x_{n}$                                  | `$x_{1}, x_{2}, \dots, x_{n}$`                                     |
+| $\mathbf{x} = \langle x_{1}, x_{2}, \dots, x_{n}\rangle$      | `$\mathbf{x} = \langle x_{1}, x_{2}, \dots, x_{n}\rangle$`         |
+| $x \in A$                                                     | `$x \in A$`                                                        |
+| $|A|$                                                         | `$|A|$`                                                            |
+| $x \in A$                                                     | `$x \in A$`                                                        |
+| $x \subset B$                                                 | `$x \subset B$`                                                    |
+| $x \subseteq B$                                               | `$x \subseteq B$`                                                  |
+| $A \cup B$                                                    | `$A \cup B$`                                                       |
+| $A \cap B$                                                    | `$A \cap B$`                                                       |
+| $X \sim {\sf Binom}(n, \pi)$                                  | `X \sim {\sf Binom}(n, \pi)$`                                      |
+| $\mathrm{P}(X \le x) = {\tt pbinom}(x, n, \pi)$               | `$\mathrm{P}(X \le x) = {\tt pbinom}(x, n, \pi)$`                  |
+| $P(A \mid B)$                                                 | `$P(A \mid B)$`                                                    |
+| $\mathrm{P}(A \mid B)$                                        | `$\mathrm{P}(A \mid B)$`                                           |
+| $\{1, 2, 3\}$                                                 | `$\{1, 2, 3\}$`                                                    |
+| $\sin(x)$                                                     | `$\sin(x)$`                                                        |
+| $\log(x)$                                                     | `$\log(x)$`                                                        |
+| $\int_{a}^{b}$                                                | `$\int_{a}^{b}$`                                                   |
+| $\left(\int_{a}^{b} f(x) \; dx\right)$                        | `$\left(\int_{a}^{b} f(x) \; dx\right)$`                           |
+| $\left[\int_{-\infty}^{\infty} f(x) \; dx\right]$             | `$\left[\int_{\-infty}^{\infty} f(x) \; dx\right]$`                |
+| $\left. F(x) \right|_{a}^{b}$                                 | `$\left. F(x) \right|_{a}^{b}$`                                    |
+| $\sum_{x = a}^{b} f(x)$                                       | `$\sum_{x = a}^{b} f(x)$`                                          |
+| $\prod_{x = a}^{b} f(x)$                                      | `$\prod_{x = a}^{b} f(x)$`                                         |
+| $\lim_{x \to \infty} f(x)$                                    | `$\lim_{x \to \infty} f(x)$`                                       |
+| $\displaystyle \lim_{x \to \infty} f(x)$                      | `$\displaystyle \lim_{x \to \infty} f(x)$` \`                      |
+| $RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (Y_n - \hat{Y}_i)^2}$ | `$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (Y_n - \hat{Y}_i)^2}$` \` |
+
+## Equations {.unnumbered}
+
+These are formulas that appear with an equation number.
+
+### Basic Equation {.unnumbered}
+
+The names of equations can not include . or \_ but it can include -
+
+    \begin{equation} 
+      1 + 1 = 2 
+      (\#eq:eq99-1)
+    \end{equation} 
+
+Which appears as:
+
+\begin{equation} 
+  1 + 1 = 2
+  (\#eq:eq99-1)
+\end{equation} 
+
+The reference to the equation is \@ref(eq:eq99-1) which comes from this code `\@ref(eq:eq99-1)`
+
+### Case-When Equation (Large Curly Brace) {.unnumbered}
+
+Based on: <https://tex.stackexchange.com/questions/9065/large-braces-for-specifying-values-of-variables-by-condition> 
+
+Case when formula: 
+
+```{=tex}
+\begin{equation} 
+y =
+\begin{cases}
+  0, & \text{if}\ a=1 \\
+  1, & \text{otherwise}
+\end{cases}
+  (\#eq:eq99-2)
+\end{equation} 
+```
+
+Which comes from this code:
+
+```{}
+    \begin{equation} 
+      y =
+      \begin{cases}
+        0, & \text{if}\ a=1 \\
+        1, & \text{otherwise}
+      \end{cases}
+      (\#eq:eq99-2)
+    \begin{equation} 
+```
+
+The reference to equation is \@ref(eq:eq99-2) which comes from this code `\@ref(eq:eq99-2)`
+
+### Alligned with Underbars {.unnumbered}
+
+\begin{equation}
+\begin{aligned}
+\mathrm{E}(Y-\hat{Y})^2 & = \mathrm{E}[f(X) + \epsilon -\hat{f}(X)]^2 \\
+                        & = \underbrace{[f(X) -\hat{f}(X)]^2}_{\mathrm{Reducible}} + \underbrace{\mathrm{var}(\epsilon)}_{\mathrm{Irreducible}} \\
+\end{aligned}
+(\#eq:eq99-3)
+\end{equation}
+
+Comes from this code:
+
+```{}
+\begin{equation}
+\begin{aligned}
+\mathrm{E}(Y-\hat{Y})^2 & = \mathrm{E}[f(X) + \epsilon -\hat{f}(X)]^2 \\
+                        & = \underbrace{[f(X) -\hat{f}(X)]^2}_{\mathrm{Reducible}} + \underbrace{\mathrm{var}(\epsilon)}_{\mathrm{Irreducible}} \\
+\end{aligned}
+(\#eq:eq99-3)
+\end{equation}
+```
+
+## Greek letters {.unnumbered}
+
+Based on: <https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html>
+
+::: {.col2}
+| letters                   | code                        |
+|:--------------------------|:----------------------------|
+| $\alpha A$                | `$\alpha A$`                |
+| $\beta B$                 | `$\beta B$`                 |
+| $\gamma \Gamma$           | `$\gamma \Gamma$`           |
+| $\delta \Delta$           | `$\delta \Delta$`           |
+| $\epsilon \varepsilon E$  | `$\epsilon \varepsilon E$`  |
+| $\zeta Z \sigma$          | `$\zeta Z \sigma`           |
+| $\eta H$                  | `$\eta H$`                  |
+| $\theta \vartheta \Theta$ | `$\theta \vartheta \Theta$` |
+| $\iota I$                 | `$\iota I$`                 |
+| $\kappa K$                | `$\kappa K$`                |
+| $\lambda \Lambda$         | `$\lambda \Lambda$`         |
+| $\mu M$                   | `$\mu M$`                   |
+| $\nu N$                   | `$\nu N$`                   |
+| $\xi\Xi$                  | `$\xi\Xi$`                  |
+| $o O$                     | `$o O$ (omicron)`           |
+| $\pi \Pi$                 | `$\pi \Pi$`                 |
+| $\rho\varrho P$           | `$\rho\varrho P$`           |
+| $\sigma \Sigma$           | `\sigma \Sigma$`            |
+| $\tau T$                  | `$\tau T$`                  |
+| $\upsilon \Upsilon$       | `$\upsilon \Upsilon$`       |
+| $\phi \varphi \Phi$       | `$\phi \varphi \Phi$`       |
+| $\chi X$                  | `$\chi X$`                  |
+| $\psi \Psi$               | `$\psi \Psi$`               |
+| $\omega \Omega$           | `$\omega \Omega$`           |
+:::
