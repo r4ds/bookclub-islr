@@ -15,11 +15,11 @@
 - Recognize KNN.
 - Understand the role of tuning in ML models.
 
-```{r setup, echo = FALSE}
+```{r 02-setup, echo = FALSE}
 knitr::opts_chunk$set(include = TRUE)
 ```
 
-```{r, echo=FALSE}
+```{r 02-library, echo=FALSE}
 # Helper packages - need dplyr and ggplot
 suppressPackageStartupMessages(library(tidyverse))
 library(ggthemes)
