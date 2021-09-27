@@ -1,0 +1,27 @@
+# Linear Model Selection and Regularization
+
+**Learning objectives:**
+
+- We'll fill these in.
+
+## Slide 1
+
+- Try to follow a slide-like format.
+
+## Slide 2
+
+- Use `##` to create new slides (sections).
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>

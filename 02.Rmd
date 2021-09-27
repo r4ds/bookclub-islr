@@ -11,9 +11,9 @@
 - Measure the accuracy/goodness of regression model fits.
 - Measure the accuracy/goodness of classification model fits.
 - Describe how bias and variance contribute to the model error.
-- Understand overfitting
-- Understand the gist of KNN
-- Understand the role of tuning in ML models
+- Understand overfitting.
+- Recognize KNN.
+- Understand the role of tuning in ML models.
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(include = TRUE)
@@ -21,9 +21,6 @@ knitr::opts_chunk$set(include = TRUE)
 
 ```{r, echo=FALSE}
 # Helper packages - need dplyr and ggplot
-library(conflicted)
-suppressMessages(conflict_prefer("select", "dplyr"))
-suppressMessages(conflict_prefer("filter", "dplyr"))
 suppressPackageStartupMessages(library(tidyverse))
 library(ggthemes)
 suppressPackageStartupMessages(library(tidymodels))
@@ -90,7 +87,7 @@ Therefore, variability associated with $\epsilon$ also affects the accuracy of o
 
 The quantity $\epsilon$ may contain unmeasured variables that are useful in predicting $Y$
 
-## Reducible vs Irriducible Error
+## Reducible vs Irreducible Error
 Consider a given estimate $\hat{f}$ and a set of predictors $X$, which yields the prediction $\hat{Y} = \hat{f}(X)$. It is easy to show that
 
  ![EQ 2.3](./images/eq2-3.jpg)
@@ -127,7 +124,7 @@ Instead of having to estimate an entirely arbitrary $p$-dimensional function $f(
 ## Parametric methods $_{(2)}$
 
 We need a procedure that uses the training data to fit or train the model. In the case of the linear model, we need to estimate the parameters $\beta_0, \beta_1,\dots, \beta_p$. That is, we want to find values of these parameters such that $$Y \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_pX_p.$$
-The most common approach to fitting the model is referred to as <mark>*(ordinary) least squares*</mark>, which we discuss in [Chapter 3](#linear).
+The most common approach to fitting the model is referred to as <mark>*(ordinary) least squares*</mark>, which we discuss in [Chapter 3](#x3).
 
 ## Parametric methods $_{(3)}$ - Easier than an arbitray function
 
