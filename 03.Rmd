@@ -2,7 +2,16 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Perform linear regression with a **single predictor variable.**
+- Estimate the **standard error** of regression coefficients.
+- Evaluate the **goodness of fit** of a regression.
+- Perform linear regression with **multiple predictor variables.**
+- Evaluate the **relative importance of variables** in a multiple linear regression.
+- Include **interaction effects** in a multiple linear regression.
+- Perform linear regression with **qualtitative predictor variables.**
+- Model **non-linear relationships** using polynomial regression.
+- Identify **non-linearity** in a data set.
+- Compare and contrast linear regression with **KNN regression.**
 
 ## Slide 1
 
