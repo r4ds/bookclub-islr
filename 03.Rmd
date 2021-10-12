@@ -8,18 +8,90 @@
 - Perform linear regression with **multiple predictor variables.**
 - Evaluate the **relative importance of variables** in a multiple linear regression.
 - Include **interaction effects** in a multiple linear regression.
-- Perform linear regression with **qualtitative predictor variables.**
+- Perform linear regression with **qualitative predictor variables.**
 - Model **non-linear relationships** using polynomial regression.
 - Identify **non-linearity** in a data set.
 - Compare and contrast linear regression with **KNN regression.**
 
-## Slide 1
+## Questions to Answer
 
-- Try to follow a slide-like format.
+Recall the `Advertising` data from [Chapter 2](#learning). Here are a few important questions that we might seek to address:
 
-## Slide 2
+1. **Is there a relationship between advertising budget and sales?**
+2. **How strong is the relationship between advertising budget and sales?** Does knowledge of the advertising budget provide a lot of information about product sales?
+3. **Which media are associated with sales?**
+4. **How large is the association between each medium and sales?** For every dollar spent on advertising in a particular medium, by what amount will sales increase? 
+5. **How accurately can we predict future sales?**
+6. **Is the relationship linear?** If there is approximately a straight-line relationship between advertising expenditure in the various media and sales, then linear regression is an appropriate tool. If not, then it may still be possible to transform the predictor or the response so that linear regression can be used.
+7. **Is there synergy among the advertising media?** Or, in stats terms, is there an interaction effect?
 
-- Use `##` to create new slides (sections).
+## Simple Linear Regression: Definition
+
+**Simple linear regression:** Very straightforward approach to predicting response $Y$ on predictor $X$.
+
+$$Y \approx \beta_{0} + \beta_{1}X$$
+
+- Read "$\approx$" as *"is approximately modeled by."*
+- $\beta_{0}$ = intercept
+- $\beta_{1}$ = slope
+
+$$\hat{y} = \hat{\beta}_{0} + \hat{\beta}_{1}x$$
+
+- $\hat{\beta}_{0}$ = our approximation of intercept
+- $\hat{\beta}_{1}$ = our approximation of slope
+- $x$ = sample of $X$
+- $\hat{y}$ = our prediction of $Y$ from $x$
+
+## Simple Linear Regression: Visualization
+
+```{r fig3-1, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="For the `Advertising` data, the least squares fit for the regression of `sales` onto `TV` is shown. The fit is found by minimizing the residual sum of squares. Each grey line segment represents a residual. In this case a linear fit captures the essence of the relationship, although it overestimates the trend in the left of the plot."}
+
+knitr::include_graphics("./images/fig3_1.jpg", error = FALSE)
+```
+
+## Simple Linear Regression: Math
+
+- **RSS** = *residual sum of squares*
+
+$$\mathrm{RSS} = e^{2}_{1} + e^{2}_{2} + \ldots + e^{2}_{n}$$
+
+$$\mathrm{RSS} = (y_{1} - \hat{\beta}_{0} - \hat{\beta}_{1}x_{1})^{2} + (y_{2} - \hat{\beta}_{0} - \hat{\beta}_{1}x_{2})^{2} + \ldots + (y_{n} - \hat{\beta}_{0} - \hat{\beta}_{1}x_{n})^{2}$$
+
+$$\hat{\beta}_{1} = \frac{\sum_{i=1}^{n}{(x_{i}-\bar{x})(y_{i}-\bar{y})}}{\sum_{i=1}^{n}{(x_{i}-\bar{x})^{2}}}$$
+$$\hat{\beta}_{0} = \bar{y} - \hat{\beta}_{1}\bar{x}$$
+
+- $\bar{x}$, $\bar{y}$ = sample means of $x$ and $y$
+
+### Visualization of Fit
+
+```{r fig3-2, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="Contour and three-dimensional plots of the RSS on the `Advertising` data, using `sales` as the response and `TV` as the predictor. The red dots correspond to the least squares estimates $\\hat\\beta_0$ and $\\hat\\beta_1$, given by (3.4)"}
+
+knitr::include_graphics("./images/fig3_2.jpg", error = FALSE)
+```
+
+**Learning Objectives:**
+
+- Perform linear regression with a **single predictor variable.** `r emo::ji("heavy_check_mark")`
+
+## Assessing Accuracy of Coefficient Estimates
+
+$$Y = \beta_{0} + \beta_{1}X + \epsilon$$
+
+- **RSE** = *residual standard error*
+- Estimate of $\sigma$
+
+$$\mathrm{RSE} = \sqrt{\frac{\mathrm{RSS}}{n - 2}}$$
+$$\mathrm{SE}(\hat\beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2}\right],\ \ \mathrm{SE}(\hat\beta_1)^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2}$$
+
+- **95% confidence interval:** a range of values such that with 95% probability, the range will contain the true unknown value of the parameter
+  - If we take repeated samples and construct the confidence interval for each sample, 95% of the intervals will contain the true unknown value of the parameter
+
+$$\hat\beta_1 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_1)$$
+$$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
+**Learning Objectives:**
+
+- Estimate the **standard error** of regression coefficients. `r emo::ji("heavy_check_mark")`
+
 
 ## Meeting Videos
 

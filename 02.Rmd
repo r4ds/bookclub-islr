@@ -1,4 +1,4 @@
-# Statistical Learning
+# Statistical Learning {#learning}
 
 **Learning objectives:**
 

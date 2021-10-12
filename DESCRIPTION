@@ -13,9 +13,12 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     bookdown,
+    emo,
     ggthemes,
     knitr,
     ISLR2,
     rmarkdown,
     tidymodels,
     tidyverse
+Remotes:
+    hadley/emo
