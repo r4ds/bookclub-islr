@@ -15,7 +15,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-09-21: Chapter 1: Introduction - Jon Harmon
 - 2021-09-28: Chapter 2: Statistical Learning (part 1) - Ray Balise
 - 2021-10-05: Chapter 2: Statistical Learning (part 2) - Ray Balise and Jon Harmon
-- 2021-10-12: Chapter 3: Linear Regression (part 1) - TBD
+- 2021-10-12: Chapter 3: Linear Regression (part 1) - Jon Harmon
 - 2021-10-19: Chapter 3: Linear Regression (part 2) - TBD
 - 2021-10-26: Chapter 4: Classification (part 1) - TBD
 - 2021-11-02: Chapter 4: Classification (part 2) - TBD
