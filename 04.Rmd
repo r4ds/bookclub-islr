@@ -2,7 +2,14 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Compare and contrast **classification** with linear regression.
+- Perform classification using **logistic regression**.
+- Perform classification using **linear discriminant analysis (LDA)**.
+- Perform classification using **quadratic discriminant analysis (QDA)**.
+- Perform classification using **naive Bayes**.
+- Identify the **strengths and weaknesses** of the various classification models.
+- Model count data using **Poisson regression**.
+
 
 ## Slide 1
 
