@@ -6,7 +6,7 @@
 - Use **leave-one-out cross-validation** to estimate the test error of a predictive model. 
 - Use **K-fold cross-validation** to estimate the test error of a predictive model. 
 - Use **the bootstrap** to estimate the test error of a predictive model. 
-- Understand the **advantages and disadvantages** of the various methods for estimating model test error. 
+- Describe the **advantages and disadvantages** of the various methods for estimating model test error. 
 
 ## Slide 1
 
