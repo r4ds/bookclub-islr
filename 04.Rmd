@@ -52,18 +52,14 @@ knitr::include_graphics("./images/fig4_1.jpg", error = FALSE)
 
 - a regression method cannot convert a qualitative response variable with more than two levels into a quantitative response that is ready for linear regression
 
-$$
-
-Y = \left\{ \begin{array}{ll}
+$$Y = \left\{ \begin{array}{ll}
           1 & \mbox{if stroke};\\
           2 & \mbox{if epileptic seizure};\\
-          3 & \mbox{if drug overdose}.\end{array} \right.
-
-$$
+          3 & \mbox{if drug overdose}.\end{array} \right.$$
 
 - a regression method will not provide meaningful estimates of Pr(Y |X), even with just two classes; partial estimates might be outside the [0, 1] probability interval
 
-```{r fig4-2, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
+```{r fig4-2, cache=FALSE, eval=FALSE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
 
 knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 ```
@@ -74,72 +70,33 @@ knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 - **Logistic regression**: models the probability that Y belongs to a particular category (X) 
 - X is binary (0/1)
 
-$$
-p(X) = β_0 + β_1X \space \Longrightarrow {Linear \space regression}
-
-\\
-
-p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}}  
-
-\space \Longrightarrow {Logistic \space function}
-
-\\
-
-odds = p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}}  
-
-\Longrightarrow {odds \space value [0, ∞]}
-
-\\
-
-\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X
-
-\Longrightarrow {log \space odds/logit}
-
-$$
+$$p(X) = β_0 + β_1X \space \Longrightarrow {Linear \space regression}$$
+$$p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \space \Longrightarrow {Logistic \space function}$$
+$$odds = p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
+$$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
 
 By logging the whole equation, we get
 
-$$
-\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X
+$$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
 
-\Longrightarrow {log \space odds/logit}
-
-$$
 To estimate the regression coefficient, we use maximum likelihood (ME). 
 
 
 Likelihood Function
 
-$$
+$$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i) = \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
 
-ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i) = \prod_{i': y_{i'}= 0} (1- p (x_{i'}))  
-
-\Longrightarrow {Likelihood \space function}
-$$
 ### Multiple Logistic Regression
 
-$$
-\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p
-
-\\
-
-\Downarrow
-
-\\
-
-p(X) = \frac{e^{\beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p}}{1 + \beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p}
-
-$$
+$$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p \\ \Downarrow \\ p(X) = \frac{e^{\beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p}}{1 + \beta_{0} + \beta_{1}X_1 + ... + \beta_{p}X_p}$$
 
 ```{r fig4-3, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "Confounding in the Default data. Left: Default rates are shown for students (orange) and non-students (blue). The solid lines display default rate as a function of balance, while the horizontal broken lines display the overall default rates. Right: Boxplots of balance for students (orange) and non-students (blue) are shown."}
 
 knitr::include_graphics("./images/fig4_3.jpg", error = FALSE)
-
 ```
 
 
 ### Multinomial Logistic Regression
-
 
 
 ## Generative Models for Classification
@@ -166,10 +123,7 @@ sample from the population
 
 Bayes’ theorem states that
 
-$$
-Pr(Y = k|X = x) = \frac {π_k f_k(x)}{\sum_{l =1}^{k} π_lf_l(x)}
-
-$$
+$$Pr(Y = k|X = x) = \frac {π_k f_k(x)}{\sum_{l =1}^{k} π_lf_l(x)}$$
 
 - $$ p_k(x) = Pr(Y = k|X = x) \Longrightarrow $$  posterior probability that an observation posterior X = x belongs to the kth class; computed from $$ f_k(X)$$
 
@@ -192,37 +146,22 @@ mean and,
 
 The normal density takes the form
 
-$$
-f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)
+$$f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
 
-$$
 Then, the posterior probability (probability that the observation belongs to the kth class, given the predictor value for that observation) is
 
-$$
+$$p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)}
+{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_l)^2)}$$
 
-p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)}
-{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_l)^2)}
-
-$$
 **Additional mathematical formula**
 
 After you log and rearrange the above equation, you will the following formula. The Bayes' classifier assign to one class if $$2x (μ_1 − μ_2) > μ_1^2 − μ_2^2$$ and otherwise. 
 
-$$
-
-δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k)
-
-
-\Longrightarrow {Equation \space 4.18}
-$$
+$$δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k) \Longrightarrow {Equation \space 4.18}$$
 
 The Bayes decision boundary is the point for which $$δ_1(x) = δ_2(x)$$
 
-$$
-
-x = \frac{μ_1^2 − μ_2^2}{2(μ_1 − μ_2)} = \frac{μ_1 + μ_2}{2}
-
-$$
+$$x = \frac{μ_1^2 − μ_2^2}{2(μ_1 − μ_2)} = \frac{μ_1 + μ_2}{2}$$
 
 ```{r fig4-4, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "Left: Two one-dimensional normal density functions are shown. The dashed vertical line represents the Bayes decision boundary. Right: 20 observations were drawn from each of the two classes, and are shown as histograms. The Bayes decision boundary is again shown as a dashed vertical line. The solid vertical line represents the LDA decision boundary estimated from the training data."}
 
@@ -234,15 +173,11 @@ The **linear discriminant analysis (LDA)** method approximates the linear
 discriminant analysis Bayes classifier by plugging estimates for $$π_k$$, $$μ_k$$, and σ^2 into equation 4.18. 
 
 $$\hat μ_k$$ is the average of all the training observations from the kth class
-$$
-\hat{\mu}_{k} = \frac{1}{n_{k}}\sum_{i: y_{i}= k} x_{i}
-$$
+$$\hat{\mu}_{k} = \frac{1}{n_{k}}\sum_{i: y_{i}= k} x_{i}$$
 
 $$ \hat σ^2 $$weighted average of the sample variances for each of the K classes
 
-$$
-\hat{\sigma}^2 = \frac{1}{n - K} \sum_{k = 1}^{K} \sum_{i: y_{i}= k} (x_{i} - \hat{\mu}_{k})^2
-$$
+$$\hat{\sigma}^2 = \frac{1}{n - K} \sum_{k = 1}^{K} \sum_{i: y_{i}= k} (x_{i} - \hat{\mu}_{k})^2$$
 
 Note. 
 n = total number of training observations, 
@@ -251,30 +186,11 @@ $$n_k$$ = number of training observations in the kth class
 $$π_k$$ is estimated from the proportion of the training observations
 that belong to the kth class.
 
-$$
-
-π_k = \frac{n_k}{n}
-
-$$
+$$π_k = \frac{n_k}{n}$$
 
 LDA classifier assigns an observation X = x to the class for which $$δ_k(x)$$ is largest. 
 
-$$
-
-δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k)
-
-
-\Longrightarrow {Equation \space 4.18}
-
-\\
-
-\Downarrow
-
-\\
-
-\hat δ_k(x) = x \cdot \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2} + log(\hat π_k)
-
-$$
+$$δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k) \Longrightarrow {Equation \space 4.18} \\ \Downarrow \\ \hat δ_k(x) = x \cdot \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2} + log(\hat π_k)$$
 
 ### Linear Discriminant Analysis for p > 1
 
@@ -285,8 +201,6 @@ $$
 **Assumptions: **
 - each individual predictor follows a one-dimensional normal distribution, with predictors having some correlation
 
-- 
-
 
 ```{r fig4-5, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "Two multivariate Gaussian density functions are shown, with p = 2. Left: The two predictors are uncorrelated and it has a circular base. Var(X_1) = Var(X_2) and Cor(X_1,X_2) = 0; Right: The two variables have a correlation of 0.7 with a elliptical base"}
 
@@ -296,29 +210,12 @@ knitr::include_graphics("./images/fig4_5.jpg", error = FALSE)
 
 The multivariate Gaussian density is defined as: 
 
-$$
-
-f(x) = \frac{1}{(2π)^{\frac{p}{2}}|Σ|^{\frac{1}{2}}} exp \left[ -\frac{1}{2} \left( x - \mu \right)^T Σ^{−1}} \left(x − μ \right) \right]
-
-$$
+$$f(x) = \frac{1}{(2π)^{\frac{p}{2}}|Σ|^{\frac{1}{2}}} exp \left[ -\frac{1}{2} \left( x - \mu \right)^T Σ^{−1}} \left(x − μ \right) \right]$$
 
 
 Bayes classifier assigns an observation X = x to the class for which $$δ_k(x)$$ is largest. 
 
-$$
-
-δ_k(x) =  x^T Σ^{−1}μ_k - \frac{1}{2}μ_k^T Σ^{−1} μ_k + log π_k 
-
-\Longrightarrow vector/matrix \space version
-
-\\
-
-δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k)
-
-
-\Longrightarrow {Equation \space 4.18}
-
-$$
+$$δ_k(x) =  x^T Σ^{−1}μ_k - \frac{1}{2}μ_k^T Σ^{−1} μ_k + log π_k \Longrightarrow vector/matrix \space version \\ δ_k(x) = x . \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + log(π_k) \Longrightarrow {Equation \space 4.18}$$
 
 ```{r fig4-6, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "An example with three classes. The observations from each class are drawn from a multivariate Gaussian distribution with p = 2, with a class-specific mean vector and a common covariance matrix. Left: Ellipses that contain 95% of the probability for each of the three classes are shown. The dashed lines are the Bayes decision boundaries. Right: 20 observations were generated from each class, and the corresponding LDA decision boundaries are indicated using solid black lines. The Bayes decision boundaries are once again shown as dashed lines. Overall, the LDA decision boundaries are pretty close to the Bayes decision boundaries, shown again as dashed lines. The test error rates for the Bayes and LDA classifiers are 0.0746 and 0.0770, respectively."}
 
@@ -345,15 +242,7 @@ total error rate out of all classifiers
 2. In the process, the Bayes classifier will yield the smallest possible total number of misclassified observations, regardless of the class from which the errors stem. 
 3. It also uses a threshold of 50% for the posterior probability of default in order to assign an observation to the default class
 
-$$
-
-Pr(default = Yes|X = x) > 0.5.
-
-\\
-
-Pr(default = Yes|X = x) > 0.2.
-
-$$
+$$Pr(default = Yes|X = x) > 0.5. \\ Pr(default = Yes|X = x) > 0.2.$$
 
 ```{r fig4-7, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "The figure illustrates the trade-off that results from modifying the threshold value for the posterior probability of default. For the Default data set, error rates are shown as a function of the threshold value for the posterior probability that is used to perform the assignment. The black solid line displays the overall error rate. The blue dashed line represents the fraction of defaulting customers that are incorrectly classified, and the orange dotted line indicates the fraction of errors among the non-defaulting customers."}
 
@@ -415,29 +304,11 @@ Important measures for classification and diagnostic testing:
 
 - QDA assumes that each class has its own covariance matrix
 
-$$
-
-X ∼ N(μ_k,Σ_k) 
-
-\Longrightarrow {Σ_k is \space covariance \space matrix \space for \space the \space kth \space class}
-
-$$
+$$X ∼ N(μ_k,Σ_k) \Longrightarrow {Σ_k is \space covariance \space matrix \space for \space the \space kth \space class}$$
 
 **Bayes classifier**
 
-$$
-
-δ_k(x) = - \frac{1}{2}(x - \mu_k)^T Σ_k^{−1}(x - \mu_k) - \frac{1}{2}log|Σ_k| + log(π_k)
-
-\\
-
-\Downarrow
-
-\\
-
-δ_k(x) =  - \frac{1}{2}x^T Σ_k^{−1}x - x^T Σ_k^{−1} \mu_k - \frac{1}{2}μ_k^T Σ_k^{−1} μ_k - \frac{1}{2}log|Σ_k| + log π_k
-
-$$
+$$δ_k(x) = - \frac{1}{2}(x - \mu_k)^T Σ_k^{−1}(x - \mu_k) - \frac{1}{2}log|Σ_k| + log(π_k) \\ \Downarrow \\ δ_k(x) =  - \frac{1}{2}x^T Σ_k^{−1}x - x^T Σ_k^{−1} \mu_k - \frac{1}{2}μ_k^T Σ_k^{−1} μ_k - \frac{1}{2}log|Σ_k| + log π_k$$
 
 QDA classifier involves plugging estimates for **$$Σ_k$$, $$μ_k$$, and $$π_k$$** into the above equation, and then assigning an observation X = x to the class for which this quantity is **largest**. 
 
@@ -465,12 +336,8 @@ knitr::include_graphics("./images/fig4_9.jpg", error = FALSE)
 - an alternative to LDA that does not assume normally distributed
 predictors
 
-$$
-
-f_k(x) = f_{k1}(x_1) × f_{k2}(x_2)×· · ·×f{k_p}(x_p),
-
-$$
-where $$f_{kj}$$ is the density function of the jth predictor among observations in the kth class 
+$$f_k(x) = f_{k1}(x_1) × f_{k2}(x_2)×· · ·×f{k_p}(x_p),$$
+where $f_{kj}$ is the density function of the jth predictor among observations in the kth class 
 
 
 *Within the kth class, the p predictors are independent.*
@@ -486,11 +353,11 @@ where $$f_{kj}$$ is the density function of the jth predictor among observations
 
 **Options to estimate the one-dimensional density function fkj using training data**
 
-1. [For Quantitative $$X_j$$] -> We assume $$X_j |Y = k ∼ N(μ_{jk},σ_{jk}^2)$$, where within each class, the jth predictor is drawn from a (univariate) normal distribution. It is **QDA-like with diagonal class-specific covariance matrix**
+1. [For Quantitative $X_j$] -> We assume $X_j |Y = k ∼ N(μ_{jk},σ_{jk}^2)$, where within each class, the jth predictor is drawn from a (univariate) normal distribution. It is **QDA-like with diagonal class-specific covariance matrix**
 
-2. [For Quantitative $$X_j$$] -> Use a *non-parametric estimate* for $$f_{kj}$$. First, a histogram for the within-class observations and then estimate $$f_{kj}(x_j)$$. Or else, use **kernel density estimator**. 
+2. [For Quantitative $X_j$] -> Use a *non-parametric estimate* for $f_{kj}$. First, a histogram for the within-class observations and then estimate $f_{kj}(x_j)$. Or else, use **kernel density estimator**. 
 
-3. [For Qualitative $$X_j$$] ->Count the proportion of training observations for the jth predictor corresponding to each class. 
+3. [For Qualitative $X_j$] ->Count the proportion of training observations for the jth predictor corresponding to each class. 
 
 Note: Fixing the threshold, the Naive Bayes has a higher error rate than LDA, but better prediction (higher sensitivity). 
 

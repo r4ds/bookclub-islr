@@ -15,6 +15,7 @@ Imports:
     bookdown,
     emo,
     ggthemes,
+    htmlTable,
     knitr,
     ISLR2,
     rmarkdown,
