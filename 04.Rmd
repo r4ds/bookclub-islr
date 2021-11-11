@@ -21,23 +21,24 @@
   - quadratic discriminant analysis (QDA)
   - naive Bayes
   - K-nearest neighbors
-  
+
+<br> 
 - Examples of classification problems: 
   1. A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have?
   
   - Predictor variable: Symptoms
   - Response variable: Type of medical conditions
-  
+<br>  
   2. An online banking service must be able to determine whether or not a transaction being performed on the site is fraudulent, on the basis of the user’s IP address, past transaction history, and so forth.
   
   - Predictor variable: User's IP address, past transaction history, etc
   - Response variable: Fraudulent activity (Yes/No)
-  
+<br>  
   3. On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to figure out which DNA mutations are deleterious (disease-causing) and which are not.
   
   - Predictor variable: DNA sequence data
   - Response variable: Presence of deleterious gene (Yes/No)
-
+<br>
 
 - In the following section, we are going to explore the `Default` dataset. The annual incomes ($X_1$ = `income`) and monthly credit card balances ($X_2$ =`balance`) are used to predict whether whether an individual will default on his or her credit card payment. 
 
@@ -98,10 +99,15 @@ knitr::include_graphics("./images/fig4_3.jpg", error = FALSE)
 
 ### Multinomial Logistic Regression
 
+- This is used in the setting where K > 2 classes. In multinomial, we select a single class to serve as the baseline.
+
+- However, the interpretation of the coefficients in a multinomial logistic regression model must be done with care, since it is tied to the choice of baseline. 
+
+- Alternatively, you can use `Softmax coding, where we _treat all K classes symmetrically_, and assume that for k = 1, . . . ,K, rather than selecting a baseline. This means, we estimate coefficients for all K classes, rather than estimating coefficients for K − 1 classes. 
 
 ## Generative Models for Classification
 
-Why Logistic Regression is not ideal?
+**Why Logistic Regression is not ideal?**
 
 - When there is substantial separation between the two classes, the
 parameter estimates for the logistic regression model are surprisingly
@@ -113,19 +119,20 @@ each of the classes and the sample size is small, then the generative modelling 
 - Generative modelling can be naturally extended to the case
 of more than two response classes. 
 
-common notations:
+<br>
+**Common notations:**
 - K $\Longrightarrow$ response class
 
 - $π_k \Longrightarrow$ overall or prior probability that a randomly chosen observation comes from the prior kth class; can be obtained from the random
 sample from the population
 
-- $ f_k(X) ≡ Pr(X|Y = k)^1 \Longrightarrow$ the density function of X density for an observation that comes from the kth class; requires some underlying assumption to estimate 
+- $f_k(X) ≡ Pr(X|Y = k)^1 \Longrightarrow$ the density function of X density for an observation that comes from the kth class; requires some underlying assumption to estimate 
 
 Bayes’ theorem states that
 
 $Pr(Y = k|X = x) = \frac {π_k f_k(x)}{\sum_{l =1}^{k} π_lf_l(x)}$
 
-- $ p_k(x) = Pr(Y = k|X = x) \Longrightarrow $  posterior probability that an observation posterior X = x belongs to the kth class; computed from $ f_k(X)$
+- $p_k(x) = Pr(Y = k|X = x) \Longrightarrow$  posterior probability that an observation posterior X = x belongs to the kth class; computed from $f_k(X)$
 
 ## A Comparison of Classification Methods
 
@@ -174,7 +181,7 @@ discriminant analysis Bayes classifier by plugging estimates for $π_k$, $μ_k$,
 $\hat μ_k$ is the average of all the training observations from the kth class
 $$\hat{\mu}_{k} = \frac{1}{n_{k}}\sum_{i: y_{i}= k} x_{i}$$
 
-$ \hat σ^2 $ is the weighted average of the sample variances for each of the K classes
+$\hat σ^2$ is the weighted average of the sample variances for each of the K classes
 
 $$\hat{\sigma}^2 = \frac{1}{n - K} \sum_{k = 1}^{K} \sum_{i: y_{i}= k} (x_{i} - \hat{\mu}_{k})^2$$
 
@@ -207,9 +214,10 @@ knitr::include_graphics("./images/fig4_5.jpg", error = FALSE)
 
 ```
 
+$\exp$
 The multivariate Gaussian density is defined as: 
 
-$$f(x) = \frac{1}{(2π)^{\frac{p}{2}}|Σ|^{\frac{1}{2}}} exp \left[ -\frac{1}{2} \left( x - \mu \right)^T Σ^{−1}} \left(x − μ \right) \right]$$
+$$f(x) = \frac{1}{(2π)^{\frac{p}{2}}|Σ|^{\frac{1}{2}}}\exp -\frac{1}{2}(x - \mu)^T Σ^{−1}(x − μ))$$
 
 
 Bayes classifier assigns an observation X = x to the class for which $$δ_k(x)$$ is largest. 
@@ -268,19 +276,8 @@ library(magrittr)
 
 matrix(c("True Neg. (TN)", "False Pos. (FP)", "N", "False Neg. (FN)", "True Pos. (TP)", "P", "N∗", "P∗", ""),
        ncol = 3,
-       dimnames = list("Predicted class" = c("− or Null", "+ or Non-null", "Total"),
-                       "True class" = c("− or Null", "+ or Non-null", "Total"))) %>% 
-  addHtmlTableStyle(align = "lcr") %>% 
-  htmlTable
-
-```
-
-```{r tbl4_7, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="Important measures for classification and diagnostic testing, derived from quantities in Table 4.6."}
-
-matrix(c("True Neg. (TN)", "False Pos. (FP)", "N", "False Neg. (FN)", "True Pos. (TP)", "P", "N∗", "P∗", ""),
-       ncol = 3,
-       dimnames = list("Predicted class" = c("− or Null", "+ or Non-null", "Total"),
-                       "True class" = c("− or Null", "+ or Non-null", "Total"))) %>% 
+       dimnames = list("Predicted class" = c(" − or Null", " + or Non-null", "Total"),
+                       "True class" = c("Neg. or Null", "Pos. or Non-null", "Total"))) %>% 
   addHtmlTableStyle(align = "lcr") %>% 
   htmlTable
 
@@ -313,8 +310,11 @@ QDA classifier involves plugging estimates for **$Σ_k$, $μ_k$, and $π_k$** in
 
 The quantity x appears as a quadratic function, hence the name. 
 
+<br>
 **Why the LDA to QDA is preferred or vice-versa?**
+<br>
 1. **Bias-variance trade-off** 
+<br>
   - Pro LDA: LDA assumes that the K classes share a common covariance matrix and the quantity X becomes linear, which means there are $K_p$ linear coefficients to estimate.LDA is a much less flexible classifier than QDA, and so has substantially *lower variance*; improved prediction performance.
   
   - Con LDA: If the assumption K classes share a common covariance matrix is badly off, LDA can suffer from *high bias*
@@ -392,7 +392,7 @@ Note: Fixing the threshold, the Naive Bayes has a higher error rate than LDA, bu
 
 <br>
 
-_ Final note._ The choice of method depends on (1) the true distribution of the predictors in each of the K classes,(2) the values of n and p - bias-variance trade-off
+_Final note._ The choice of method depends on (1) the true distribution of the predictors in each of the K classes,(2) the values of n and p - bias-variance trade-off
 
 
 ### An Empirical Comparison
