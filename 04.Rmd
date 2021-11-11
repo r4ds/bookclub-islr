@@ -271,8 +271,8 @@ An ideal ROC curve will hug the top left corner, so the larger **area under the 
 
 ```{r tbl4_6, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="Possible results when applying a classifier or diagnostic test to a population"}
 
-library(htmlTable)
-library(magrittr)
+usethis::use_package("htmlTable")
+usethis::use_package("magrittr")
 
 matrix(c("True Neg. (TN)", "False Pos. (FP)", "N", "False Neg. (FN)", "True Pos. (TP)", "P", "N∗", "P∗", ""),
        ncol = 3,
