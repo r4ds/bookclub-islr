@@ -20,6 +20,7 @@ Imports:
     ISLR2,
     rmarkdown,
     tidymodels,
-    tidyverse
+    tidyverse,
+    magrittr
 Remotes:
     hadley/emo

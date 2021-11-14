@@ -23,7 +23,9 @@
   - K-nearest neighbors
 
 <br> 
-- Examples of classification problems: 
+- **Examples of classification problems: **
+<br>
+
   1. A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have?
   
   - Predictor variable: Symptoms
@@ -80,10 +82,10 @@ By logging the whole equation, we get
 
 $$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
 
-To estimate the regression coefficient, we use maximum likelihood (ME). 
+To estimate the regression coefficient, we use **maximum likelihood (ME)**. 
 
 
-Likelihood Function
+***Likelihood Function***
 
 $$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i) = \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
 
@@ -121,6 +123,7 @@ of more than two response classes.
 
 <br>
 **Common notations:**
+<br>
 - K $\Longrightarrow$ response class
 
 - $π_k \Longrightarrow$ overall or prior probability that a randomly chosen observation comes from the prior kth class; can be obtained from the random
@@ -128,11 +131,13 @@ sample from the population
 
 - $f_k(X) ≡ Pr(X|Y = k)^1 \Longrightarrow$ the density function of X density for an observation that comes from the kth class; requires some underlying assumption to estimate 
 
+<br>
+
 Bayes’ theorem states that
 
-$Pr(Y = k|X = x) = \frac {π_k f_k(x)}{\sum_{l =1}^{k} π_lf_l(x)}$
+$$Pr(Y = k|X = x) = \frac {π_k f_k(x)}{\sum_{l =1}^{k} π_lf_l(x)}$$
 
-- $p_k(x) = Pr(Y = k|X = x) \Longrightarrow$  posterior probability that an observation posterior X = x belongs to the kth class; computed from $f_k(X)$
+- $p_k(x) = Pr(Y = k|X = x) \Longrightarrow$  _posterior probability_ that an observation posterior X = x belongs to the kth class; computed from $f_k(X)$
 
 ## A Comparison of Classification Methods
 
@@ -153,7 +158,7 @@ mean and,
 
 The normal density takes the form
 
-$f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$
+$$f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
 
 Then, the posterior probability (probability that the observation belongs to the kth class, given the predictor value for that observation) is
 
@@ -271,8 +276,8 @@ An ideal ROC curve will hug the top left corner, so the larger **area under the 
 
 ```{r tbl4_6, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="Possible results when applying a classifier or diagnostic test to a population"}
 
-usethis::use_package("htmlTable")
-usethis::use_package("magrittr")
+library("htmlTable")
+library("magrittr")
 
 matrix(c("True Neg. (TN)", "False Pos. (FP)", "N", "False Neg. (FN)", "True Pos. (TP)", "P", "N∗", "P∗", ""),
        ncol = 3,
@@ -361,7 +366,7 @@ where $f_{kj}$ is the density function of the jth predictor among observations i
 Note: Fixing the threshold, the Naive Bayes has a higher error rate than LDA, but better prediction (higher sensitivity). 
 
 
-## A comparison of classification methods
+## Summary of the classification methods
 
 ### An Analytical Comparison
 
