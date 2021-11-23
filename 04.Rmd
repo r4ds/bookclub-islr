@@ -629,9 +629,6 @@ e.g. for Poisson regression, $log(\lambda(X_1, ..., X_p) = \beta_0 + \beta_1X_1 
 
 ## Lab: Classification Methods
 
-
-
-
 ## Meeting Videos
 
 ### Cohort 1
