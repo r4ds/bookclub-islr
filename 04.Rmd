@@ -435,47 +435,197 @@ _Scenario 6_: Normal distribution, different diagonal covariance matrix for each
 
 ## Generalized Linear Models
 
-- For count data 
+**Count data** (e.g. number of bikers per hour) is neither quantitative nor qualitative
 
-```{r fig4-13, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "A least squares linear regression model was fit to predict bikers in the Bikeshare data set. Left: The coefficients associated with the month of the year. Bike usage is highest in the spring and fall, and lowest in the winter. Right: The coefficients associated with the hour of the day. Bike usage is highest during peak commute times, and lowest overnight."}
+=> neither linear regression nor the classification approaches considered so far are applicable.
+
+
+## Linear regression with count data - negative values
+
+The results of fitting a least squares regression model to the `Bikeshare` data provides some reasonable results: 
+
+* as weather progressively worsens, the number of bikers decreases (_coefficients become negative wrt baseline_)
+
+* the coefficients associated with season and time of day match expected patterns (_lowest in winter, and highest during peak commute times_)
+
+
+```{r tab4-10, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "_Results for a least squares linear model fit to predict bikers in the Bikeshare data. For the qualitative variable weathersit, the baseline level corresponds to clear skies._"}
+
+knitr::include_graphics("./images/tab4_10.jpg", error = FALSE)
+
+```
+
+
+```{r fig4-13, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "_A least squares linear regression model was fit to predict bikers in the Bikeshare data set. Left: The coefficients associated with the month of the year. Bike usage is highest in the spring and fall, and lowest in the winter. Right: The coefficients associated with the hour of the day. Bike usage is highest during peak commute times, and lowest overnight._"}
 
 knitr::include_graphics("./images/fig4_13.jpg", error = FALSE)
 
 ```
 
 
-```{r fig4-14, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "Left: On the Bikeshare dataset, the number of bikers is displayed on the y-axis, and the hour of the day is displayed on the x-axis. Jitter was applied for ease of visualization. For the most part, as the mean number of bikers increases, so does the variance in the number of bikers. A smoothing spline fit is shown in green. Right: The log of the number of bikers is now displayed on the y-axis."}
+***Problem 1***: <mark>*model predicts negative numbers of bikers at times*</mark>
+
+
+
+## Linear regression with count data - heteroscedasticity
+
+In this example, the variance of biker numbers changes as the mean number changes:
+
+* during worse conditions, there are few bikers, and little variation in the number of bikers
+
+* during better conditions, there are many bikers on average, but also larger variation in the number of bikers
+
+
+```{r fig4-14, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "_Left: On the Bikeshare dataset, the number of bikers is displayed on the y-axis, and the hour of the day is displayed on the x-axis. For the most part, as the mean number of bikers increases, so does the variance in the number of bikers. A smoothing spline fit is shown in green. Right: The log of the number of bikers is displayed on the y-axis._"}
 
 knitr::include_graphics("./images/fig4_14.jpg", error = FALSE)
 
 ```
 
 
-**Problems: **
-1. LM predicts a negative number of users in ~10% of the dataset
+***Problem 2***: <mark>*observed heteroscedasticity is a violation of linear model assumptions*</mark>
 
-2. Heteroscedasticity of the data
+$$Y = \beta_{0} + \sum_{j=1}^p \beta_{j} + \epsilon$$ 
 
-3. Nature of response is integer-value (i.e., count)
+where $\epsilon$ is a mean-zero error term with a constant variance
 
-**Potential solution:** 
 
-1. Log-transform the data -> difficulty in intepreting meaningful estimates
+Transforming to log improves the variance, but cannot be used where the response can take on a 0 value. 
 
-2. Poisson regression model
+Log transformation also results in challenges in interpretation:
 
-### Poisson Regression Model
+e.g. “_a one-unit increase in $X_j$ is associated with an increase in the mean of the log of $Y$ by an amount $β_j$_”
 
-- The Poisson distribution is typically used to model counts, able to take on nonnegative integer values
 
-Some important distinctions between the Poisson regression model and
-the linear regression: 
 
-1. **Interpretation:** An increase in Xj by one unit is associated with a change in E(Y) = λ by a factor of exp(βj )
+## Problems with linear regression of count data
 
-2. **Mean-variance relationship** We implicitly assume that mean bike usage in a given hour equals the variance of bike usage during that hour; we use constant variance in linear regression
 
-3. **Nonnegative fitted values** There are no negative predictions using the Poisson regression model.
+
+***Problem 1***: <mark>*model predicts negative numbers of bikers at times*</mark>
+
+
+***Problem 2***: <mark>*observed heteroscedasticity is a violation of linear model assumptions*</mark>
+
+
+***Problem 3***: <mark>*integer values (bikers) predicted using a continuous response $Y$*</mark>
+
+
+
+"_[A] Poisson regression model provides a much more natural and elegant approach for this task._"
+
+
+## Poisson distribution
+
+A count response variable $Y$ (which takes on non-negative integer values) can be modeled using the **Poisson distribution**, where the probability that $Y$ takes on a given count value $k$ can be calculated as:
+
+$Pr(Y = k) = \frac{e^{-\lambda}\lambda^k}{k!}$  for $k$ = 0, 1, 2, ...
+
+
+where $\lambda$ represents both the expected value (mean) and variance of $Y$:
+
+$Y = E(Y) = Var(Y)$
+
+=> "_[I]f $Y$ follows the Poisson distribution, then the larger the mean of $Y$, the larger its variance._"
+
+
+```{r fig.cap= "_Plots of Poisson Distributions with different lambda values, showing how variance increases with increasing lambda. Note all values are non-negative integer values, suitable for modelling counts, k._"}
+
+par(mfrow = c(2,2))
+lambda <- c(1:4)
+k <- c(0:10)
+for (lam in lambda) {
+  Prk <- (exp(-lam)*lam^k)/factorial(k)
+  plot(k, Prk, type = 'b', ylim = c(0, 0.4), main = paste("lambda =", lam))
+}
+
+```
+
+
+
+
+## Poisson Regression Model mean (lambda)
+
+"_[R]ather than modeling [a count response variable], $Y$, as a Poisson distribution with a fixed mean value like $\lambda$ = 5, we would like to allow the mean to vary as a function of the covariates._"
+
+
+The mean $\lambda$ can be modeled as a function of the predictor variables as follows:
+
+$log(\lambda(X_1, ..., X_p) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$
+
+NB: taking the log ensures that $\lambda$ can only be non-negative.
+
+
+This is equivalent to representing the mean $\lambda$ as follows:
+
+$\lambda = \text{E}(Y) = \lambda(X_1, ..., X_p) = e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}$
+
+
+
+## Estimating the Poisson Regression parameters
+
+The calculation of $\lambda$ can then be used in the formula of the Poisson Distribution, allowing the Maximum Likelihood approach to be used in estimating the parameters, $\beta_0$, $\beta_1$,..., $\beta_p$:
+
+
+Poisson Distribution Formula: $Pr(Y = k) = \frac{e^{-\lambda}\lambda^k}{k!}$  for $k$ = 0, 1, 2, ...
+
+
+Maximum likelihood: $l(\beta_0, \beta_1, ..., \beta_p) = \Pi_{i=1}^n\frac{e^{-\lambda(x_i)}\lambda(x_i)^{y_i}}{y_i!}$
+
+where $\lambda(x_i) = e^{\beta_0 + \beta_1x_{i1} + ... + \beta_px_{ip}}$
+
+
+Coefficients that maximize the likelihood $l(\beta_0, \beta_1, ..., \beta_p)$ (make the observed data as likely as possible) are chosen.
+
+
+
+## Interpreting Poisson Regression
+
+An increase in $X_j$ by one unit is associated with a change in $E(Y) = \lambda$ by a factor of $exp(\beta_j)$
+
+```{r tab4-11, cache=FALSE, echo=FALSE, fig.align="center", fig.cap= "_Results for Poisson regression model fit to predict bikers in the Bikeshare data. For the qualitative variable weathersit, the baseline level corresponds to clear skies._"}
+
+knitr::include_graphics("./images/tab4_11.jpg", error = FALSE)
+
+```
+
+A change in weather from clear to cloudy skies is associated with a change in mean bike usage by a factor of 
+
+exp(-0.08) = 0.923 
+
+i.e. on average, only 92.3% as many people will use bikes compared to when it is clear (baseline weather).
+
+
+
+
+## Advantages of Poisson Regression
+
+Poisson regression has several advantages in modeling count data:
+
+**Mean-variance relationship** We implicitly assume that mean bike usage in a given hour equals the variance of bike usage during that hour (cf use constant variance in linear regression).
+
+**Non-negative fitted values** There are no negative predictions using the Poisson regression model.
+
+
+
+
+## Generalized Linear Models
+
+
+Generalized linear models (GLMs) all follow the same 'recipe':
+
+* use a set of predictors $X_1$, ..., $X_p$ to predict a response $Y$
+
+* model the response $Y$ as coming from a particular distribution
+
+e.g. Poisson Distribution, for Poisson regression
+
+* transform the mean of the response (via a _link function_ $\eta$) so that the transformed mean is a linear function of the predictors
+
+e.g. for Poisson regression, $log(\lambda(X_1, ..., X_p) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$
+
+
+
 
 ## Lab: Classification Methods
 
