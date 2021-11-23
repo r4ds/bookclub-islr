@@ -15,10 +15,12 @@ Imports:
     bookdown,
     emo,
     ggthemes,
+    htmlTable,
     knitr,
     ISLR2,
     rmarkdown,
     tidymodels,
-    tidyverse
+    tidyverse,
+    magrittr
 Remotes:
     hadley/emo
