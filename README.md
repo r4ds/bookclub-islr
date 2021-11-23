@@ -16,27 +16,31 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-09-28: Chapter 2: Statistical Learning (part 1) - Ray Balise
 - 2021-10-05: Chapter 2: Statistical Learning (part 2) - Ray Balise and Jon Harmon
 - 2021-10-12: Chapter 3: Linear Regression (part 1) - Jon Harmon
-- 2021-10-19: Chapter 3: Linear Regression (part 2) - TBD
-- 2021-10-26: Chapter 4: Classification (part 1) - TBD
-- 2021-11-02: Chapter 4: Classification (part 2) - TBD
-- 2021-11-09: Chapter 5: Resampling Methods (part 1) - TBD
-- 2021-11-16: Chapter 5: Resampling Methods (part 2) - TBD
-- 2021-11-23: Chapter 6: Linear Model Selection and Regularization (part 1) - TBD
-- 2021-11-30: Chapter 6: Linear Model Selection and Regularization (part 2) - TBD
-- 2021-12-07: Chapter 7: Moving Beyond Linearity (part 1) - TBD
-- 2021-12-14: Chapter 7: Moving Beyond Linearity (part 2) - TBD
-- 2021-12-21: Chapter 8: Tree-Based Methods (part 1) - TBD
-- 2021-12-28: Chapter 8: Tree-Based Methods (part 2) - TBD
-- 2022-01-04: Chapter 9: Support Vector Machines (part 1) - TBD
-- 2022-01-11: Chapter 9: Support Vector Machines (part 2) - TBD
-- 2022-01-18: Chapter 10: Deep Learning (part 1) - TBD
-- 2022-01-25: Chapter 10: Deep Learning (part 2) - TBD
-- 2022-02-01: Chapter 11: Survival Analysis and Censored Data (part 1) - TBD
-- 2022-02-08: Chapter 11: Survival Analysis and Censored Data (part 2) - TBD
-- 2022-02-15: Chapter 12: Unsupervised Learning (part 1) - TBD
-- 2022-02-22: Chapter 12: Unsupervised Learning (part 2) - TBD
-- 2022-03-01: Chapter 13: Multiple Testing (part 1) - TBD
-- 2022-03-08: Chapter 13: Multiple Testing (part 2) - TBD
+- 2021-10-19: Chapter 3: Linear Regression (part 2) - August
+- 2021-10-26: Chapter 3: Linear Regression (lab) - Jon Harmon
+- 2021-11-02: NO MEETING (Fallback Break)
+- 2021-11-09: Chapter 4: Classification (part 1) - Mei Ling
+- 2021-11-16: Chapter 4: Classification (lab) - Ray Balise
+- 2021-11-23: Chapter 4: Classification (part 2) - Kim Martin
+- 2021-11-30: Chapter 5: Resampling Methods (part 1) - Laura Rose
+- 2021-12-07: Chapter 5: Resampling Methods (part 2) - Justin Dollman
+- 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Daniel
+- 2021-12-21: Chapter 6: Linear Model Selection and Regularization (part 2) - Daniel
+- 2021-12-28: NO MEETING (Winter Break)
+- 2022-01-04: Chapter 7: Moving Beyond Linearity (part 1) - TBD
+- 2022-01-11: Chapter 7: Moving Beyond Linearity (part 2) - TBD
+- 2022-01-18: Chapter 8: Tree-Based Methods (part 1) - TBD
+- 2022-01-25: Chapter 8: Tree-Based Methods (part 2) - TBD
+- 2022-02-01: Chapter 9: Support Vector Machines (part 1) - TBD
+- 2022-02-08: Chapter 9: Support Vector Machines (part 2) - TBD
+- 2022-02-15: Chapter 10: Deep Learning (part 1) - TBD
+- 2022-02-22: Chapter 10: Deep Learning (part 2) - Federica Gazzelloni
+- 2022-03-01: Chapter 11: Survival Analysis and Censored Data (part 1) - TBD
+- 2022-03-08: Chapter 11: Survival Analysis and Censored Data (part 2) - TBD
+- 2022-03-15: Chapter 12: Unsupervised Learning (part 1) - TBD
+- 2022-03-22: Chapter 12: Unsupervised Learning (part 2) - TBD
+- 2022-03-29: Chapter 13: Multiple Testing (part 1) - TBD
+- 2022-04-05: Chapter 13: Multiple Testing (part 2) - TBD
 
 <hr>
 
