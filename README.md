@@ -42,6 +42,26 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-03-29: Chapter 13: Multiple Testing (part 1) - TBD
 - 2022-04-05: Chapter 13: Multiple Testing (part 2) - TBD
 
+*Cohort 2: (starts 2021-12-02) - Tuesdays, 10:00am CST*
+
+<details> 
+  
+- 2021-12-02: Chapter 1: Introduction
+- 2021-12-09: Chapter 2: Statistical Learning
+- 2021-12-16: Chapter 3: Linear Regression
+- 2021-12-23: NO MEETING (to be confirmed)
+- 2021-12-30: NO MEETING (Winter Break)
+- 2022-01-06: Chapter 4: Classification
+- 2022-01-13: Chapter 5: Resampling Methods
+- 2022-01-20: Chapter 6: Linear Model Selection and Regularization
+- 2022-01-27: Chapter 7: Moving Beyond Linearity   
+- 2022-02-03: Chapter 8: Tree-Based Methods 
+- 2022-02-10: Chapter 9: Support Vector Machines  
+- 2022-02-17: Chapter 10: Deep Learning  
+- 2022-02-24: Chapter 11: Survival Analysis and Censored Data  
+- 2022-03-03: Chapter 12: Unsupervised Learning  
+- 2022-03-10: Chapter 13: Multiple Testing  
+  
 <hr>
 
 
