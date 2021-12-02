@@ -46,22 +46,35 @@ If you would like to present, please add your name next to a chapter using the [
 
 <details> 
   
-- 2021-12-02: Chapter 1: Introduction
-- 2021-12-09: Chapter 2: Statistical Learning
-- 2021-12-16: Chapter 3: Linear Regression
-- 2021-12-23: NO MEETING (to be confirmed)
-- 2021-12-30: NO MEETING (Winter Break)
-- 2022-01-06: Chapter 4: Classification
-- 2022-01-13: Chapter 5: Resampling Methods
-- 2022-01-20: Chapter 6: Linear Model Selection and Regularization
-- 2022-01-27: Chapter 7: Moving Beyond Linearity   
-- 2022-02-03: Chapter 8: Tree-Based Methods 
-- 2022-02-10: Chapter 9: Support Vector Machines  
-- 2022-02-17: Chapter 10: Deep Learning  
-- 2022-02-24: Chapter 11: Survival Analysis and Censored Data  
-- 2022-03-03: Chapter 12: Unsupervised Learning  
-- 2022-03-10: Chapter 13: Multiple Testing  
+- 2021-12-02	Chapter 1: Introduction	- Federica Gazzelloni
+- 2021-12-09	Chapter 2: Statistical Learning	- Jim Gruman
+- 2021-12-16	Chapter 2: Statistical Learning	- TBC
+- 2021-12-23	NO MEETING	
+- 2021-12-30	NO MEETING	
+- 2022-01-06	Chapter 3: Linear Regression - Ricardo J. Serrano
+- 2022-01-13	Chapter 3: Linear Regression - Ricardo J. Serrano
+- 2022-01-20	Chapter 4: Classification	- Michael Haugen
+- 2022-01-27	Chapter 4: Classification	- Michael Haugen
+- 2022-02-03	Chapter 5: Resampling Methods	- AL Brown
+- 2022-02-10	Chapter 5: Resampling Methods	- AL Brown
+- 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
+- 2022-02-24	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
+- 2022-03-03	Chapter 7: Moving Beyond Linearity - TBC
+- 2022-03-10	Chapter 7: Moving Beyond Linearity - TBC	
+- 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
+- 2022-03-24	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
+- 2022-03-31	Chapter 9: Support Vector Machines - TBC
+- 2022-04-07	Chapter 9: Support Vector Machines - TBC
+- 2022-04-14	Chapter 10: Deep Learning	- TBC
+- 2022-04-21	Chapter 10: Deep Learning	- TBC
+- 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
+- 2022-05-05	Chapter 11: Survival Analysis and Censored Data	- Michael Haugen
+- 2022-05-12	Chapter 12: Unsupervised Learning	- TBC	
+- 2022-05-19	Chapter 12: Unsupervised Learning	- TBC	
+- 2022-05-26	Chapter 13: Multiple Testing - TBC	
+- 2022-06-02	Chapter 13: Multiple Testing - TBC	
   
+
 <hr>
 
 
