@@ -31,7 +31,7 @@ library(knitr)
 
 ## Advertising Example
 
-Data set consists of the sales of that product in 200 different markets, along with advertising budgets for the product in each of those markets for three different media: TV, radio, and newspaper.
+The data set consists of the sales of that product in 200 different markets, along with advertising budgets for the product in each of those markets for three different media: TV, radio, and newspaper.
 
 ![Fig 2.1](./images/fig2_1.jpg)
 
