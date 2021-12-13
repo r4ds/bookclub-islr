@@ -943,6 +943,198 @@ ISLR2::Boston %>%
 
 Again, the oldest homes have more than 8 rooms per dwelling. They have the lowest tax assessments and a low proportion of non-retail business acres per town.
 
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/P8BMLBplcTE")`
+
+<details>
+<summary> Meeting chat log 1</summary>
+
+```
+00:08:32	Fran Barton:	A very rainy afternoon here in this corner of England
+00:09:17	Kim Martin:	Good afternoon everyone :)
+00:09:31	Stijn:	Hiya!
+00:09:59	Jon Harmon (jonthegeek):	Good {time wherever you are}, everyone!
+00:11:49	Stijn:	You type like a programmer would, Jon
+00:13:10	Kim Martin:	@Stijn How does a programmer type?
+00:13:24	Kim Martin:	The curly braces?
+00:13:51	Stijn:	Hahaha, just making lame jokes over here. Let's not read into it too much :D
+00:14:04	Kim Martin:	(overthinking-R-us)
+00:14:09	shamsuddeen:	Increase the size pls
+00:14:49	Wayne Defreitas:	if you go to view options in zoom, you can also zoom screen size
+00:15:38	Fran Barton:	Would it be possible to F11 to make the browser full screen?
+00:15:48	Kim Martin:	These are your _notes_?!
+00:15:49	August:	That is awesome, thank you!
+00:15:54	shamsuddeen:	Thanks
+00:15:55	Stijn:	That is REALLY cool, thanks Ray!
+00:16:00	Kim Martin:	Link please!
+00:16:09	Mei Ling Soh:	Loved the appendix section
+00:16:10	Laura Rose:	very cool; thanks!
+00:16:11	Keuntae Kim:	awesome!!! I need this!!!
+00:16:22	Ryan Metcalf:	This is great. Thank you!
+00:16:30	Kim Martin:	Ah - found it: https://r4ds.github.io/bookclub-islr/statistical-learning.html
+00:16:43	Jon Harmon (jonthegeek):	r4ds.io/islr is the shortcut
+00:17:28	Stijn:	dependent and independent variables is what I'm used to
+00:17:44	Fran Barton:	I'm pretty new to all of this so I'll just take whatever terminology I'm given for now
+00:17:52	Jon Harmon (jonthegeek):	Note to self: I should increase the default font size in this notes-book.
+00:18:23	Brett Longworth:	Features is newish to me. Not part of the ML club. =)
+00:20:19	Jon Harmon (jonthegeek):	"Features" is more used in the ML world, "independent variable" in actual science, in my experience.
+00:21:12	Jyoti:	the estimates of the regression coefficients are computed such that on an average the estimate of error becomes zero
+00:21:30	Jon Harmon (jonthegeek):	There's always a (somewhat) relevant xkcd: https://xkcd.com/2048/
+00:22:18	Till:	from a probabilistic point, given that you model is correct, the error distribution is assumed to have a zero mean and any deviations from a prediction is completely random
+00:23:31	Fran Barton:	"the whole point of the book is to present different ways to come up with surfaces like this" (or something like that - Ray) - thank you, I like that kind of context, helps me get the bigger picture.
+00:23:37	shamsuddeen:	Y is also a function of ϵ, which, by definition, cannot be predicted using X. What this means from the book?
+00:24:18	Kim Martin:	Y = f(X)  if everything about Y can be (perfectly) predicted by X
+00:24:44	Jon Harmon (jonthegeek):	Y depends on both X and epsilon, and you can't predict epsilon from X; if you could, it'd be part of f(X).
+00:25:04	Kim Martin:	… but since Y _cannot_ be perfectly predicted just with X (there are other important variables that are not included in X... or some unpredictable randomness) this is acknowledged by adding the error term... hence Y = f(X) + e
+00:26:43	shamsuddeen:	It is important to keep in mind that the irreducible error will always provide an upper bound on the accuracy of our prediction for Y. This bound is almost always unknown in practice.
+00:28:20	shamsuddeen:	Thank you
+00:29:52	August:	this is basically image 2.9
+00:30:52	Kim Martin:	Every point in the _training_ set... but what about the _test_ set?
+00:31:20	Kim Martin:	You can fit your function perfect... with no errors... to your training set... but what happens when you get new data?
+00:31:35	Rahul T:	I think here it’s on the whole population but in most cases we only have sample and we can fit that sample well but doesn’t mean it will generalize well to the population
+00:31:36	shamsuddeen:	Uhmmm
+00:31:39	shamsuddeen:	Thanks
+00:33:25	SriRam:	In complex theory, you may call this rationality vs bounded rationality , there is always a boundary stopping you from knowing everything
+00:33:28	shamsuddeen:	I got it. Rahu, your point also make sense.
+00:33:36	Brett Longworth:	We can fit a function that fits all points, but that removes irreducible error, which I think is the definition of overfitting?
+00:33:54	shamsuddeen:	Yes, Bret I guess so
+00:34:47	Brett Longworth:	Best argument for a training and test set I've heard. Overfitting should show up in the fit for the test set.
+00:35:02	Kim Martin:	Some domains have smaller error than others though... e.g. simple physics experiments will have a smaller error than (eg) experiments involving complex systems (including human behaviour)
+00:35:16	Keuntae Kim:	Also, the perfect prediction model for the sample does not necessarily guarantee prefect predicted outcomes when a new dataset comes into the model.
+00:36:06	Fran Barton:	I wonder if there is some confusion among the group as to the meaning of the word "error". Here it doesn't mean that you as a researcher have done something wrong. It doesn't mean the model is unusable. It just means any useful model will inevitably only approximate to the phenomenon itself.
+00:36:20	Sangeeta Bhatia:	yes that makes sense. if we knew the truth, we won’t need “f”.
+00:36:47	Brett Longworth:	So for the physics example, running a jagged line through all points of a distance vs time curve would immediately be shown to be an overfit when predicting with new data.
+00:37:50	Kim Martin:	That's whey section 2.2.1 goes to pains to emphasize that the model should be assessed (MSE etc) based on the test data, not the training set (which will most likely be far lower)
+00:38:16	August:	I think we are getting overly bogged down here, this is revisited several times as the book progresses
+00:38:28	shamsuddeen:	Yes, lets progress
+00:45:06	shamsuddeen:	How to make this kind of plot in ggplot?
+00:45:52	Keuntae Kim:	geom_contour() <- I guess
+00:46:02	Stijn:	https://www.r-graph-gallery.com/3d-surface-plot.html
+00:46:10	Stijn:	Not ggplot though
+00:46:22	Keuntae Kim:	https://ggplot2.tidyverse.org/reference/geom_contour.html#:~:text=ggplot2%20can%20not%20draw%20true,can%20appear%20at%20most%20once.
+00:46:25	August:	https://stackoverflow.com/questions/38331198/add-regression-plane-to-3d-scatter-plot-in-plotly
+00:46:32	Keuntae Kim:	Okay..
+00:46:34	August:	plotly for the win
+00:46:36	Ryan Metcalf:	Ive tried this 3D in Python. (But that doesn’t apply to R.)
+00:47:10	Stijn:	And let's give rayshader an honourable mention for 3D stuff!
+00:48:09	Rahul T:	I am not sure if this has the code - it’s listed on the book site as a resource https://web.stanford.edu/~hastie/ISLR2/Labs/
+00:49:06	Jon Harmon (jonthegeek):	A long, unfinished thread about surface in R: https://rfordatascience.slack.com/archives/C8JRJSW4S/p1627573385008700
+00:49:54	Jon Harmon (jonthegeek):	@rahul That's just the labs (~1/2 of each chapter).
+00:51:35	Rahul T:	Got it, thanks!
+00:51:38	Kim Martin:	Super cynical, Raymond 😂
+00:52:02	August:	Hey that's my job your talking about! :P
+00:52:10	Ryan S:	I'm going to try that approach with my boss -- "I need more money because I can do better!"
+00:52:18	Kim Martin:	Why MSE vs RMSE?
+00:52:21	August:	but I can!
+00:52:45	Kim Martin:	Only to get units in normal sense?
+00:53:28	Rahul T:	May be it’s easy to derive the bias variance tradeoff - just a guess
+00:53:30	Kim Martin:	Why does ISLR2 stop at MSE? Because it does the job (getting 'normal units' is irrelevant)?
+00:53:31	shamsuddeen:	No Free Lunch Theorem for Machine Learning: https://machinelearningmastery.com/no-free-lunch-theorem-for-machine-learning/
+00:54:29	Jon Harmon (jonthegeek):	Yeah, that'd be my take. RMSE is usually more reportable but if you're just trying to calculate a number to compare your fit to another fit. I definitely prefer RMSE!
+00:55:34	Stijn:	I'm not sure what the 'decrease-stagnate-increase' implies :/
+00:57:37	Stijn:	Whew, I think it's somewhat clicking... Will have to re-read
+00:58:43	Keuntae Kim:	In the figure at the top, a yellow linear line is too simple, so a lot of errors when a new dataset comes in, so weak predictive power.
+00:59:16	Kim Martin:	How are they quantifying 'flexibility'?
+00:59:43	Kim Martin:	Number of parameters to estimate (2 for linear)?
+00:59:51	Rahul T:	Book says “degrees of freedom, for a number of smoothing splines.”
+01:00:07	Rahul T:	It will be discussed in ch7
+01:00:10	Keuntae Kim:	For the line passing through every point, no errors (almost zero variance), but extremely hard to predict or estimate values when a new dataset comes in.
+01:00:22	Keuntae Kim:	This is what I understand from the figures.
+01:00:25	Rahul T:	They say at the end of page 31
+01:04:20	David Severski:	We’re coming up on time, do we want to find a good point to pause until next week?
+01:04:43	Stijn:	The idea that a biostats college professor also finds some of these sections challenging, makes me feel much more comfortable 😅
+01:05:12	Kim Martin:	😅👍
+01:05:38	Mei Ling Soh:	I think we should stop at the bias-variance trade-off
+01:07:46	shamsuddeen:	Dev set
+01:09:23	August:	p36 explains this
+01:09:59	David Severski:	I’ve got to jet. Thanks for presenting and to everyone for the discussion!
+01:10:42	Kim Martin:	Is the aim to do the lab next week, or the week after?
+01:10:49	Keuntae Kim:	Good session today. Too many confusing things I have to digest!!! Need to study of my own more!!! haha 😅
+01:11:16	Kim Martin:	(I'll confess I didn't get through the Chapter, despite intending to have read it all by today)
+01:11:31	Keuntae Kim:	Ray, thank you very much. You did a great job to explain these complex things!
+01:11:34	Mei Ling Soh:	So, we have to try out the exercises before the next study session?
+01:11:46	shamsuddeen:	Thank you Ray.
+01:11:50	August:	try the lectures online if you struggle with the book, it'll help reading the material.
+01:11:53	Kim Martin:	It might be nice to try to share code / visuals for (trying to) explore these topics more
+01:12:01	Mei Ling Soh:	Thank you, Ray!
+01:12:08	Laura Rose:	Thanks, Ray!
+01:12:09	collinberke:	Thanks, Ray!
+01:12:17	Rahul T:	This was very helpful. Thank you, Ray!
+01:12:26	Till:	yes, many thanks!
+01:12:31	Kaustav Sen:	Thanks Ray!  
+01:12:51	Kim Martin:	@August you mean these: https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/
+01:13:09	August:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/statistical-learning.html
+01:13:37	Fran Barton:	thanks everyone
+01:14:10	Ryan S:	Thanks everyone!
+01:14:14	Kim Martin:	Thanks all!
+01:14:16	Keuntae Kim:	Thank you everyone!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/MfBUPmK-aNg")`
+
+<details>
+<summary> Meeting chat log 2</summary>
+
+```
+00:05:01	A. S. Ghatpande:	Hello
+00:05:35	jonathan.bratt:	hello!
+00:07:02	Ryan Metcalf:	Good morning/afternoon/evening everyone!
+00:08:02	jonathan.bratt:	I missed last week; Ray, were you going to finish going through chapter 2 today?
+00:09:41	David Severski:	I just noticed Raymond’s Skinny Puppy poster. Awesome. Now I need to queue that up for today.
+00:09:45	David Severski:	😄
+00:12:11	Ryan Metcalf:	Ryan S.
+00:19:33	A. S. Ghatpande:	How would you calculate bias in the example given?
+00:19:48	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:22:40	shamsuddeen:	We do have validation test also sometimes. Is that called validation error ?
+00:24:00	shamsuddeen:	The chapter seems not discuss anything about validation set
+00:25:14	SriRam:	K is number of neighbors to consider I think
+00:27:29	Rahul T:	I think it’s (f - E(f_hat))
+00:28:11	Rahul T:	f is true function and E(f_hat) in different samples expected value
+00:29:03	SriRam:	Bias is error predicted vs observed , from my understanding
+00:29:29	August:	might be useful: http://scott.fortmann-roe.com/docs/BiasVariance.html
+00:30:12	Keuntae Kim:	https://www.value-at-risk.net/bias/ <-- about bias in a mathematical way, but it is basically about the difference between the actual and estimated values.
+00:31:33	A. S. Ghatpande:	thanks for all the answers here about bias, enough food for thought
+00:37:52	Ryan Metcalf:	Would you be able to wrangle the data or clean the data more?
+00:38:01	Ryan Metcalf:	If it is noise, likely not.
+00:38:12	A. S. Ghatpande:	you need more data!
+00:38:33	August:	Yes and not depends on data and what you can bring in i.e weather data or create from the data ie pca
+00:53:53	Rahul T:	Got it, that’s helpful. Thank you!
+00:56:43	August:	basically predictive power is desirable, but not the main concern with inferential. Sometime you have to sacrifice predictive accuracy for explainability. Generally you hope to approach consensus within the zeitgeist.
+00:57:01	shamsuddeen:	Email spam classification
+01:03:05	A. S. Ghatpande:	spammers wrote inferential models!
+01:03:14	SriRam:	Lol
+01:04:58	Raymond Balise:	so sorry I need to be in another meeting in two minutes
+01:05:23	Jon Harmon (jonthegeek):	No problem, we'll stop very soon.
+01:06:06	shamsuddeen:	I need to leave now. See u all next. Thanks
+01:06:46	Rahul T:	Thank you!
+01:06:50	A. S. Ghatpande:	very good thankseveryone
+01:06:51	collinberke:	Thank you!
+01:06:52	Ryan S:	thanks!
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/FpynCQNFIXs")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:22:35	Ricardo Serrano:	Simpson’s Paradox is a statistical phenomenon where an association between two variables in a population emerges, disappears or reverses when the population is divided into subpopulations. https://plato.stanford.edu/entries/paradox-simpson/
+00:28:46	Michael Haugen:	the book defines irreducible error as measurement errors and/or unmeasured variables.
+00:33:45	Michael Haugen:	Interesting that baseball has the concept of “unforced error.”To create error due to not having the best functional form (reducible error) is kind of like an unforced error.
+00:42:27	Ricardo Serrano:	NLP is another unsupervised learning methodology
+00:48:50	Michael Haugen:	the green line is a good example of being too wiggly right?
+01:01:16	Federica Gazzelloni:	Dimensionality reduction: https://juliasilge.com/blog/billboard-100/
+01:02:05	Michael Haugen:	Online version of book: http://www.feat.engineering/
+01:03:59	Michael Haugen:	one stats book to another
+```
+</details>
 
 
 
