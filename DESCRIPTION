@@ -21,6 +21,8 @@ Imports:
     rmarkdown,
     tidymodels,
     tidyverse,
-    magrittr
+    magrittr,
+    GGally,
+    skimr
 Remotes:
     hadley/emo
