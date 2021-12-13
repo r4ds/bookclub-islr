@@ -97,6 +97,139 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 
 ### Cohort 1
 
+`r knitr::include_url("https://www.youtube.com/embed/dqA5MNNDqcE")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:07:48	A. S. Ghatpande:	Good morning
+00:07:56	Daniel Lupercio:	Good morning everyone!
+00:08:56	Kim Martin:	👋😁
+00:10:32	Kim Martin:	If linear regression had a motto: "I contain multitudes!"
+00:11:06	Raymond Balise:	+1 @Kim
+00:15:43	Gianluca Pegoraro:	Is the “approximately modeled by” sign due to the existence of the irreducible error + reducible error?
+00:15:45	Kim Martin:	Notation can be a surprisingly large barrier... and not hard to get over, when handled head-on.
+00:16:18	Kim Martin:	@Gianluca I think the irreducible error is a given - even the 'true' function will suffer from irreducible error.
+00:16:53	Gianluca Pegoraro:	Thanks everyone for the answer
+00:16:56	Kim Martin:	God plays dice? ;)
+00:18:08	Ryan Metcalf:	For the team, has anyone ever created the plot in Figure 3.1? The same that Jon is sharing?
+00:18:10	Kim Martin:	Anyone know if there are any spaced repetition (eg AnkiDroid) cards for ISLR2 terms?
+00:18:31	Kim Martin:	If not, should we create them?
+00:18:59	Raymond Balise:	there is a package for that :)
+00:19:07	Raymond Balise:	no idea what it is but there is one
+00:19:39	Raymond Balise:	@ryan yep I have it somewhere
+00:19:53	Raymond Balise:	will share it in the channel
+00:20:21	collinberke:	I also have some resources as well, @Ryan Metcalf.
+00:21:38	Kim Martin:	RSS seems worded strangely: wouldn't it make more sense to call it "sum of residual squares"?
+00:22:01	Daniel Lupercio:	Some partial derivatives are used to find the minimization
+00:22:05	jonathan.bratt:	Yeah, I think “SRS” or “SSR” would be easier to remember. :)
+00:23:55	Kim Martin:	I think this might be a good walkthrough of the proof, if my notes are correct: https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data/more-on-regression/v/proof-part-4-minimizing-squared-error-to-regression-line
+00:28:12	Kaustav Sen:	is there any particular reason for doing (n-2) instead of n in the RSE formula?
+00:28:34	jonathan.bratt:	something something degrees of freedom
+00:28:38	Rahul T:	Might be related to Degree of freedom?
+00:28:54	Rahul T:	We are estimating 2 beta params
+00:29:22	Rahul T:	My guess not sure
+00:29:33	Kaustav Sen:	ah.. makes sense.  thanks!
+00:30:23	August:	I'm happy to read on
+00:30:23	Kim Martin:	I'm struggling to keep up - life getting in the way... wouldn't say no to a go slow
+00:30:53	Kim Martin:	What is more important: speed or solidity ;)
+00:31:08	Raymond Balise:	I like your presentation would rather wait
+00:31:57	A. S. Ghatpande:	sounds good, thanks
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/PFhVGNzraoE")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:43	jonathan.bratt:	Is that Curious George as the Joker?
+00:12:15	Kim Martin:	👋😁
+00:13:58	Kim Martin:	Time to grab a coffee still?
+00:14:08	SriRam:	Hi All, I missed the last class, may I know where we stopped the last time
+00:14:50	Kim Martin:	Signup https://docs.google.com/spreadsheets/d/1_pIPi68R_FwpzK_uMCRSKen9gdQLBx4sN3uifL-g_Nw/edit?usp=sharing
+00:27:20	Raymond Balise:	what was pluck() function?  why use it instead of pull()
+00:28:01	SriRam:	May be revisit your code, I think values in the book are incorrect ? I may be wrong
+00:31:35	SriRam:	Eq 3.14 vs table 3.1, I don’t get the same values
+00:37:39	Keuntae Kim:	7.0325/0.4578 = 15.36...
+00:38:16	Keuntae Kim:	The null hypothesis in this case is that the coefficient estimate is zero, which is not our expectation.
+00:39:42	Keuntae Kim:	Ha - H0 / SE = t-value
+00:46:59	Jon Harmon (jonthegeek):	"Akaike information criterion"
+00:47:29	Jon Harmon (jonthegeek):	I was hoping to hear someone pronounce that 🙃
+00:48:23	SriRam:	Thank you Kim, its the second value that seems incorrect 0.0475/0.0027
+00:50:20	Rahul T:	Also allows to invert X’X
+00:50:43	Rahul T:	I thought that was one of the reason
+00:57:25	jonathan.bratt:	Who can say “heteroscedasticity” fast?
+00:59:03	Kim Martin:	(good drinking game material, that)
+00:59:39	Raymond Balise:	+1 Kim
+01:00:58	Keuntae Kim:	The book does not mention about rule of thumbs for the VIF to evaluate the multicollinearity in the regression. What about your field?
+01:02:04	Keuntae Kim:	Rule of thumbs for VIF to test collinearity when you create a linear regression model?
+01:03:45	Raymond Balise:	I usually look in a SAS book at the office with a real formula…. but I think 5 is where you worry
+01:04:35	Raymond Balise:	van Belle has a book on statistical rules of thumb that is another place to look
+01:04:42	Keuntae Kim:	Someone says 2.5 or 3 and others also says 10.
+01:05:00	Raymond Balise:	10 is a for sure you have a prolem
+01:05:13	Keuntae Kim:	Got it.
+01:05:24	Federica Gazzelloni:	can you share the github thing?
+01:05:44	Raymond Balise:	If I see something over 5 I will drop variables and see how much the betas shift around
+01:08:45	A. S. Ghatpande:	thanks August
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/Y5dz5ExYGxI")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:04:59	Kim Martin:	👋😁
+00:05:12	Mei Ling Soh:	Hihi!
+00:21:08	August:	python plots work the saem way
+00:21:13	August:	^same
+00:21:14	Laura Rose:	yes
+00:23:21	Laura Rose:	i agree
+00:23:26	Daniel Lupercio:	Spot on
+00:24:23	Federica Gazzelloni:	tidymodels
+00:36:16	David Severski:	FYI, in zoom you can now share multiple apps at once by shift clicking on the window inside the share tray. 🙂
+00:41:49	Mei Ling Soh:	I'm not following the tidymodels. Is there any introductory kind books for me to read on?
+00:42:19	SriRam:	https://www.tidymodels.org/learn/
+00:42:26	David Severski:	As a tidymodels convert, the real power comes when you are doing lots of different model types with different specifications and/or want to do tuning in a model-implementation independent fashion.
+00:43:22	A. S. Ghatpande:	ISLR is much heavier lift than tidymodels
+00:44:38	SriRam:	I prefer tidy style as it allows dplyr with it, I find dplyr easy to handle data
+00:46:46	Federica Gazzelloni:	is there any difference in fitting interaction terms between classical model and tidymodels?
+00:49:39	Daniel Lupercio:	The interaction being that the variables are multiplied?
+00:49:50	SriRam:	I am getting a feeling that this (tidy) steps is like ggplot, adding layers to core model
+00:50:13	Ryan Metcalf:	@SriRam, I would agree!
+00:50:44	David Severski:	I’ve never found a complete reference to all the special operators within R model formulas… Anyone got one? Interaction, I(), power, multiplicity, etc...
+00:50:59	Jon Harmon (jonthegeek):	step_interact(terms = ~ body_mass_g:starts_with("species"))
+00:53:32	Federica Gazzelloni:	in general the use of step_interact is with all predictors, but in particular case you might need to choose just one or two predictors
+00:54:31	SriRam:	I was also confused with the colon :  and the word “step”, I thought, this was stepwise regression with all predictors
+00:55:19	Mei Ling Soh:	Me too. I was thinking about the stepwise regression
+00:56:40	Daniel Lupercio:	Execersie 10 seems like a good start
+01:02:02	SriRam:	parsnip is by max ? So if I wish, I can do these exercises using parsnip ? I believe there is also a book by max….. predictive models something???
+01:05:52	David Severski:	Parsnip is part of the overall tidymodels ecosystem, but Max and the team. The tidymodels books and learning references earlier in the chat cover parsnip.
+01:07:34	David Severski:	Oh dear, I never got the caret -> parsnip transition. Total Dad joke. 😛
+01:07:57	SriRam:	😀
+01:07:58	jonathan.bratt:	Yeah, it’s painfully clever :)
+01:08:06	Laura Rose:	yeah i didn't get that either. good dad joke tho
+01:08:34	David Severski:	There are three problems in computer science. Naming things and counting. ;)
+01:08:39	SriRam:	So what is the latest, so I train myself in that :(
+01:09:29	David Severski:	Tidymodels: parsnip + recipes + tuning + …
+01:09:42	David Severski:	tidyverse: dplyr + ggplot + forcats + …
+01:10:15	David Severski:	Both have metapackages that load the commonly used bits: library(tidymodels) and or library(tidyverse)
+01:10:30	SriRam:	So my caret book becomes a paper weight ? :( :(
+01:10:47	David Severski:	Caret is still supported, but will no longer get new features.
+01:10:56	SriRam:	Oke
+01:11:24	Federica Gazzelloni:	it depends if you need to set different parameters to your model, otherwise that is still to use
+01:13:20	SriRam:	Time to catch up on chapters !!
+01:13:47	Kim Martin:	😐
+01:14:01	Federica Gazzelloni:	thanks
+```
+</details>
+
+### Cohort 2
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

@@ -633,6 +633,82 @@ e.g. for Poisson regression, $log(\lambda(X_1, ..., X_p) = \beta_0 + \beta_1X_1 
 
 ### Cohort 1
 
+`r knitr::include_url("https://www.youtube.com/embed/_W0MGfmpzYY")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:27	Kim M:	👋😁
+00:09:40	SriRam:	Yay, summer time in SA
+00:12:51	SriRam:	lol
+00:13:42	SriRam:	Can someone help me with zoom, my Audio doesn’t work. I tried many microphones 🙁, all kinds of settings
+00:14:01	SriRam:	Any expert advice?
+00:14:05	Raymond Balise:	Mac or Windows?
+00:14:10	SriRam:	Mac
+00:14:16	Raymond Balise:	I supper common
+00:14:27	Raymond Balise:	there is an up arrow next to the mic
+00:14:28	SriRam:	🙁
+00:14:30	Raymond Balise:	pick the mic there
+00:14:40	Raymond Balise:	Zoom usually guesses worng
+00:14:53	SriRam:	It says “same as system”
+00:15:24	August:	document html knit open that
+00:15:24	Ryan Metcalf:	Ctrl + Shift + B for building. Or Knit the single file.
+00:15:29	Kim M:	No other option? I see 'same as system' but the other option ('Microphone Array...') is selected
+00:15:36	Raymond Balise:	are you using an external mic
+00:15:55	SriRam:	Yes < I tried wired and wireless
+00:36:18	Jon Harmon (jonthegeek):	FYI: No newline between $$ and the equation to get it to render properly in HTML output. So:
+$$Pr(Y = k|X = x) … {(x)}$$ works (even if it's multi-line in-between)
+01:08:09	Raymond Balise:	Lovely work.  I need to get to another meeting.
+01:12:36	Ryan Metcalf:	Great job Mei Ling!
+01:13:04	Kim M:	Me. But I'm not sure I'll be able to get through.
+01:13:14	Kim M:	I'll try.
+01:13:48	Laura Rose:	sounds good!
+01:14:05	Kim M:	Ciao
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/3PriAsFD5Ps")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:22:00	Wayne Defreitas:	YES tidymodels
+00:31:06	August:	cs = cubic spline
+00:32:57	August:	some additional stuff about splines in r
+00:32:58	August:	https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-019-0666-3
+00:42:58	Wayne Defreitas:	#can create custom function [metric_set()] to specify which model metrics we want.
+
+#available functions: accuracy(), kap(), sens(),spec(), ppv(), npv(), mcc(), j_index(), bal_accuracy, detection_prevalence(), precision(), recall(), f_meas() 
+custom_metrics <- metric_set (accuracy, sens, spec)
+00:44:24	Wayne Defreitas:	custom_metrics(leads_results,
+         truth=purchased,
+         estimate=.pred_class)
+00:44:43	August:	https://yardstick.tidymodels.org/reference/metric_set.html
+01:02:54	Wayne Defreitas:	Running to another meeting…thanks everyone
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/ZjFSODq2Ryk")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:20:03	Raymond Balise:	nicely done
+00:21:33	Mei Ling Soh:	https://www.theanalysisfactor.com/count-data-considered-continuous/#:~:text=The%20issue%20with%20count%20variables,model%2C%20which%20require%20continuous%20data.&text=Treating%20that%20count%20variable%20as,in%20your%20particular%20data%20set.
+00:30:04	SriRam:	Just realised that GLM is not in the first edition (the book I have) :(
+00:30:54	August:	https://www.statlearning.com/
+00:31:05	August:	link at the bottom of page for 2nd edition
+00:31:24	SriRam:	Thank you August & Mei
+00:32:25	August:	👍 anytime
+00:42:27	Federica Gazzelloni:	Thanks Raymond!!
+```
+</details>
+
+### Cohort 2
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

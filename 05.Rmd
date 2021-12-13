@@ -134,6 +134,50 @@ $$SE_{B(\hat{\alpha})} = \sqrt{\frac{1}{B-1}\sum_{r=1}^{B}\left(\hat{\alpha}^{*r
 
 ### Cohort 1
 
+`r knitr::include_url("https://www.youtube.com/embed/Obt6EZeBfIw")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:14:53	jonathan.bratt:	Sorry, didn’t realize I was unmuted. :)
+00:15:03	Raymond Balise:	be right back… I am listening
+00:15:16	August:	time series can also be analysed with features, which means you can use decision trees, and not rely on the sequential indexing.
+00:17:08	August:	for those wanting to understand when we aren't modelling on features https://otexts.com/fpp3/tscv.html
+00:17:18	August:	application in modeltime https://cran.r-project.org/web/packages/modeltime.resample/vignettes/getting-started.html
+00:25:53	Jon Harmon (jonthegeek):	10-fold CV is orange, LOOCV is black dashed, true is blue.
+00:27:24	Mei Ling Soh:	How do we decide on the k-value?
+00:27:47	August:	Its kind of a choice.
+00:29:05	jonathan.bratt:	because we have five fingers on each hand :)
+00:29:39	Jon Harmon (jonthegeek):	rsample::vfold_cv defaults to 10 so I generally do 10 🙃
+00:29:47	August:	the answer is in section 7.10.1 of ESL
+00:29:50	Mei Ling Soh:	😅
+00:30:04	August:	By answer I mean explination
+00:31:09	August:	With time series I tend to use about 5 or 6 k when using models which utilise sequential indexing.
+00:32:10	jonathan.bratt:	Can you use the arrow keys?
+00:38:11	August:	This is quite interesting: https://machinelearningmastery.com/how-to-configure-k-fold-cross-validation/
+00:39:53	Mei Ling Soh:	Thanks, August!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/JMDQsvVqMT8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:11:39	Jon Harmon (jonthegeek):	https://twitter.com/whyRconf
+00:14:38	SriRam:	go for one page view, not scrolling view
+00:25:46	Wayne Defreitas:	lol
+00:33:53	SriRam:	it should be square root of mean, not mean of square root ? Or did i read it wrong?
+00:45:45	Wayne Defreitas:	This was great thank you
+00:46:27	Mei Ling Soh:	Great! Thanks
+00:49:19	jonathan.bratt:	Ch6 is long
+```
+</details>
+
+### Cohort 2
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
