@@ -2,7 +2,13 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Select a subset of features to include in a linear model.
+  - Compare and contrast the forward stepwise, backward stepwise, hybrid, and best subset methods of subset selection.
+- Use shrinkage methods to constrain the flexibility of linear models.
+  - Compare and contrast the lasso and ridge regression methods of shrinkage.
+- Reduce the dimensionality of the data for a linear model.
+  - Compare and contrast the PCR and PLS methods of dimension reduction.
+- Explain the challenges that may occur when fitting linear models to high-dimensional data.
 
 ## Slide 1
 
