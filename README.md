@@ -12,6 +12,9 @@ If you would like to present, please add your name next to a chapter using the [
 
 *Cohort 1: (started 2021-09-21) - Tuesdays, 10:00am EST/EDT*
 
+<details>
+  <summary> Past Meetings </summary>
+
 - 2021-09-21: Chapter 1: Introduction - Jon Harmon
 - 2021-09-28: Chapter 2: Statistical Learning (part 1) - Ray Balise
 - 2021-10-05: Chapter 2: Statistical Learning (part 2) - Ray Balise and Jon Harmon
@@ -24,6 +27,9 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-11-23: Chapter 4: Classification (part 2) - Kim Martin
 - 2021-11-30: Chapter 5: Resampling Methods (part 1) - Laura Rose
 - 2021-12-07: Chapter 5: Resampling Methods (part 2) - Justin Dollman
+
+</details>
+
 - 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Daniel
 - 2021-12-21: Chapter 6: Linear Model Selection and Regularization (part 2) - Daniel
 - 2021-12-28: NO MEETING (Winter Break)
@@ -44,10 +50,14 @@ If you would like to present, please add your name next to a chapter using the [
 
 *Cohort 2: (starts 2021-12-02) - Tuesdays, 10:00am CST*
 
-<details> 
-  
+<details>
+  <summary> Past Meetings </summary>
+
 - 2021-12-02	Chapter 1: Introduction	- Federica Gazzelloni
 - 2021-12-09	Chapter 2: Statistical Learning	- Jim Gruman
+
+</details>
+
 - 2021-12-16	Chapter 2: Statistical Learning	- TBC
 - 2021-12-23	NO MEETING	
 - 2021-12-30	NO MEETING	
