@@ -30,8 +30,8 @@ If you would like to present, please add your name next to a chapter using the [
 
 </details>
 
-- 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Daniel
-- 2021-12-21: Chapter 6: Linear Model Selection and Regularization (part 2) - Daniel
+- 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Justin Dollman
+- 2021-12-21: Chapter 6: Linear Model Selection and Regularization (part 2) - or maybe no meeting?
 - 2021-12-28: NO MEETING (Winter Break)
 - 2022-01-04: Chapter 7: Moving Beyond Linearity (part 1) - TBD
 - 2022-01-11: Chapter 7: Moving Beyond Linearity (part 2) - TBD
