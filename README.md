@@ -58,7 +58,7 @@ If you would like to present, please add your name next to a chapter using the [
 
 </details>
 
-- 2021-12-16	Chapter 2: Statistical Learning	- TBC
+- 2021-12-16	Chapter 2: Statistical Learning	Lab - Jim Gruman
 - 2021-12-23	NO MEETING	
 - 2021-12-30	NO MEETING	
 - 2022-01-06	Chapter 3: Linear Regression - Ricardo J. Serrano
