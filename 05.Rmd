@@ -8,17 +8,175 @@
 - Use **the bootstrap** to estimate the test error of a predictive model. 
 - Describe the **advantages and disadvantages** of the various methods for estimating model test error. 
 
-## Slide 1
+## Validation Set Approach
 
-- Try to follow a slide-like format.
+- This involves randomly splitting the data into a *training set* and *validation set*.
+  - Note that in certain applications, such as time series analysis, it is not feasible to randomly split the data.
+- The advantage of the validation set approach is that it is conceptually simple to understand and implement.
+- However, the *validation error rate* is variable depending on the assignment of the training and validation sets.
+- Additionally, we are giving up valuable data points by not using all of the data to estimate the model.
+  - Thus the validation error rate will tend to overestimate the test error rate.
+  
+## Validation Error Rate Varies Depending on Data Set
+```{r fig5-2, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Left: The validation set approach was used to estimated the test mean squared error from predicting mpg as a polynomial function of horsepower. Right: The estimated test error varies depending on the validation and training sets used."}
 
-## Slide 2
+knitr::include_graphics('./images/fig5_2.jpg', error = FALSE)
+```
+## Leave-One-Out Cross-Validation (LOOCV)
 
-- Use `##` to create new slides (sections).
+- LOOCV aims to address some of the drawbacks of the validation set approach.
+- Similar to validation set approach, LOOCV involves splitting the data into a training set and validation set.
+- However, the validation set includes one observation, and the training set includes $n-1$ observations. This process is repeated for all observations such that $n$ models are estimated.
+  - Having a large training set avoids the problems from not using all (or almost all) of the data in estimating the model.
+  - Conversely, the validation error for a given model is highly variable since it consists of one observation, although it is unbiased.
+
+LOOCV estimate of test error is averaged over the $n$ models:
+
+$$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}(y_{i}-\hat{y_{i}})^2$$
+
+## Advantages of LOOCV over Validation Set Approach
+
+- There are several advantages to LOOCV over validation set approach.
+  1. It has less bias since models are repeatedly fitted on slightly different data sets, so it tends to not overestimate the test error as much as the validation set approach.
+  2. The estimated test error will always be the same when LOOCV is performed on the entire data set.
+  
+- The major disadvantage to LOOCV is that it is computationally expensive.
+
+- An easy shortcut for estimating the LOOCV test error for linear or polynomial regression models from a single model is as follows.
+
+$$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}\left(\frac{y_{i} - \hat{y_{i}}}{1 - h_{i}}\right)^2$$
+where $h_{i}$ is the leverage for a given residual as defined in equation 3.37 in the book for a simple linear regression. Its value falls between 1 and $1/n$, so that observations whose residual has high leverage will contribute relatively more to the CV statistic.
+
+- In general, LOOCV can be used for various kinds of models, including logistic regression, LDA, and QDA. 
+
+## k-fold Cross-Validation
+
+- This is an alternative to LOOCV which involves dividing the data set into $k$ groups (folds) of approximately equal size. 
+- The percent of the data set that is in the validation set can be thought of as $1/k$.
+ - E.g., for $k=5$ groups, 20% of the data would be withheld for testing.
+ 
+## Graphical Illustration of k-fold Approach
+
+```{r fig5-5, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "The data set is split five times such that all observations are included in one validation set. The model is estimated on 80% of the data five different times, the predictions are made for the remaining 20%, and the test MSEs are averaged."}
+
+knitr::include_graphics("./images/fig5_5.jpg", error = FALSE)
+
+```
+- Thus, LOOCV is a special case of k-fold cross-validation, where $k=n$.
+- The equation for the CV statistic is below:
+
+$$CV_{k} = \frac{1}{k}{\sum_{i=1}^{k}}MSE_{i}$$ 
+
+## Advantages of k-fold Cross-Validation over LOOCV
+
+- The main advantage of k-fold over LOOCV is computational.
+- However, there are other advantages related to the bias-variance tradeoff.
+- The figure below shows the true test error for the simulated data sets from Chapter 2 compared to the LOOCV error and k-fold cross-validation error.
+
+```{r fig5-6, echo=FALSE, cache=FALSE,  fig.align='center', fig.cap="The estimated test errors for LOOCV and k-fold cross validation is compared to the true test error for the three simulated data sets from Chapter 2. True test error is shown in blue, LOOCV error is the dashed black line, and 10-fold error is shown in orange."}
+
+knitr::include_graphics("./images/fig5_6.jpg", error = FALSE)
+```
+
+## Bias-Variance Tradeoff and k-fold Cross-Validation
+
+- As mentioned previously, the validation approach tends to overestimate the true test error, but there is low variance in the estimate since we just have one estimate of the test error.
+- Conversely, the LOOCV method has little bias, since almost all observations are used to create the models. 
+  - Since the mean of the highly correlated $n$ models has a higher variance, LOOCV mean estimated error has a higher variance.
+- The k-fold method ($k<n$) suffers from intermediate bias and variance levels.
+  - For this reason, $k=5$ or $k=10$ is often used in modeling since it has been demonstrated to yield results that do not have either too much bias or variance.
+  
+## Cross-Validation on Classification Problems
+
+- Previous examples have focused on measuring cross-validated test error where $Y$ is quantitative. 
+- We can also use cross validation for classification problems, using the equation below, which is an example of LOOCV.
+- $Err_{i} = I(Y_{i}\neq\hat{Y}_{i})$
+
+$$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}Err_{i}$$
+
+## Logistic Polynomial Regression, Bayes Decision Boundaries, and k-fold Cross Validation
+
+```{r fig5-7, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="Estimated decision boundaries of polynomial logistic regression models for simulated data are shown. The Bayes decision boundary is the dashed purple line."}
+
+knitr::include_graphics("./images/fig5_7.jpg", error = FALSE)
+```
+
+- In practice, the true test error and Bayes error rate are unknown, so we need to estimate the test error rate.
+- This can be done via k-fold cross-validation, which is often a good estimate of the true test error rate.
+
+```{r fig5-8, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The test error rate (beige), the training error rate (blue), and the 10-fold cross validation error rate (black) are shown for polynomial logistic regression and KNN classification."}
+
+knitr::include_graphics("./images/fig5_8.jpg")
+```
+
+## The Bootstrap
+
+- The bootstrap can be used in a wide variety of modeling frameworks to estimate the uncertainty associated with a given estimator.
+- For example, the bootstrap is useful to estimate the standard errors of a coefficient.
+
+- The bootstrap involves **repeated sampling with replacement** from the original data set to form a distribution of the statistic in question.
+
+## Population Distribution Compared to Bootstrap Distribution
+
+```{r fig5-10, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The distribution of the mean of alpha is shown on the left, with 1000 samples generated from the true population. A bootstrap distribution is shown in the middle, with 1000 samples taken from the original sample. Note that both confidence intervals contain the true alpha (pink line) in the right panel, and that the spread of both distributions is similar."}
+
+knitr::include_graphics("./images/fig5_10.jpg")
+
+```
+
+## Bootstrap Standard Error
+
+The bootstrap standard error formula is somewhat more complex. The equation below gives the standard error for the $\hat{\alpha}$ example in the book. The bootstrap standard error functions as an estimate of the standard error of $\hat{\alpha}$ estimated from the original data set.
+
+$$SE_{B(\hat{\alpha})} = \sqrt{\frac{1}{B-1}\sum_{r=1}^{B}\left(\hat{\alpha}^{*r} - \frac{1}{B}\sum_{j=1}^{B}\hat{\alpha}^{*j}\right)^2}$$
 
 ## Meeting Videos
 
 ### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/Obt6EZeBfIw")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:14:53	jonathan.bratt:	Sorry, didn’t realize I was unmuted. :)
+00:15:03	Raymond Balise:	be right back… I am listening
+00:15:16	August:	time series can also be analysed with features, which means you can use decision trees, and not rely on the sequential indexing.
+00:17:08	August:	for those wanting to understand when we aren't modelling on features https://otexts.com/fpp3/tscv.html
+00:17:18	August:	application in modeltime https://cran.r-project.org/web/packages/modeltime.resample/vignettes/getting-started.html
+00:25:53	Jon Harmon (jonthegeek):	10-fold CV is orange, LOOCV is black dashed, true is blue.
+00:27:24	Mei Ling Soh:	How do we decide on the k-value?
+00:27:47	August:	Its kind of a choice.
+00:29:05	jonathan.bratt:	because we have five fingers on each hand :)
+00:29:39	Jon Harmon (jonthegeek):	rsample::vfold_cv defaults to 10 so I generally do 10 🙃
+00:29:47	August:	the answer is in section 7.10.1 of ESL
+00:29:50	Mei Ling Soh:	😅
+00:30:04	August:	By answer I mean explination
+00:31:09	August:	With time series I tend to use about 5 or 6 k when using models which utilise sequential indexing.
+00:32:10	jonathan.bratt:	Can you use the arrow keys?
+00:38:11	August:	This is quite interesting: https://machinelearningmastery.com/how-to-configure-k-fold-cross-validation/
+00:39:53	Mei Ling Soh:	Thanks, August!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/JMDQsvVqMT8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:11:39	Jon Harmon (jonthegeek):	https://twitter.com/whyRconf
+00:14:38	SriRam:	go for one page view, not scrolling view
+00:25:46	Wayne Defreitas:	lol
+00:33:53	SriRam:	it should be square root of mean, not mean of square root ? Or did i read it wrong?
+00:45:45	Wayne Defreitas:	This was great thank you
+00:46:27	Mei Ling Soh:	Great! Thanks
+00:49:19	jonathan.bratt:	Ch6 is long
+```
+</details>
+
+### Cohort 2
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 

@@ -281,12 +281,95 @@ knitr::include_graphics("images/fig1_2.png")
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/VSRRy3vpvq0")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:07:44	Fran Barton:	Hi!!!
+00:08:00	Mei Ling Soh:	Hello!
+00:08:17	BEN:	Hello!
+00:08:53	Kim Martin:	Hello :)
+00:09:15	Stijn Van de Vondel:	Hiya!
+00:09:31	Ryan S:	18 participants before kick off time!  Jon, hope you're expecting a large crowd.  :-)
+00:11:18	Fran Barton:	Gesundheit
+00:11:49	Jyoti Bhogal:	That's Starry Nights in the background @Jon :)
+00:11:59	Kim Martin:	I'm going to turn off my camera and mic for a little bit so no one is subjected to seeing me eat peanut butter from the 'emergency snack jar' 😵
+00:12:08	Fran Barton:	:-D
+00:12:31	Fran Barton:	I'm in a shared office with background noise so will stay on mute most of the time
+00:12:43	Stijn Van de Vondel:	Gotta say, that's one hell of a silent vacuum
+00:13:05	Stijn Van de Vondel:	If it's not the mic, you may be sitting on a vacuum goldmine
+00:13:21	Kim Martin:	😂
+00:16:42	Kim Martin:	Shall we do tag-team presentations to spread the responsibility/opportunity around?
+00:16:51	Kim Martin:	(swopping presenter mid-session/chapter)
+00:17:18	Raymond Balise:	chapter 2 is a lot
+00:20:02	Ryan S:	love that idea -- discussion one week, exercises second week
+00:20:15	Mei Ling Soh:	I second that
+00:20:27	Kim Martin:	+1
+00:20:40	Raymond Balise:	thoughts on Tidymodels vs Base?
+00:22:25	Kim Martin:	Nothing against Tidyverse (recent convert), but it makes sense to me to start with base
+00:22:36	Jyoti Bhogal:	The link for today's meeting, I got through a friend. What do I need to do to subscribe for receiving the links for meetings?
+00:22:41	Kim Martin:	(the argument is overblown, imo)
+00:23:16	Jyoti Bhogal:	thank you
+00:23:17	Raymond Balise:	👍🏼
+00:23:17	Kim Martin:	https://github.com/r4ds/bookclub-islr
+00:23:23	David Severski:	To be clear, we’re talking tidymodels vs base, not tidyverse v base.
+00:23:31	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:28:03	Fran Barton (he/him):	do we know why they are called "supervised" and "unsupervised"? interesting terminology and I think it would help me to understad better if I could grasp what they have to do with whether you're looking for outputs or not
+00:28:35	August:	supervised has a target/output to be predicted.
+00:29:02	Fran Barton (he/him):	"letting the machine go play" is great - that helps thx
+00:29:15	Kim Martin:	All models that involve 'training' are supervised, I'm guessing?
+00:30:24	Kim Martin:	If the process of the unsupervised model 'deciding' on how to group things into clusters is computationally expensive, then you'd train it first...
+00:30:52	Kim Martin:	… then after it has 'decided', it'll be quick in the future to slot new observations into those clusters
+00:30:58	Kim Martin:	(guessing)
+00:31:44	BEN:	tidymodels nomenclature is always exciting :3
+00:32:05	Arnab Dey (he/him):	epsilon?
+00:32:12	Kim Martin:	'Exciting'? (novice - curious)
+00:32:35	BEN:	both
+00:32:36	Keuntae Kim:	that stands for "element of"
+00:32:50	SriRam:	In set theory, it is called “belongs to”
+00:32:51	Arnab Dey (he/him):	ah!
+00:32:52	Kaustav Sen:	belongs to? https://www.mathdoubts.com/belongs-to/#:~:text=In%20the%20set%20theory%2C%20the,element%20belongs%20to%20the%20set.&text=It%20helps%20us%20to%20express,its%20set%20in%20mathematical%20form.
+00:32:53	August:	Isn't E also euler?
+00:32:57	Keuntae Kim:	correct. already in the slide... hahah
+00:33:08	Raymond Balise:	add the link to that book later plz
+00:33:14	Fran Barton (he/him):	wikipedia: "The lunate epsilon, ϵ, is not to be confused with the set membership symbol ∈"
+00:33:33	Kim Martin:	Math notation as bird spotting hobby alternative...
+00:33:42	August:	sorry you're right euler is more like e
+00:34:05	Ryan Metcalf:	Latex: \in
+00:34:18	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:34:21	Jon Harmon (jonthegeek):	statlearning.com
+00:34:23	Raymond Balise:	the notation book reference plz
+00:34:29	Kim Martin:	https://www.amazon.com/Mathematical-Notation-Guide-Engineers-Scientists/dp/1466230525
+00:34:37	Raymond Balise:	thx kim
+00:34:41	Mei Ling Soh:	https://www.rapidtables.com/math/symbols/Basic_Math_Symbols.html
+00:35:11	Fran Barton (he/him):	^ useful! thx
+00:38:08	Fran Barton (he/him):	I think `install.github("ISLR2")` is maybe missing the repo owner name "CRAN/ISLR2" ??
+00:38:37	Ryan S:	let's say it's been many years since my last "traditional / undergrad" stats class.  Will I survive ISLR or should I brush up a bit?
+00:39:06	Fran Barton (he/him):	ah of course - let's fix on github ;-)
+00:39:56	SriRam:	This is also my stepping stone into this world
+00:40:25	Ryan S:	good to know.  Otherwise, I have the hours of 2:00 AM to 3:00 AM on Saturdays I can use to review Stats 101.
+00:40:30	Ryan S:	😆
+00:43:16	Ryan S:	thx!
+00:43:19	Wayne Defreitas:	thx
+00:43:19	Stijn Van de Vondel:	Thanks for hosting, can't wait for the next parts!
+00:43:20	A. S. Ghatpande:	thanks
+00:43:23	Jiwan Heo:	thank you!
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/n29onzdTbAo")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:32:05	Ricardo Serrano:	https://github.com/r4ds/bookclub-islr
+00:32:07	Michael Haugen:	https://github.com/r4ds/bookclub-islr
+00:50:59	Federica Gazzelloni:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/index.html
+00:51:11	Federica Gazzelloni:	https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/
 ```
 </details>

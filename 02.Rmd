@@ -2,18 +2,18 @@
 
 **Learning objectives:**
 
-- Understand Vocabulary for prediction
-- Understand "Error"/Accuracy
-- Understand Parametric vs Nonparametric Models
-- Describe the trade-off between more accurate models and more interpretable models.
-- Compare and contrast supervised and unsupervised learning.
-- Compare and contrast regression and classification problems.
-- Measure the accuracy/goodness of regression model fits.
-- Measure the accuracy/goodness of classification model fits.
-- Describe how bias and variance contribute to the model error.
-- Understand overfitting.
-- Recognize KNN.
-- Understand the role of tuning in ML models.
+-   Understand Vocabulary for prediction
+-   Understand "Error"/Accuracy
+-   Understand Parametric vs Nonparametric Models
+-   Describe the trade-off between more accurate models and more interpretable models.
+-   Compare and contrast supervised and unsupervised learning.
+-   Compare and contrast regression and classification problems.
+-   Measure the accuracy/goodness of regression model fits.
+-   Measure the accuracy/goodness of classification model fits.
+-   Describe how bias and variance contribute to the model error.
+-   Understand overfitting.
+-   Recognize KNN.
+-   Understand the role of tuning in ML models.
 
 ```{r 02-setup, echo = FALSE}
 knitr::opts_chunk$set(include = TRUE)
@@ -28,218 +28,252 @@ tidymodels_prefer()
 library(knitr)
 ```
 
+## What is Statistical Learning? 
 
-## Advertising Example
+The chapter opens with a discussion of what models are good for, how we use them, and some of the issues that are involved.
 
-Data set consists of the sales of that product in 200 different markets, along with advertising budgets for the product in each of those markets for three different media: TV, radio, and newspaper.
+Can we predict Sales using ad media spending?
 
-![Fig 2.1](./images/fig2_1.jpg)
+```{r}
+read_csv(
+    "https://www.statlearning.com/s/Advertising.csv",
+    col_types = "-dddd",
+    skip = 1,
+    col_names = c("row", "TV", "radio", "newspaper", "sales")
+  ) %>% 
+  pivot_longer(cols = -sales) %>% 
+  ggplot(aes(value, sales)) +
+  geom_point(shape = 21, color = "red") +
+  geom_smooth(method = "lm", color = "blue",
+              se = FALSE, formula = "y ~ x") +
+  facet_wrap(vars(name),
+             scales = "free_x",
+             strip.position = "bottom") +
+  theme_bw() +
+  theme(strip.placement = "outside",
+        panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  labs(x = NULL,
+       caption = "Source: https://www.statlearning.com/s/Advertising.csv | A simple least squares fit shown in blue")
+```
 
-## Terms
-In this setting, the advertising budgets are <mark>*input variables*</mark> while sales is an <mark>*output variable*</mark>. The input variables are typically denoted using the symbol $X$, with a subscript to distinguish them. So $X_1$ might be the `TV` budget, $X_2$ the `radio` budget, and $X_3$ the `newspaper` budget. The inputs go by different names, such as <mark>*predictors*, *independent variables*, *features*</mark>, or sometimes just <mark>*variables*</mark>. The output variable in this case, sales is often called the <mark>*response*</mark> or <mark>*dependent variable*</mark>, and is typically denoted using the symbol $Y$. Throughout this book, we will use all of these terms interchangeably.
+You can make out a trend, at least in radio and TV.
 
-## Equation 2.1
+We typically want to be able to characterize the **Sales** potential as a function of all three media inputs. How do they operate together?
+
+<h4>**Notation**</h4>
+
+In this setting, the advertising budgets are <mark>*input variables*</mark> while sales is an <mark>*output variable*</mark>. The input variables are typically denoted using the symbol $X$, with a subscript to distinguish them. 
+
+So $X_1$ might be the `TV` budget, 
+$X_2$ the `radio` budget, and 
+$X_3$ the `newspaper` budget. 
+
+The inputs go by different names, such as <mark>*predictors*, *independent variables*, *features*</mark>, or sometimes just <mark>*variables*</mark>. 
+
+The output variable in this case, `sales` is often called the <mark>*response*</mark> or <mark>*dependent variable*</mark>, and is typically denoted using the symbol $Y$. 
+
 We assume that there is some relationship between $Y$ and $X = (X_1, X_2,\dots,X_p)$, which can be written in the very general form
 
+```{=tex}
 \begin{equation}
 y = f(X) + \epsilon
 \end{equation}
+```
+Here $f$ is some fixed but unknown function of $X_1, \dots, X_p$, and $\epsilon$ is a random <mark>*error term*</mark>, which is independent of $X$ and has a mean of zero. In this formulation, $f$ represents the <mark>*systematic*</mark> information that $X$ provides about $Y$.
 
-Here $f$ is some fixed but unknown function of $X_1, \dots, X_p$, and $\epsilon$ is a random <mark>*error term*</mark>, which is independent of $X$ and has mean zero. In this formulation, $f$ represents the <mark>*systematic*</mark> information that $X$ provides about $Y$.
+<h4>**What is the $f(X)$ good for?**</h4>
 
-## Error terms
+With a good $f$ we can make predictions of $Y$ at new points.
 
-![Fig 2.2](./images/fig2_2.jpg)
+We can understand which components are important in explaining $Y$, and which components are irrelevant.
 
-The vertical lines represent the error terms $\epsilon$.
+Depending on the complexity of $f$, we may be able to understand how each component of $X_j$ of $X$ affects $Y$.
 
+```{r}
+read_csv("https://www.statlearning.com/s/Income1.csv",
+         col_types = "-dd",
+         skip = 1,
+         col_names = c("row", "Education","Income")) %>% 
+  mutate(res = residuals(loess(Income ~ Education))) %>% 
+  ggplot(aes(Education, Income)) +
+  geom_point(shape = 20, size = 4, color = "red") +
+  geom_segment(aes(xend = Education, yend = Income - res)) +
+  geom_smooth(method = "loess", se = FALSE, color = "blue",
+              formula = "y ~ x") +
+  scale_x_continuous(breaks = seq(10,22,2)) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(x = "Years of Education",
+       caption = "Source: https://www.statlearning.com/s/Income1.csv | A loess fit shown in blue") 
+```
 
-## Error Terms Two Predictors
+The vertical lines represent the error terms $\epsilon$. That is, the difference between the model estimate and the observed value.
 
-![Fig 2.3](./images/fig2_3.jpg)
+----
 
-Here $f$ is a two-dimensional surface that must be estimated based on the observed data.
+### Why Estimate $f$?
 
-> In essence, statistical learning refers to a set of approaches for estimating $f$. 
+There are two main reasons that we may wish to estimate $f$: *prediction* and *inference*.
 
-## Why Estiamte $f$?
+<h4>**Prediction**</h4>
 
-There are two main reasons that we may wish to estimate $f$: *prediction* and *inference*. 
+In many situations, a set of inputs $X$ are readily available, but the output $Y$ cannot be easily obtained. We can predict $Y$ using
 
-## Prediction
-
-In many situations, a set of inputs X are readily available, but the output Y cannot be easily obtained. In this setting, since the error term averages to zero, we can predict Y using 
-
+```{=tex}
 \begin{equation}
 \hat{Y} = \hat{f}(X)
 \end{equation}
+```
+$\hat{f}$ is often treated as a *black box*,
 
-$\hat{f}$ is often treated as a *black box*, 
+> One is not typically concerned with the exact form of $\hat{f}$, provided that it yields accurate predictions for Y.
 
->One is not typically concerned with the exact form of $\hat{f}$, provided that it yields accurate predictions for Y.
+The accuracy of $\hat{Y}$ as a prediction for $Y$ depends on two quantities, called the *reducible error* and the *irreducible error*.
 
-## Accuracy
-The accuracy of $\hat{y}$ as a prediction for $y$ depends on two quantities, which we will call the <mark>*reducible error*</mark> and the <mark>*irreducible error*</mark>. In general, $\hat{f}$ will not be perfect estimate for $f$, and this inaccuracy will introduce some error. This error is reducible because we can potentially improve the accuracy of $\hat{f}$ by using the most appropriate statistical learning technique to estimate $f$. 
+**Reducible Error** We can reduce the gap between our estimate and the true function by applying improved methods.
 
-Even if it were possible to form a perfect estimate for $f$,  <mark>our prediction would still have some error in it!</mark> This is because $Y$ is also a function of $\epsilon$, which, by definition, cannot be predicted using $X$. 
+**Irreducible Error** The quantity $\epsilon$ may contain unmeasured variables that are useful in predicting $Y$ : since we don’t measure them, $f$ cannot use them for its prediction. The quantity $\epsilon$ will also contain unmeasurable variation. 
 
-Therefore, variability associated with $\epsilon$ also affects the accuracy of our predictions. This is known as the *irreducible* error, because no matter how well we estimate $f$, we cannot reduce the error introduced by $\epsilon$. 
+![](https://24.media.tumblr.com/18571dcd16e913b96632fe403278d0a3/tumblr_mv5fvvsRQy1ro5xweo1_400.gif)
 
-The quantity $\epsilon$ may contain unmeasured variables that are useful in predicting $Y$
+The focus of the book is on techniques for estimating $f$ with the aim of minimizing the *reducible* error. 
 
-## Reducible vs Irreducible Error
-Consider a given estimate $\hat{f}$ and a set of predictors $X$, which yields the prediction $\hat{Y} = \hat{f}(X)$. It is easy to show that
+----
 
- ![EQ 2.3](./images/eq2-3.jpg)
+<h4>**Inference**</h4>
 
-where $\mathrm{E}(Y -\hat{Y})^2$ represents the average, or *expected value*, of the squared difference between the predicted and actual value of $Y$, and Var( $\epsilon$ ) represents the variance associated with the error term $\epsilon$. 
+We are often interested in understanding the association between $Y$ and
+$X = (X_1, X_2,\dots,X_p)$. In this situation we wish to estimate $f$, but our goal is not necessarily to make predictions for $Y$. Now $f$ cannot be treated as a black box, because we need to know its exact form. In this setting, one may be interested in answering the following questions:
 
->The focus of this book is on techniques for estimating $f$ with the aim of minimizing the reducible error. It is important to keep in mind that the irreducible error will always provide an upper bound on the accuracy of our prediction for $Y$. This bound is almost always unknown in practice.
+- Which predictors are associated with the response?
+ 
+- What is the relationship between the response and each predictor?
 
-## Inference
+- Can the relationship between Y and each predictor be adequately summarized using a linear equation, or is the relationship more complicated?
 
-We are often interested in understanding the association between $Y$ and $X_1,\dots,X_p$. In this situation we wish to estimate $f$, but <mark>our goal is not necessarily to make predictions for $Y$</mark>. Now $\hat{f}$ cannot be treated as a black box, because we need to know its exact form. 
+Consider the **Advertising** data. One may be interested in answering questions such as:
 
-+ Which predictors are associated with the response? 
-+ What is the relationship between the response and each predictor? 
-+ Can the relationship between $Y$ and each predictor be adequately summarized using a linear equation, or is the relationship more complicated?
+– Which media are associated with sales?
 
-## Linear Model
+– Which media generate the biggest boost in sales? or
 
-Depending on whether our ultimate goal is prediction, inference, or a combination of the two, different methods for estimating $f$ may be appropriate. 
+– How large of an increase in sales is associated with a given increase
+in TV advertising?
 
-<mark>*Linear models*</mark> allow for relatively simple and interpretable inference, but may not yield as accurate predictions as some other approaches. 
+----
 
-> In contrast, some of the highly non-linear approaches that we discuss in the later chapters of this book can potentially provide quite accurate predictions for $Y$, but this comes at the expense of a less interpretable model for which inference is more challenging.
+### How do we estimate $f$?
 
-## Parametric methods $_{(1)}$
+We want to find a function $f$ such that $Y ≈ f(X)$ for any observation. Broadly speaking, most statistical learning methods for this task can be characterized as either *parametric* or *non-parametric*. 
 
-We make an assumption about the functional form, or shape, of $f$. For example, one very simple assumption is that $f$ is linear in $X$:
+<h4>**Parametric Methods**</h4>
 
-$$
-f(X) = \beta_0 + \beta_1X_1 + \beta_2X_2 + ··· + \beta_pX_p.
-$$
-Instead of having to estimate an entirely arbitrary $p$-dimensional function $f(X)$, one only needs to estimate the $p + 1$ coefficients $\beta_0, \beta_1, \dots, \beta_p$.
+Parametric methods involve a two-step model-based approach.
 
-## Parametric methods $_{(2)}$
+1. First we make an assumption about the functional form of $f$
 
-We need a procedure that uses the training data to fit or train the model. In the case of the linear model, we need to estimate the parameters $\beta_0, \beta_1,\dots, \beta_p$. That is, we want to find values of these parameters such that $$Y \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_pX_p.$$
-The most common approach to fitting the model is referred to as <mark>*(ordinary) least squares*</mark>, which we discuss in [Chapter 3](#linear).
+1. After a model is selected, we apply a procedure to fit or train the model.
 
-## Parametric methods $_{(3)}$ - Easier than an arbitray function
+> The potential disadvantage of a parametric approach is that the model we choose will usually not match the true unknown form of $f$. If the chosen model is too far from the true $f$, then our estimate will be poor.
 
-The model-based approach just described is referred to as *parametric*; it reduces the problem of estimating $f$ down to one of estimating a set of parameters. It is generally much easier to estimate a set of parameters, such as $\beta_0, \beta_1, \dots, \beta_y$ in the linear model, than it is to fit an entirely arbitrary function $f$. 
+We can try to address this problem by choosing more flexible models that can fit many different possible functional forms for $f$.
 
-## Parametric methods $_{(4)}$ - Disadvantage
+> These more complex models can lead to a phenomenon known as <mark>*overfitting*</mark> the data, which essentially means they follow the errors, or noise, too closely.
 
-> The potential disadvantage of a parametric approach is that the model we choose will usually not match the true unknown form of $f$. If the chosen model is too far from the true $f$, then our estimate will be poor. 
+```{r}
+ISLR2::Portfolio %>% 
+  ggplot(aes(X, Y)) +
+  geom_point(shape = 21, color = "gray50") +
+  geom_smooth(method = "lm", color = "red", 
+              se = FALSE, formula = "y ~ x") +
+  geom_point(x = 1, y = 0.5, shape = 20, 
+             color = "red", size = 8) +
+  geom_vline(xintercept = 1, color = "red") +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::Portfolio | A linear fit shown in red") 
+```
 
-We can try to address this problem by choosing <mark>*flexible*</mark> models that can fit many different possible functional forms for $f$. 
+In a given dataset, there may be many observed values of $Y$ for each $X$. In this regression example, the expected value of Y given X = 1 is 0.5.
 
-> These more complex models can lead to a phenomenon known as <mark>*overfitting*</mark> the data, which essentially means they follow the errors, or noise, too closely. 
+The value of 0.5 is an average of sorts of the slice taken at x = 1.
 
+Although it is almost never correct, a linear model often serves as a good and interpretable approximation.
 
-## Basic Parametric Model
-![Figure 2-4](./images/fig2_4.jpg)
+<h4>**Non-Parametric Methods**</h4>
 
-Figure shows an example of the parametric approach applied to the `Income` data. We have fit a linear model of the form $$\tt{income} \approx \beta_0 + \beta_1 \times \tt{education} + \beta_2 \times \tt{seniority}.$$ We can see that the linear fit given in Figure 2.4 is not quite right: the true $f$ has some curvature that is not captured in the linear fit.
+> Non-parametric methods don't make explicit assumptions about the functional form of $f$
 
-## Non-Parametric Methods
+Instead they seek an estimate of $f$ that gets as close to the data points as possible without being too rough or wiggly.
 
-> Non-parametric methods don't make explicit assumptions about the functional form of $f$ 
+Any parametric approach brings with it the possibility that the functional form used to estimate $f$ on training data is very different from the true $f$, in which case the resulting model will not fit unseen, new data well.
 
-Instead they seek an estimate of $f$ that gets as close to the data points as possible without being too rough or wiggly. 
+Non-parametric approaches do suffer from a major disadvantage:
 
-Any parametric approach brings with it the possibility that the functional form used to estimate $f$ is very different from the true $f$, in which case the resulting model will not fit the data well. 
+> A very large number of observations (far more a than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for $f$.
 
-In contrast, non-parametric approaches completely avoid this danger, since <mark>essentially no assumption about the form of $f$ is made.</mark>
+----
 
-But non-parametric approaches do suffer from a major disadvantage: 
+### Prediction Accuracy vs Model Interpretability
 
->very large number of observations (far more a than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for $f$.
+Why would we ever choose to use a more restrictive method instead of a very flexible approach?
 
-## Thin plate splines
-![Figure 2-5](./images/fig2_5.jpg)
-![Figure 2-6](./images/fig2_6.jpg)
-<br>
+> If we are mainly interested in inference, then restrictive models are often more interpretable.
 
-A <mark>*thin-plate spline*</mark> is used to estimate $f$. This approach does not impose any pre-specified model on $f$. It instead attempts to produce an estimate for $f$ that is as close as possible to the observed data, subject to the fit that is, the yellow surface being *smooth*.
+Flexible approaches can lead to such complicated estimates of $f$ that it is difficult to understand how any individual predictor is associated with the response.
 
-Second plot shows the same thin-plate spline fit using a <mark>lower level of smoothness</mark>, allowing for a rougher fit. The resulting estimate fits the observed data perfectly! This is an example of overfitting the data.
+### Supervised Versus Unsupervised Learning
 
-## Prediction Accuracy vs Model Interpretability
+Supervised problems have labeled data with a response measurement, also called a dependent variable. 
 
-*Why would we ever choose to use a more restrictive method instead of a very flexible approach?* 
+Unsupervised problems have no labels. The challenge is to derive clusters, or patterns, to better understand what is happening.
 
-> If we are mainly interested in inference, then restrictive models are much more interpretable.  
+### Regression Versus Classification Problems
 
-Very flexible approaches, can lead to such complicated estimates of $f$ that it is difficult to understand how any individual predictor is associated with the response.
+Variables can be characterized as either <mark>*quantitative*</mark> or <mark>*qualitative*</mark> (categorical).
 
-+ Least squares linear regression is relatively inflexible but is quite interpretable. 
-+ Lasso, less flexible approach than linear regression. It is also more interpretable
-+ Generalized additive models (GAMs), more flexible than linear regression
+Quantitative variables take on numerical values. 
 
-Fully non-linear methods are highly flexible approaches that are harder to interpret.
-
-+ bagging
-+ boosting
-+ support vector machines with non-linear kernels
-+ neural networks (deep learning)
-
-## Supervised Versus Unsupervised Learning
-
-Most statistical learning problems fall into one of two categories: <mark>*supervised*</mark> or <mark>*unsupervised*</mark>.
-
-> With unsupervised learning, there is no response variable to predict. The goal of cluster analysis is to ascertain, on the basis of $x_1,\dots, x_n$, whether the observations fall into relatively distinct groups. 
-
-![Figure 2-8](./images/fig2_8.jpg)
-
-## Regression Versus Classification Problems
-
-Variables can be characterized as either <mark>*quantitative*</mark> or <mark>*qualitative*</mark> (categorical). 
-
-> Quantitative variables take on numerical values. In contrast, qualitative variables take on values in one of *K different* <mark>*classes*</mark>, or categories. 
+In contrast, qualitative variables take on values in <mark>*classes*</mark>, or categories.
 
 ## Assessing Model Accuracy
 
+There is no free lunch in statistics: no one method dominates all others over all possible problems.
+
+Selecting the best approach can be challenging in practice.
+
+### Measuring Quality of Fit
+
 > *There is no free lunch in statistics*: no one method dominates all others over all possible data sets. On a particular data set, one specific method may work best, but some other method may work better on a similar but different data set.
 
-## MSE 
+<h4>**MSE**</h4>
 
-We need some way to measure how well its predictions actually match the observed data. 
+We always need some way to measure how well a model's predictions actually match the observed data.
 
-> In the regression setting, the most commonly-used measure is the <mark>*mean squared error*</mark> (MSE), given by 
-$$ MSE = \frac{1}{n}\sum_{i=1}^n(y_i-\hat{f}(x_i))^2,$$
+> In the regression setting, the most commonly-used measure is the <mark>*mean squared error*</mark> (MSE), given by $$ MSE = \frac{1}{n}\sum_{i=1}^n(y_i-\hat{f}(x_i))^2,$$
 
 The MSE will be small if the predicted responses are very close to the true responses,and will be large if for some of the observations, the predicted and true responses differ substantially.
 
-## Training vs. Test
-The MSE in the above equation is computed using the training data that was used to fit the model, and so should more accurately be referred to as the <mark>*training MSE*</mark>. 
+<h4>**Training vs. Test**</h4>
 
->In general, we do not really care how well the method works on the training data. 
+The MSE in the above equation is computed using the training data that was used to fit the model, and so should more accurately be referred to as the <mark>*training MSE*</mark>.
 
-We are interested in the accuracy of the predictions that we obtain when we apply our method to previously unseen  <mark>*test data*</mark>. 
+> In general, we do not really care how well the method works on the training data.
+
+We are interested in the accuracy of the predictions that we obtain when we apply our method to previously unseen <mark>*test data*</mark>.
 
 $$\mathrm{Ave}(y_0 - \hat{f}(x_0))^2 ,$$
 
-We'd like to select the model for which this quantity is as small as possible on future samples.
-
-## Overfitting with Increased Flexiblity
-![Figure 2-9](./images/fig2_9.jpg)
-![Figure 2-10](./images/fig2_10.jpg)
-<br><br>
-</hr>
- ![Figure 2-11](./images/fig2_11.jpg)
-
-## Interpretation
+We'd like to select the model for which this quantity is as small as possible on unseen, future samples.
 
 The <mark>*degrees of freedom*</mark> is a quantity that summarizes the flexibility of a curve. The training MSE declines monotonically as flexibility increases.
 
-<mark>As model flexibility increases, training MSE will decrease, but the test MSE may not.</mark> When a given method yields a small training MSE but a large test MSE, we are said to be *overfitting* the data. 
+<h4>**Overfitting**</h4>
+
+<mark>As model flexibility increases, training MSE will decrease, but the test MSE may not.</mark> When a given method yields a small training MSE but a large test MSE, we are said to be *overfitting* the data.
 
 > Overfitting refers specifically to the case in which a less flexible model would have yielded a smaller test MSE.
-
-## The Bias-Variance Trade-Off
 
 MSE, for a given value, can always be decomposed into the sum of three fundamental quantities: the <mark>*variance*</mark> of $\hat{f}(x_0)$, the squared <mark>*bias*</mark> of $\hat{f}(x_0)$ and the variance of the <mark>error terms</mark> $\epsilon$. That is,
 
@@ -247,36 +281,59 @@ $$E\big(y_0 - \hat{f}(x_0)\big)^2 = \mathrm{Var}\big(\hat{f}(x_0)\big) +[\mathrm
 
 Here the notation $E\big(y_0 - \hat{f}(x_0)\big)^2$ defines the <mark>*expected test MSE*</mark> at $x_0$ and refers to the average test MSE that we would obtain if we repeatedly estimated $f$ using a <mark>large number of training sets</mark>, and tested each at $x_0$. The overall expected test MSE can be computed by averaging $E \big(y_0 - \hat{f}x(x_0)\big)^2$ over all possible values of $x_0$ in the test set
 
+![FIGURE 2.9. Left: Data simulated from f, shown in black. Three estimates of f are shown: the linear regression line (orange curve), and two smoothing spline fits (blue and green curves). Right: Training MSE (grey curve), test MSE (red curve), and minimum possible test MSE over all methods (dashed line). Squares represent the training and test MSEs for the three fits shown in the left-hand panel.](images/fig2_9.jpg) 
+
+The orange, blue and green squares indicate the MSEs associated with the corresponding curves in the left hand panel. A more restricted and hence smoother curve has fewer degrees of freedom than a wiggly curve—note that in Figure 2.9, linear regression is at the most restrictive end, with two degrees of freedom. The training MSE declines monotonically as flexibility increases.
+ 
+As the flexibility of the statistical learning method increases, we observe a monotone decrease in the training MSE and a U-shape in the test MSE. This is a fundamental property of statistical learning that holds regardless of the particular data set at hand and regardless of the statistical method being used. As model flexibility increases, training MSE will decrease, but the test MSE may not.
+
+When a given method yields a small training MSE but a large test MSE, we are said to be <mark>*overfitting*</mark> the data.
+
+![FIGURE 2.10. Details are as in Figure 2.9, using a different true f that is much closer to linear. In this setting, linear regression provides a very good fit to the data.](images/fig2_10.jpg)
+
+Another example in which the true $f$ is approximately linear.
+
+However, because the truth is close to linear, the test MSE
+only decreases slightly before increasing again, so that the orange least squares fit is substantially better than the highly flexible green curve.
+
+Figure 2.11 displays an example in which f is highly non-linear. The
+training and test MSE curves still exhibit the same general patterns, but now there is a rapid decrease in both curves before the test MSE starts to increase slowly.
+
+![FIGURE 2.11. Details are as in Figure 2.9, using a different f that is far from linear. In this setting, linear regression provides a very poor fit to the data.](images/fig2_11.jpg)
+
 > We need to select a statistical learning method that simultaneously achieves low variance and low bias.
 
-## Bias-Variance Trade-Off
-As we use more flexible methods, the variance will increase and the bias will decrease. As we increase the flexibility of a class of methods, the bias tends to initially decrease faster than the variance increases. However, at some point increasing flexibility has little impact on the bias but starts to significantly increase the variance. When this happens the test MSE increases. 
+### The Bias-Variance Trade-Off
 
- ![Figure 2-11](./images/fig2_12.jpg)
+As we use more flexible methods, the variance will increase and the bias will decrease. As we increase the flexibility of a class of methods, the bias tends to initially decrease faster than the variance increases. However, at some point increasing flexibility has little impact on the bias but starts to significantly increase the variance. When this happens the test MSE increases.
 
-In all three cases, the variance increases and the bias decreases as the method’s flexibility increases. The relationship between bias, variance, and test set MSE given is referred to as the <mark>*bias-variance trade-off*</mark>. 
+![FIGURE 2.12. Squared bias (blue curve), variance (orange curve), Var(ϵ) (dashed line), and test MSE (red curve) for the three data sets in Figures 2.9–2.11. The vertical dotted line indicates the flexibility level corresponding to the smallest test MSE.](./images/fig2_12.jpg)
+
+In all three cases, the variance increases and the bias decreases as the method's flexibility increases. The relationship between bias, variance, and test set MSE given is referred to as the <mark>*bias-variance trade-off*</mark>.
 
 > The challenge lies in finding a method for which both the variance and the squared bias are low. This trade-off is one of the most important recurring themes in this book.
 
-## The Classification Setting
+### The Classification Setting
 
-The most common approach for quantifying the accuracy of our estimate $\hat{f}$ is the training <mark>*error rate*</mark>, the proportion of mistakes that are made if we apply our estimate $\hat{f}$ to the training observations:
-$$\frac{1}{n}\sum_{i=1}^{n}I(y_i \ne \hat{y}_i).$$
+The most common approach for quantifying the accuracy of our estimate $\hat{f}$ is the training <mark>*error rate*</mark>, the proportion of mistakes that are made if we apply our estimate $\hat{f}$ to the training observations: $$\frac{1}{n}\sum_{i=1}^{n}I(y_i \ne \hat{y}_i).$$
 
 The above equation computes the fraction of incorrect classifications.
 
-Equation is referred to as the <mark>*training error*</mark> rate because it is computed based on the data that was used to train our classifier. 
+The equation is referred to as the <mark>*training error*</mark> rate because it is computed based on the data that was used to train our classifier.
 
-> We are most interested in the error rates that result from applying our classifier to test observations that were not used in training. 
+> Again, we are most interested in the error rates that result from applying our classifier to test observations that were not used in training.
 
-## Test Error
+<h4>**Test Error**</h4>
+
 The <mark>*test error*</mark> rate associated with a set of test observations of the form $(x_0, y_0)$ is given by
 
 $$\mathrm{Ave}\big(I(y_i \ne \hat{y}_i)\big).$$
 
 Where $\hat{y}_0$ is the predicted class label that results from applying the classifier to the test observation with predictor $x_0$. A good classifier is one for which the test error is smallest.
 
-## The Bayes Classifier
+<h4>**The Bayes Classifier**</h4>
+
+*Hypothetical -- cannot be done in practice*
 
 The test error rate is minimized, on average, by a very simple classifier that *assigns each observation to the most likely class, given its predictor values*. In other words, we should simply assign a test observation with predictor vector $x_0$ to the class $j$ for which
 
@@ -284,13 +341,16 @@ $$\mathrm{Pr}(Y=j|X=x_0).$$
 
 Note that is a <mark>*conditional probability*</mark>: it is the probability that $Y = j$, given the observed predictor vector $X_0$. This very simple classifier is called the <mark>*Bayes classifier*</mark>.
 
-## Bayes Classifier Decision Boundry
+<h4>**Bayes Classifier Decision Boundary**</h4>
 
-![Figure 2-13](./images/fig2_13.jpg)
+Figure 2.13 provides an example using a simulated data set in a two dimensional space consisting of predictors X1 and X2. The orange and
+blue circles correspond to training observations that belong to two different classes. For each value of X1 and X2, there is a different probability of the response being orange or blue.
+
+![FIGURE 2.13. A simulated data set consisting of 100 observations in each of two groups, indicated in blue and in orange. The purple dashed line represents the Bayes decision boundary. The orange background grid indicates the region in which a test observation will be assigned to the orange class, and the blue background grid indicates the region in which a test observation will be assigned to the blue class.](images/fig2_13.jpg)
 
 The purple dashed line represents the points where the probability is exactly 50%. This is called the <mark>*Bayes decision boundary*</mark>. An observation that falls on the orange side of the boundary will be assigned to the orange class, and similarly an observation on the blue side of the boundary will be assigned to the blue class.
 
-> The Bayes classifier produces the lowest possible test error rate, called the <mark>*Bayes error rate*</mark>. 
+> The Bayes classifier produces the lowest possible test error rate, called the <mark>*Bayes error rate*</mark>.
 
 The overall Bayes error rate is given by
 
@@ -298,11 +358,11 @@ $$1- E\big(\mathop{\mathrm{max}}_{j}(Y=j|X)\big),$$
 
 where the expectation averages the probability over all possible values of X. The Bayes error rate is analogous to the irreducible error, discussed earlier.
 
-## K-Nearest Neighbors
+<h4>**K-Nearest Neighbors**</h4>
 
-For real data, we do not know the conditional distribution of $Y$ given $X$, and so computing the Bayes classifier is impossible. 
+For real data, we do not know the conditional distribution of $Y$ given $X$, and so computing the Bayes classifier is impossible.
 
-Many approaches attempt to estimate the conditional distribution of $Y$ given $X$, and then classify a given observation to the class with highest estimated probability. One such method is the <mark>*K-nearest neighbors*</mark> (KNN) classifier. 
+Many approaches attempt to estimate the conditional distribution of $Y$ given $X$, and then classify a given observation to the class with highest estimated probability. One such method is the <mark>*K-nearest neighbors*</mark> (KNN) classifier.
 
 Given a positive integer K and a test observation $t_{0}$, the KNN classifier first identifies the K points in the training data that are closest to $x_0$
 
@@ -314,24 +374,774 @@ Finally, KNN classifies the test observation $x_0$ to the class with the largest
 
 The KNN approach with $K$ = 3 at all of the possible values for $X_1$ and $X_2$, and have drawn in the corresponding KNN decision boundary.
 
-Despite the fact that it is a very simple approach, KNN can often produce classifiers that are surprisingly close to the optimal Bayes classifier.
+Despite the fact that it is a very simple approach, KNN can produce classifiers that are surprisingly close to the optimal Bayes classifier.
 
-## KNN with Different K
+<h4>**KNN with Different K**</h4>
 
-![Figure 2-15](./images/fig2_15.jpg)
-![Figure 2-16](./images/fig2_16.jpg)
-<br>
+![FIGURE 2.15. The black curve indicates the KNN decision boundary on the data from Figure 2.13, using K = 10. The Bayes decision boundary is shown as a purple dashed line. The KNN and Bayes decision boundaries are very similar.](images/fig2_15.jpg) 
+
+![FIGURE 2.16. A comparison of the KNN decision boundaries obtained using K = 1 and K = 100 on the data from Figure 2.13. With K = 1, the decision boundary is overly flexible, while with K = 100 it is not sufficiently flexible. The Bayes decision boundary is shown as a purple dashed line.](images/fig2_16.jpg) 
 
 > The choice of K has a drastic effect on the KNN classifier obtained.
 
-## KNN Tuning
-![Figure 2-17](./images/fig2_17.jpg)
+Nearest neighbor methods can be lousy when $p$ is large. 
 
-There is not a strong relationship between the training error rate and the test error rate. 
+Reason: the *curse of dimensionality*. Nearest neighbors tend to be far away in high dimensions.
 
-> As we use more flexible classification methods, the training error rate will decline but the test error rate may not. 
+<h4>**KNN Tuning**</h4>
 
-As $1/K$ increases, the method becomes more flexible. As in the regression setting, the training error rate consistently declines as the flexibility increases. 
+![FIGURE 2.17. The KNN training error rate (blue, 200 observations) and test error rate (orange, 5,000 observations) on the data from Figure 2.13, as the level of flexibility (assessed using 1/K on the log scale) increases, or equivalently as the number of neighbors K decreases. The black dashed line indicates the Bayes error rate. The jumpiness of the curves is due to the small size of the training data set.](./images/fig2_17.jpg)
+
+> As we use more flexible classification methods, the training error rate will decline but the test error rate may not.
+
+As $1/K$ increases, the method becomes more flexible. As in the regression setting, the training error rate consistently declines as the flexibility increases.
 
 However, the test error exhibits a characteristic U-shape, declining at first (with a minimum at approximately $K$ = 10) before increasing again when the method becomes excessively flexible and overfits.
+
+## Exercises
+
+<h4>**Conceptual**</h4>
+
+<span style="color: red;">
+1. For each of parts (a) through (d), indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.</span>
+
+<span style="color: red;">
+(a) The sample size n is extremely large, and the number of predictors p is small.</span>
+
+A flexible model can take advantage of the large number of observations to make a detailed model.
+
+<span style="color: red;">
+(b) The number of predictors p is extremely large, and the number
+of observations n is small.</span>
+
+I'd apply Principal Component Analysis to drive p well under n, and then an inflexible, parametric method like Ordinary Least Squares could provide a model with a reasonable test set performance. 
+
+<span style="color: red;">
+(c) The relationship between the predictors and response is highly
+non-linear.</span>
+
+A flexible model could better capture the non-linearity.
+
+<span style="color: red;">
+(d) The variance of the error terms, i.e. σ2 = Var(ϵ), is extremely
+high.</span>
+
+An inflexible, parametric method would provide a standardized, average slice across the domain.
+
+<span style="color: red;">
+2. Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide n and p.</span>
+
+<span style="color: red;">
+(a) We collect a set of data on the top 500 firms in the US. For each
+firm we record profit, number of employees, industry and the
+CEO salary. We are interested in understanding which factors
+affect CEO salary.</span>
+
+The problem is a regression, and we are interested in inferring the component factors. N is 500, and p is 3.
+
+<span style="color: red;">
+(b) We are considering launching a new product and wish to know
+whether it will be a success or a failure. We collect data on 20
+similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables.</span>
+
+The problem is a binary classification prediction. The N is 20, p is 13. 
+
+<span style="color: red;">
+(c) We are interested in predicting the % change in the USD/Euro
+exchange rate in relation to the weekly changes in the world
+stock markets. Hence we collect weekly data for all of 2012. For
+each week we record the % change in the USD/Euro, the %
+change in the US market, the % change in the British market,
+and the % change in the German market.</span>
+
+The % change problem is a regression prediction with a p of 4 and an N of 52.
+
+<span style="color: red;">
+3. We now revisit the bias-variance decomposition.</span>
+
+<span style="color: red;">
+(a) Provide a sketch of typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods
+towards more flexible approaches. The x-axis should represent
+the amount of flexibility in the method, and the y-axis should
+represent the values for each curve. There should be five curves.
+Make sure to label each one.</span>
+
+![](https://2.bp.blogspot.com/-bSV25_BnIN8/V4Ko7w4pd3I/AAAAAAAAPqk/AhVPSbql3S4W_vv8AhaCpFVYvAX-rY4LgCKgB/s1600/bias-variance.png)
+
+X-axis: increasing flexibility and model complexity
+
+Y-axis: increasing Error, Variance, and Bias
+
+<span style="color: blue;">Blue</span>: Bias
+
+<span style="color: brown;">Brown</span>: Variance
+
+<span style="color: green;">Yellow</span>: Training set MSE
+
+<span style="color: green;">Green</span>: Testing set MSE
+
+Black: Irreducibile error (Bayes)
+
+<span style="color: red;">
+(b) Explain why each of the five curves has the shape displayed in
+part (a).</span>
+
+<span style="color: green;">Yellow</span>: As models become more flexible and complex, the training error is reduced, but with diminishing benefit.
+
+<span style="color: green;">Green</span>: We often observe a U-shaped error in the holdout training error. This is a combination of the Bias error above the least flexible model and the Variance error from over-fitting the most flexible models and the irreducible error component.
+
+<span style="color: blue;">Blue</span>: The bias error component, as observed in the test result
+
+<span style="color: brown;">Brown</span>: The variance error component, as observed in the test result
+
+Black: The irreducible error component, as observed in the test result
+
+<span style="color: red;">
+4. You will now think of some real-life applications for statistical learning.</span>
+
+<span style="color: red;">
+(a) Describe three real-life applications in which classification might
+be useful. Describe the response, as well as the predictors. Is the
+goal of each application inference or prediction? Explain your
+answer.</span>
+
+- Infer the causes of expedited freight for a component part. The independent predictors would include country of origin, shipping method, promised lead time, and schedule changes for a year of deliveries.
+      
+- Predict customer churn for a learning labs subscription education program. The independent predictors would include monthly payment history, course topics, and web site visits.
+      
+- Predict the alphabetic letter of samples of handwriting. The independent predictors would be the pixels of many labeled images.
+
+<span style="color: red;">
+(b) Describe three real-life applications in which regression might
+be useful. Describe the response, as well as the predictors. Is the
+goal of each application inference or prediction? Explain your
+answer.</span>
+
+- Predict the survival rate of a vehicle component part in use by customers. The response is the proportion of parts still in service, censored. The independent predictors would include engine hours accumulated, region, machine chassis, and type of farm.
+      
+- Infer the characteristics of bottles of wine that influence price. The independent predictors would include the vintage year, the type of grape, the region, the color of the bottle, and the length of the story on the label.
+      
+- Predict the number of sales conversions per visitor for a web portal store front, given the catalog of products available, the layout parameters of the web site, the colors, and dimensions of the shopping experience.
+
+<span style="color: red;">
+(c) Describe three real-life applications in which cluster analysis
+might be useful.</span>
+
+- Given demographic data on millions of customers and what they buy, build five persona's for describing the current customer base to a company investor.
+      
+- Given IoT operating data from agricultural equipment, build three persona's for characterizing duty cycles of a fleet.
+      
+- Given employee communications transactional data, build three persona's for better tailoring targeted leadership training.
+
+<span style="color: red;">
+5. What are the advantages and disadvantages of a very flexible (versus
+a less flexible) approach for regression or classification? Under what
+circumstances might a more flexible approach be preferred to a less
+flexible approach? When might a less flexible approach be preferred?</span>
+
+The very flexible GBMs and Neural Nets require more data, and are often both less interpretable and explainable. Banks and highly regulated entities prefer simple linear models and decision trees so they can explain their management policies in simple terms.
+
+<span style="color: red;">
+6. Describe the differences between a parametric and a non-parametric
+statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a nonparametric approach)? What are its disadvantages?</span>
+
+In any parametric approach we start with an assumption about the functional form and then work towards fitting the data to the closest version of that functional form. On advantage is in explainability, and another is that less data is required to build a useful model. A disadvantage is that the model might never achieve the lowest error rate. 
+
+<span style="color: red;">
+7. The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.</span>
+
+|Obs.|X1|X2|X3|Y
+|:----|:---|:---|:---|:---|
+|1| 0| 3| 0| Red
+|2| 2| 0| 0| Red
+|3| 0| 1| 3| Red
+|4| 0| 1| 2| Green
+|5|−1| 0| 1| Green
+|6| 1| 1| 1| Red
+
+<span style="color: red;">Suppose we wish to use this data set to make a prediction for Y when X1 = X2 = X3 = 0 using K-nearest neighbors.</span>
+
+<span style="color: red;">(a) Compute the Euclidean distance between each observation and
+the test point, X1 = X2 = X3 = 0.</span>
+
+Red: sqrt((0-0)^2 + (0-3)^2 + (0-0)^2 )= sqrt(9) = 3 
+
+Red: sqrt((0-2)^2 + (0-0)^2 + (0-0)^2 )= sqrt(4) = 2
+
+Red: sqrt((0-0)^2 + (0-1)^2 + (0-3)^2 )= sqrt(10) = 3.162278
+
+Green: sqrt((0-0)^2 + (0-1)^2 + (0-2)^2 )= sqrt(5)= 2.236068
+
+Green: sqrt((0+1)^2 + (0-0)^2 + (0-1)^2 )= sqrt(2) =1.414214 
+
+Red: sqrt((0-1)^2 + (0-1)^2 + (0-1)^2 )= sqrt(3)=1.732051
+
+<span style="color: red;">(b) What is our prediction with K = 1? Why?</span>
+
+For a test set X1=X2=X3=0, this is closest to Green which is at a distance sqrt(2). Therefore the prediction is Green.
+
+<span style="color: red;">(c) What is our prediction with K = 3? Why?</span>
+
+For a test set X1=X2=X3=0, this is closest to Red (Obs 2), Green(Obs 5) and Red(Obs 6). Thus the prediction will be Red.
+
+<span style="color: red;">(d) If the Bayes decision boundary in this problem is highly nonlinear, then would we expect the best value for K to be large or small? Why?</span>
+
+Small k values yield a model with lots of detailed curves in the boundary, and likely the lowest irreducible error.
+
+<h4>**Applied**</h4>
+
+<span style="color: red;">8. This exercise relates to the College data set, which can be found in the file College.csv on the book website.</span>
+
+<span style="color: red;">(a) Use the read.csv() function to read the data into R. Call the loaded data college. Make sure that you have the directory set to the correct location for the data.</span>
+
+<span style="color: red;">(b) Look at the data using the View() function. You should notice that the first column is just the name of each university. We don’t really want R to treat this as data. However, it may be handy to have these names for later. Try the following commands:</span>
+
+<span style="color: red;">(c) i. Use the summary() function to produce a numerical summary
+of the variables in the data set.</span>
+
+```{r}
+college <- read_csv("https://www.statlearning.com/s/College.csv",
+                    show_col_types = FALSE) %>% 
+   rename(college = `...1`) 
+
+summary(college)
+```
+
+<span style="color: red;">ii. Use the pairs() function to produce a scatterplot matrix of
+the first ten columns or variables of the data. Recall that you can reference the first ten columns of a matrix A using A[,1:10].</span>
+
+```{r, fig.asp=1, fig.width=12}
+# pairs(college[,3:12])
+
+GGally::ggpairs(college[,2:11],
+                mapping = aes(color = Private),
+                progress = FALSE,
+                lower = list(combo = GGally::wrap("facethist",  
+bins = 40))) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::College | Ten numeric features") 
+```
+
+<span style="color: red;">iii. Use the plot() function to produce side-by-side boxplots of
+Outstate versus Private.</span>
+
+```{r}
+# plot( college$Private, college$Outstate )
+
+college %>% 
+  ggplot(aes(Private, Outstate)) +
+  geom_boxplot() +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::College") 
+```
+
+<span style="color: red;">iv. Create a new qualitative variable, called Elite, by binning
+the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10 % of their high school
+classes exceeds 50 %.</span>
+
+<span style="color: red;">Use the summary() function to see how many elite universities there are.</span>
+
+```{r}
+# Elite <- rep("No", nrow(college))
+# Elite[college$Top10perc > 50] <- " Yes "
+# Elite <- as.factor(Elite)
+# college <- data.frame(college , Elite)
+
+college <- college %>% 
+  mutate(Elite = as_factor(if_else(Top10perc > 50, "Yes", "No")))
+
+summary(college$Elite)
+```
+
+<span style="color: red;">Now use the plot() function to produce side-by-side boxplots of Outstate versus Elite.</span>
+
+```{r}
+#plot( college$Elite, college$Outstate )
+
+college %>% 
+  ggplot(aes(Elite, Outstate)) +
+  geom_boxplot() +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::College") 
+```
+
+<span style="color: red;">v. Use the hist() function to produce some histograms with
+differing numbers of bins for a few of the quantitative variables. You may find the command par(mfrow = c(2, 2)) useful: it will divide the print window into four regions so
+that four plots can be made simultaneously. Modifying the arguments to this function will divide the screen in other ways.</span>
+
+```{r}
+college %>% 
+  ggplot(aes(Enroll, fill = Private)) +
+  geom_histogram(bins = 40) +  
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::College") 
+```
+
+<span style="color: red;">vi. Continue exploring the data, and provide a brief summary
+of what you discover.</span>
+
+```{r, fig.asp=1, fig.width=12}
+GGally::ggpairs(bind_cols(college[,2],college[,12:18]),
+                mapping = aes(color = Private),
+                progress = FALSE,
+                lower = list(combo = GGally::wrap("facethist",  
+bins = 40))) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(caption = "Source: ISLR2::College | Ten numeric features") 
+```
+
+The public institutions in this dataset enroll more undergraduates, while the private ones have more pursuing terminal degrees in their fields.
+
+<span style="color: red;">9. This exercise involves the Auto data set studied in the lab. Make sure that the missing values have been removed from the data.
+(a) Which of the predictors are quantitative, and which are qualitative?</span>
+
+```{r}
+Auto <- ISLR2::Auto %>% 
+  drop_na %>% 
+  tibble()
+
+# summary(Auto)
+
+skimr::skim(Auto)
+```
+
+Quantitative: mpg, cylinders, displacement, horsepower, weight, acceleration, year, origin
+
+Qualitative: name
+
+<span style="color: red;">(b) What is the range of each quantitative predictor? You can answer this using the range() function. range()</span>
+
+```{r}
+Auto %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(), range)) %>%
+  mutate(level = c("min", "max")) %>%
+  pivot_longer(cols = -level,
+               names_to = "metric",
+               values_to = "value") %>%
+  pivot_wider(names_from = level,
+              values_from = value)
+```
+
+<span style="color: red;">(c) What is the mean and standard deviation of each quantitative predictor?</span>
+
+```{r}
+Auto %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(), mean, na.rm = TRUE)) %>% pivot_longer(everything(),
+                                                                       values_to = "mean")
+
+Auto %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(), sd, na.rm = TRUE)) %>% pivot_longer(everything(),
+                                                                     values_to = "sd")
+```
+
+<span style="color: red;">(d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?</span>
+
+```{r}
+Auto[-c(10:85), ] %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(),
+                   range, na.rm = TRUE)) %>%
+  mutate(level = c("min", "max")) %>%
+  pivot_longer(cols = -level,
+               names_to = "metric",
+               values_to = "value") %>%
+  pivot_wider(names_from = level,
+              values_from = value)
+
+Auto[-c(10:85), ] %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(), mean, na.rm = TRUE)) %>%
+  pivot_longer(everything(),
+               values_to = "mean")
+
+Auto[-c(10:85), ] %>%
+  select(where(is.numeric)) %>%
+  summarize(across(everything(), sd, na.rm = TRUE)) %>%
+  pivot_longer(everything(),
+               values_to = "sd")
+```
+
+<span style="color: red;">(e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.</span>
+
+```{r, fig.asp=1, fig.width=12}
+GGally::ggpairs(select(Auto, -name),
+                progress = FALSE,
+                lower = list(combo = GGally::wrap("facethist",  
+bins = 40)))
+```
+
+`displacement` appears to have a positive relationship with `horsepower`
+
+`mpg` has a negative, nonlinear relationship with `displacement`
+
+<span style="color: red;">(f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.</span>
+
+Yes, a predictive model is certainly possible with this data set. 
+
+<span style="color: red;">2.4 Exercises 57
+10. This exercise involves the Boston housing data set. (a) To begin, load in the Boston data set. The Boston data set is part of the ISLR2 library.</span>
+
+<span style="color: red;">How many rows are in this data set?</span>
+
+```{r}
+nrow(ISLR2::Boston)
+```
+
+<span style="color: red;">How many columns?</span>
+
+```{r}
+ncol(ISLR2::Boston)
+```
+
+<span style="color: red;">What do the rows and columns represent?</span>
+
+These are housing sale values `medv` and the characteristics of 506 suburbs of Boston.
+
+<span style="color: red;">(b) Make some pairwise scatterplots of the predictors (columns) in this data set. Describe your findings.</span>
+
+```{r, fig.asp=1, fig.width=12}
+GGally::ggpairs(ISLR2::Boston,
+                progress = FALSE,
+                lower = list(combo = GGally::wrap("facethist",  
+bins = 40)))
+```
+
+`medv` is reduced with higher `lstat`
+
+`medv` increases with `rm`
+
+<span style="color: red;">(c) Are any of the predictors associated with per capita crime rate? If so, explain the relationship.</span>
+
+Yes, `rad` highway access moderately at 0.626. Crime is highest at low `rad`, drops quickly, and then increase somewhat at high `rad`.
+
+<span style="color: red;">(d) Do any of the census tracts of Boston appear to have particularly high crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each predictor</span>
+
+```{r}
+ISLR2::Boston %>% 
+  slice_max(crim, n = 3)
+
+ISLR2::Boston %>% 
+  ggplot(aes(crim)) +
+  geom_histogram(bins = 30)
+```
+
+Yes, the median crime rate `crim` is very low, at only 0.257. This feature is heavily skewed right. The range runs from 0.00637 to 89.0.
+
+```{r}
+ISLR2::Boston %>% 
+  slice_max(tax, n = 3)
+
+ISLR2::Boston %>% 
+  ggplot(aes(tax)) +
+  geom_histogram(bins = 30)
+```
+
+Yes, median full value tax rates range from 169k to 711k. The distribution across suburbs is also not even.
+
+```{r}
+ISLR2::Boston %>% 
+  slice_min(ptratio , n = 3)
+
+ISLR2::Boston %>% 
+  ggplot(aes(ptratio)) +
+  geom_histogram(bins = 30)
+```
+
+The `ptratio` is skewed left, with the bulk of the suburbs at the high end of the range from 2.16 to 38.
+
+<span style="color: red;">(e) How many of the census tracts in this data set bound the Charles river?</span>
+
+```{r}
+ISLR2::Boston %>% 
+  count(chas == 1)
+```
+
+35 suburbs bound the Charles River
+
+<span style="color: red;">(f) What is the median pupil-teacher ratio among the towns in this data set?</span>
+
+```{r}
+ISLR2::Boston %>% 
+  summarise(ptratio_median = median(ptratio))
+```
+
+<span style="color: red;">(g) Which census tract of Boston has lowest median value of owner occupied homes?</span>
+
+```{r}
+ISLR2::Boston %>% 
+  add_rowindex() %>% 
+  select(.row, medv) %>% 
+  filter(medv == min(medv))
+```
+
+Rows 399 and 406.
+
+<span style="color: red;">What are the values of the other predictors for that census tract, and how do those values compare to the overall ranges for those predictors? Comment on your findings.</span>
+
+```{r, fig.asp=1}
+ISLR2::Boston %>%
+  mutate(bottom_tracts =
+           if_else(medv == min(medv),
+                   "Bottom",
+                   NA_character_)) %>% 
+  pivot_longer(cols = -c(bottom_tracts, medv)) %>% 
+  ggplot(aes(value, medv, color = bottom_tracts)) +
+  geom_point() +
+  facet_wrap(vars(name),
+             scales = "free_x") +
+  theme_bw() +
+  theme(strip.placement = "outside",
+        panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  labs(caption = "Source: ISLR2::Boston | Lowest Median Home Value Suburbs",
+       color = NULL)
+
+```
+
+<span style="color: red;">The lowest median value suburbs of Boston are the oldest, they have higher crime than most, they are close to empoyment centers, they are related to industry, they have high taxes, and a low `zn` proportion of large lots zoned.</span>
+
+<span style="color: red;">(h) In this data set, how many of the census tracts average more than seven rooms per dwelling? More than eight rooms per dwelling? Comment on the census tracts that average more than eight rooms per dwelling.</span>
+
+```{r}
+ISLR2::Boston %>% 
+  mutate(room_state = case_when(
+    rm > 8 ~ "eight_plus",
+    rm > 7 ~ "seven_to_eight",
+    TRUE ~ NA_character_
+  )) %>% 
+  count(room_state)
+```
+
+
+```{r, fig.asp=1}
+ISLR2::Boston %>%
+  mutate(room_state = case_when(
+    rm > 8 ~ "eight_plus",
+    rm > 7 ~ "seven_to_eight",
+    TRUE ~ NA_character_
+  )) %>% 
+  pivot_longer(cols = -c(room_state, medv)) %>% 
+  ggplot(aes(value, medv, color = room_state)) +
+  geom_point(shape = 21, alpha = 0.7) +
+  facet_wrap(vars(name),
+             scales = "free_x") +
+  theme_bw() +
+  theme(strip.placement = "outside",
+        panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  labs(caption = "Source: ISLR2::Boston | More than 8 rooms per dwelling",
+       color = NULL)
+```
+
+Again, the oldest homes have more than 8 rooms per dwelling. They have the lowest tax assessments and a low proportion of non-retail business acres per town.
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/P8BMLBplcTE")`
+
+<details>
+<summary> Meeting chat log 1</summary>
+
+```
+00:08:32	Fran Barton:	A very rainy afternoon here in this corner of England
+00:09:17	Kim Martin:	Good afternoon everyone :)
+00:09:31	Stijn:	Hiya!
+00:09:59	Jon Harmon (jonthegeek):	Good {time wherever you are}, everyone!
+00:11:49	Stijn:	You type like a programmer would, Jon
+00:13:10	Kim Martin:	@Stijn How does a programmer type?
+00:13:24	Kim Martin:	The curly braces?
+00:13:51	Stijn:	Hahaha, just making lame jokes over here. Let's not read into it too much :D
+00:14:04	Kim Martin:	(overthinking-R-us)
+00:14:09	shamsuddeen:	Increase the size pls
+00:14:49	Wayne Defreitas:	if you go to view options in zoom, you can also zoom screen size
+00:15:38	Fran Barton:	Would it be possible to F11 to make the browser full screen?
+00:15:48	Kim Martin:	These are your _notes_?!
+00:15:49	August:	That is awesome, thank you!
+00:15:54	shamsuddeen:	Thanks
+00:15:55	Stijn:	That is REALLY cool, thanks Ray!
+00:16:00	Kim Martin:	Link please!
+00:16:09	Mei Ling Soh:	Loved the appendix section
+00:16:10	Laura Rose:	very cool; thanks!
+00:16:11	Keuntae Kim:	awesome!!! I need this!!!
+00:16:22	Ryan Metcalf:	This is great. Thank you!
+00:16:30	Kim Martin:	Ah - found it: https://r4ds.github.io/bookclub-islr/statistical-learning.html
+00:16:43	Jon Harmon (jonthegeek):	r4ds.io/islr is the shortcut
+00:17:28	Stijn:	dependent and independent variables is what I'm used to
+00:17:44	Fran Barton:	I'm pretty new to all of this so I'll just take whatever terminology I'm given for now
+00:17:52	Jon Harmon (jonthegeek):	Note to self: I should increase the default font size in this notes-book.
+00:18:23	Brett Longworth:	Features is newish to me. Not part of the ML club. =)
+00:20:19	Jon Harmon (jonthegeek):	"Features" is more used in the ML world, "independent variable" in actual science, in my experience.
+00:21:12	Jyoti:	the estimates of the regression coefficients are computed such that on an average the estimate of error becomes zero
+00:21:30	Jon Harmon (jonthegeek):	There's always a (somewhat) relevant xkcd: https://xkcd.com/2048/
+00:22:18	Till:	from a probabilistic point, given that you model is correct, the error distribution is assumed to have a zero mean and any deviations from a prediction is completely random
+00:23:31	Fran Barton:	"the whole point of the book is to present different ways to come up with surfaces like this" (or something like that - Ray) - thank you, I like that kind of context, helps me get the bigger picture.
+00:23:37	shamsuddeen:	Y is also a function of ϵ, which, by definition, cannot be predicted using X. What this means from the book?
+00:24:18	Kim Martin:	Y = f(X)  if everything about Y can be (perfectly) predicted by X
+00:24:44	Jon Harmon (jonthegeek):	Y depends on both X and epsilon, and you can't predict epsilon from X; if you could, it'd be part of f(X).
+00:25:04	Kim Martin:	… but since Y _cannot_ be perfectly predicted just with X (there are other important variables that are not included in X... or some unpredictable randomness) this is acknowledged by adding the error term... hence Y = f(X) + e
+00:26:43	shamsuddeen:	It is important to keep in mind that the irreducible error will always provide an upper bound on the accuracy of our prediction for Y. This bound is almost always unknown in practice.
+00:28:20	shamsuddeen:	Thank you
+00:29:52	August:	this is basically image 2.9
+00:30:52	Kim Martin:	Every point in the _training_ set... but what about the _test_ set?
+00:31:20	Kim Martin:	You can fit your function perfect... with no errors... to your training set... but what happens when you get new data?
+00:31:35	Rahul T:	I think here it’s on the whole population but in most cases we only have sample and we can fit that sample well but doesn’t mean it will generalize well to the population
+00:31:36	shamsuddeen:	Uhmmm
+00:31:39	shamsuddeen:	Thanks
+00:33:25	SriRam:	In complex theory, you may call this rationality vs bounded rationality , there is always a boundary stopping you from knowing everything
+00:33:28	shamsuddeen:	I got it. Rahu, your point also make sense.
+00:33:36	Brett Longworth:	We can fit a function that fits all points, but that removes irreducible error, which I think is the definition of overfitting?
+00:33:54	shamsuddeen:	Yes, Bret I guess so
+00:34:47	Brett Longworth:	Best argument for a training and test set I've heard. Overfitting should show up in the fit for the test set.
+00:35:02	Kim Martin:	Some domains have smaller error than others though... e.g. simple physics experiments will have a smaller error than (eg) experiments involving complex systems (including human behaviour)
+00:35:16	Keuntae Kim:	Also, the perfect prediction model for the sample does not necessarily guarantee prefect predicted outcomes when a new dataset comes into the model.
+00:36:06	Fran Barton:	I wonder if there is some confusion among the group as to the meaning of the word "error". Here it doesn't mean that you as a researcher have done something wrong. It doesn't mean the model is unusable. It just means any useful model will inevitably only approximate to the phenomenon itself.
+00:36:20	Sangeeta Bhatia:	yes that makes sense. if we knew the truth, we won’t need “f”.
+00:36:47	Brett Longworth:	So for the physics example, running a jagged line through all points of a distance vs time curve would immediately be shown to be an overfit when predicting with new data.
+00:37:50	Kim Martin:	That's whey section 2.2.1 goes to pains to emphasize that the model should be assessed (MSE etc) based on the test data, not the training set (which will most likely be far lower)
+00:38:16	August:	I think we are getting overly bogged down here, this is revisited several times as the book progresses
+00:38:28	shamsuddeen:	Yes, lets progress
+00:45:06	shamsuddeen:	How to make this kind of plot in ggplot?
+00:45:52	Keuntae Kim:	geom_contour() <- I guess
+00:46:02	Stijn:	https://www.r-graph-gallery.com/3d-surface-plot.html
+00:46:10	Stijn:	Not ggplot though
+00:46:22	Keuntae Kim:	https://ggplot2.tidyverse.org/reference/geom_contour.html#:~:text=ggplot2%20can%20not%20draw%20true,can%20appear%20at%20most%20once.
+00:46:25	August:	https://stackoverflow.com/questions/38331198/add-regression-plane-to-3d-scatter-plot-in-plotly
+00:46:32	Keuntae Kim:	Okay..
+00:46:34	August:	plotly for the win
+00:46:36	Ryan Metcalf:	Ive tried this 3D in Python. (But that doesn’t apply to R.)
+00:47:10	Stijn:	And let's give rayshader an honourable mention for 3D stuff!
+00:48:09	Rahul T:	I am not sure if this has the code - it’s listed on the book site as a resource https://web.stanford.edu/~hastie/ISLR2/Labs/
+00:49:06	Jon Harmon (jonthegeek):	A long, unfinished thread about surface in R: https://rfordatascience.slack.com/archives/C8JRJSW4S/p1627573385008700
+00:49:54	Jon Harmon (jonthegeek):	@rahul That's just the labs (~1/2 of each chapter).
+00:51:35	Rahul T:	Got it, thanks!
+00:51:38	Kim Martin:	Super cynical, Raymond 😂
+00:52:02	August:	Hey that's my job your talking about! :P
+00:52:10	Ryan S:	I'm going to try that approach with my boss -- "I need more money because I can do better!"
+00:52:18	Kim Martin:	Why MSE vs RMSE?
+00:52:21	August:	but I can!
+00:52:45	Kim Martin:	Only to get units in normal sense?
+00:53:28	Rahul T:	May be it’s easy to derive the bias variance tradeoff - just a guess
+00:53:30	Kim Martin:	Why does ISLR2 stop at MSE? Because it does the job (getting 'normal units' is irrelevant)?
+00:53:31	shamsuddeen:	No Free Lunch Theorem for Machine Learning: https://machinelearningmastery.com/no-free-lunch-theorem-for-machine-learning/
+00:54:29	Jon Harmon (jonthegeek):	Yeah, that'd be my take. RMSE is usually more reportable but if you're just trying to calculate a number to compare your fit to another fit. I definitely prefer RMSE!
+00:55:34	Stijn:	I'm not sure what the 'decrease-stagnate-increase' implies :/
+00:57:37	Stijn:	Whew, I think it's somewhat clicking... Will have to re-read
+00:58:43	Keuntae Kim:	In the figure at the top, a yellow linear line is too simple, so a lot of errors when a new dataset comes in, so weak predictive power.
+00:59:16	Kim Martin:	How are they quantifying 'flexibility'?
+00:59:43	Kim Martin:	Number of parameters to estimate (2 for linear)?
+00:59:51	Rahul T:	Book says “degrees of freedom, for a number of smoothing splines.”
+01:00:07	Rahul T:	It will be discussed in ch7
+01:00:10	Keuntae Kim:	For the line passing through every point, no errors (almost zero variance), but extremely hard to predict or estimate values when a new dataset comes in.
+01:00:22	Keuntae Kim:	This is what I understand from the figures.
+01:00:25	Rahul T:	They say at the end of page 31
+01:04:20	David Severski:	We’re coming up on time, do we want to find a good point to pause until next week?
+01:04:43	Stijn:	The idea that a biostats college professor also finds some of these sections challenging, makes me feel much more comfortable 😅
+01:05:12	Kim Martin:	😅👍
+01:05:38	Mei Ling Soh:	I think we should stop at the bias-variance trade-off
+01:07:46	shamsuddeen:	Dev set
+01:09:23	August:	p36 explains this
+01:09:59	David Severski:	I’ve got to jet. Thanks for presenting and to everyone for the discussion!
+01:10:42	Kim Martin:	Is the aim to do the lab next week, or the week after?
+01:10:49	Keuntae Kim:	Good session today. Too many confusing things I have to digest!!! Need to study of my own more!!! haha 😅
+01:11:16	Kim Martin:	(I'll confess I didn't get through the Chapter, despite intending to have read it all by today)
+01:11:31	Keuntae Kim:	Ray, thank you very much. You did a great job to explain these complex things!
+01:11:34	Mei Ling Soh:	So, we have to try out the exercises before the next study session?
+01:11:46	shamsuddeen:	Thank you Ray.
+01:11:50	August:	try the lectures online if you struggle with the book, it'll help reading the material.
+01:11:53	Kim Martin:	It might be nice to try to share code / visuals for (trying to) explore these topics more
+01:12:01	Mei Ling Soh:	Thank you, Ray!
+01:12:08	Laura Rose:	Thanks, Ray!
+01:12:09	collinberke:	Thanks, Ray!
+01:12:17	Rahul T:	This was very helpful. Thank you, Ray!
+01:12:26	Till:	yes, many thanks!
+01:12:31	Kaustav Sen:	Thanks Ray!  
+01:12:51	Kim Martin:	@August you mean these: https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/
+01:13:09	August:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/statistical-learning.html
+01:13:37	Fran Barton:	thanks everyone
+01:14:10	Ryan S:	Thanks everyone!
+01:14:14	Kim Martin:	Thanks all!
+01:14:16	Keuntae Kim:	Thank you everyone!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/MfBUPmK-aNg")`
+
+<details>
+<summary> Meeting chat log 2</summary>
+
+```
+00:05:01	A. S. Ghatpande:	Hello
+00:05:35	jonathan.bratt:	hello!
+00:07:02	Ryan Metcalf:	Good morning/afternoon/evening everyone!
+00:08:02	jonathan.bratt:	I missed last week; Ray, were you going to finish going through chapter 2 today?
+00:09:41	David Severski:	I just noticed Raymond’s Skinny Puppy poster. Awesome. Now I need to queue that up for today.
+00:09:45	David Severski:	😄
+00:12:11	Ryan Metcalf:	Ryan S.
+00:19:33	A. S. Ghatpande:	How would you calculate bias in the example given?
+00:19:48	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:22:40	shamsuddeen:	We do have validation test also sometimes. Is that called validation error ?
+00:24:00	shamsuddeen:	The chapter seems not discuss anything about validation set
+00:25:14	SriRam:	K is number of neighbors to consider I think
+00:27:29	Rahul T:	I think it’s (f - E(f_hat))
+00:28:11	Rahul T:	f is true function and E(f_hat) in different samples expected value
+00:29:03	SriRam:	Bias is error predicted vs observed , from my understanding
+00:29:29	August:	might be useful: http://scott.fortmann-roe.com/docs/BiasVariance.html
+00:30:12	Keuntae Kim:	https://www.value-at-risk.net/bias/ <-- about bias in a mathematical way, but it is basically about the difference between the actual and estimated values.
+00:31:33	A. S. Ghatpande:	thanks for all the answers here about bias, enough food for thought
+00:37:52	Ryan Metcalf:	Would you be able to wrangle the data or clean the data more?
+00:38:01	Ryan Metcalf:	If it is noise, likely not.
+00:38:12	A. S. Ghatpande:	you need more data!
+00:38:33	August:	Yes and not depends on data and what you can bring in i.e weather data or create from the data ie pca
+00:53:53	Rahul T:	Got it, that’s helpful. Thank you!
+00:56:43	August:	basically predictive power is desirable, but not the main concern with inferential. Sometime you have to sacrifice predictive accuracy for explainability. Generally you hope to approach consensus within the zeitgeist.
+00:57:01	shamsuddeen:	Email spam classification
+01:03:05	A. S. Ghatpande:	spammers wrote inferential models!
+01:03:14	SriRam:	Lol
+01:04:58	Raymond Balise:	so sorry I need to be in another meeting in two minutes
+01:05:23	Jon Harmon (jonthegeek):	No problem, we'll stop very soon.
+01:06:06	shamsuddeen:	I need to leave now. See u all next. Thanks
+01:06:46	Rahul T:	Thank you!
+01:06:50	A. S. Ghatpande:	very good thankseveryone
+01:06:51	collinberke:	Thank you!
+01:06:52	Ryan S:	thanks!
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/FpynCQNFIXs")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:22:35	Ricardo Serrano:	Simpson’s Paradox is a statistical phenomenon where an association between two variables in a population emerges, disappears or reverses when the population is divided into subpopulations. https://plato.stanford.edu/entries/paradox-simpson/
+00:28:46	Michael Haugen:	the book defines irreducible error as measurement errors and/or unmeasured variables.
+00:33:45	Michael Haugen:	Interesting that baseball has the concept of “unforced error.”To create error due to not having the best functional form (reducible error) is kind of like an unforced error.
+00:42:27	Ricardo Serrano:	NLP is another unsupervised learning methodology
+00:48:50	Michael Haugen:	the green line is a good example of being too wiggly right?
+01:01:16	Federica Gazzelloni:	Dimensionality reduction: https://juliasilge.com/blog/billboard-100/
+01:02:05	Michael Haugen:	Online version of book: http://www.feat.engineering/
+01:03:59	Michael Haugen:	one stats book to another
+```
+</details>
+
+
+
+
+
+
+
+
+
 
