@@ -164,7 +164,7 @@ potential improvements over standard linear regression
 ([source](https://web.stanford.edu/~hastie/ISLR2/Slides/Ch1_Inroduction.pdf))
 
 
-## Datasets provided in the ISLR2 package:
+## Datasets provided in the ISLR2 package
 
 The book provides the {ISLR2} R package with all the datasets needed the analysis.
 
@@ -185,7 +185,7 @@ knitr::include_graphics("images/01-datasets.png")
 
 ### Example datasets
 
-```{r 01-tidyverse, include = false}
+```{r 01-tidyverse, include = FALSE}
 library(tidyverse)
 ```
 As an example some of the data sets used are:
