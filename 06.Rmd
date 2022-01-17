@@ -318,12 +318,42 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/MsyBfczbBao")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:10:43	jonathan.bratt:	:-D
+00:11:02	Laura Rose:	chapter 6 is really long!
+00:11:07	jonathan.bratt:	Yes, it is!
+00:11:38	Laura Rose:	I can probably not do 12/21 either, due to another meeting
+00:11:50	jonathan.bratt:	second
+00:11:52	Laura Rose:	2
+00:12:52	SriRam:	except Ryan :D
+00:13:17	Ryan Metcalf:	People run away if I were to grow a beard! Patchy!
+00:13:24	SriRam:	:D
+00:35:32	jonathan.bratt:	> morphemepiece::morphemepiece_tokenize("unbiasedly")
+[[1]]
+ un##  bias  ##ed  ##ly 
+11995  4903  4030  4057
+00:36:06	Jon Harmon (jonthegeek):	lol I did the same thing Jonathan
+00:36:32	jonathan.bratt:	😆
+00:36:48	Jon Harmon (jonthegeek):	(that's a package Jonathan and I are working on for NLP)
+01:01:05	jonathan.bratt:	That was really good.
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/sBElE41XG2Q")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:34:42	Federica Gazzelloni:	tidy models: https://www.tmwr.org/dimensionality.html
+00:35:05	Ryan Metcalf:	https://www.tmwr.org/dimensionality.html#partial-least-squares
+00:35:09	Federica Gazzelloni:	pca for unsupervised
+00:35:18	Federica Gazzelloni:	pls for supervised
+```
+</details>
+
