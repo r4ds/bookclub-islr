@@ -14,15 +14,16 @@ Depends:
 Imports: 
     bookdown,
     emo,
+    GGally,
     ggthemes,
     htmlTable,
-    knitr,
     ISLR2,
-    rmarkdown,
-    tidymodels,
-    tidyverse,
+    knitr,
     magrittr,
-    GGally,
-    skimr
+    patchwork,
+    rmarkdown,
+    skimr,
+    tidymodels,
+    tidyverse
 Remotes:
     hadley/emo
