@@ -40,6 +40,12 @@ In particular, the **Statistical learning theory** deals with the problem of fin
 
 ## What have we gotten ourselves into?
 
+**An Introduction to Statistical Learning (ISL by James, Witten, Hastie and Tibshiraniis)**, is a collection of modern statistical methods for modeling and making predictions from real-world data.
+
+It is a middle way between theoretical statistics and the practice of applying statistics to real-world problems.
+
+It can be considered as a user manual, with self-contained R labs, which lead you through the use of different methods for applying statistical analysis to different kinds of data.
+
 - 2: Terminology & main concepts
 - 3-4: Classic linear methods
 - 5: Resampling (so we can choose the best method)
@@ -60,22 +66,7 @@ remotes::install_github("r4ds/bookclub-islr")
 remove.packages("bookclubislr") # This isn't really a package.
 ```
 
-
-
-**Some info about the book:**
-
-```{r tidyverse, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
-library(tidyverse)
-```
-
-
-**An Introduction to Statistical Learning (ISL by James, Witten, Hastie and Tibshiraniis)**, is a collection of modern statistical methods for modeling and making predictions from real-world data.
-
-It is a middle way between theoretical statistics and the practice of applying statistics to real-world problems.
-
-It can be considered as a user manual, with self-contained R labs, which lead you through the use of different methods for applying statistical analysis to different kinds of data.
-
-
+We'll look at this data in more detail below.
 
 ## Some useful resources:
 
@@ -97,60 +88,54 @@ It can be considered as a user manual, with self-contained R labs, which lead yo
 The book provides a series of toolkits classified as **supervised or unsupervised** techniques for understanding data.
 
 The second edition of the book (2021) contains additions within the most updated statistical analysis.
-```{r contents,echo=FALSE, fig.align='center', fig.cap='Editions', out.width='80%'}
+
+```{r 01-contents, echo=FALSE, fig.align='center', fig.cap='Editions', out.width='80%'}
 knitr::include_graphics("images/01-contents.png")
 ```
 
 
-## How the book is divided
+## How is the book divided?
 
-The book is divided in 13 chapters covering:
+The book is divided into 13 chapters covering:
 
 - Introduction and Statistical Learning:
-    
-    - Supervised Versus Unsupervised Learning
-    - Regression Versus Classification Problems
+  - Supervised Versus Unsupervised Learning
+  - Regression Versus Classification Problems
 
 **Linear statistical learning**
 
 - Linear Regression:
-
-    - basic concepts 
-    - introduction of K-nearest neighbor classifier
+  - basic concepts
+  - introduction of K-nearest neighbor classifier
       
 - Classification:
+  - logistic regression
+  - linear discriminant analysis
 
-    -  logistic regression
-     - linear discriminant analysis
-
-- Resampling Methods: 
-    
-    - cross-validation 
-    - the bootstrap
+- Resampling Methods:
+  - cross-validation
+  - the bootstrap
     
 - Linear Model Selection and Regularization: 
 potential improvements over standard linear regression
-
-     - stepwise selection
-     - ridge regression
-     - principal components regression
-     - the lasso
+  - stepwise selection
+  - ridge regression
+  - principal components regression
+  - the lasso
      
      
 **Non-linear statistical learning**
 
-- Moving Beyond Linearity: 
-
-    - Polynomial Regression
-    - Regression Spline
-    - Smoothing Splines
-    - Local Regression
-    - Generalized Additive Models
+- Moving Beyond Linearity:
+  - Polynomial Regression
+  - Regression Spline
+  - Smoothing Splines
+  - Local Regression
+  - Generalized Additive Models
     
 - Tree-Based Methods:
-
-    - Decision Trees
-    - Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees
+  - Decision Trees
+  - Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees
     
 - Support Vector Machines (linear and non-linear classification)
 
@@ -159,10 +144,9 @@ potential improvements over standard linear regression
 - Survival Analysis and Censored Data
 
 - Unsupervised Learning:
-
-    - Principal components analysis
-    - K-means clustering
-    - Hierarchical clustering
+  - Principal components analysis
+  - K-means clustering
+  - Hierarchical clustering
     
 - Multiple Testing
 
@@ -184,7 +168,7 @@ potential improvements over standard linear regression
 
 The book provides the {ISLR2} R package with all the datasets needed the analysis.
 
-```{r islr2package, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 01-islr2package, message=FALSE, warning=FALSE, paged.print=FALSE}
 # install.packages("ISLR2")
 # install.packages("remotes")
 # remotes::install_github("r4ds/bookclub-islr")
@@ -193,7 +177,7 @@ library(ISLR2)
 ```
 
 
-```{r datasets,echo=FALSE, fig.align='center', fig.cap='Datasets in ISLR2 package', out.width='80%'}
+```{r 01-datasets, echo=FALSE, fig.align='center', fig.cap='Datasets in ISLR2 package', out.width='80%'}
 knitr::include_graphics("images/01-datasets.png")
 ```
 
@@ -201,39 +185,42 @@ knitr::include_graphics("images/01-datasets.png")
 
 ### Example datasets
 
+```{r 01-tidyverse, include = false}
+library(tidyverse)
+```
 As an example some of the data sets used are:
 
 1. **Wage Data**: predicting a continuous or quantitative output value (a regression problem) - Chapter3.
-```{r}
-ISLR2::Wage%>%head
+```{r 01-wage-data}
+ISLR2::Wage %>% head()
 ```
 
-```{r}
-p1<- Wage%>%
-  ggplot(aes(x=age,y=wage))+
-  geom_point(color="grey55")+
-  geom_smooth()+
+```{r 01-wage-plot}
+p1 <- Wage %>%
+  ggplot(aes(x = age, y = wage)) +
+  geom_point(color = "grey55") +
+  geom_smooth() +
   theme_bw()
 ```
 
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-p2<-Wage%>%
-  ggplot(aes(x=year,y=wage))+
-  geom_point(color="grey55")+
-  geom_smooth(method="lm")+
+```{r 01-wage-plot-2, message=FALSE, warning=FALSE, paged.print=FALSE}
+p2<-Wage %>%
+  ggplot(aes(x = year, y = wage)) +
+  geom_point(color = "grey55") +
+  geom_smooth(method = "lm") +
   theme_bw()
 ```
 
-```{r}
-p3<-Wage%>%
-  ggplot(aes(x=education,y=wage))+
-  geom_boxplot(aes(fill=education),show.legend = F)+
-  theme_bw()+
-  theme(axis.text.x = element_text(size=5))
+```{r 01-wage-plot-3}
+p3<-Wage %>%
+  ggplot(aes(x = education, y = wage)) +
+  geom_boxplot(aes(fill = education), show.legend = FALSE) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 5))
 ```
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 01-patchwork, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(patchwork)
 p1|p2|p3
 ```
@@ -241,39 +228,39 @@ p1|p2|p3
 
 2. **Stock Market Data**: predicting a categorical or qualitative output (classification problem).
 Predict whether the index will increase or decrease on a given day, using the past 5 days’ percentage changes in the index - Chapter 4.
-```{r}
-ISLR2::Smarket%>%head
+```{r 01-stocks}
+ISLR2::Smarket %>% head()
 ```
 
-```{r}
-Smarket%>%
-  pivot_longer(cols=c("Lag1","Lag2","Lag3"),names_to="lags13",values_to="lags13_val")%>%
-  ggplot(aes(x=Direction,y=lags13_val))+
-  geom_boxplot(aes(fill=Direction),show.legend = F)+
-  facet_wrap(~lags13)+
-  labs(x="Today's Direction",y="Percentage change in S&P")+
-  theme_bw()+
+```{r 01-stocks-plot}
+Smarket %>%
+  pivot_longer(
+    cols=c("Lag1","Lag2","Lag3"), names_to="lags13", values_to="lags13_val"
+  ) %>%
+  ggplot(aes(x=Direction,y=lags13_val)) +
+  geom_boxplot(aes(fill=Direction),show.legend = F) +
+  facet_wrap(~lags13) +
+  labs(x="Today's Direction",y="Percentage change in S&P") +
+  theme_bw() +
   theme(strip.background = element_blank())
 ```
 
-```{r Smarket1,echo=FALSE, fig.align='center', fig.cap='fit a quadratic discriminant analysis model', out.width='80%'}
+```{r 01-Smarket1, echo=FALSE, fig.align='center', fig.cap='fit a quadratic discriminant analysis model', out.width='80%'}
 knitr::include_graphics("images/fig1_1.png")
 ```
 
 3. **Gene Expression Data**
-```{r}
+```{r 01-genes}
 class(NCI60)
-ISLR2::NCI60%>%names
+ISLR2::NCI60 %>% names()
 NCI60$labs
 # View(NCI60)
 ```
 
 
-```{r NCI601,echo=FALSE, fig.align='center', fig.cap='the first two principal components of the data', out.width='80%'}
+```{r 01-NCI601, echo=FALSE, fig.align='center', fig.cap='the first two principal components of the data', out.width='80%'}
 knitr::include_graphics("images/fig1_2.png")
 ```
-
-
 
 
 
