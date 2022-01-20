@@ -230,12 +230,27 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/PwJknyq61NQ")`
 
 <details>
 <summary> Meeting chat log </summary>
-
 ```
-ADD LOG HERE
+00:54:05	Ricardo Serrano:	https://github.com/rserran/melbourne_housing_kaggle
+01:12:29	Michael Haugen:	So what do you do instead of p values?
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/OUeMNQVaEvE")`
+
+<details>
+<summary> Meeting chat log </summary>
+```
+00:15:30	Ricardo Serrano:	https://github.com/rserran/melbourne_housing_kaggle
+00:26:23	Jim Gruman:	😃 cool - TIL about `ggpubr` - thanks
+00:32:04	jlsmith3:	Very cool!
+01:03:46	Jim Gruman:	sounds great. thank you Ricardo!
+01:06:45	Michael Haugen:	https://docs.google.com/spreadsheets/d/1bqZ5EO_ilCDsCuSr5N0MRJqGFj-Sy0fVRrt5Mw21p48/edit#gid=0
+01:06:48	Michael Haugen:	Sign up
+01:06:57	jlsmith3:	Thanks for the link!
 ```
 </details>
