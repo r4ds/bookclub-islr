@@ -2,7 +2,13 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Use **polynomial regression** to model a relationship between a predictor and an outcome.
+- Use **step functions** to model a relationship between a predictor and an outcome.
+- Use **regression splines** to model a relationship between a predictor and an outcome.
+- Use **smoothing splines** to model a relationship between a predictor and an outcome.
+- Use **local regression** to model a relationship between a predictor and an outcome.
+- Use **generalized additive models** to model a relationship between multiple predictors and an outcome.
+
 
 ## Slide 1
 
