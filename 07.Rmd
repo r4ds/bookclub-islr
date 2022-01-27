@@ -22,12 +22,16 @@
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/EvpA_jXAe2g")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:51:58	Jon Harmon (jonthegeek):	Because I'm obsessed now with "Why ξ?":
+"KS" for "knot/spline" = "ks" = "ξ"?
+I'm going to try to use that now, at least 🙃
+00:54:45	Laura Rose:	👍
+01:01:55	Federica Gazzelloni:	h(x,ξ) taylor : https://en.wikipedia.org/wiki/Taylors_theorem
 ```
 </details>
