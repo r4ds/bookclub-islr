@@ -106,7 +106,7 @@ knitr::include_graphics("./images/fig5_7.jpg", error = FALSE)
 
 ```{r fig5-8, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The test error rate (beige), the training error rate (blue), and the 10-fold cross validation error rate (black) are shown for polynomial logistic regression and KNN classification."}
 
-knitr::include_graphics("./images/fig5_8.jpg")
+knitr::include_graphics("./images/fig5_8.JPG")
 ```
 
 ## The Bootstrap
