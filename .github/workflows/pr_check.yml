@@ -8,7 +8,8 @@ name: pr_check
 jobs:
   bookdown:
     name: pr_check_book
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v2
