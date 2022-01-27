@@ -10,9 +10,11 @@ jobs:
     name: pr_check_book
     runs-on: ubuntu-latest
     steps:
-      - if: "!contains(github.event.head_commit.message, 'gha skip')"
+      - name: checkout
+        if: !contains(github.event.head_commit.message, 'gha skip')
         uses: actions/checkout@v2
-      - if: "!contains(github.event.head_commit.message, 'gha skip')"
+      - name: setup
+        if: "!contains(github.event.head_commit.message, 'gha skip')"
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.1.2'
