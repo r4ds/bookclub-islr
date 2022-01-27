@@ -725,12 +725,16 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/tJjejzPj7P4")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:10:56	Ricardo:	https://www.polyu.edu.hk/cbs/sjpolit/logisticregression.html
+00:14:57	Federica Gazzelloni:	https://www.coursera.org/specializations/biostatistics-public-health Dr. John McGready, PhD, MS
+01:10:26	Jim Gruman:	thank you Michael!  don't eat the mushrooms🍄
+01:10:50	jlsmith3:	Thank you, Michael!!
+01:11:18	Ricardo:	Thanks, Michael 👍
 ```
 </details>
