@@ -19,6 +19,7 @@ Imports:
     ggthemes,
     htmlTable,
     ISLR2,
+    janitor,
     knitr,
     magrittr,
     patchwork,
