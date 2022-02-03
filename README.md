@@ -69,8 +69,8 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-02-10	Chapter 5: Resampling Methods	- AL Brown
 - 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
 - 2022-02-24	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
-- 2022-03-03	Chapter 7: Moving Beyond Linearity - TBC
-- 2022-03-10	Chapter 7: Moving Beyond Linearity - TBC	
+- 2022-03-03	Chapter 7: Moving Beyond Linearity - Daniel
+- 2022-03-10	Chapter 7: Moving Beyond Linearity - Daniel	
 - 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
 - 2022-03-24	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
 - 2022-03-31	Chapter 9: Support Vector Machines - TBC
@@ -79,10 +79,10 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-04-21	Chapter 10: Deep Learning	- TBC
 - 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
 - 2022-05-05	Chapter 11: Survival Analysis and Censored Data	- Michael Haugen
-- 2022-05-12	Chapter 12: Unsupervised Learning	- TBC	
-- 2022-05-19	Chapter 12: Unsupervised Learning	- TBC	
-- 2022-05-26	Chapter 13: Multiple Testing - TBC	
-- 2022-06-02	Chapter 13: Multiple Testing - TBC	
+- 2022-05-12	Chapter 12: Unsupervised Learning	- Daniel	
+- 2022-05-19	Chapter 12: Unsupervised Learning	- Daniel	
+- 2022-05-26	Chapter 13: Multiple Testing - Federica Gazzelloni	
+- 2022-06-02	Chapter 13: Multiple Testing - Federica Gazzelloni	
   
 
 <hr>

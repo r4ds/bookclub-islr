@@ -13,18 +13,19 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     bookdown,
+    car,
     emo,
+    GGally,
     ggthemes,
     htmlTable,
-    knitr,
     ISLR2,
-    rmarkdown,
-    tidymodels,
-    tidyverse,
+    knitr,
     magrittr,
-    GGally,
-    skimr, 
-    titanic, 
-    car
+    patchwork,
+    rmarkdown,
+    skimr,
+    tidymodels, 
+    tidyverse,
+    titanic
 Remotes:
     hadley/emo
