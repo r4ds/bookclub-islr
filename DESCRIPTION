@@ -23,6 +23,8 @@ Imports:
     tidyverse,
     magrittr,
     GGally,
-    skimr
+    skimr, 
+    titanic, 
+    car
 Remotes:
     hadley/emo
