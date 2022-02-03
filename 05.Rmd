@@ -130,6 +130,288 @@ The bootstrap standard error formula is somewhat more complex. The equation belo
 
 $$SE_{B(\hat{\alpha})} = \sqrt{\frac{1}{B-1}\sum_{r=1}^{B}\left(\hat{\alpha}^{*r} - \frac{1}{B}\sum_{j=1}^{B}\hat{\alpha}^{*j}\right)^2}$$
 
+
+
+## Lab: Cross-Validation and the Bootstrap
+
+**Resampling techniques**
+
+### The Validation Set Approach
+
+to estimate the test error rates
+
+```{r 05L-libs, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ISLR2)
+library(tidyverse)
+#library(tidymodels)
+#tidymodels_prefer()
+library(patchwork)
+```
+
+```{r 05L-auto}
+data("Auto");dim(Auto)
+```
+
+
+```{r 05L-train1}
+set.seed(1)
+train1 <- sample(392,196) # 392/2 = 196 split the set in two groups
+```
+
+Check the trend of the data
+```{r 05L-plot1}
+ggplot(data=Auto, aes(x = horsepower, y = mpg))+
+  geom_point() +
+  geom_smooth()
+```
+
+The estimated test MSE for the linear regression fit is 23.27
+```{r 05L-fit1}
+lm.fit1 <- lm(mpg ~ horsepower, data = Auto, subset = train1)
+
+# calculate MSE
+mse <- cbind(Auto,pred=predict(lm.fit1, Auto))%>%
+  select(mpg,pred)%>%
+  slice(-train1)%>%
+  mutate(res=(mpg-pred)^2)%>%
+  summarize(mse=mean(res))
+```
+
+`poly()` function to estimate the **test error** for the quadratic and cubic regressions
+```{r 05L-fit2}
+lm.fit2 <- lm(mpg ~ poly(horsepower,2),data=Auto,subset=train1)
+
+mean((Auto$mpg - predict(lm.fit2, Auto))[-train1]^2)
+```
+
+```{r 05L-fit3}
+lm.fit3 <- lm(mpg ~ poly(horsepower,3),data=Auto,subset=train1)
+mean((Auto$mpg - predict(lm.fit3, Auto))[-train1]^2)
+```
+
+```{r 05L-mse-list}
+mse_df <- data.frame(sample= "seed_1",
+                     poly=1:3,
+           mse=c(mean((Auto$mpg - predict(lm.fit1, Auto))[-train1]^2),
+                 mean((Auto$mpg - predict(lm.fit2, Auto))[-train1]^2),
+                 mean((Auto$mpg - predict(lm.fit3, Auto))[-train1]^2)))
+```
+
+Trying with a different sample found that results are consistent and using a quadradic function is better than a simple liners function...
+```{r 05L-train2}
+set.seed(2)
+train2 <- sample(392,196)
+lm.fit4 <- lm(mpg ~ horsepower, data = Auto, subset = train2)
+lm.fit5 <- lm(mpg ~ poly(horsepower, 2), data = Auto,subset = train2)
+lm.fit6 <- lm(mpg ~ poly(horsepower, 3), data = Auto,subset = train2)
+
+mse_df_full <- mse_df %>%
+  rbind(data.frame(sample="seed_2",
+                   poly=1:3,
+           mse=c(mean((Auto$mpg - predict(lm.fit4, Auto))[-train2]^2),
+                 mean((Auto$mpg - predict(lm.fit5, Auto))[-train2]^2),
+                 mean((Auto$mpg - predict(lm.fit6, Auto))[-train2]^2))
+           )) %>%
+  group_by(sample)%>%
+  arrange(mse)
+mse_df_full
+```
+
+```{r 05L-plot2}
+p1 <-ggplot(mse_df_full, aes(x=factor(1:6),y=mse,color=sample))+
+  geom_line(group=1,color="grey35")+
+  geom_point()+
+  labs(x="model fit")+
+  theme_bw()+
+  theme(legend.position = "none")
+p2 <-ggplot(mse_df_full, aes(x=factor(poly),y=mse,color=sample))+
+  geom_point()+
+  labs(x="polynomial")+
+  theme_bw()+
+  theme(axis.title.y = element_blank())
+p1+p2
+```
+
+
+### Leave-One-Out Cross-Validation
+
+**LOOCV estimate** for generalized linear models
+
+- glm()
+- cv.glm()
+
+These **linear regressions** are the same
+```{r 05L-lm-vs-glm}
+glm.fit <- glm(mpg ~ horsepower, data = Auto)
+lm.fit <- lm(mpg ~ horsepower, data = Auto)
+
+coef(glm.fit)
+coef(lm.fit)
+```
+
+In this section we use `glm()` as it can be used with `cv.glm() function to compare results.
+
+In the cv.glm function, the two numbers in the **delta vector** contain the **cross-validation results** or the **LOOCV statistic**
+
+> LOOCV estimate for the MSE test error is the average of $n$ tests error estimates:
+
+$$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}MSE_{i}$$
+```{r 05L-cv-glm}
+library(boot)
+glm.fit_cv <- glm(mpg ~ horsepower, data = Auto)
+
+cv.err <- cv.glm(Auto, glm.fit_cv)
+
+
+cv.err$delta
+```
+
+```{r 05L-cv.error}
+cv.error <- rep(0, 10)
+
+# iteratively fits polynomial regressions for polynomials of order i = 1 to i = 10
+for (i in 1:10) {
+  glm.fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.error[i] <- cv.glm(Auto, glm.fit)$delta[1]
+  }
+
+cv.error
+```
+
+Sharp drop in the estimated test MSE between the linear and quadratic fits.
+```{r 05L-plot3}
+ggplot(data = data.frame(cv.error), 
+       aes(x = factor(1:10), y =cv.error) ) +
+  geom_line(group=1,color="blue")+
+  geom_point(color="white",stroke=1,shape=21,size=2)+
+  geom_point(color="blue",size=1.5)+
+  labs(x="Degree of Polynomial",y="MSE",title="LOOCV")+
+  scale_y_continuous(limits = c(16,28),breaks = seq(16,28,1))+
+  theme_bw()+
+  theme(panel.grid = element_line(size=0.2))
+```
+
+
+### k-Fold Cross-Validation
+
+cv.glm() function is also used to implement **k-fold CV**.
+
+computation time shorter
+```{r 05L-k-folds}
+k <- 10
+set.seed(17)
+cv.error.10 <- rep(0,10)
+for (i in 1:10) {
+  glm.fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.error.10[i] <- cv.glm(Auto, glm.fit, K=10)$delta[1]
+}
+cv.error.10
+```
+
+```{r 05L-plot4}
+data.frame(id=1:10,
+           cv.error=cv.error,
+           cv.error.10=cv.error.10) %>%
+  pivot_longer(cols=c(cv.error,cv.error.10),names_to="cv",values_to="cv_values")%>%
+ggplot(aes(x = id, y =cv_values,group=cv)) +
+  geom_line(aes(color=cv))+
+  geom_point(shape=".")+
+  labs(x="Degree of Polynomial",y="MSE",title="10-fold CV")+
+  scale_y_continuous(limits = c(16,28),breaks = seq(16,28,1))+
+  theme_bw()+
+  theme(panel.grid = element_line(size=0.2))
+```
+
+
+### The Bootstrap
+
+Bootstrap approach can be applied in almost all situations.
+
+```{r 05L-portfolio}
+data("Portfolio")
+```
+
+#### Estimating the Accuracy of a Statistic of Interest
+
+- to assess the variability associated with the regression coefficients in a linear model fit, we need to quantify the uncertainty, and choose $\alpha$ in order minimize the total risk, or variance, of the investment.
+
+$\alpha$ is the fraction we want to invest in $X$ and $(1-\alpha)$ is the fraction we want to invest in $Y$
+
+
+$$Var=\alpha X+(1-\alpha)Y)$$
+$$\alpha=\frac{\sigma^2_{Y}-\sigma_{XY}}{\sigma^2_{X}+\sigma^2_{Y}-2\sigma_{XY}}$$
+
+
+```{r 05L-alpha.fn}
+alpha.fn <- function(data,index) {
+  X <- data$X[index]
+  Y <- data$Y[index]
+  (var(Y)-cov(X,Y))/(var(X)+var(Y)-2*cov(X,Y))
+}
+```
+
+First $\alpha$ calculation
+```{r 05L-alpha.fn2}
+alpha.fn(Portfolio, 1:100)
+```
+
+**Bootstrap contruction**
+
+Select 100 random observations from the range 1 to 100, with replacement, recompute $\hat{\alpha}$ based on new data.
+```{r 05L-alpha-sample}
+set.seed(7)
+alpha.fn(Portfolio, sample(100, 100, replace = T))
+```
+
+
+Applying the `boot()` function with the `alpha.fn` and 1000 replications.
+```{r 05L-bootstrap}
+boot(Portfolio, alpha.fn, R = 1000)
+```
+
+
+
+#### Estimating the Accuracy of a Linear Regression Model
+
+- to assess the variability of the coefficient estimates and predictions
+
+In particular, to assess the variability of the estimates for $\beta_{1}$ and $\beta_{2}$
+```{r 05L-boot.fn}
+boot.fn <- function(data, index)
+  coef(lm(mpg ~ horsepower, data = data, subset = index))
+
+boot.fn(Auto, 1:392)
+```
+
+If we try with different samples we obtain different results, with random observations.
+
+Calculate the **standard errors** of 1,000 bootstrap estimates for the intercept and slope terms, applying the `boot.fn` to the bootstrap function `boot()`:
+```{r 05L-boot_function}
+boot(Auto, boot.fn, 1000)
+```
+
+
+```{r 05L-bt1}
+summary(lm(mpg ~ horsepower, data = Auto))$coef
+```
+
+What if we change the model adding `I(horsepower^2)` term in the model?
+```{r 05L-bt2}
+boot.fn <- function(data, index)
+  coef(lm(mpg ~ horsepower + I(horsepower^2), 
+          data = data, subset = index))
+```
+
+```{r 05L-bt3}
+set.seed(1)
+boot(Auto, boot.fn, 1000)
+```
+
+
+```{r 05L-bt4}
+summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
+```
+
 ## Meeting Videos
 
 ### Cohort 1
