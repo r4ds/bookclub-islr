@@ -106,7 +106,7 @@ knitr::include_graphics("./images/fig5_7.jpg", error = FALSE)
 
 ```{r fig5-8, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The test error rate (beige), the training error rate (blue), and the 10-fold cross validation error rate (black) are shown for polynomial logistic regression and KNN classification."}
 
-knitr::include_graphics("./images/fig5_8.jpg")
+knitr::include_graphics("./images/fig5_8.JPG")
 ```
 
 ## The Bootstrap
@@ -120,7 +120,7 @@ knitr::include_graphics("./images/fig5_8.jpg")
 
 ```{r fig5-10, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The distribution of the mean of alpha is shown on the left, with 1000 samples generated from the true population. A bootstrap distribution is shown in the middle, with 1000 samples taken from the original sample. Note that both confidence intervals contain the true alpha (pink line) in the right panel, and that the spread of both distributions is similar."}
 
-knitr::include_graphics("./images/fig5_10.jpg")
+knitr::include_graphics("./images/fig5_10.JPG")
 
 ```
 

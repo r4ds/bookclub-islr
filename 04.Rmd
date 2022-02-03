@@ -709,12 +709,32 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/IMeAnVZgtb8")`
+
+<details>
+<summary> Meeting chat log </summary>
+```
+00:24:30	Ricardo Serrano:	https://github.com/rserran/melbourne_housing_kaggle
+00:24:39	Federica Gazzelloni:	thanks
+00:59:01	Jim Gruman:	tidy(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)  the exponentiate = TRUE will back out of the log to give just the odds
+00:59:04	Anna-Leigh Brown:	https://www.wolframalpha.com/input/?i=logistic+function
+01:06:46	Jim Gruman:	I will always question the glm breakpoint of 0.5, A good discussion for offline of a means of adjustment here: https://towardsdatascience.com/bank-customer-churn-with-tidymodels-part-2-decision-threshold-analysis-c658845ef1f
+01:07:22	Jim Gruman:	thank you Michael !
+01:09:39	jlsmith3:	Thank you, Michael!
+01:09:44	Ricardo Serrano:	Thanks, Michael!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/tJjejzPj7P4")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:10:56	Ricardo:	https://www.polyu.edu.hk/cbs/sjpolit/logisticregression.html
+00:14:57	Federica Gazzelloni:	https://www.coursera.org/specializations/biostatistics-public-health Dr. John McGready, PhD, MS
+01:10:26	Jim Gruman:	thank you Michael!  don't eat the mushrooms🍄
+01:10:50	jlsmith3:	Thank you, Michael!!
+01:11:18	Ricardo:	Thanks, Michael 👍
 ```
 </details>
