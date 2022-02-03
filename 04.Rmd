@@ -625,6 +625,89 @@ e.g. Poisson Distribution, for Poisson regression
 e.g. for Poisson regression, $log(\lambda(X_1, ..., X_p) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$
 
 
+## Addendum - Logistic Regression Assumptions
+
+```{r}
+library(dplyr)
+library(titanic)
+library(car)
+```
+
+Source: [The 6 Assumptions of Logistic Regression (With Examples)](https://www.statology.org/assumptions-of-logistic-regression/)
+
+Source: [Assumptions of Logistic Regression, Clearly Explained](https://towardsdatascience.com/assumptions-of-logistic-regression-clearly-explained-44d85a22b290)
+
+**Logistic regression** is a method to fit a regression model usually when the response variable is binary.
+
+#### Assumption #1 - The response variable is binary
+
+Examples:
+
+- Yes or No
+
+- Male or Female
+
+- Pass or Fail
+
+For more tha two possible outcomes, an **ordinal regression** is the model of choice.
+
+#### Assumption #2 - Observations are independent
+
+As the OLS regression, the logistic regression requires that observations are iid (independent and identical distributed).
+
+Easiest way is to create a plot of residuals against time (i.e. order of observations) and observe if the pattern is random or not.
+
+#### Assumption #3 - No multicollinearity among predictors
+
+Multicollinearity occurs when two or more explanatory variables are highly correlated to each other, such that they do not provide unique or independent information in the regression model. If the degree of correlation is high enough between variables, it can cause problems when fitting and interpreting the model.
+
+Use `VIF` to check multicollinearity (> 10 show strong collinearity among predcitors)
+
+#### Assumption #4 - No extreme outliers
+
+Logistic regression assumes that there are no extreme outliers or influential observations in the dataset.
+
+Use `Cook's distance` for each observation.
+
+#### Assumption #5 - There is a Linear Relationship Between Explanatory Variables and the Logit of the Response Variable
+
+Logistic regression assumes that there exists a linear relationship between each explanatory variable and the logit of the response variable. Recall that the logit is defined as:
+
+Logit(p)  = log(p / (1-p)) where p is the probability of a positive outcome.
+
+Use `Box-Tidwell` test to check this assumption.
+
+Example:
+```{r}
+titanic <- titanic_train %>% 
+     select(Survived, Age, Fare) %>% 
+     na.omit() %>% 
+     janitor::clean_names()
+
+glimpse(titanic)
+```
+
+Build the model
+```{r}
+# survived (target  ~ age + fare)
+log_reg <- glm(survived ~ age + fare, data = titanic, family = binomial(link = "logit"))
+
+summary(log_reg)
+```
+
+Box_Tidwell test
+```{r}
+titanic <- titanic %>% 
+     mutate(age_1 = age + 1, fare_1 = fare + 1)
+
+boxTidwell(survived ~ age_1 + fare_1, data = titanic)
+```
+
+#### Assumption #6 - Sample size must be sufficiently large
+
+Logistic regression assumes that the sample size of the dataset if large enough to draw valid conclusions from the fitted logistic regression model.
+
+As a rule of thumb, you should have a minimum of 10 cases with the least frequent outcome for each explanatory variable. For example, if you have 3 explanatory variables and the expected probability of the least frequent outcome is 0.20, then you should have a sample size of at least (10*3) / 0.20 = 150.
 
 
 ## Lab: Classification Methods
