@@ -29,14 +29,14 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-12-07: Chapter 5: Resampling Methods (part 2) - Justin Dollman
 - 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Justin Dollman
 - 2021-12-28 & 2022-01-04: NO MEETINGS (Winter Break)
-  
-  </details>
-  
 - 2022-01-11: Chapter 6: Linear Model Selection and Regularization (part 2) - Justin Dollman
 - 2022-01-18: Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
 - 2022-01-25: Chapter 7: Moving Beyond Linearity (part 1) - Justin Dollman
 - 2022-02-01: Chapter 7: Moving Beyond Linearity (part 2) - Justin Dollman
-- 2022-02-08: Chapter 8: Tree-Based Methods (part 1) - TBD
+  
+  </details>
+  
+- 2022-02-08: Chapter 8: Tree-Based Methods (part 1) - Justin Dollman
 - 2022-02-15: Chapter 8: Tree-Based Methods (part 2) - TBD
 - 2022-02-22: Chapter 9: Support Vector Machines (part 1) - TBD
 - 2022-03-01: Chapter 9: Support Vector Machines (part 2) - TBD
@@ -67,21 +67,21 @@ If you would like to present, please add your name next to a chapter using the [
 </details>
   
 - 2022-02-03	Chapter 5: Resampling Methods	- (Lab) Ricardo J. Serrano & Federica Gazzelloni
-- 2022-02-10	Chapter 5: Resampling Methods	- TBC
+- 2022-02-10	Chapter 5: Resampling Methods	- TBD
 - 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
 - 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
-- 2022-03-03	Chapter 7: Moving Beyond Linearity - TBC
-- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - TBC	
+- 2022-03-03	Chapter 7: Moving Beyond Linearity - TBD
+- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - TBD	
 - 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
 - 2022-03-24	Chapter 8: Tree-Based Methods	(Lab) - Ricardo J. Serrano
-- 2022-03-31	Chapter 9: Support Vector Machines - TBC
-- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - TBC
-- 2022-04-14	Chapter 10: Deep Learning	- TBC
-- 2022-04-21	Chapter 10: Deep Learning	(Lab) - TBC
+- 2022-03-31	Chapter 9: Support Vector Machines - TBD
+- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - TBD
+- 2022-04-14	Chapter 10: Deep Learning	- TBD
+- 2022-04-21	Chapter 10: Deep Learning	(Lab) - TBD
 - 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
 - 2022-05-05	Chapter 11: Survival Analysis and Censored Data	(Lab) - Michael Haugen
-- 2022-05-12	Chapter 12: Unsupervised Learning	- TBC	
-- 2022-05-19	Chapter 12: Unsupervised Learning	(Lab) - TBC	
+- 2022-05-12	Chapter 12: Unsupervised Learning	- TBD	
+- 2022-05-19	Chapter 12: Unsupervised Learning	(Lab) - TBD	
 - 2022-05-26	Chapter 13: Multiple Testing - Federica Gazzelloni	
 - 2022-06-02	Chapter 13: Multiple Testing (Lab) - Federica Gazzelloni	
 - 2022-06-09  Final Discussion and Q&A - All  
