@@ -4,7 +4,7 @@
 
 - Implement a binary classification model using a **maximal margin classifier**.
 - Implement a binary classification model using a **support vector classifier**.
-- Implement a binary classification model using a **support vector machine**.
+- Implement a binary classification model using a **support vector machine** (SVM).
 - Generalize SVM models to **multi-class** cases.
 
 
