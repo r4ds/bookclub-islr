@@ -33,8 +33,8 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-01-18: Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
 - 2022-01-25: Chapter 7: Moving Beyond Linearity (part 1) - Justin Dollman
 - 2022-02-01: Chapter 7: Moving Beyond Linearity (part 2) - Justin Dollman
-  
-  </details>
+
+</details>
   
 - 2022-02-08: Chapter 8: Tree-Based Methods (part 1) - Justin Dollman
 - 2022-02-15: Chapter 8: Tree-Based Methods (part 2) - TBD
@@ -68,7 +68,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
 - 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
   
-  </details>
+</details>
   
 - 2022-03-03	Chapter 7: Moving Beyond Linearity - Jim Gruman
 - 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - Jim Gruman	
