@@ -16,7 +16,7 @@ $$\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} = 0$$
 
 ## Using a Separating Hyperplane to Classify
 
-- Consider a matrix **X** of dimensions $n*p$, and a $y_{i} \in \{-1, 1\}$. We have a new observations, $x^*$, which is a vector $x^* = (x^*_{1}...x^*_{p})^T$ which we wish to classify to one of two groups.
+- Consider a matrix **X** of dimensions $n*p$, and a $y_{i} \in \{-1, 1\}$. We have a new observation, $x^*$, which is a vector $x^* = (x^*_{1}...x^*_{p})^T$ which we wish to classify to one of two groups.
 - We will use a *separating hyperplane* to classify the observation.
 
 ## Visual Example of Using a Hyperplane to Classify
@@ -36,7 +36,7 @@ knitr::include_graphics('./images/fig9_2.jpg', error = FALSE)
 - An intuitive choice is the *maximal margin hyperplane*, which is the hyperplane that is farthest from the training data.
 - We compute the perpendicular distance from each training observation to the hyperplane. The smallest of these distances is known as the *margin*.
 - The *maximal margin hyperplane* is the hyperplane for which the *margin* is maximized. We can classify a test observation based on which side of the maximal margin hyperplane it lies on, and this is known as the *maximal margin classifier*.
-- The maximal margin classifier classifies $x^*$ based on the sign of $f(x^*) = \beta_{0} + \beta_{1}x^*_{1} + ... + \beta_{p}x^*{p}$.
+- The maximal margin classifier classifies $x^*$ based on the sign of $f(x^*) = \beta_{0} + \beta_{1}x^*_{1} + ... + \beta_{p}x^*_{p}$.
 
 ## Visual Representation of Maximal Margin Classifier
 ```{r mmc, echo=FALSE}
