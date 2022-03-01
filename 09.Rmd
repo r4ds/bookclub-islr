@@ -77,7 +77,7 @@ $$\epsilon_{i} \geq 0, \sum_{i=1}^{n}\epsilon_{i} \leq C$$
 
 - *C* is a nonnegative tuning parameter, typically chosen through cross-validation, and can be thought of as the budget for margin violation by the observations. 
 - The $\epsilon$s are *slack variables* that allow individual observations to be on the wrong side of the margin or hyperplane. The $\epsilon_{i}$ indicates where the *i*th observation is located with regards to the margin and hyperplane. 
-- If $\epsilon_{i}$ = 0, the observation is on the correct side of the margin. If greater than 0, it is on the wronge side of margin. If greater than 1, it is on the wronge side of the hyperplane. 
+- If $\epsilon_{i}$ = 0, the observation is on the correct side of the margin. If greater than 0, it is on the wrong side of margin. If greater than 1, it is on the wrong side of the hyperplane. 
 - Since *C* constrains the sum of the $\epsilon$s, it determines the number and magnitude of violations to the margin. If $C=0$, there is no margin for violation, thus all the $\epsilon_{1}...\epsilon_{n} = 0$. 
 - Note that if $C>0$, no more than *C* observations can be on wrong side of hyperplane, since in these cases $\epsilon_{i} > 1$. 
 
@@ -124,7 +124,7 @@ $$K(x_{i}, x_{i'}) = (1 + \sum_{j=1}^{p}x_{ij}x_{i'j})^d$$
 - This will lead to a much more flexible decision boundary, and is basically fitting an SVC in a higher-dimensional space involving polynomials of degree $d$, instead of the original feature space. 
 - When an SVC is combined with a nonlinear kernel as above, the result is a *support vector machine*.
 
-$$f(x) =  \beta_{0} + \sum_{i \in S}K(x, x_{i})$$
+$$f(x) =  \beta_{0} + \sum_{i \in S}\alpha_{i}K(x, x_{i})$$
 
 ## Radial Kernels
 - There are other options besides polynomial kernel functions, and a popular one is a *radial kernel*. $\gamma$ is a positive constant. 
@@ -152,7 +152,7 @@ knitr::include_graphics('./images/fig9_9.jpg')
 - Another option is *one-versus-all* classification. This can be useful when there are a lot of classes.
 - $K$ SVMs are fitted, and one of the K classes to the remaining $K-1$ classes. 
 - $\beta_{0k}...\beta_{pk}$ denotes the parameters that results from constructing an SVM comparing the $k$th class (coded as +1) to the other classes (-1).
-- Assign test observation $x^*$ to the class $k$ for which $\beta_{0k} + ... + \beta_{pk}$ is largest.
+- Assign test observation $x^*$ to the class $k$ for which $\beta_{0k} + ... + \beta_{pk}x^*_{p}$ is largest.
 
 
 ## Meeting Videos
