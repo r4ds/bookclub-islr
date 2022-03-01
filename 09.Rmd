@@ -22,7 +22,7 @@ $$\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} = 0$$
 ## Visual Example of Using a Hyperplane to Classify
 
 ```{r hyperplane-class, echo=FALSE}
-knitr::include_graphics('./images/fig9_2.jpg', error = FALSE)
+knitr::include_graphics('./images/fig9_2.JPG', error = FALSE)
 ```
  
 - We can label the blue observations as $y_{i} = 1$ and the pink observations as $y_{i} = -1$. 
@@ -40,7 +40,7 @@ knitr::include_graphics('./images/fig9_2.jpg', error = FALSE)
 
 ## Visual Representation of Maximal Margin Classifier
 ```{r mmc, echo=FALSE}
-knitr::include_graphics('./images/fig9_3.jpg')
+knitr::include_graphics('./images/fig9_3.JPG')
 ```
 
 - Note the 3 training observations that lie on the margin and are equidistant from the hyperplane. These are the *support vectors* (vectors in *p*-dimensional space; in this case $p=2$).
@@ -83,7 +83,7 @@ $$\epsilon_{i} \geq 0, \sum_{i=1}^{n}\epsilon_{i} \leq C$$
 
 ## Visual Illustration of SVC
 ```{r svc-vis, echo=FALSE}
-knitr::include_graphics('./images/fig9_7.jpg')
+knitr::include_graphics('./images/fig9_7.JPG')
 ```
 
 - A property of the classifier is that only data points which lie on or violate the margin will affect the hyperplane. These data points are known as *support vectors*.
@@ -138,7 +138,7 @@ $$K(x, x_{i}) = exp(-\gamma\sum_{j=1}^p(x_{ij} - x_{i'j})^2)$$
 
 ## Radial Kernels, cont.
 ```{r radkern, echo=FALSE}
-knitr::include_graphics('./images/fig9_9.jpg')
+knitr::include_graphics('./images/fig9_9.JPG')
 ```
 
 - The advantage of using a kernel rather than simply enlarging feature space is computational, since it is only necessary to compute $n \choose 2$ kernel functions. 
