@@ -33,8 +33,8 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-01-18: Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
 - 2022-01-25: Chapter 7: Moving Beyond Linearity (part 1) - Justin Dollman
 - 2022-02-01: Chapter 7: Moving Beyond Linearity (part 2) - Justin Dollman
-  
-  </details>
+
+</details>
   
 - 2022-02-08: Chapter 8: Tree-Based Methods (part 1) - Justin Dollman
 - 2022-02-15: Chapter 8: Tree-Based Methods (part 2) - TBD
@@ -63,19 +63,19 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-01-13	Chapter 3: Linear Regression (Lab) - Ricardo J. Serrano
 - 2022-01-20	Chapter 4: Classification	- Michael Haugen
 - 2022-01-27	Chapter 4: Classification	(Lab) - Michael Haugen
+- 2022-02-03	Chapter 5: Resampling Methods	- (Lab) Ricardo J. Serrano & Federica Gazzelloni
+- 2022-02-10	Chapter 5: Resampling Methods	- Team
+- 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
+- 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
   
 </details>
   
-- 2022-02-03	Chapter 5: Resampling Methods	- (Lab) Ricardo J. Serrano & Federica Gazzelloni
-- 2022-02-10	Chapter 5: Resampling Methods	- TBD
-- 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
-- 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
-- 2022-03-03	Chapter 7: Moving Beyond Linearity - TBD
-- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - TBD	
+- 2022-03-03	Chapter 7: Moving Beyond Linearity - Jim Gruman
+- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - Jim Gruman	
 - 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
 - 2022-03-24	Chapter 8: Tree-Based Methods	(Lab) - Ricardo J. Serrano
-- 2022-03-31	Chapter 9: Support Vector Machines - TBD
-- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - TBD
+- 2022-03-31	Chapter 9: Support Vector Machines - Jenny Smith
+- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - Jenny Smith
 - 2022-04-14	Chapter 10: Deep Learning	- TBD
 - 2022-04-21	Chapter 10: Deep Learning	(Lab) - TBD
 - 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
