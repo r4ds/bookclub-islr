@@ -21,7 +21,7 @@ $$\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} = 0$$
 
 ## Visual Example of Using a Hyperplane to Classify
 
-```{r hyperplane-class, echo=FALSE}
+```{r hyperplane-class, echo=FALSE, out.width=800}
 knitr::include_graphics('./images/fig9_2.JPG', error = FALSE)
 ```
  
@@ -39,7 +39,7 @@ knitr::include_graphics('./images/fig9_2.JPG', error = FALSE)
 - The maximal margin classifier classifies $x^*$ based on the sign of $f(x^*) = \beta_{0} + \beta_{1}x^*_{1} + ... + \beta_{p}x^*_{p}$.
 
 ## Visual Representation of Maximal Margin Classifier
-```{r mmc, echo=FALSE}
+```{r mmc, echo=FALSE, out.width=800}
 knitr::include_graphics('./images/fig9_3.JPG')
 ```
 
@@ -82,7 +82,7 @@ $$\epsilon_{i} \geq 0, \sum_{i=1}^{n}\epsilon_{i} \leq C$$
 - Note that if $C>0$, no more than *C* observations can be on wrong side of hyperplane, since in these cases $\epsilon_{i} > 1$. 
 
 ## Visual Illustration of SVC
-```{r svc-vis, echo=FALSE}
+```{r svc-vis, echo=FALSE, out.width=800}
 knitr::include_graphics('./images/fig9_7.JPG')
 ```
 
@@ -137,7 +137,7 @@ $$K(x, x_{i}) = exp(-\gamma\sum_{j=1}^p(x_{ij} - x_{i'j})^2)$$
 - The radial kernel therefore exhibits local behavior with respect to other observations.
 
 ## Radial Kernels, cont.
-```{r radkern, echo=FALSE}
+```{r radkern, echo=FALSE, out.width=800}
 knitr::include_graphics('./images/fig9_9.JPG')
 ```
 
