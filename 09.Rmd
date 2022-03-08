@@ -154,6 +154,180 @@ knitr::include_graphics('./images/fig9_9.JPG')
 - $\beta_{0k}...\beta_{pk}$ denotes the parameters that results from constructing an SVM comparing the $k$th class (coded as +1) to the other classes (-1).
 - Assign test observation $x^*$ to the class $k$ for which $\beta_{0k} + ... + \beta_{pk}x^*_{p}$ is largest.
 
+## Lab: Support Vector Classifier
+
+This is a hybrid of [Emil's tidymodels labs](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/support-vector-machines.html) and the original lab. I make sure our data matches theirs so we can compare more directly.
+
+```{r 09-tidymodels, message = FALSE, warning = FALSE}
+library(tidymodels)
+library(kernlab) # We'll use the plot method from this.
+```
+
+```{r 09-lab-data}
+set.seed(1)
+sim_data <- matrix(
+  rnorm (20 * 2), 
+  ncol = 2,
+  dimnames = list(NULL, c("x1", "x2"))
+) %>% 
+  as_tibble() %>% 
+  mutate(
+    y = factor(c(rep(-1, 10), rep(1, 10)))
+  ) %>%
+  mutate(
+    x1 = ifelse(y == 1, x1 + 1, x1),
+    x2 = ifelse(y == 1, x2 + 1, x2)
+  )
+
+sim_data %>% 
+  ggplot() +
+  aes(x1, x2, color = y) +
+  geom_point()
+
+# I generated this using their process then saved it to use here.
+test_data <- readRDS("data/09-testdat.rds") %>% 
+  rename(x1 = x.1, x2 = x.2)
+
+test_data %>% 
+  ggplot() +
+  aes(x1, x2, color = y) +
+  geom_point()
+```
+
+We create a spec for a model, which we'll update throughout this lab with different costs.
+
+```{r 09-lab-spec}
+svm_linear_spec <- svm_poly(degree = 1) %>%
+  set_mode("classification") %>%
+  set_engine("kernlab", scaled = FALSE)
+```
+
+Then we do a couple fits with manual cost.
+
+```{r 09-lab-simple_fits}
+svm_linear_fit_10 <- svm_linear_spec %>% 
+  set_args(cost = 10) %>%
+  fit(y ~ ., data = sim_data)
+svm_linear_fit_10
+
+svm_linear_fit_10 %>%
+  extract_fit_engine() %>%
+  plot()
+
+svm_linear_fit_01 <- svm_linear_spec %>% 
+  set_args(cost = 0.1) %>%
+  fit(y ~ ., data = sim_data)
+svm_linear_fit_01
+svm_linear_fit_01 %>%
+  extract_fit_engine() %>%
+  plot()
+
+svm_linear_fit_001 <- svm_linear_spec %>% 
+  set_args(cost = 0.01) %>%
+  fit(y ~ ., data = sim_data)
+svm_linear_fit_001
+svm_linear_fit_001 %>%
+  extract_fit_engine() %>%
+  plot()
+```
+
+### Tuning
+
+Let's find the best cost.
+
+```{r 09-lab-tune}
+svm_linear_wf <- workflow() %>%
+  add_model(
+    svm_linear_spec %>% set_args(cost = tune())
+  ) %>%
+  add_formula(y ~ .)
+
+set.seed(1234)
+sim_data_fold <- vfold_cv(sim_data, strata = y)
+
+param_grid <- grid_regular(cost(), levels = 10)
+
+# Our grid isn't identical to the book, but it's close enough.
+param_grid
+
+tune_res <- tune_grid(
+  svm_linear_wf, 
+  resamples = sim_data_fold, 
+  grid = param_grid
+)
+
+autoplot(tune_res)
+```
+
+Tune can pull out the best result for us.
+
+```{r 09-lab-tune-best}
+best_cost <- select_best(tune_res, metric = "accuracy")
+
+svm_linear_final <- finalize_workflow(svm_linear_wf, best_cost)
+
+svm_linear_fit <- svm_linear_final %>% fit(sim_data)
+
+svm_linear_fit %>% 
+  augment(new_data = test_data) %>%
+  conf_mat(truth = y, estimate = .pred_class)
+
+svm_linear_fit_001 %>% 
+  augment(new_data = test_data) %>%
+  conf_mat(truth = y, estimate = .pred_class)
+```
+
+### Linearly separable data
+
+```{r 09-lab-separate}
+sim_data_sep <- sim_data %>% 
+  mutate(
+    x1 = ifelse(y == 1, x1 + 0.5, x1),
+    x2 = ifelse(y == 1, x2 + 0.5, x2)
+  )
+
+sim_data_sep %>% 
+  ggplot() +
+  aes(x1, x2, color = y) +
+  geom_point()
+
+svm_fit_sep_1e5 <- svm_linear_spec %>% 
+  set_args(cost = 1e5) %>%
+  fit(y ~ ., data = sim_data_sep)
+
+svm_fit_sep_1e5
+svm_fit_sep_1e5 %>%
+  extract_fit_engine() %>%
+  plot()
+
+svm_fit_sep_1 <- svm_linear_spec %>% 
+  set_args(cost = 1) %>%
+  fit(y ~ ., data = sim_data_sep)
+
+svm_fit_sep_1
+svm_fit_sep_1 %>%
+  extract_fit_engine() %>%
+  plot()
+
+test_data_sep <- test_data %>% 
+  mutate(
+    x1 = ifelse(y == 1, x1 + 0.5, x1),
+    x2 = ifelse(y == 1, x2 + 0.5, x2)
+  )
+
+svm_fit_sep_1e5 %>% 
+  augment(new_data = test_data_sep) %>%
+  conf_mat(truth = y, estimate = .pred_class)
+
+svm_fit_sep_1 %>% 
+  augment(new_data = test_data_sep) %>%
+  conf_mat(truth = y, estimate = .pred_class)
+```
+
+## Lab: Support Vector Machine (non-linear kernel)
+
+Now that we've seen one that's comparable, I want to focus on the tidymodels version. For the rest of the meeting, see [Emil's version](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/support-vector-machines.html#support-vector-machine)
+
 
 ## Meeting Videos
 
