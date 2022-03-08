@@ -19,13 +19,14 @@ Imports:
     ggthemes,
     htmlTable,
     ISLR2,
+    kernlab,
     janitor,
     knitr,
     magrittr,
     patchwork,
     rmarkdown,
     skimr,
-    tidymodels, 
+    tidymodels,
     tidyverse,
     titanic
 Remotes:
