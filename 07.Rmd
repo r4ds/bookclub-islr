@@ -526,7 +526,7 @@ mgcv::plot.gam(
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube/embed/EvpA_jXAe2g")`
+`r knitr::include_url("https://www.youtube.com/embed/EvpA_jXAe2g")`
 
 <details>
 <summary> Meeting chat log </summary>
@@ -543,7 +543,7 @@ I'm going to try to use that now, at least 🙃
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube/embed/wIj-rgxB-9A")`
+`r knitr::include_url("https://www.youtube.com/embed/wIj-rgxB-9A")`
 
 <details>
 <summary> Meeting chat log </summary>
