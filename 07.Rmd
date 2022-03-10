@@ -1,6 +1,6 @@
 # Moving Beyond Linearity
 
-**Our learning objectives:**
+**Learning objectives:**
 
 Model relationships between a predictor and an outcome with
 
@@ -46,7 +46,7 @@ But often linearity is good enough.
 
 This chapter presents a hierarchy of methods that offer more flexibility without losing much of the ease and interpret ability of linear models. The first is a polynomial expansion.
 
-$$ y_i = \beta_0+\beta_1x_i+\beta_2x_i^2...+\beta_dx_i^d+\epsilon_i$$
+$$y_i = \beta_0+\beta_1x_i+\beta_2x_i^2...+\beta_dx_i^d+\epsilon_i$$
 <center>A degree **d** polynomial</center>
 
 
@@ -526,7 +526,7 @@ mgcv::plot.gam(
 
 ### Cohort 1
 
-`r knitr::include_url("https://youtu.be/EvpA_jXAe2g")`
+`r knitr::include_url("https://www.youtube/embed/EvpA_jXAe2g")`
 
 <details>
 <summary> Meeting chat log </summary>
@@ -543,13 +543,12 @@ I'm going to try to use that now, at least 🙃
 
 ### Cohort 2
 
-`r knitr::include_url("https://youtu.be/wIj-rgxB-9A")`
+`r knitr::include_url("https://www.youtube/embed/wIj-rgxB-9A")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-<<<<<<< HEAD
 00:20:40	Ricardo Serrano:	Orthogonal expansion in polynomial regression https://www.dropbox.com/s/j39rd74l51q2vch/Chapter12-Regression-PolynomialRegression.pdf?dl=0
 00:21:05	jlsmith3:	Thank you, Ricardo!
 00:21:36	Federica Gazzelloni:	@jenny you can have a look at the picture in this article for getting a sense of orthogonal expansion (in this case it is searching for next values that follow these paths) (https://www.researchgate.net/figure/Orthogonal-and-diagonal-node-expansion-in-the-A-search-algorithm_fig2_222666188)
@@ -561,13 +560,7 @@ I'm going to try to use that now, at least 🙃
 00:52:37	Federica Gazzelloni:	number of trips to a doctor's office
 00:54:52	Federica Gazzelloni:	Generalized additive  models (GAMs) are  a powerful generalization of linear, logistic, and Poisson regression models.
 00:56:06	Federica Gazzelloni:	should we do the lab?
-00:59:16	Ricardo Serrano:	Let's split the lab problems
-=======
-00:51:58	Jon Harmon (jonthegeek):	Because I'm obsessed now with "Why ξ?":
-"KS" for "knot/spline" = "ks" = "ξ"?
-I'm going to try to use that now, at least 🙃
-00:54:45	Laura Rose:	👍
-01:01:55	Federica Gazzelloni:	h(x,ξ) taylor : https://en.wikipedia.org/wiki/Taylors_theorem
+00:59:16	Ricardo Serrano:	Let's split the lab problems  https://en.wikipedia.org/wiki/Taylors_theorem
 
 ```
 </details>
