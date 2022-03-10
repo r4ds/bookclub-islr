@@ -23,6 +23,10 @@ Imports:
     tidyverse,
     magrittr,
     GGally,
-    skimr
+    skimr,
+    cowplot,
+    mgcv,
+    gam,
+    splines
 Remotes:
     hadley/emo
