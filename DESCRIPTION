@@ -14,7 +14,9 @@ Depends:
 Imports: 
     bookdown,
     car,
+    cowplot,
     emo,
+    gam,
     GGally,
     ggthemes,
     htmlTable,
@@ -23,9 +25,11 @@ Imports:
     janitor,
     knitr,
     magrittr,
+    mgcv,
     patchwork,
     rmarkdown,
     skimr,
+    splines,
     tidymodels,
     tidyverse,
     titanic
