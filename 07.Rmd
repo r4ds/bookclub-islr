@@ -541,6 +541,17 @@ I'm going to try to use that now, at least 🙃
 ```
 </details>
 
+`r knitr::include_url("https://www.youtube.com/embed/sEJ-yyypIhU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:20:42	Federica Gazzelloni:	https://en.wikipedia.org/wiki/Smoothing_spline
+00:23:23	Federica Gazzelloni:	lambda > = 0 is a smoothing parameter,
+```
+</details>
+
 ### Cohort 2
 
 `r knitr::include_url("https://www.youtube.com/embed/wIj-rgxB-9A")`
@@ -561,6 +572,17 @@ I'm going to try to use that now, at least 🙃
 00:54:52	Federica Gazzelloni:	Generalized additive  models (GAMs) are  a powerful generalization of linear, logistic, and Poisson regression models.
 00:56:06	Federica Gazzelloni:	should we do the lab?
 00:59:16	Ricardo Serrano:	Let's split the lab problems  https://en.wikipedia.org/wiki/Taylors_theorem
+```
+</details>
 
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
 ```
 </details>

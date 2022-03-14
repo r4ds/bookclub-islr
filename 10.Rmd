@@ -25,3 +25,27 @@
 ADD LOG HERE
 ```
 </details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>

@@ -333,6 +333,36 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 
 ### Cohort 1
 
+`r knitr::include_url("https://www.youtube.com/embed/g9ICZXZ2p4s")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:41:54	Jon Harmon (jonthegeek):	9.23 in the book *does* still have the alpha.
+00:52:14	Federica Gazzelloni:	dealing with grouping based on some indications
+00:54:37	Ryan Metcalf:	Laura, not sure if this is the same video series. https://www.youtube.com/channel/UCB2p-jaoolkv0h22m4I9l9Q/videos
+00:55:02	Jon Harmon (jonthegeek):	Here specifically: https://www.youtube.com/watch?v=ooYwHNvH-YU&list=PLAOUn-KLSAVOf4Uk-WbLGPUDFjMSyytkw&index=3
+00:59:15	Federica Gazzelloni:	let’s share the lab??
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/fX_hQJ_fXVw")`
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
+
+### Cohort 3
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
