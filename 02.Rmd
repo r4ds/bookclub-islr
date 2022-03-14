@@ -1144,3 +1144,46 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:54:05	Ricardo:	MNIST dataset
 ```
 </details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/fxq7hbLyv7c")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:52	Fariborz Soroush:	none here :)
+00:31:06	Mei Ling Soh:	More on parametric and non-parametric tests: https://byjus.com/maths/difference-between-parametric-and-nonparametric/#:~:text=The%20key%20difference%20between%20parametric,tendency%20with%20the%20median%20value.
+00:31:28	Mei Ling Soh:	Sometimes, it is better to use non-parametric tests as they are based on median
+00:35:15	Mei Ling Soh:	ggplot-2 book: https://ggplot2-book.org/
+00:36:06	Mei Ling Soh:	Bookclub on slack `#book_club-ggplot2`
+00:39:58	Jeremy Selva:	Welch t test is not equal variance one. Student is the equal variance one. Both are parametric because they assume a normal (known) distribution.
+00:41:43	Mei Ling Soh:	Thanks, Jeremy. I thought welch was a non-parametric test 😅
+00:54:26	Rahul:	This is my derivation for the earlier equation we were talking about.
+01:05:56	Rahul:	This has a good info on parametric vs non parametric https://sebastianraschka.com/faq/docs/parametric_vs_nonparametric.html
+01:06:03	Rahul:	For later read
+01:06:07	Rahul:	Thank you!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/T1C-YMdP2ZU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:35	Mei Ling Soh:	https://www.crumplab.com/statisticsLab/lab-10-factorial-anova.html
+00:28:41	Mei Ling Soh:	The answers👆
+00:31:51	Rose Franzen:	Sorry Mei Ling, the answers for what? That link doesn’t seem to be related to this content (unless I’m totally missing something, which is possible 🙂 )
+00:32:44	Mei Ling Soh:	https://onmee.github.io/assets/docs/ISLR/Statistical-Learning.pdf
+00:55:06	Rose Hartman:	My preference is to rush through so we can keep getting to new content 🙂
+00:55:11	Celine H:	I’d rather take our time to go through the material
+00:55:13	shamsuddeen:	Where is the sign-up sheet?
+00:55:25	Nilay Yönet:	https://docs.google.com/spreadsheets/d/1xab0RUdnUC6V-RkXvZqTcLvJrkY6T2ZHAZSUDA_krn4/edit#gid=0
+00:55:30	Celine H:	I’m ok either way.
+00:55:39	Rose Hartman:	Me too 🙂
+00:57:59	Celine H:	I’d love to see the tidy model example.
+00:58:06	Celine H:	tidyverse
+```
+</details>

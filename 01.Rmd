@@ -360,3 +360,46 @@ knitr::include_graphics("images/fig1_2.png")
 00:51:11	Federica Gazzelloni:	https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/
 ```
 </details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/cXjTKOoN6aU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:45	Fariborz Soroush:	Lighting in my room is terrible. I cut my video :D
+00:10:23	Mei Ling Soh:	That’s fine!
+00:15:24	Fariborz Soroush:	Go CHoPpers I guess?:lol:
+00:15:36	Rose Hartman (she/her):	Woot 🙂
+00:19:30	Amber:	My wifi is a bit rocky so I don’t want to put on my audio, but hi everyone! I’m Amber, I’m a student at CUNY Grad Center in NY where I’m studying Quantitative Methods in the Social Sciences, and have struggled with r during the entire time of my studies 😂 so I’m really looking forward to this book club to finally get comfortable with r
+00:19:59	Rose Hartman (she/her):	Hi Amber! 🙂
+00:20:36	Rose Franzen (she/her):	Hi Amber!
+00:20:38	Nilay Yönet:	👋☺️
+00:20:40	Fariborz Soroush:	Hi Amber :)
+00:21:46	Mounika [Monika]:	Hi Amber :)
+00:25:15	Mounika [Monika]:	Mei, could you please post also the link to the R4DS GitHub resource?
+00:25:24	Rose Franzen (she/her):	https://r4ds.github.io/bookclub-islr/book-club-meetings.html
+00:25:34	Mounika [Monika]:	Thank you !
+00:36:28	Rose Hartman (she/her):	Did you get the capitals? install.packages(“ISLR2”)?
+00:36:31	Rose Hartman (she/her):	It worked fine for me
+00:36:38	Rahul:	I don’t know much R but looking online https://cran.rstudio.com/web/packages/ISLR2/ seems that it Depends:	R (≥ 3.5.0)
+00:37:38	Nilay Yönet:	yes my R version is
+00:37:40	Nilay Yönet:	R version 4.1.0 (2021-05-18)
+00:38:12	Rahul:	OK, then that might not be the reason
+00:38:43	Nilay Yönet:	Idk :/ I will try cloning :)
+00:38:45	Rose Hartman (she/her):	Nilay, usually when I get that error message, I find it’s because I had a typo in the package name ;) Double check that you typed it in correctly?
+00:39:03	Nilay Yönet:	oh ok I will check that as well :)
+00:49:10	Fariborz Soroush:	Suggestions for API? VSCode? Jupyter? I remember R had its own interpreter but I have MacOS not sure if it works there.
+00:50:10	Rose Hartman (she/her):	I really like RStudio for R: https://www.rstudio.com/products/rstudio/
+00:50:24	Mounika [Monika]:	RStudio is the OG for R!!
+00:50:38	Fariborz Soroush:	Ok, RStudio it is :) :D
+00:54:31	Rahul:	13th march
+00:54:36	Rose Hartman (she/her):	Quick poll: Who is interested in doing tidymodels? I am, but happy to skip it if everyone else would prefer to stay in base R.
+00:55:35	Mounika [Monika]:	I think the plan of covering base as well as tidyR sounds good.. I am ok sticking to baseR if both is too much
+00:57:24	Amber:	^^ same
+00:57:44	Rose Franzen (she/her):	I am also interested in tidy models
+00:57:47	Amber:	Bye everyone!
+```
+</details>

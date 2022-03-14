@@ -821,3 +821,15 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 01:11:18	Ricardo:	Thanks, Michael 👍
 ```
 </details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
