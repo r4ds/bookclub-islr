@@ -2,7 +2,13 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Describe the structure of a *single-layer neural network.*
+- Describe the structure of a *multilayer neural network.*
+- Describe the structure of a *convolutional neural network.*
+- Describe the structure of a *recurrent neural network.*
+- **Compare deep learning** to simpler models.
+- **Recognize** the process by which **neutral networks are fit.**
+- Explain the **double descent** phenomenon.
 
 ## Slide 1
 
