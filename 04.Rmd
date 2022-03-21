@@ -79,24 +79,28 @@ knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 
 ## Logistic Regression
 
+### The Logistic Model
 - **Logistic regression**: models the probability that Y belongs to a particular category (X) 
 - X is binary (0/1)
 
 $$p(X) = β_0 + β_1X \space \Longrightarrow {Linear \space regression}$$
 $$p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \space \Longrightarrow {Logistic \space function}$$
-$$odds = p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
-$$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
+$$odds = \frac{p (X)}{1 - p (X)} =  e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
 
 By logging the whole equation, we get
 
 $$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
 
+### Estimating the Regression Coefficient
 To estimate the regression coefficient, we use **maximum likelihood (ME)**. 
 
 
 ***Likelihood Function***
 
-$$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i) = \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
+$$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i)  \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
+
+- The aim is to find beta values such that $$ℓ$$ is maximum. 
+- The Least square method is the special case of maximum likelihood function. 
 
 ### Multiple Logistic Regression
 
