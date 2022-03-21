@@ -171,11 +171,11 @@ mean and,
 
 The normal density takes the form
 
-$$f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
+$$f_k(x) = \frac{1}{\sqrt{2πσ_k}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
 
 Then, the posterior probability (probability that the observation belongs to the kth class, given the predictor value for that observation) is
 
-$$p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)}{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_l)^2)}$$
+$$p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσ}}exp(- \frac{1}{2σ^2}(x- \mu_k)^2)}{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσ}}exp(- \frac{1}{2σ^2}(x- \mu_l)^2)}$$
 
 **Additional mathematical formula**
 
@@ -194,7 +194,7 @@ knitr::include_graphics("./images/fig4_4.jpg", error = FALSE)
 ```
 
 The **linear discriminant analysis (LDA)** method approximates the linear
-discriminant analysis Bayes classifier by plugging estimates for $π_k$, $μ_k$, and σ^2 into equation 4.18. 
+discriminant analysis Bayes classifier by plugging estimates for $π_k$, $μ_k$, and $σ^2$ into equation 4.18. 
 
 $\hat μ_k$ is the average of all the training observations from the kth class
 $$\hat{\mu}_{k} = \frac{1}{n_{k}}\sum_{i: y_{i}= k} x_{i}$$
@@ -210,7 +210,7 @@ $n_k$ = number of training observations in the kth class
 $π_k$ is estimated from the proportion of the training observations
 that belong to the kth class.
 
-$π_k = \frac{n_k}{n}$
+$$π_k = \frac{n_k}{n}$$
 
 LDA classifier assigns an observation X = x to the class for which $δ_k(x)$ is largest. 
 
