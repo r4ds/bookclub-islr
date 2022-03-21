@@ -44,7 +44,7 @@
 
 - In the following section, we are going to explore the `Default` dataset. The annual incomes ($X_1$ = `income`) and monthly credit card balances ($X_2$ =`balance`) are used to predict whether whether an individual will default on his or her credit card payment. 
 
-```{r fig4-1, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="The distribution of balance and income split by the binary default variable respectively; Note. Defaulters represented as orange plus sign; non-defaulters represented as blue circle"}
+```{r fig4-1, cache=TRUE, echo=FALSE, fig.align="center", fig.cap="The distribution of balance and income split by the binary default variable respectively; Note. Defaulters represented as orange plus sign; non-defaulters represented as blue circle"}
 
 knitr::include_graphics("./images/fig4_1.jpg", error = FALSE)
 
@@ -71,7 +71,7 @@ $$Y = \left\{ \begin{array}{ll}
   - in such cases, the prediction of $\hat{Y} > 0.5$, can be associated with \mbox{drug overdose}.
   - The main issue is partial estimates might be outside the [0, 1] probability interval, e.g. fig4-2:
 
-```{r fig4-2, cache=FALSE, eval=FALSE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
+```{r fig4-2, cache=TRUE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
 
 knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 ```
