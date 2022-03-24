@@ -2,7 +2,10 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Use **basic decision trees** to model relationships between predictors and an outcome.
+- Compare and contrast tree-based models with other model types.
+- Use **tree-based ensemble methods** to build predictive models.
+- Compare and contrast the various methods of building tree ensembles: bagging, boosting, random forests, and Bayesian Additive Regression Trees.
 
 ## Slide 1
 
@@ -15,6 +18,59 @@
 ## Meeting Videos
 
 ### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/3E4Pu2UspDI")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:12:39	Ryan Metcalf:	(I’m very self-conscious)
+00:21:31	Mei Ling Soh:	I didn’t have time to read this chapter, so sorry to ask, how did you decide on the internal nodes?
+00:22:57	Jon Harmon (jonthegeek):	I think we're about to go into that :)
+00:23:08	shamsuddeen:	I guess it is calculated based on the purity
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/c_u4Gh4CDnM")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:43:03	jonathan.bratt:	Maybe “inversely correlated” is more accurate?
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/8NGM8aLRCv0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:47	Jon Harmon (jonthegeek):	Yay for using anything other than Boston 😁
+00:14:51	jonathan.bratt:	BTW:
+00:15:07	jonathan.bratt:	node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+00:15:40	jonathan.bratt:	From `rpart` output
+00:21:47	Federica Gazzelloni:	I need to jump off in 15 minutes..apologies..
+00:34:36	Federica Gazzelloni:	See you on Thursday @laura - thanks @jon
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
+
+### Cohort 3
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 

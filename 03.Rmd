@@ -270,3 +270,20 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 01:09:44	Ricardo Serrano:	Thanks, Michael!
 ```
 </details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/VN_7plsw27I")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:12:38	Rose Hartman:	I think the edx videos are recorded by the authors, right?
+00:12:39	Rahul:	https://www.youtube.com/playlist?list=PLOg0ngHtcqbPTlZzRHA2ocQZqB1D_qZ5V
+00:50:26	Mei Ling Soh:	https://onmee.github.io/ISLR-Solutions/
+01:02:13	Rose Hartman:	Yeah, this was great! Thanks!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/gpIOZyyK_bU")`

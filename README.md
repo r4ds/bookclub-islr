@@ -27,26 +27,28 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-11-23: Chapter 4: Classification (part 2) - Kim Martin
 - 2021-11-30: Chapter 5: Resampling Methods (part 1) - Laura Rose
 - 2021-12-07: Chapter 5: Resampling Methods (part 2) - Justin Dollman
+- 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Justin Dollman
+- 2021-12-28 & 2022-01-04: NO MEETINGS (Winter Break)
+- 2022-01-11: Chapter 6: Linear Model Selection and Regularization (part 2) - Justin Dollman
+- 2022-01-18: Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
+- 2022-01-25: Chapter 7: Moving Beyond Linearity (part 1) - Justin Dollman
+- 2022-02-01: Chapter 7: Moving Beyond Linearity (part 2) - Justin Dollman
+- 2022-02-08: Chapter 8: Tree-Based Methods (part 1) - Justin Dollman
+- 2022-02-15: Chapter 8: Tree-Based Methods (part 2) - Justin Dollman
+- 2022-02-22: Chapter 8: Tree-Based Methods (lab) - Laura Rose
+- 2022-03-01: Chapter 9: Support Vector Machines - Laura Rose
 
 </details>
-
-- 2021-12-14: Chapter 6: Linear Model Selection and Regularization (part 1) - Justin Dollman
-- 2021-12-21: Chapter 6: Linear Model Selection and Regularization (part 2) - or maybe no meeting?
-- 2021-12-28: NO MEETING (Winter Break)
-- 2022-01-04: Chapter 7: Moving Beyond Linearity (part 1) - TBD
-- 2022-01-11: Chapter 7: Moving Beyond Linearity (part 2) - TBD
-- 2022-01-18: Chapter 8: Tree-Based Methods (part 1) - TBD
-- 2022-01-25: Chapter 8: Tree-Based Methods (part 2) - TBD
-- 2022-02-01: Chapter 9: Support Vector Machines (part 1) - TBD
-- 2022-02-08: Chapter 9: Support Vector Machines (part 2) - TBD
-- 2022-02-15: Chapter 10: Deep Learning (part 1) - TBD
-- 2022-02-22: Chapter 10: Deep Learning (part 2) - Federica Gazzelloni
-- 2022-03-01: Chapter 11: Survival Analysis and Censored Data (part 1) - TBD
-- 2022-03-08: Chapter 11: Survival Analysis and Censored Data (part 2) - TBD
-- 2022-03-15: Chapter 12: Unsupervised Learning (part 1) - TBD
-- 2022-03-22: Chapter 12: Unsupervised Learning (part 2) - TBD
-- 2022-03-29: Chapter 13: Multiple Testing (part 1) - TBD
-- 2022-04-05: Chapter 13: Multiple Testing (part 2) - TBD
+  
+- 2022-03-08: Chapter 9: Support Vector Machines (lab) - Jon Harmon
+- 2022-03-15: Chapter 10: Deep Learning (part 1) - Federica Gazzelloni
+- 2022-03-22: Chapter 10: Deep Learning (lab) - TBD
+- 2022-03-29: Chapter 11: Survival Analysis and Censored Data (part 1) - Justin Dollman
+- 2022-04-05: Chapter 11: Survival Analysis and Censored Data (lab) - TBD
+- 2022-04-12: Chapter 12: Unsupervised Learning (part 1) - Jon Harmon
+- 2022-04-19: Chapter 12: Unsupervised Learning (lab) - Jon Harmon
+- 2022-04-26: Chapter 13: Multiple Testing (part 1) - Mei Ling Soh
+- 2022-05-03: Chapter 13: Multiple Testing (lab) - Mei Ling Soh
 
 *Cohort 2: (starts 2021-12-02) - Tuesdays, 10:00am CST*
 
@@ -55,35 +57,35 @@ If you would like to present, please add your name next to a chapter using the [
 
 - 2021-12-02	Chapter 1: Introduction	- Federica Gazzelloni
 - 2021-12-09	Chapter 2: Statistical Learning	- Jim Gruman
-
-</details>
-
-- 2021-12-16	Chapter 2: Statistical Learning	Lab - Jim Gruman
+- 2021-12-16	Chapter 2: Statistical Learning	(Lab) - Jim Gruman
 - 2021-12-23	NO MEETING	
 - 2021-12-30	NO MEETING	
 - 2022-01-06	Chapter 3: Linear Regression - Ricardo J. Serrano
-- 2022-01-13	Chapter 3: Linear Regression - Ricardo J. Serrano
+- 2022-01-13	Chapter 3: Linear Regression (Lab) - Ricardo J. Serrano
 - 2022-01-20	Chapter 4: Classification	- Michael Haugen
-- 2022-01-27	Chapter 4: Classification	- Michael Haugen
-- 2022-02-03	Chapter 5: Resampling Methods	- AL Brown
-- 2022-02-10	Chapter 5: Resampling Methods	- AL Brown
+- 2022-01-27	Chapter 4: Classification	(Lab) - Michael Haugen
+- 2022-02-03	Chapter 5: Resampling Methods	- (Lab) Ricardo J. Serrano & Federica Gazzelloni
+- 2022-02-10	Chapter 5: Resampling Methods	- Team
 - 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
-- 2022-02-24	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
-- 2022-03-03	Chapter 7: Moving Beyond Linearity - Daniel
-- 2022-03-10	Chapter 7: Moving Beyond Linearity - Daniel	
-- 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
-- 2022-03-24	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
-- 2022-03-31	Chapter 9: Support Vector Machines - TBC
-- 2022-04-07	Chapter 9: Support Vector Machines - TBC
-- 2022-04-14	Chapter 10: Deep Learning	- TBC
-- 2022-04-21	Chapter 10: Deep Learning	- TBC
-- 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
-- 2022-05-05	Chapter 11: Survival Analysis and Censored Data	- Michael Haugen
-- 2022-05-12	Chapter 12: Unsupervised Learning	- Daniel	
-- 2022-05-19	Chapter 12: Unsupervised Learning	- Daniel	
-- 2022-05-26	Chapter 13: Multiple Testing - Federica Gazzelloni	
-- 2022-06-02	Chapter 13: Multiple Testing - Federica Gazzelloni	
+- 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
   
+</details>
+  
+- 2022-03-03	Chapter 7: Moving Beyond Linearity - Jim Gruman
+- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - Jim Gruman	
+- 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
+- 2022-03-24	Chapter 8: Tree-Based Methods	(Lab) - Ricardo J. Serrano
+- 2022-03-31	Chapter 9: Support Vector Machines - Jenny Smith
+- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - Jenny Smith
+- 2022-04-14	Chapter 10: Deep Learning	- TBD
+- 2022-04-21	Chapter 10: Deep Learning	(Lab) - TBD
+- 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
+- 2022-05-05	Chapter 11: Survival Analysis and Censored Data	(Lab) - Michael Haugen
+- 2022-05-12	Chapter 12: Unsupervised Learning	- TBD	
+- 2022-05-19	Chapter 12: Unsupervised Learning	(Lab) - TBD	
+- 2022-05-26	Chapter 13: Multiple Testing - Federica Gazzelloni	
+- 2022-06-02	Chapter 13: Multiple Testing (Lab) - Federica Gazzelloni	
+- 2022-06-09  Final Discussion and Q&A - All  
 
 <hr>
 

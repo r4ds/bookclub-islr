@@ -460,6 +460,37 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 
 ### Cohort 2
 
+`r knitr::include_url("https://www.youtube.com/embed/RQfPmCVuPC8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:29:18	Ricardo Serrano:	https://www.statology.org/assumptions-of-logistic-regression/
+00:29:26	Ricardo Serrano:	https://towardsdatascience.com/assumptions-of-logistic-regression-clearly-explained-44d85a22b290
+01:06:18	Jim Gruman:	thank you Federica!!! more horsepower 🐎
+01:07:47	Jim Gruman:	I need to jump off. Talk to you all next week. Ciao
+```
+</details>
+
+
+`r knitr::include_url("https://www.youtube.com/embed/iDxpBea8AI0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:18:27	Federica Gazzelloni:	Hello Jenny!
+00:18:44	jlsmith3:	Good morning!
+00:39:57	Ricardo Serrano:	References for bias/variance https://www.bmc.com/blogs/bias-variance-machine-learning/
+00:40:26	Ricardo Serrano:	https://youtu.be/EuBBz3bI-aA
+00:40:36	Federica Gazzelloni:	Thanks Ricardo!
+00:57:55	Jim Gruman:	🐎 thank you everybody!
+```
+</details>
+
+### Cohort 3
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

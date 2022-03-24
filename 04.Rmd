@@ -44,7 +44,7 @@
 
 - In the following section, we are going to explore the `Default` dataset. The annual incomes ($X_1$ = `income`) and monthly credit card balances ($X_2$ =`balance`) are used to predict whether whether an individual will default on his or her credit card payment. 
 
-```{r fig4-1, cache=FALSE, echo=FALSE, fig.align="center", fig.cap="The distribution of balance and income split by the binary default variable respectively; Note. Defaulters represented as orange plus sign; non-defaulters represented as blue circle"}
+```{r fig4-1, cache=TRUE, echo=FALSE, fig.align="center", fig.cap="The distribution of balance and income split by the binary default variable respectively; Note. Defaulters represented as orange plus sign; non-defaulters represented as blue circle"}
 
 knitr::include_graphics("./images/fig4_1.jpg", error = FALSE)
 
@@ -60,9 +60,18 @@ $$Y = \left\{ \begin{array}{ll}
           2 & \mbox{if epileptic seizure};\\
           3 & \mbox{if drug overdose}.\end{array} \right.$$
 
-- a regression method will not provide meaningful estimates of Pr(Y |X), even with just two classes; partial estimates might be outside the [0, 1] probability interval
+- Depending on the complexity of the problem, a regression method will not provide meaningful estimates of Pr(Y |X); 
 
-```{r fig4-2, cache=FALSE, eval=FALSE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
+- There are times that a binary *qualitative* responses can be modeled using *dummy variables* approach. Example:
+
+$$Y = \left\{ \begin{array}{ll}
+          0 & \mbox{if stroke};\\
+          1 & \mbox{if drug overdose}.\end{array} \right.$$
+
+  - in such cases, the prediction of $\hat{Y} > 0.5$, can be associated with \mbox{drug overdose}.
+  - The main issue is partial estimates might be outside the [0, 1] probability interval, e.g. fig4-2:
+
+```{r fig4-2, cache=TRUE, echo=FALSE, fig.align="center", fig.cap="Classification using the Default data. Left: Estimated probability of default using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for default(No or Yes). Right: Predicted probabilities of default using logistic regression. All probabilities lie between 0 and 1."}
 
 knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 ```
@@ -70,24 +79,28 @@ knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 
 ## Logistic Regression
 
+### The Logistic Model
 - **Logistic regression**: models the probability that Y belongs to a particular category (X) 
 - X is binary (0/1)
 
 $$p(X) = β_0 + β_1X \space \Longrightarrow {Linear \space regression}$$
 $$p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \space \Longrightarrow {Logistic \space function}$$
-$$odds = p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
-$$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
+$$odds = \frac{p (X)}{1 - p (X)} =  e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
 
 By logging the whole equation, we get
 
 $$\log \biggl(\frac{p(X)}{1- p(X)}\bigg) = \beta_{0} + \beta_{1}X \Longrightarrow {log \space odds/logit}$$
 
+### Estimating the Regression Coefficient
 To estimate the regression coefficient, we use **maximum likelihood (ME)**. 
 
 
 ***Likelihood Function***
 
-$$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i) = \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
+$$ℓ (\beta_{0}, \beta_{1}) = \prod_{i: y_{i}= 1} p (x_i)  \prod_{i': y_{i'}= 0} (1- p (x_{i'})) \Longrightarrow {Likelihood \space function}$$
+
+- The aim is to find beta values such that $$ℓ$$ is maximum. 
+- The Least square method is the special case of maximum likelihood function. 
 
 ### Multiple Logistic Regression
 
@@ -158,11 +171,11 @@ mean and,
 
 The normal density takes the form
 
-$$f_k(x) = \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
+$$f_k(x) = \frac{1}{\sqrt{2πσ_k}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)$$
 
 Then, the posterior probability (probability that the observation belongs to the kth class, given the predictor value for that observation) is
 
-$$p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_k)^2)}{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσk}}exp(- \frac{1}{2σ^2_k}(x- \mu_l)^2)}$$
+$$p_k(x) = \frac{π_k \frac{1}{\sqrt{2πσ}}exp(- \frac{1}{2σ^2}(x- \mu_k)^2)}{\sum^k_{l=1} π_l \frac{1}{\sqrt{2πσ}}exp(- \frac{1}{2σ^2}(x- \mu_l)^2)}$$
 
 **Additional mathematical formula**
 
@@ -181,7 +194,7 @@ knitr::include_graphics("./images/fig4_4.jpg", error = FALSE)
 ```
 
 The **linear discriminant analysis (LDA)** method approximates the linear
-discriminant analysis Bayes classifier by plugging estimates for $π_k$, $μ_k$, and σ^2 into equation 4.18. 
+discriminant analysis Bayes classifier by plugging estimates for $π_k$, $μ_k$, and $σ^2$ into equation 4.18. 
 
 $\hat μ_k$ is the average of all the training observations from the kth class
 $$\hat{\mu}_{k} = \frac{1}{n_{k}}\sum_{i: y_{i}= k} x_{i}$$
@@ -197,7 +210,7 @@ $n_k$ = number of training observations in the kth class
 $π_k$ is estimated from the proportion of the training observations
 that belong to the kth class.
 
-$π_k = \frac{n_k}{n}$
+$$π_k = \frac{n_k}{n}$$
 
 LDA classifier assigns an observation X = x to the class for which $δ_k(x)$ is largest. 
 
@@ -819,5 +832,17 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 01:10:26	Jim Gruman:	thank you Michael!  don't eat the mushrooms🍄
 01:10:50	jlsmith3:	Thank you, Michael!!
 01:11:18	Ricardo:	Thanks, Michael 👍
+```
+</details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
 ```
 </details>

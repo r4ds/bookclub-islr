@@ -2,7 +2,13 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Describe the structure of a *single-layer neural network.*
+- Describe the structure of a *multilayer neural network.*
+- Describe the structure of a *convolutional neural network.*
+- Describe the structure of a *recurrent neural network.*
+- **Compare deep learning** to simpler models.
+- **Recognize** the process by which **neutral networks are fit.**
+- Explain the **double descent** phenomenon.
 
 ## Slide 1
 
@@ -15,6 +21,30 @@
 ## Meeting Videos
 
 ### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>
+
+### Cohort 3
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
