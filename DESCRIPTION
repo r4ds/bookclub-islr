@@ -14,19 +14,24 @@ Depends:
 Imports: 
     bookdown,
     car,
+    dlookr, 
     emo,
     GGally,
     ggthemes,
     htmlTable,
+    ISLR,
     ISLR2,
     janitor,
     knitr,
     magrittr,
     patchwork,
     rmarkdown,
+    rpart.plot,
     skimr,
     tidymodels, 
     tidyverse,
-    titanic
+    titanic, 
+    vembedr, 
+    vip
 Remotes:
     hadley/emo
