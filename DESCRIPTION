@@ -13,9 +13,10 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     bookdown,
+    broomstick,
     car,
     cowplot,
-    dlookr, 
+    dlookr,
     doParallel,
     emo,
     gam,
@@ -34,9 +35,9 @@ Imports:
     rpart.plot,
     skimr,
     splines,
-    tidymodels, 
+    tidymodels,
     tidyverse,
-    titanic, 
+    titanic,
     vip
 Remotes:
     hadley/emo
