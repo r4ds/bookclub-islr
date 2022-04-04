@@ -40,4 +40,5 @@ Imports:
     titanic,
     vip
 Remotes:
-    hadley/emo
+    hadley/emo,
+    njtierney/broomstick

@@ -11,7 +11,7 @@ Script source: https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/tree-based-m
 
 ## Decision Tree Terminology
 
-![Source: https://medium.com/@scid2230/decision-tree-basics-34d864483c42](img/decision_tree_structure.png)
+![Source: https://medium.com/@scid2230/decision-tree-basics-34d864483c42](images/decision_tree_structure.png)
 
 ## Decision Trees Explained (StatQuest)
 
