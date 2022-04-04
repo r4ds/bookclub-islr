@@ -15,12 +15,7 @@ Script source: https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/tree-based-m
 
 ## Decision Trees Explained (StatQuest)
 
-<!-- `r knitr::include_url("https://www.youtube.com/embed/_L39rN6gz7Y")` -->
-
-```{r, echo=FALSE}
-embed_youtube("_L39rN6gz7Y", ratio = "16by9") %>% 
-     use_align("center")
-```
+`r knitr::include_url("https://www.youtube.com/embed/_L39rN6gz7Y")`
 
 ## 8.1 Fitting Classification Trees
 
@@ -31,7 +26,6 @@ library(tidymodels)
 library(ISLR)
 library(rpart.plot)
 library(vip)
-library(vembedr)
 ```
 
 ```{r}
