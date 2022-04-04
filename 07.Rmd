@@ -2,21 +2,525 @@
 
 **Learning objectives:**
 
-- Use **polynomial regression** to model a relationship between a predictor and an outcome.
-- Use **step functions** to model a relationship between a predictor and an outcome.
-- Use **regression splines** to model a relationship between a predictor and an outcome.
-- Use **smoothing splines** to model a relationship between a predictor and an outcome.
-- Use **local regression** to model a relationship between a predictor and an outcome.
-- Use **generalized additive models** to model a relationship between multiple predictors and an outcome.
+Model relationships between a predictor and an outcome with
+
+1. **polynomial regression** 
+1. **step functions** 
+1. **regression splines** 
+1. **smoothing splines**
+1. **local regression** 
+1. **generalized additive models** 
+
+Chapter 7 resources:
+
+1. [The text at https://www.statlearning.com/](https://www.statlearning.com/)
+1. [Cohort 1 videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGibdB0i2wveuFRDlXHbWaPD)
+1. [Author videos](https://www.youtube.com/playlist?list=PL5-da3qGB5IBn84fvhh-u2MU80jvo8OoR)
+1. [Author slides](https://hastie.su.domains/MOOC-Slides/nonlinear.pdf)
+1. [Emil Hvitfeldt's `Tidymodels` examples](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/moving-beyond-linearity.html)
+1. [Kim Larsen's GAM: The Predictive Modeling Silver Bullet](https://multithreaded.stitchfix.com/blog/2015/07/30/gam/)
+
+![Black motorcycle parked at road toward mountain](https://images.unsplash.com/photo-1518787289325-94c6917b88ef)
+
+<details>
+
+```{r chapter7setup}
+
+suppressPackageStartupMessages({
+  library(splines)
+  library(tidymodels)
+})
+
+tidymodels_prefer()
+```
+
+</details>
+
+----
+
+## Polynomial and Step Regression 
+
+<h4> The truth is never linear!</h4>
+
+But often linearity is good enough.
+
+This chapter presents a hierarchy of methods that offer more flexibility without losing much of the ease and interpret ability of linear models. The first is a polynomial expansion.
+
+$$y_i = \beta_0+\beta_1x_i+\beta_2x_i^2...+\beta_dx_i^d+\epsilon_i$$
+<center>A degree **d** polynomial</center>
 
 
-## Slide 1
+```{r chapter7-1, fig.asp=0.8}
 
-- Try to follow a slide-like format.
+Wage <- as_tibble(ISLR2::Wage) %>% 
+    mutate(high = factor(wage > 250, 
+                       levels = c(TRUE, FALSE), 
+                       labels = c("High", "Low")))
 
-## Slide 2
+rec_poly <- recipe(wage ~ age, data = Wage) %>%
+  step_poly(age, degree = 4)
 
-- Use `##` to create new slides (sections).
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+poly_wf <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_recipe(rec_poly)
+
+poly_fit <- fit(poly_wf, data = Wage)
+
+age_range <- tibble(age = seq(min(Wage$age), max(Wage$age)))
+
+regression_lines <- bind_cols(
+  augment(poly_fit, new_data = age_range),
+  predict(poly_fit, new_data = age_range, type = "conf_int")
+)
+
+regression_plot <- Wage %>%
+  ggplot(aes(age, wage)) +
+  geom_point(alpha = 0.1) +
+  geom_line(aes(y = .pred), color = "darkgreen",
+            size = 1.5,
+            data = regression_lines) +
+  geom_line(
+    aes(y = .pred_lower),
+    data = regression_lines,
+    linetype = "dashed",
+    color = "blue"
+  ) +
+  geom_line(
+    aes(y = .pred_upper),
+    data = regression_lines,
+    linetype = "dashed",
+    color = "blue"
+  ) +
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    panel.grid = element_blank(),
+    strip.background = element_blank(),
+    plot.title.position = "plot"
+  ) +
+  labs(x = "Age", y = "Wage",
+       subtitle = "Regression")
+
+rec_poly <- recipe(high ~ age, data = Wage) %>%
+  step_poly(age, degree = 4)
+
+lr_spec <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification")
+
+lr_poly_wf <- workflow() %>%
+  add_model(lr_spec) %>%
+  add_recipe(rec_poly)
+
+lr_poly_fit <- fit(lr_poly_wf, data = Wage)
+
+classification_lines <- bind_cols(
+  augment(lr_poly_fit, new_data = age_range, type = "prob"),
+  predict(lr_poly_fit, new_data = age_range, type = "conf_int")
+)
+
+classification_plot <- classification_lines %>%
+  ggplot(aes(age)) +
+  ylim(c(0, 0.2)) +
+  geom_line(aes(y = .pred_High), color = "darkgreen",
+            size = 1.5) +
+  geom_line(aes(y = .pred_lower_High),
+            color = "blue",
+            linetype = "dashed") +
+  geom_line(aes(y = .pred_upper_High),
+            color = "blue",
+            linetype = "dashed") +
+  geom_jitter(
+    aes(y = (high == "High") / 5),
+    data = Wage,
+    shape = "|",
+    height = 0,
+    width = 0.2
+  ) +
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    panel.grid = element_blank(),
+    strip.background = element_blank()
+  ) +
+  labs(x = "Age", y = "Pr(Wage>250 | Age)",
+       subtitle = "Classification")
+
+title_theme <- cowplot::ggdraw() +
+  cowplot::draw_label("ISLR2 Wage Dataset 4th degree polynomial fits and 2x pointwise SEs", x = 0.05, hjust = 0)
+
+cowplot::plot_grid(title_theme, 
+                   cowplot::plot_grid(regression_plot, classification_plot),
+                   ncol = 1, rel_heights = c(0.1, 1)) 
+
+```
+
+<h4>Details</h4>
+
+- Create new variables $X_1 = X, X_2 = X^2$ etc and then treat the problem the same as multiple linear regression.
+
+Under the hood, the expansion happens with the `poly` function
+
+```{r, chapter7-2}
+Wage %>% 
+  select(age) %>% 
+  bind_cols(as_tibble(round(poly(Wage$age, 3), 3))) %>% 
+  head()
+
+```
+
+What R does, and what is a best practice, is to force an orthogonal expansion to avoid correlations in the new variables.
+
+This behavior is somewhat different than what might have been expected, possibly as
+
+```{r}
+Wage %>% 
+  select(age) %>% 
+  bind_cols(as_tibble(round(poly(Wage$age, 3, raw = TRUE), 3))) %>% 
+  head()
+
+```
+
+- We are not really interested in the coefficients; more interested in
+the fitted function values at any value $x_0$
+
+$$f\hat(x_0) = \hat\beta_0+\hat\beta_1x_0+\hat\beta_2x_0^2+\hat\beta_3x_0^3+\hat\beta_4x_0^4$$
+
+- Since $f\hat(x_0)$ is a linear function, we can get a simple expression for pointwise-variances at any value $x_0$. 
+
+- We either fix the degree `d` at some reasonably low value, or else use cross-validation to choose `d`.
+
+-  Logistic regression follows naturally. Here we `mutate` a categorical variable `high` for $y_i > 250 |x_i$
+
+-  To get confidence intervals, compute upper and lower bounds *on the logit scale*, and then invert to get on probability scale.
+
+- Can apply the polynomial expansion separately on several variables. See GAMs later for a better approach.
+
+- Important Caveat:  polynomials have notorious tail behavior, which can be very
+bad for extrapolation.
+
+<h4>Step Functions</h4>
+
+Another way of creating transformations of a variable — cut the variable into distinct regions.
+
+```{r chapter7-3, fig.asp=0.8}
+rec_cut <- recipe(wage ~ age, data = Wage) %>%
+  step_cut(age, breaks = c(30, 50, 70))
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+cut_wf <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_recipe(rec_cut)
+
+cut_fit <- fit(cut_wf, data = Wage)
+
+regression_lines <- bind_cols(
+  augment(cut_fit, new_data = age_range),
+  predict(cut_fit, new_data = age_range, type = "conf_int")
+)
+
+regression_plot <- Wage %>%
+  ggplot(aes(age, wage)) +
+  geom_point(alpha = 0.1) +
+  geom_line(aes(y = .pred), color = "darkgreen",
+            size = 1.5,
+            data = regression_lines) +
+  geom_line(
+    aes(y = .pred_lower),
+    data = regression_lines,
+    linetype = "dashed",
+    color = "blue"
+  ) +
+  geom_line(
+    aes(y = .pred_upper),
+    data = regression_lines,
+    linetype = "dashed",
+    color = "blue"
+  ) +
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    panel.grid = element_blank(),
+    strip.background = element_blank(),
+    plot.title.position = "plot"
+  ) +
+  labs(x = "Age", y = "Wage",
+       subtitle = "Regression")
+
+rec_cut <- recipe(high ~ age, data = Wage) %>%
+  step_cut(age, breaks = c(30, 50, 70))
+
+lr_spec <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification")
+
+cut_wf <- workflow() %>%
+  add_model(lr_spec) %>%
+  add_recipe(rec_cut)
+
+cut_fit <- fit(cut_wf, data = Wage)
+
+classification_lines <- bind_cols(
+  augment(cut_fit, new_data = age_range, type = "prob"),
+  predict(cut_fit, new_data = age_range, type = "conf_int")
+)
+
+classification_plot <- classification_lines %>%
+  ggplot(aes(age)) +
+  ylim(c(0, 0.2)) +
+  geom_line(aes(y = .pred_High), color = "darkgreen", size = 1.5) +
+  geom_line(aes(y = .pred_lower_High),
+            color = "blue",
+            linetype = "dashed") +
+  geom_line(aes(y = .pred_upper_High),
+            color = "blue",
+            linetype = "dashed") +
+  geom_jitter(
+    aes(y = (high == "High") / 5),
+    data = Wage,
+    shape = "|",
+    height = 0,
+    width = 0.2
+  ) +
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    panel.grid = element_blank(),
+    strip.background = element_blank()
+  ) +
+  labs(x = "Age", y = "Pr(Wage>250 | Age)",
+       subtitle = "Classification")
+
+title_theme <- cowplot::ggdraw() +
+  cowplot::draw_label("ISLR2 Wage Dataset Step Function fits and 2x pointwise SEs", x = 0.05, hjust = 0)
+
+cowplot::plot_grid(title_theme, 
+                   cowplot::plot_grid(regression_plot, classification_plot),
+                   ncol = 1, rel_heights = c(0.1, 1)) 
+
+```
+
+- Easy to work with. Creates a series of dummy variables representing each group.
+
+- Useful way of creating interactions that are easy to interpret. 
+
+- Choice of cutpoints or knots can be problematic. For crafting the nonlinearities, smoother alternatives such as `splines` are available.
+
+<h4>Piecewise Polynomials</h4>
+
+- Instead of a single polynomial in X over its whole domain, we can rather use different polynomials in regions defined by knots.
+
+- Better to add constraints to the polynomials, e.g. continuity
+
+- `Splines` have the “maximum” amount of continuity
+
+## Splines
+
+>A linear spline is a piecewise linear polynomial continuous at each knot.
+
+We can represent this model as
+
+$$ y_i = \beta_0 + \beta_1b_1(x_i) + \beta_2b_2(x_i) + · · · + \beta_{K+1}b_{K+1}(x_i) + \epsilon_i $$
+where the $b_k$ are *basis functions*.
+
+```{r, Chapter7-4-1}
+
+###
+
+fit <- lm(wage ~ bs(age, knots = c(25, 40, 60)), data = Wage)
+agelims <- range(Wage$age)
+age.grid <- seq(from = agelims[1], to = agelims[2])
+pred <- predict(fit, newdata = list(age = age.grid), se = T)
+plot(Wage$age, Wage$wage, col = "gray")
+title("Poly B-Spline Basis w 3 knots and Natural Cubic Spline")
+lines(age.grid, pred$fit, lwd = 2)
+lines(age.grid, pred$fit + 2 * pred$se, lty = "dashed")
+lines(age.grid, pred$fit - 2 * pred$se, lty = "dashed")
+###
+fit2 <- lm(wage ~ ns(age, df = 4), data = Wage)
+pred2 <- predict(fit2, newdata = list(age = age.grid),
+     se = T)
+lines(age.grid, pred2$fit, col = "red", lwd = 2)
+
+```
+
+<h4>Cubic Splines</h4>
+
+> A cubic spline is a piecewise cubic polynomial with continuous derivatives up to order 2 at each knot.
+
+- To apply a cubic spline, the knot locations have to be defined. Intuitively, one might locate them at the quartile breaks or at range boundaries that are significant for the data domain.
+
+<h4>Natural Cubic Splines</h4>
+
+> A natural cubic spline extrapolates linearly beyond the boundary knots. This adds 4 = 2 × 2 extra constraints, and allows us to put more internal knots for the same degrees of freedom as a regular cubic spline above.
+
+- Fitting natural splines is easy. A cubic spline with K knots has K + 4 parameters or degrees of freedom. A natural spline with K knots has K degrees of freedom.
+
+- The result is often a simpler, smoother, more generalizable function with less bias.
+
+<h4>Smoothing Splines</h4>
+
+> The solution is a natural cubic spline, with a knot at every unique value of $x_i$. A roughness penalty controls the roughness via $\lambda$.
+
+-  Smoothing splines avoid the knot-selection issue mathematically, leaving a single λ to be chosen.
+
+- in the R function `smooth.spline` the degrees of freedom is often specified, not the λ
+
+- `smooth.spline` has a built-in cross-validation function to choose a suitable DF automatically, as ordinary leave-one-out (TRUE) or ‘generalized’ cross-validation (GCV) when FALSE. The ‘generalized’ cross-validation method GCV technique will work best when there are duplicated points in x. 
+
+```{r, Chapter7-4-2}
+
+###
+plot(Wage$age, Wage$wage, xlim = agelims, cex = .5, col = "darkgrey")
+title("Smoothing Spline")
+
+fit <- smooth.spline(Wage$age, Wage$wage, df = 16)
+fit2 <- smooth.spline(Wage$age, Wage$wage, cv = TRUE)
+
+lines(fit, col = "red", lwd = 2)
+lines(fit2, col = "blue", lwd = 2)
+legend("topright", legend = c("16 DF", "6.8 DF"),
+    col = c("red", "blue"), lty = 1, lwd = 2, cex = .8)
+```
+
+<h4>Local Regression</h4>
+
+> Local regression is a slightly different approach for fitting which involves computing the fit at a target point $x_i$ using only nearby observations.
+
+The loess fit yields a walk with a `span` parameter to arrive at a spline fit.
+
+```{r, Chapter7-4-3}
+###
+plot(Wage$age, Wage$wage, xlim = agelims, cex = .5, col = "darkgrey")
+title("Local Regression")
+
+fit <- loess(wage ~ age, span = .2, data = Wage)
+fit2 <- loess(wage ~ age, span = .5, data = Wage)
+lines(age.grid, predict(fit, data.frame(age = age.grid)),
+    col = "red", lwd = 2)
+lines(age.grid, predict(fit2, data.frame(age = age.grid)),
+    col = "blue", lwd = 2)
+legend("topright", legend = c("Span = 0.2", "Span = 0.5"),
+    col = c("red", "blue"), lty = 1, lwd = 2, cex = .8)
+
+```
+
+So far, every example model has shown one independent variable and one dependent variable. Much more utility comes when these techniques are generalized broadly for many independent variables. 
+
+A side note - normal `ggplot` geom_smooth for small datasets applies the loess method.
+
+```{r, Chapter7-4-4, fig.asp=0.8}
+
+as_tibble(ISLR2::Hitters) %>% 
+  ggplot(aes(RBI, Runs)) +
+  geom_point(alpha = 0.2, color = "gray20") +
+  stat_smooth(method = "loess", span = 0.2, color = "midnightblue", se = F) +
+  stat_smooth(method = "loess", span = 0.5, color = "darkgreen", se = F) +
+  stat_smooth(method = "loess", span = 0.8, color = "red", se = F) +
+  labs(title = "Loess Spans on ISLR2::Hitters",
+       x = "Runs Batted In", y = "Runs",
+       caption = "Spans:\nBlue: 0.2, Green: 0.5, Red: 0.8") +
+  theme_minimal()
+
+```
+
+## Generalized Additive Models
+
+Generalized additive models were originally invented by Trevor Hastie and Robert Tibshirani in 1986 as a natural way to extend the conventional **multiple** linear regression model 
+
+$$ y_i = \beta_0+\beta_1x_{i1}+\beta_2x_{i2}...+\beta_px_{ip}+\epsilon_i$$
+
+Mathematically speaking, GAM is an additive modeling technique where the impact of the predictive variables is captured through smooth functions which, depending on the underlying patterns in the data, can be nonlinear:
+
+![](https://multithreaded.stitchfix.com/assets/images/blog/fig1.svg)
+
+We can write the GAM structure as:
+
+$$g(E(Y))=\alpha + s_1(x_1)+...+s_p(x_p) $$
+
+where $Y$ is the dependent variable (i.e., what we are trying to predict), $E(Y)$ denotes the expected value, and $g(Y)$ denotes the link function that links the expected value to the predictor variables $x_1,…,x_p$.
+
+The terms $s_1(x_1),…,s_p(x_p)$ denote smooth, *nonparametric* functions. Note that, in the context of regression models, the terminology *nonparametric* means that the shape of predictor functions are fully determined by the data as opposed to *parametric* functions that are defined by a typically small set of parameters. This can allow for more flexible estimation of the underlying predictive patterns without knowing upfront what these patterns look like.
+
+The `mgcv` version:
+
+```{r chapter7-5-1, fig.asp=0.8}
+
+gam.m3 <-
+  mgcv::gam(wage ~ s(as.numeric(year), k = 4) + s(as.numeric(age), k = 5) + education, data = Wage)
+
+summary(gam.m3)
+
+par(mfrow = c(1, 3))
+mgcv::plot.gam(
+  gam.m3,
+  residuals = FALSE,
+  all.terms = TRUE,
+  shade = TRUE,
+  shade.col = 2,
+  rug = TRUE,
+  scale = 0
+)
+
+```
+
+A comparable model, built with lm and natural cubic splines, plotted as the GAM contributions to the `wage`:
+
+```{r chapter7-5-2, fig.asp=0.8}
+gam::plot.Gam(
+  lm(wage ~ ns(year, df = 4) + ns(age, df = 5) + education, data = Wage),
+  residuals = FALSE,
+  rugplot = TRUE,
+  se = TRUE,
+  scale = 0
+)
+```
+
+<h4>Why Use GAMs?</h4>
+
+There are at least three good reasons why you want to use GAM: interpretability, flexibility/automation, and regularization. Hence, when your model contains nonlinear effects, GAM provides a regularized and interpretable solution, while other methods generally lack at least one of these three features. In other words, GAMs strike a nice balance between the interpretable, yet biased, linear model, and the extremely flexible, “black box” learning algorithms.
+
+- Coefficients not that interesting; fitted functions are.
+
+- Can mix terms — some linear, some nonlinear
+
+- Can use smoothing splines AND local regression as well
+
+- GAMs are simply additive, although low-order interactions can be included in a natural way using, e.g. bivariate smoothers or interactions
+
+<h4>Fitting GAMs in R</h4>
+
+The two main packages in R that can be used to fit generalized additive models are `gam` and `mgcv`. The `gam` package was written by Trevor Hastie and is more or less frequentist. The `mgcv` package was written by Simon Wood, and, while it follows the same framework in many ways, it is much more general because it considers GAM to be any penalized GLM (and Bayesian). The differences are described in detail in the documentation for `mgcv`.
+
+I discovered that `gam` and `mgcv` do not work well when loaded at the same time. Restart the R session if you want to switch between the two packages – detaching one of the packages is not sufficient.
+
+An example of a classification GAM model:
+
+```{r chapter7-5-3, fig.asp=0.8}
+gam.lr <-
+  mgcv::gam(I(wage > 250) ~ as.numeric(year) + s(as.numeric(age), k = 5) + education, data = Wage)
+
+summary(gam.lr)
+
+par(mfrow = c(1, 3))
+mgcv::plot.gam(
+  gam.lr,
+  residuals = FALSE,
+  all.terms = TRUE,
+  shade = TRUE,
+  shade.col = 2,
+  rug = TRUE,
+  scale = 0
+)
+
+```
 
 ## Meeting Videos
 
@@ -28,10 +532,57 @@
 <summary> Meeting chat log </summary>
 
 ```
-00:51:58	Jon Harmon (jonthegeek):	Because I'm obsessed now with "Why ξ?":
+00:51:58    Jon Harmon (jonthegeek):    Because I'm obsessed now with "Why ξ?":
 "KS" for "knot/spline" = "ks" = "ξ"?
 I'm going to try to use that now, at least 🙃
-00:54:45	Laura Rose:	👍
-01:01:55	Federica Gazzelloni:	h(x,ξ) taylor : https://en.wikipedia.org/wiki/Taylors_theorem
+00:54:45    Laura Rose: 👍
+01:01:55    Federica Gazzelloni:    h(x,ξ) taylor : https://en.wikipedia.org/wiki/Taylors_theorem
+
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/sEJ-yyypIhU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:20:42	Federica Gazzelloni:	https://en.wikipedia.org/wiki/Smoothing_spline
+00:23:23	Federica Gazzelloni:	lambda > = 0 is a smoothing parameter,
+```
+</details>
+
+### Cohort 2
+
+`r knitr::include_url("https://www.youtube.com/embed/wIj-rgxB-9A")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:20:40	Ricardo Serrano:	Orthogonal expansion in polynomial regression https://www.dropbox.com/s/j39rd74l51q2vch/Chapter12-Regression-PolynomialRegression.pdf?dl=0
+00:21:05	jlsmith3:	Thank you, Ricardo!
+00:21:36	Federica Gazzelloni:	@jenny you can have a look at the picture in this article for getting a sense of orthogonal expansion (in this case it is searching for next values that follow these paths) (https://www.researchgate.net/figure/Orthogonal-and-diagonal-node-expansion-in-the-A-search-algorithm_fig2_222666188)
+00:22:26	Ricardo Serrano:	👍
+00:48:51	jlsmith3:	Perfect, thank you Federica!
+00:52:02	Federica Gazzelloni:	analysis of  wage-education  relationship
+00:52:16	Federica Gazzelloni:	brand  choice
+00:52:28	Jim Gruman:	👍🏼
+00:52:37	Federica Gazzelloni:	number of trips to a doctor's office
+00:54:52	Federica Gazzelloni:	Generalized additive  models (GAMs) are  a powerful generalization of linear, logistic, and Poisson regression models.
+00:56:06	Federica Gazzelloni:	should we do the lab?
+00:59:16	Ricardo Serrano:	Let's split the lab problems  https://en.wikipedia.org/wiki/Taylors_theorem
+```
+</details>
+
+### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
 ```
 </details>
