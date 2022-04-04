@@ -16,6 +16,7 @@ Imports:
     car,
     cowplot,
     dlookr, 
+    doParallel,
     emo,
     gam,
     GGally,
