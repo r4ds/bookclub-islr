@@ -18,7 +18,8 @@ Imports:
     cowplot,
     dlookr,
     doParallel,
-    emo,
+    emo, 
+    finetune, 
     gam,
     GGally,
     ggthemes,
@@ -30,7 +31,8 @@ Imports:
     knitr,
     magrittr,
     mgcv,
-    patchwork,
+    patchwork, 
+    randomForest, 
     rmarkdown,
     rpart.plot,
     skimr,
@@ -38,7 +40,8 @@ Imports:
     tidymodels,
     tidyverse,
     titanic,
-    vip
+    vip, 
+    xgboost
 Remotes:
     hadley/emo,
     njtierney/broomstick
