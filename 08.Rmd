@@ -7,7 +7,7 @@
 - Use **tree-based ensemble methods** to build predictive models.
 - Compare and contrast the various methods of building tree ensembles: bagging, boosting, random forests, and Bayesian Additive Regression Trees.
  
-Script source: https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/tree-based-methods.html
+Original script source: https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/tree-based-methods.html
 
 ## Decision Tree Terminology
 
@@ -81,14 +81,14 @@ carseats_num
 library(dlookr)
 ```
 
-```{r, Pearson_correlation}
+```{r, Pearson_correlation_class}
 carseats_num %>% 
   correlate() %>% 
   plot()
 ```
 
 Correlation heatmap (Spearman)
-```{r, Spearman_correlation}
+```{r, Spearman_correlation_class}
 carseats_num %>% 
   correlate(method = "spearman") %>% 
   plot()
@@ -97,7 +97,7 @@ carseats_num %>%
 ## Build a model
 
 Split dataset into train/test
-```{r, split_dataset}
+```{r, split_dataset_class}
 set.seed(1234)
 carseats_split <- initial_split(carseats, prop = 0.75, strata = High)
 
@@ -179,7 +179,7 @@ doParallel::registerDoParallel(no_cores - 1)
 foreach::getDoParWorkers()
 ```
 
-```{r, tune_grid}
+```{r, tune_grid_class}
 tree_grid <- grid_regular(cost_complexity(range = c(-4, -1)), 
                           tree_depth(range = c(3, 7)), 
                           levels = 10
@@ -197,7 +197,7 @@ tune_res <- tune_grid(
 
 ## Evaluate the model
 
-```{r, extract_metrics}
+```{r, extract_metrics_class}
 tune_res %>% 
      collect_metrics()
 ```
@@ -225,7 +225,7 @@ class_tree_final_fit
 ## Visualize the tuned decision tree (classification)
 
 At last, we can visualize the model, and we see that the better-performing model is less complex than the original model we fit.
-```{r, plot_final_fit_tree_class__diagram}
+```{r, plot_final_fit_tree_class_diagram}
 class_tree_final_fit %>%
   extract_fit_engine() %>%
   rpart.plot(roundint = FALSE)
@@ -282,7 +282,7 @@ Carseats %>%
 ## Correlation Analysis
 
 Pearson correlation
-```{r, Pearson_correlation}
+```{r, Pearson_correlation_reg}
 Carseats %>% 
      mutate(Urban = ifelse(Urban == "No", 0, 1), 
             US = ifelse(US == "No", 0, 1), 
