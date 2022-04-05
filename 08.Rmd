@@ -580,7 +580,6 @@ library(finetune)
 
 set.seed(4242)
 
-tictoc::tic()
 xgb_rs <- 
      tune_race_anova(
      xgb_wf, 
@@ -588,7 +587,6 @@ xgb_rs <-
      grid = 20, 
      control = control_race(verbose_elim = TRUE)
 )
-tictoc::toc()
 
 xgb_rs
 ```
