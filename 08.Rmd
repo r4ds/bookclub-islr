@@ -556,10 +556,11 @@ Model spec
 ```{r, boost_tune_spec}
 xgb_spec <- 
      boost_tree(
-          trees = tune(), 
+          trees = 2000, 
           mtry = tune(), 
           min_n = tune(), 
-          learn_rate = 0.01
+          tree_depth = tune(), 
+          learn_rate = tune()
      ) %>% 
      set_engine("xgboost") %>% 
      set_mode("regression")
@@ -572,20 +573,30 @@ xgb_wf <- workflow() %>%
      add_formula(Sales ~ .)
 ```
 
-## Grid tuning with finetune::race_anova()
+## Hyperparameter grid tuning
 
-Tune the `xgboost` model with `race_anova()` to accelerate the tuning speed.
-```{r, boost_tune_racing}
-library(finetune)
+Tune the `xgboost` model with `grid_latin_hypercube()`
+```{r, boost_grid_latin_hypercube}
+xgb_grid <- 
+     grid_latin_hypercube(
+       min_n(), 
+       tree_depth(), 
+       learn_rate(), 
+       finalize(mtry(), carseats_train), 
+       size = 20
+)
 
+xgb_grid
+```
+
+```{r, boost_tune_grid}
 set.seed(4242)
 
-xgb_rs <- 
-     tune_race_anova(
-     xgb_wf, 
-     carseats_boot, 
-     grid = 20, 
-     control = control_race(verbose_elim = TRUE)
+xgb_rs <- tune_grid(
+  xgb_wf, 
+  resamples = carseats_boot, 
+  grid = xgb_grid, 
+  control = control_grid(save_pred = TRUE)
 )
 
 xgb_rs
@@ -594,7 +605,7 @@ xgb_rs
 ## Evaluate the model
 
 ```{r, boost_tuning_evaluation_plot}
-plot_race(xgb_rs)
+autoplot(xgb_rs)
 ```
 
 Show best models
@@ -624,8 +635,8 @@ Collect metrics
 xgb_last_fit %>% collect_metrics()
 ```
 
-RMSE: __1.38__
-R-squared: __0.728__
+RMSE: __1.44__
+R-squared: __0.703__
 
 ## Feature importance
 
