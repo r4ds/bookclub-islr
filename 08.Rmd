@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Tree-Based Methods
 
 **Learning objectives:**
@@ -13,7 +18,7 @@ Original script source: https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/tre
 
 ![Source: https://medium.com/@scid2230/decision-tree-basics-34d864483c42](images/decision_tree_structure.png)
 
-## Decision Trees Explained (StatQuest)
+## Decision Trees (Classification) Explained (StatQuest)
 
 `r knitr::include_url("https://www.youtube.com/embed/_L39rN6gz7Y")`
 
@@ -24,6 +29,7 @@ We will also use the `Carseats` data set from the `ISLR` package to demonstrate 
 ```{r, load_libraries, echo = FALSE}
 library(tidymodels)
 library(ISLR)
+library(readr)
 library(rpart.plot)
 library(vip)
 ```
@@ -165,7 +171,8 @@ To be able to tune the variable we need 2 more objects. With the `resamples` obj
 ```{r, tree_spec_hyperparameters}
 tree_spec <- decision_tree(
        cost_complexity = tune(), 
-       tree_depth = tune()
+       tree_depth = tune(), 
+       min_n = tune()
        ) %>% 
      set_engine("rpart") %>% 
      set_mode("classification")
@@ -174,25 +181,34 @@ tree_spec <- decision_tree(
 Setup parallel processing ----
 ```{r, setup_parallel_processing, echo=FALSE}
 set.seed(2022)
-no_cores <- 6
+no_cores <- 10
 doParallel::registerDoParallel(no_cores - 1)
 foreach::getDoParWorkers()
 ```
 
-```{r, tune_grid_class}
+```{r, tree_define_grid_class}
 tree_grid <- grid_regular(cost_complexity(range = c(-4, -1)), 
                           tree_depth(range = c(3, 7)), 
-                          levels = 10
+                          min_n(range = c(10, 20)), 
+                          levels = 5
                           )
+```
 
-set.seed(2001)
-tune_res <- tune_grid(
-  tree_spec, 
-  High ~ ., 
-  resamples = carseats_boot, 
-  grid = tree_grid, 
-  metrics = metric_set(accuracy)
-)
+```{r, tree_tune_grid_class}
+# set.seed(2001)
+# tune_res <- tune_grid(
+#   tree_spec, 
+#   High ~ ., 
+#   resamples = carseats_boot, 
+#   grid = tree_grid, 
+#   metrics = metric_set(accuracy)
+# )
+
+# save tune_res
+# write_rds(tune_res, 'data/08_tree_tune_grid_results.rds')
+
+tune_res <- read_rds('data/08_tree_tune_grid_results.rds')
+tune_res
 ```
 
 ## Evaluate the model
@@ -208,13 +224,13 @@ Using `autoplot()` shows which values of `cost_complexity` appear to produce the
 autoplot(tune_res)
 ```
 
-We can now select the best performing value with `select_best()`, finalize the workflow by updating the value of `cost_complexity` and fit the model on the full training data set.
+We can now select the best performing model with `select_best()`, finalize the workflow by updating the value of `cost_complexity, tree_depth, and min_n` and fit the model on the full training data set.
 ```{r, final_fit_class}
 # select best model
-best_complexity <- select_best(tune_res)
+best_model <- select_best(tune_res)
 
 # fit model with best model hyperparameters
-class_tree_final <- finalize_model(tree_spec, best_complexity)
+class_tree_final <- finalize_model(tree_spec, best_model)
 
 # refit training dataset with best model hyperparameters
 class_tree_final_fit <- fit(class_tree_final, High ~ ., data = carseats_train)
@@ -253,7 +269,7 @@ augment(class_tree_final_fit, new_data = carseats_train) %>%
      accuracy(truth = High, estimate = .pred_class)
 ```
 
-Training accuracy: __84.7%__
+Training accuracy: __86.3%__
 
 Confusion matrix (test, best model)
 ```{r, test_final_fit_metrics}
@@ -269,6 +285,10 @@ Testing accuracy: __71%__
 ## 8.2 - Fitting Regression Trees
 
 We will now show how we fit a regression tree. This is very similar to what we saw in the last section. The main difference here is that the response we are looking at will be continuous instead of categorical.
+
+## Decision Trees (Regression) Explained (StatQuest)
+
+`r knitr::include_url("https://www.youtube.com/embed/g9c66TUylZ4")`
 
 ### EDA
 
@@ -318,6 +338,14 @@ reg_tree_fit <- fit(reg_tree_spec, Sales ~ ., data = carseats_train)
 reg_tree_fit
 ```
 
+## Visualize our decision tree
+
+```{r, plot_regression_tree_diagram}
+reg_tree_fit %>% 
+     extract_fit_engine() %>% 
+     rpart.plot(roundint = FALSE)
+```
+
 ## Evaluate the model
 
 Collect metrics using `augment`
@@ -331,14 +359,6 @@ augment(reg_tree_fit, new_data = carseats_test) %>%
 
 Training RMSE: __1.58__
 Testing RMSE: __2.18 (overfit)__ 
-
-## Visualize our decision tree
-
-```{r, plot_regression_tree_diagram}
-reg_tree_fit %>% 
-     extract_fit_engine() %>% 
-     rpart.plot(roundint = FALSE)
-```
 
 ## Tuning the regression model
 
@@ -368,6 +388,8 @@ tune_res <- tune_grid(
   resamples = carseats_boot, 
   grid = param_grid
 )
+
+tune_res
 ```
 
 ## Evaluate the model
@@ -421,6 +443,12 @@ Testing RMSE: __2.04 (still overfitting!)__
 
 ## 8.3 - Bagging and Random Forests
 
+## Random Forest Diagram
+
+![Source: https://en.wikipedia.org/wiki/Random_forest#/media/File:Random_forest_diagram_complete.png](images/Random_forest_diagram_complete.png)
+
+## Example
+
 Here, we apply bagging and random forests to the `Carseats` data set. We will be using the randomForest package as the engine. A bagging model is the same as a random forest where mtry is equal to the number of predictors. We can specify the `mtry` to be .cols() which means that the number of columns in the predictor matrix is used. This is useful if you want to make the specification more general and usable to many different data sets. .cols() is one of many `descriptors` in the `parsnip` package. We also set `importance = TRUE` in set_engine() to tell the engine to save the information regarding variable importance. This is needed for this engine if we want to use the `vip` package later.
 
 For a more detailed explanation of `bagging` and its counterpart `boosting`, read this [link](https://quantdare.com/what-is-the-difference-between-bagging-and-boosting/)
@@ -446,8 +474,8 @@ augment(bagging_fit, new_data = carseats_test) %>%
   rmse(truth = Sales, estimate = .pred)
 ```
 
-Training RMSE: __0.657__
-Testing RMSE: __1.34 (overfit)__
+Training RMSE: __0.671__
+Testing RMSE: __1.35 (overfit)__
 
 We can also create a quick scatterplot between the true and predicted value to see if we can make any diagnostics.
 ```{r, rf_bagging_scatterplot_actual_pred}
@@ -488,8 +516,8 @@ augment(rf_fit, new_data = carseats_test) %>%
   rmse(truth = Sales, estimate = .pred)
 ```
 
-Training RMSE: __0.860__
-Testing RMSE: __1.35 (still overfitting)__
+Training RMSE: __0.858__
+Testing RMSE: __1.36 (still overfitting)__
 
 We can likewise plot the true value against the predicted value.
 ```{r, rf_scatterplot_actual_pred}
@@ -573,32 +601,28 @@ xgb_wf <- workflow() %>%
      add_formula(Sales ~ .)
 ```
 
-## Hyperparameter grid tuning
+## Grid tuning with finetune::race_anova()
 
-Tune the `xgboost` model with `grid_latin_hypercube()`
-```{r, boost_grid_latin_hypercube}
-xgb_grid <- 
-     grid_latin_hypercube(
-       min_n(), 
-       tree_depth(), 
-       learn_rate(), 
-       finalize(mtry(), carseats_train), 
-       size = 20
-)
+Tune the `xgboost` model with `race_anova()` to accelerate the tuning speed.
+```{r}
+# library(finetune)
+# 
+# set.seed(4242)
+# 
+# tictoc::tic()
+# xgb_rs <- 
+#      tune_race_anova(
+#      xgb_wf, 
+#      carseats_boot, 
+#      grid = 30, 
+#      control = control_race(verbose_elim = TRUE)
+# )
+# tictoc::toc()
 
-xgb_grid
-```
+# save xgb_rs
+# write_rds(xgb_rs, 'data/08_boost_tree_racing_grid_results.rds')
 
-```{r, boost_tune_grid}
-set.seed(4242)
-
-xgb_rs <- tune_grid(
-  xgb_wf, 
-  resamples = carseats_boot, 
-  grid = xgb_grid, 
-  control = control_grid(save_pred = TRUE)
-)
-
+xgb_rs <- read_rds('data/08_boost_tree_racing_grid_results.rds')
 xgb_rs
 ```
 
@@ -635,8 +659,8 @@ Collect metrics
 xgb_last_fit %>% collect_metrics()
 ```
 
-RMSE: __1.44__
-R-squared: __0.703__
+RMSE: __1.42__
+R-squared: __0.706__
 
 ## Feature importance
 
@@ -647,7 +671,7 @@ vip(xgb_fit, geom = "point", num_features = 12)
 ```
 
 Stop parallel cluster
-```{r, stop_parallel_cluster}
+```{r, stop_parallel_cluster, echo=FALSE}
 doParallel::stopImplicitCluster()
 ```
 
