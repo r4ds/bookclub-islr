@@ -13,25 +13,37 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     bookdown,
+    broomstick,
     car,
     cowplot,
-    emo,
+    dlookr,
+    doParallel,
+    emo, 
+    finetune, 
     gam,
     GGally,
     ggthemes,
     htmlTable,
+    ISLR,
     ISLR2,
-    kernlab,
     janitor,
+    kernlab,
     knitr,
     magrittr,
     mgcv,
-    patchwork,
+    patchwork, 
+    randomForest, 
+    ranger, 
+    readr, 
     rmarkdown,
+    rpart.plot,
     skimr,
     splines,
     tidymodels,
     tidyverse,
-    titanic
+    titanic,
+    vip, 
+    xgboost
 Remotes:
-    hadley/emo
+    hadley/emo,
+    njtierney/broomstick
