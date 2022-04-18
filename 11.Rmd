@@ -2,7 +2,12 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Describe how **censored data** impacts survival analysis.
+- Calculate a **Kaplan-Meier survival curve.**
+- Compare the survival rates of two groups with the **log-rank test.**
+- Model survival data using **Cox's proportional hazards**
+- Apply **shrinkage methods** to regularize the Cox model.
+- Calculate the generalized **AUC** for a survival model.
 
 ## Slide 1
 
