@@ -2,7 +2,12 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Compare and contrast **supervised learning** and **unsupervised learning.**
+- Perform **principal component analysis** to analyze the sources of variance in a dataset.
+- **Impute missing values** in a dataset via **matrix completion.**
+- Perform **K-means clustering** to partition observations into a pre-specified number of clusters.
+- Perform **hierarchical clustering** to partition observations into a tree-like structure.
+
 
 ## Slide 1
 
