@@ -5,3 +5,8 @@
 .DS_Store
 _book
 _bookdown_files
+bookclub-islr_files
+libs
+bookclub-islr.Rmd
+bookclub-islr.html
+bookclub-islr.knit.md
