@@ -16,6 +16,7 @@ Imports:
     broomstick,
     car,
     cowplot,
+    DiagrammeR,
     dlookr,
     doParallel,
     emo, 
