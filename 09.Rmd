@@ -7,6 +7,27 @@
 - Implement a binary classification model using a **support vector machine** (SVM).
 - Generalize SVM models to **multi-class** cases.
 
+**Support vector machine (SVM)**, an approach for classification developed in 1990. 
+SVM is a generalizaion of classifiers methods, in particular:
+
+- **maximal margin classifier** (it requires that the classes be separable by a linear boundary).
+- **support vector classifier**
+- **support vector machine**: binary classification setting with two classes
+
+```{r echo=FALSE, fig.align='center', fig.dim="100%"}
+library(DiagrammeR)
+
+mermaid("
+graph TB
+  A[SVM<br>support vector machine<br>non-linear class boundaries]
+
+  B[MMC<br>maximal margin classifier<br>linear class boundaries] 
+  B-->C[SVC<br>support vector classifier<br>applied in a broader range of cases]
+  A-->C
+
+")
+```
+
 
 ## Maximal Margin Classifier & Hyperplanes
 - A *hyperplane* is a $p-1$-dimensional flat subspace of a $p$-dimensional space. For example, in a 2-dimensional space, a hyperplane is a flat one-dimensional space: a line. 
