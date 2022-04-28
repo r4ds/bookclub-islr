@@ -8,16 +8,309 @@
 - Perform **K-means clustering** to partition observations into a pre-specified number of clusters.
 - Perform **hierarchical clustering** to partition observations into a tree-like structure.
 
+## Unsupervised Learning vs Supervised Learning {-}
 
-## Slide 1
+- Supervised learning has **predictors** (features) + **outcome(s).**
+- Unsupervised learning **only has features.**
+- **Goal:** Discover interesting things
+  - Visualization
+  - Subgroups
 
-- Try to follow a slide-like format.
+## Principal Component Analysis {-}
 
-## Slide 2
+- Also discussed in Chapter 6.
+- Find axes with *most variance.*
+- We'll demonstrate with this 2-feature dataset.
 
-- Use `##` to create new slides (sections).
+```{r 12-pca1, echo=FALSE, out.width=800}
+knitr::include_graphics("images/fig06-14.png", error = FALSE)
+```
 
-## Meeting Videos
+## Principal Component Analysis {-}
+
+- Green line = line that **spreads out the data the most.**
+- Map each point onto that line.
+
+```{r 12-pca2, echo=FALSE, out.width=800}
+knitr::include_graphics("images/fig06-15a.png", error = FALSE)
+```
+
+## Principal Component Analysis {-}
+
+- That line is the **first principal component.**
+- Distance from that line is the **2nd (orthogonal to 1st).**
+
+```{r 12-pca3, echo=FALSE, out.width=800}
+knitr::include_graphics("images/fig06-15b.png", error = FALSE)
+```
+
+## PCA Lab: Recipe {-}
+
+Based on [Emil Hvitfeldt's tidymodels implementation](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/unsupervised-learning.html#principal-components-analysis)
+
+```{r 12-pca-lab-recipe, message = FALSE, warning = FALSE}
+library(tidymodels)
+library(tidyverse)
+pca_rec <- recipes::recipe(~., data = USArrests) %>%
+  recipes::step_normalize(recipes::all_numeric_predictors()) %>%
+  recipes::step_pca(recipes::all_numeric_predictors(), id = "pca") %>%
+  recipes::prep()
+```
+
+## PCA Lab: Loadings {-}
+
+```{r 12-pca-lab-loadings}
+pca_rec %>% 
+  broom::tidy(id = "pca", type = "coef") %>% 
+  ggplot() +
+    aes(x = value, y = terms) +
+    facet_wrap(~ component) +
+    geom_col() +
+    theme_minimal()
+```
+
+## PCA Lab: Variance {-}
+
+```{r 12-pca-lab-variance}
+pca_rec %>% 
+  broom::tidy(id = "pca", type = "variance") %>% 
+  dplyr::filter(terms == "cumulative percent variance") %>% 
+  ggplot() +
+    aes(x = component, y = value/100) +
+    geom_col() +
+    scale_y_continuous(labels = scales::percent) +
+    geom_hline(yintercept = 0.9) +
+    ylab("cumulative percent variance") +
+    theme_minimal()
+```
+
+- `step_pca` also has `num_comp` and `threshold` arguments.
+
+## Matrix Completion {-}
+
+- They haven't added this to their slides yet.
+- Sometimes you want to **fill in NAs intelligently.**
+  - This can be the whole task, not just before modeling (Netflix, etc)
+- **Techniques based on PCA** are sometimes good at this.
+
+## Matrix Completion: Their Technique {-}
+
+- Start with mean imputation per column.
+- Use the computed PCA data to impute values.
+- Recompute PCA and repeat.
+- Technically they use `svd()` (singular-value decomposition) in the lab, which is called inside the `prcomp()` function, to more directly demonstrate what's happening.
+
+## Matrix Completion Lab: Setup {-}
+
+- First we set up a matrix with missing values.
+- The code for this is in the book and not particularly interesting, but I've made the names suck less.
+- I also don't scale, because their package does this internally.
+
+```{r 12-softImpute-setup}
+arrests <- data.matrix(USArrests)
+
+n_omit <- 20
+set.seed(15)
+target_rows <- sample(seq(50), n_omit)
+target_cols <- sample(1:4, n_omit, replace = TRUE)
+targets <- cbind(target_rows, target_cols)
+head(targets, 2)
+
+arrests_na <- arrests
+arrests_na[targets] <- NA
+head(arrests_na, 2)
+
+is_missing <- is.na(arrests_na)
+```
+
+## Matrix Completion Lab: softImpute {-}
+
+They created the `{softImpute}` package to do this, let's use it!
+
+```{r 12-softImpute-use}
+fit_svd <- softImpute::softImpute(
+  arrests_na, 
+  type = "svd",
+  thresh = 1e-16,
+  maxit = 3000
+)
+arrests_imputed <- softImpute::complete(arrests_na, fit_svd, unscale = TRUE)
+cor(arrests_imputed[is_missing], arrests[is_missing])
+```
+
+## K-Means Clustering {-}
+
+- **Randomly assign** each observation to a cluster.
+- Compute each **centroid.**
+- Assign each observation to the **nearest centroid.**
+- **Repeat** until it stops changing.
+
+## K-Means Clustering: Data {-}
+
+```{r 12-kmeans-1, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08a.png", error = FALSE)
+```
+
+## K-Means Clustering: Randomly Assign {-}
+
+```{r 12-kmeans-2, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08b.png", error = FALSE)
+```
+
+## K-Means Clustering: Initial Centroids {-}
+
+```{r 12-kmeans-3, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08c.png", error = FALSE)
+```
+
+## K-Means Clustering: Reassign {-}
+
+```{r 12-kmeans-4, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08d.png", error = FALSE)
+```
+
+## K-Means Clustering: New Centroids {-}
+
+```{r 12-kmeans-5, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08e.png", error = FALSE)
+```
+
+## K-Means Clustering: Final Result {-}
+
+```{r 12-kmeans-6, echo=FALSE, out.width=400}
+knitr::include_graphics("images/fig12-08f.png", error = FALSE)
+```
+
+## K-Means Clustering: Warning {-}
+
+```{r 12-kmeans-7, echo=FALSE, out.width=800}
+knitr::include_graphics("images/fig12-09.png", error = FALSE)
+```
+
+## K-Means Lab: Setup
+
+Based on [Emil Hvitfeldt's tidymodels implementation](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/unsupervised-learning.html#kmeans-clustering)
+
+```{r 12-kmeans-lab-1}
+set.seed(2)
+
+x_df_labeled <- tibble(
+  x = rnorm(n = 75, mean = rep(c(0, 3, 5), each = 25)),
+  y = rnorm(n = 75, mean = rep(c(0, -4, 2), each = 25)),
+  true_cluster = rep(c("A", "B", "C"), each = 25)
+)
+
+x_df_labeled %>%
+  ggplot(aes(x, y, color = true_cluster)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  theme_minimal()
+```
+
+## K-Means Lab: 3 Clusters
+
+```{r 12-kmeans-lab-2}
+x_df <- select(x_df_labeled, -true_cluster)
+set.seed(1234)
+res_kmeans <- kmeans(
+  x_df, 
+  centers = 3, nstart = 20
+)
+
+augment(res_kmeans, data = x_df) %>%
+  rename(pred_cluster = ".cluster") %>% 
+  ggplot(aes(x, y, color = pred_cluster)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  theme_minimal()
+```
+
+## K-Means Lab: Multi
+
+```{r 12-kmeans-lab-3}
+set.seed(1234)
+multi_kmeans <- tibble(k = 1:10) %>%
+  mutate(
+    model = purrr::map(k, ~ kmeans(x_df, centers = .x, nstart = 20)),
+    tot.withinss = purrr::map_dbl(model, ~ glance(.x)$tot.withinss)
+  )
+
+multi_kmeans %>% 
+  ggplot(aes(k, tot.withinss)) +
+  geom_point() +
+  geom_line() +
+  theme_minimal()
+```
+
+## K-Means Lab: Finalize
+
+```{r 12-kmeans-lab-4}
+multi_kmeans %>%
+  filter(k == 3) %>%
+  pull(model) %>%
+  pluck(1) %>% 
+  augment(data = x_df) %>%
+  rename(pred_cluster = ".cluster") %>% 
+  ggplot(aes(x, y, color = pred_cluster)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  theme_minimal()
+```
+
+## K-Means Lab: Bad Choices
+
+```{r 12-kmeans-lab-5}
+multi_kmeans %>%
+  filter(k == 2) %>%
+  pull(model) %>%
+  pluck(1) %>% 
+  augment(data = x_df) %>%
+  rename(pred_cluster = ".cluster") %>% 
+  ggplot(aes(x, y, color = pred_cluster)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  theme_minimal()
+
+multi_kmeans %>%
+  filter(k == 5) %>%
+  pull(model) %>%
+  pluck(1) %>% 
+  augment(data = x_df) %>%
+  rename(pred_cluster = ".cluster") %>% 
+  ggplot(aes(x, y, color = pred_cluster)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  theme_minimal()
+```
+
+## Hierarchical Clustering {-}
+
+- Clusters of clusters of clusters.
+- Start: **Each point = cluster.**
+- At each step, assign the **2 closest clusters** to a shared cluster.
+- **Repeat.**
+- Ends when all observations are in a **single cluster.**
+
+## Hierarchical Clustering: Types of Linkage {-}
+
+Linkage    Description
+-------    -----------
+Complete   Largest pairwise distances between A & B. 
+Single     Smallest pairwise distances between A & B.
+Average    Average pairwise distances between A & B.
+Centroid   Distance between centroids of A & B.
+
+"Distance" can be different measures:
+
+- Euclidean distance.
+- Correlation.
+- Presumably other distance measures.
+
+## Hierarchical Clustering Lab
+
+I don't have any changes, let's go through [Emil's lab as-is](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/unsupervised-learning.html#hierarchical-clustering)
+
+## Meeting Videos {-}
 
 ### Cohort 1
 
