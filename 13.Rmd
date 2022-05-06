@@ -2,7 +2,10 @@
 
 **Learning objectives:**
 
-- We'll fill these in.
+- Identify the challenges of performing **multiple hypothesis tests.**
+- Reduce Type I errors by controlling the **family-wise error rate** (FWER).
+- Balance Type I and Type II errors by controlling the **false discovery rate** (FDR).
+- Calculate p-values using **resampling**.
 
 ## Slide 1
 

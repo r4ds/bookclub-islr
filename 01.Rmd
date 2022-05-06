@@ -28,6 +28,14 @@ In particular, the **Statistical learning theory** deals with the problem of fin
 - Machine learning* is useful to everyone, let's all learn enough to use it responsibly.
 - R "labs" make this make sense for this community!
 
+## Premises of ISLR
+
+From Page 9 of the Introduction:
+
+- "Many statistical learning methods are relevant and useful in a wide range of academic and non-academic disciplines, beyond just the statistical sciences."
+- "Statistical learning should not be viewed as a series of black boxes."
+- "While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!"
+- "We presume that the reader is interested in applying statistical learning methods to real-world problems."
 
 ## Notation
 
