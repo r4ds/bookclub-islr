@@ -314,15 +314,7 @@ I don't have any changes, let's go through [Emil's lab as-is](https://emilhvitfe
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
-
-<details>
-<summary> Meeting chat log </summary>
-
-```
-ADD LOG HERE
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/CAGvO0rC6Ek")`
 
 ### Cohort 2
 

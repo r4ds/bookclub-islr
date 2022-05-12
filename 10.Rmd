@@ -22,13 +22,27 @@
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/1D6plTaDvTU")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:22:21	Mei Ling Soh:	It's z <0 in the book, pg 405
+00:26:39	Jon Harmon (jonthegeek):	For anyone who wants to watch that video after this: https://www.youtube.com/watch?v=CqOfi41LfDw
+00:53:53	Federica Gazzelloni:	part2 of the video: https://www.youtube.com/watch?v=IN2XmBhILt4&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1&index=4
+00:57:40	Mei Ling Soh:	Thanks!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/_MOovDiGzHg")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:09	Jon Harmon (jonthegeek):	https://www.statlearning.com/resources-second-edition
+00:41:00	Jon Harmon (jonthegeek):	(dataloader, dataset or list) A dataloader created with torch::dataloader() used for training the model, or a dataset created with torch::dataset() or a list. Dataloaders and datasets must return list with at most 2 items. The first item will be used as input for the module and the second will be used as target for the loss function.
 ```
 </details>
 

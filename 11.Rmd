@@ -21,13 +21,38 @@
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/VyjPLYLwBMg")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:30:47	Jon Harmon (jonthegeek):	ggplot2 default red is "salmon" (according to this site: https://www.htmlcsscolor.com/hex/F8766D)
+
+the default blue is  "cornflower blue" https://www.htmlcsscolor.com/hex/619CFF
+
+and while I'm at it, the default green is "dark pastel green" https://www.htmlcsscolor.com/hex/00BA38
+00:55:24	Jon Harmon (jonthegeek):	summand == addend https://www.merriam-webster.com/dictionary/summand
+00:55:54	Jon Harmon (jonthegeek):	subtrahend
+00:56:31	Jon Harmon (jonthegeek):	https://www.merriam-webster.com/dictionary/subtrahend
+
+A subtrahend is subtracted from a minuend.
+
+https://www.merriam-webster.com/dictionary/minuend
+00:57:29	Jonathan.Bratt:	😄
+01:05:55	Federica Gazzelloni:	workshop: https://bioconnector.github.io/workshops/r-survival.html
+01:06:29	Jon Harmon (jonthegeek):	There's an in-progress survival analysis package in tidymodels, btw: https://github.com/tidymodels/censored/
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/dbIg-JyWn8U")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:56	Jon Harmon (jonthegeek):	https://github.com/tidymodels/censored/ not yet on CRAN
+00:50:52	Jon Harmon (jonthegeek):	https://twitter.com/justsaysrisks
 ```
 </details>
 
