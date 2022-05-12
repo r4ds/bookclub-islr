@@ -597,6 +597,10 @@ I'm going to try to use that now, at least 🙃
 
 ### Cohort 3
 
+`r knitr::include_url("https://www.youtube.com/embed/nvbCP-hidTY")`
+
+### Cohort 4
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

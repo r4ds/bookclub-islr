@@ -379,6 +379,42 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 
 ### Cohort 3
 
+`r knitr::include_url("https://www.youtube.com/embed/b--hZlZqJ6I")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:07:07	Nilay Yönet:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/resampling-methods.html
+00:33:41	Mei Ling Soh:	Maybe we can wrap up the lab soon?
+00:37:48	Fariborz Soroush:	👍
+01:04:24	Mei Ling Soh:	Two more minutes to go
+01:05:19	Nilay Yönet:	https://onmee.github.io/assets/docs/ISLR/Resampling-Methods.pdf
+01:05:22	Nilay Yönet:	https://waxworksmath.com/Authors/G_M/James/WWW/chapter_5.html
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/TPg7sAhUYV4")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:23:20	Mei Ling Soh:	Each resample is created within the stratification variable. Numeric strata are binned into quartiles.
+00:34:05	Jeremy Selva:	https://dionysus.psych.wisc.edu/iaml/unit-06.html#elastic-net-regression
+00:54:24	Jeremy Selva:	Here are the link to the slides and the lab
+https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter6
+https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter6-lab/
+Source codes for the slides and the lab
+https://github.com/JauntyJJS/islr2-bookclub-cohort3-chapter6
+https://github.com/JauntyJJS/islr2-bookclub-cohort3-chapter6-lab
+00:55:57	Rose Hartman:	Thanks, Jeremy!
+00:56:01	Nilay Yönet:	thank you Jeremy!
+```
+</details>
+
+### Cohort 4
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
