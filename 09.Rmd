@@ -372,13 +372,16 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/-hwGjFSv1Lo")`
+
+`r knitr::include_url("https://www.youtube.com/embed/EgQ7Z_UoRcY")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:10:29	Federica Gazzelloni:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/support-vector-machines.html
+01:04:02	Jenny Smith:	https://www.youtube.com/c/TidyX_screencast
 ```
 </details>
 

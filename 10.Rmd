@@ -48,13 +48,24 @@
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/Itju79hysRE")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:28:37	Jim Gruman:	https://playground.tensorflow.org/
+00:29:06	Federica Gazzelloni:	Thanks Jim
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/b_5WvnqtyDE")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:14:41	Ricardo Serrano:	Neural network course https://youtu.be/ob1yS9g-Zcs
 ```
 </details>
 
