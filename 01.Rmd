@@ -411,3 +411,20 @@ knitr::include_graphics("images/fig1_2.png")
 00:57:47	Amber:	Bye everyone!
 ```
 </details>
+
+### Cohort 4
+
+`r knitr::include_url("https://www.youtube.com/embed/VTA3wGNOaKQ")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:20:25	Kevin Kent:	https://github.com/r4ds/bookclub-islr
+00:34:27	Kevin Kent:	https://forms.gle/r4vfsArqSz3cBe9v6
+00:36:18	Kevin Kent:	https://forms.gle/r4vfsArqSz3cBe9v6
+01:02:59	Ronald Legere:	https://otexts.com/fpp2/
+01:03:17	Ronald Legere:	https://otexts.com/fpp3/
+01:06:47	Lydia Gibson:	Spam always says free or has an exclamation point lol
+```
+</details>

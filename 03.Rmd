@@ -287,3 +287,15 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/gpIOZyyK_bU")`
+
+### Cohort 4
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>

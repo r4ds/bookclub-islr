@@ -1187,3 +1187,15 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:58:06	Celine H:	tidyverse
 ```
 </details>
+
+### Cohort 4
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
+```
+</details>

@@ -491,6 +491,27 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 
 ### Cohort 3
 
+`r knitr::include_url("https://www.youtube.com/embed/PbXm-08CmUU")`
+
+`r knitr::include_url("https://www.youtube.com/embed/Sa5xUFazPQY")`
+
+`r knitr::include_url("https://www.youtube.com/embed/b--hZlZqJ6I")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:07:07	Nilay Yönet:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/resampling-methods.html
+00:33:41	Mei Ling Soh:	Maybe we can wrap up the lab soon?
+00:37:48	Fariborz Soroush:	👍
+01:04:24	Mei Ling Soh:	Two more minutes to go
+01:05:19	Nilay Yönet:	https://onmee.github.io/assets/docs/ISLR/Resampling-Methods.pdf
+01:05:22	Nilay Yönet:	https://waxworksmath.com/Authors/G_M/James/WWW/chapter_5.html
+```
+</details>
+
+### Cohort 4
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

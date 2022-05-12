@@ -575,7 +575,31 @@ I'm going to try to use that now, at least 🙃
 ```
 </details>
 
+`r knitr::include_url("https://www.youtube.com/embed/PWBMEDH9RU8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:34:11	Ricardo Serrano:	https://www.andreaperlato.com/mlpost/polynomial-regression-smoothing-splines/
+00:34:25	Ricardo Serrano:	https://stats.stackexchange.com/questions/517375/splines-relationship-of-knots-degree-and-degrees-of-freedom
+00:34:50	Ricardo Serrano:	https://parsnip.tidymodels.org/reference/mars.html
+00:35:00	Ricardo Serrano:	https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/smooth.spline
+00:35:10	Ricardo Serrano:	https://www.youtube.com/watch?v=bESJ81dyYro
+00:35:25	Ricardo Serrano:	https://www.youtube.com/watch?v=Vf7oJ6z2LCc
+00:36:22	Ricardo Serrano:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/moving-beyond-linearity.html
+00:38:13	Federica Gazzelloni:	mgcv::gam()
+00:38:44	Jim Gruman:	🐕 looking for attention :)
+00:44:06	Ricardo Serrano:	I’m back!
+00:50:57	Ricardo Serrano:	lo() -  loess fit in a gam model
+```
+</details>
+
 ### Cohort 3
+
+`r knitr::include_url("https://www.youtube.com/embed/nvbCP-hidTY")`
+
+### Cohort 4
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
