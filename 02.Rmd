@@ -224,7 +224,7 @@ Why would we ever choose to use a more restrictive method instead of a very flex
 Flexible approaches can lead to such complicated estimates of $f$ that it is difficult to understand how any individual predictor is associated with the response.
 
 
-```{r 01-contents, echo=FALSE, fig.align='center', fig.cap='Editions', out.width='80%'}
+```{r 02-tradeoff, echo=FALSE, fig.align='center', out.width='80%'}
 knitr::include_graphics("images/flex_interpret_plot.png")
 ```
 
