@@ -213,10 +213,6 @@ Non-parametric approaches do suffer from a major disadvantage:
 
 > A very large number of observations (far more a than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for $f$.
 
-```{r 01-contents, echo=FALSE, fig.align='center', fig.cap='Editions', out.width='80%'}
-knitr::include_graphics("images/flex_interpret_plot.png")
-```
-
 ----
 
 ### Prediction Accuracy vs Model Interpretability
@@ -226,6 +222,11 @@ Why would we ever choose to use a more restrictive method instead of a very flex
 > If we are mainly interested in inference, then restrictive models are often more interpretable.
 
 Flexible approaches can lead to such complicated estimates of $f$ that it is difficult to understand how any individual predictor is associated with the response.
+
+
+```{r 01-contents, echo=FALSE, fig.align='center', fig.cap='Editions', out.width='80%'}
+knitr::include_graphics("images/flex_interpret_plot.png")
+```
 
 
 
