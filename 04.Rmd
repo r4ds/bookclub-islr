@@ -837,6 +837,37 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 
 ### Cohort 3
 
+`r knitr::include_url("https://www.youtube.com/embed/776kwEXjL5E")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:43:07	Soroush, Fariborz:	https://www.youtube.com/watch?v=HZGCoVF3YvM
+00:43:12	Soroush, Fariborz:	https://www.youtube.com/watch?v=lG4VkPoG3ko
+00:43:20	Soroush, Fariborz:	https://www.youtube.com/watch?v=o2Tpws5C2Eg
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/uf5wkpgJyN0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:38	Jeremy Selva:	10pm
+00:44:38	Rose Hartman:	This has been super helpful for me, at least! Thank you 🙂
+01:03:10	Mei Ling Soh:	We will need to end soon.
+01:03:22	Mei Ling Soh:	I can present the lab next week
+01:03:31	Mei Ling Soh:	I have prepared the slides up to KNN
+01:05:10	Rose Hartman:	Thank you so much for this explanation today! Very helpful.
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/PbXm-08CmUU")`
+
+### Cohort 4
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>

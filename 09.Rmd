@@ -158,6 +158,7 @@ $$K(x, x_{i}) = exp(-\gamma\sum_{j=1}^p(x_{ij} - x_{i'j})^2)$$
 - The radial kernel therefore exhibits local behavior with respect to other observations.
 
 ## Radial Kernels, cont.
+
 ```{r radkern, echo=FALSE, out.width=800}
 knitr::include_graphics('./images/fig9_9.JPG')
 ```
@@ -270,15 +271,29 @@ param_grid <- grid_regular(cost(), levels = 10)
 
 # Our grid isn't identical to the book, but it's close enough.
 param_grid
+```
 
+```{r 09-show-tune-res, eval = FALSE}
 tune_res <- tune_grid(
   svm_linear_wf, 
   resamples = sim_data_fold, 
   grid = param_grid
 )
 
+# We ran this locally and then saved it so everyone doesn't need to wait for
+# this to process each time they build the book.
+
+# saveRDS(tune_res, "data/09-tune_res.rds")
+```
+
+```{r 09-load-tune-res, include = FALSE}
+tune_res <- readRDS("data/09-tune_res.rds")
+```
+
+```{r 09-autoplot-tune_res}
 autoplot(tune_res)
 ```
+
 
 Tune can pull out the best result for us.
 
@@ -372,6 +387,21 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 
 ### Cohort 2
 
+`r knitr::include_url("https://www.youtube.com/embed/-hwGjFSv1Lo")`
+
+`r knitr::include_url("https://www.youtube.com/embed/EgQ7Z_UoRcY")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:10:29	Federica Gazzelloni:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/support-vector-machines.html
+01:04:02	Jenny Smith:	https://www.youtube.com/c/TidyX_screencast
+```
+</details>
+
+### Cohort 3
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
@@ -382,7 +412,7 @@ ADD LOG HERE
 ```
 </details>
 
-### Cohort 3
+### Cohort 4
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 

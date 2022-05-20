@@ -720,6 +720,29 @@ doParallel::stopImplicitCluster()
 
 ### Cohort 2
 
+`r knitr::include_url("https://www.youtube.com/embed/h3v_qhWDlbM")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+01:08:47	Jim Gruman:	thank you. see you all next week
+01:11:56	Ricardo:	https://youtu.be/_L39rN6gz7Y
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/OAlBRNS7q0k")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:35	Jim Gruman:	Jared Lander gives a talk on Finding the Tallest Tree and references ISLR as a great resource to learn more. He discusses the various types of hyperparameters of rpart and others. His deck: https://jaredlander.com/content/2020/08/TallestTree.html#1
+```
+</details>
+
+### Cohort 3
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
@@ -730,7 +753,7 @@ ADD LOG HERE
 ```
 </details>
 
-### Cohort 3
+### Cohort 4
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 

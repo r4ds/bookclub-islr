@@ -223,6 +223,13 @@ Why would we ever choose to use a more restrictive method instead of a very flex
 
 Flexible approaches can lead to such complicated estimates of $f$ that it is difficult to understand how any individual predictor is associated with the response.
 
+
+```{r 02-tradeoff, echo=FALSE, fig.align='center', out.width='80%'}
+knitr::include_graphics("images/flex_interpret_plot.png")
+```
+
+
+
 ### Supervised Versus Unsupervised Learning
 
 Supervised problems have labeled data with a response measurement, also called a dependent variable. 
@@ -1185,5 +1192,17 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:55:39	Rose Hartman:	Me too 🙂
 00:57:59	Celine H:	I’d love to see the tidy model example.
 00:58:06	Celine H:	tidyverse
+```
+</details>
+
+### Cohort 4
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+ADD LOG HERE
 ```
 </details>
