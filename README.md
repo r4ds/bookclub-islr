@@ -65,27 +65,31 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-01-20	Chapter 4: Classification	- Michael Haugen
 - 2022-01-27	Chapter 4: Classification	(Lab) - Michael Haugen
 - 2022-02-03	Chapter 5: Resampling Methods	- (Lab) Ricardo J. Serrano & Federica Gazzelloni
-- 2022-02-10	Chapter 5: Resampling Methods	- Team
+- 2022-02-10	Chapter 5: Resampling Methods	- All
 - 2022-02-17	Chapter 6: Linear Model Selection and Regularization - Federica Gazzelloni
 - 2022-02-24	Chapter 6: Linear Model Selection and Regularization (Lab) - Federica Gazzelloni
   
 </details>
   
-- 2022-03-03	Chapter 7: Moving Beyond Linearity - Jim Gruman
-- 2022-03-10	Chapter 7: Moving Beyond Linearity (Lab) - Jim Gruman	
-- 2022-03-17	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
-- 2022-03-24	Chapter 8: Tree-Based Methods	(Lab) - Ricardo J. Serrano
-- 2022-03-31	Chapter 9: Support Vector Machines - Jenny Smith
-- 2022-04-07	Chapter 9: Support Vector Machines (Lab) - Jenny Smith
-- 2022-04-14	Chapter 10: Deep Learning	- TBD
-- 2022-04-21	Chapter 10: Deep Learning	(Lab) - TBD
-- 2022-04-28	Chapter 11: Survival Analysis and Censored Data -	Michael Haugen
-- 2022-05-05	Chapter 11: Survival Analysis and Censored Data	(Lab) - Michael Haugen
-- 2022-05-12	Chapter 12: Unsupervised Learning	- TBD	
-- 2022-05-19	Chapter 12: Unsupervised Learning	(Lab) - TBD	
-- 2022-05-26	Chapter 13: Multiple Testing - Federica Gazzelloni	
-- 2022-06-02	Chapter 13: Multiple Testing (Lab) - Federica Gazzelloni	
-- 2022-06-09  Final Discussion and Q&A - All  
+- 2022-03-03  NO MEETING	
+- 2022-03-10	Chapter 7: Moving Beyond Linearity - Jim Gruman
+- 2022-03-17  NO MEETING
+- 2022-03-24	Chapter 7: Moving Beyond Linearity (Lab) - Jim Gruman	
+- 2022-03-31	Chapter 8: Tree-Based Methods	- Ricardo J. Serrano
+- 2022-04-07	Chapter 8: Tree-Based Methods	(Lab) - Ricardo J. Serrano
+- 2022-04-14  NO MEETING
+- 2022-04-21	Chapter 9: Support Vector Machines - Jenny Smith
+- 2022-04-28	Chapter 9: Support Vector Machines (Lab) - Jenny Smith
+- 2022-05-05	Chapter 10: Deep Learning	- Jim Gruman
+- 2022-05-12	Chapter 10: Deep Learning	(Lab) - Jim Gruman
+- 2022-05-19  NO MEETING
+- 2022-05-26	Chapter 11: Survival Analysis and Censored Data -	Ricardo J. Serrano
+- 2022-06-02	Chapter 11: Survival Analysis and Censored Data	(Lab) - Ricardo J. Serrano
+- 2022-06-09	Chapter 12: Unsupervised Learning	- All	
+- 2022-06-16	Chapter 12: Unsupervised Learning	(Lab) - All	
+- 2022-06-23	Chapter 13: Multiple Testing - Federica Gazzelloni	
+- 2022-06-30	Chapter 13: Multiple Testing (Lab) - Federica Gazzelloni	
+- 2022-07-07  Final Discussion and Q&A - All  
 
 <hr>
 
