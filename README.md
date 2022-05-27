@@ -3,17 +3,17 @@
 Welcome to the R4DS Introduction to Statistical Learning Using R Book Club!
 
 We are working together to read [_Introduction to Statistical Learning Using R_](https://www.statlearning.com) by Gareth James, Daniela Witten, Trevor Hastie, and Rob Tibshirani (Springer Science+Business Media, LLC, part of Springer Nature, copyright 2021, 978-1-0716-1418-1_1).
-Join the #book_club-islr channel on the [R4DS Slack](https://r4ds.io/join) to participate.
+Join the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on the [R4DS Slack](https://r4ds.io/join) to participate.
 As we read, we are producing [notes about the book](https://r4ds.github.io/bookclub-islr/).
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort pinned in the [#bookclub-islr](https://app.slack.com/client/T6UC1DKJQ/C02CQ93F882) channel on Slack!
+If you would like to present, please see the sign-up sheet for your cohort pinned in the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on Slack!
 
-- *Cohort 1: (started 2021-09-21, ended 2022-05-24) - Tuesdays, 9:00am CST/CDT*
-- *Cohort 2: (started 2021-12-02) - [Thursdays, 10:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20211202T160000&p1=24)*
-- *Cohort 3: (started 2022-02-07) - [Mondays, 9:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220207T150000&p1=24)*
-- *Cohort 4: (started 2022-05-01) - [Sundays, 3:00pm CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220501T200000&p1=24&p2=179)*
+- Cohort 1: (started 2021-09-21, ended 2022-05-24) - Tuesdays, 9:00am CST/CDT
+- Cohort 2: (started 2021-12-02) - [Thursdays, 10:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20211202T160000&p1=24)
+- Cohort 3: (started 2022-02-07) - [Mondays, 9:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220207T150000&p1=24)
+- Cohort 4: (started 2022-05-01) - [Sundays, 3:00pm CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220501T200000&p1=24&p2=179)
 
 <hr>
 
