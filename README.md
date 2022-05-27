@@ -8,12 +8,12 @@ As we read, we are producing [notes about the book](https://r4ds.github.io/bookc
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort pinned in the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on Slack!
+If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on Slack)!
 
-- Cohort 1: (started 2021-09-21, ended 2022-05-24) - Tuesdays, 9:00am CST/CDT
-- Cohort 2: (started 2021-12-02) - [Thursdays, 10:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20211202T160000&p1=24)
-- Cohort 3: (started 2022-02-07) - [Mondays, 9:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220207T150000&p1=24)
-- Cohort 4: (started 2022-05-01) - [Sundays, 3:00pm CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220501T200000&p1=24&p2=179)
+- Cohort 1 (started 2021-09-21, ended 2022-05-24): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGibdB0i2wveuFRDlXHbWaPD)
+- [Cohort 2](https://docs.google.com/spreadsheets/d/1bqZ5EO_ilCDsCuSr5N0MRJqGFj-Sy0fVRrt5Mw21p48/edit?usp=sharing) (started 2021-12-02): [Thursdays, 10:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20211202T160000&p1=24) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGhO5S1v53nQzil-OSRZIweH)
+- [Cohort 3](https://docs.google.com/spreadsheets/d/1xab0RUdnUC6V-RkXvZqTcLvJrkY6T2ZHAZSUDA_krn4/edit?usp=sharing) (started 2022-02-07): [Mondays, 9:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220207T150000&p1=24) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGisLSs09v1NQUQaxuE8nbOO)
+- [Cohort 4](https://docs.google.com/spreadsheets/d/1YA6MUJAtdoaelXrBqbYEeVvz1gi2e-GLZH02Po___ro/edit?usp=sharing) (started 2022-05-01): [Sundays, 3:00pm CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220501T200000&p1=24&p2=179) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi9LAXM5kcyuN_bkN66TzUD)
 
 <hr>
 
