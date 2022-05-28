@@ -41,6 +41,9 @@ $$\hat{y} = \hat{\beta}_{0} + \hat{\beta}_{1}x$$
 - $\hat{\beta}_{1}$ = our approximation of slope
 - $x$ = sample of $X$
 - $\hat{y}$ = our prediction of $Y$ from $x$
+- hat symbol denotes "estimated value" 
+
+- Linear regression is a simple approach to supervised learning
 
 ## Simple Linear Regression: Visualization
 
