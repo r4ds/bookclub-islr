@@ -95,6 +95,11 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 
 - Estimate the **standard error** of regression coefficients. `r emo::ji("heavy_check_mark")`
 
+## Multiple Linear Regression
+
+## Qualitative Predictors
+
+## Extensions
 
 ## Meeting Videos
 
