@@ -95,6 +95,16 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 
 - Estimate the **standard error** of regression coefficients. `r emo::ji("heavy_check_mark")`
 
+## Assessing the Accuracy of the Model
+
+- **RSE* can be considered a measure of the *lack of fit* of the model. 
+
+- *$R^2$* statistic provides an alternative that is in the form of a *proportion of the variance explained*:
+
+$$R^2 = 1 - \frac{RSS}{TSS}$$
+where TSS is the *total sum of squarse*:
+$$TSS = \Sigma (y_i - \bar{y})^2$$
+
 ## Multiple Linear Regression
 
 ## Qualitative Predictors
