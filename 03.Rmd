@@ -97,9 +97,9 @@ $$\hat\beta_0 \pm 2\ \cdot \ \mathrm{SE}(\hat\beta_0)$$
 
 ## Assessing the Accuracy of the Model
 
-- **RSE* can be considered a measure of the *lack of fit* of the model. 
-
-- *$R^2$* statistic provides an alternative that is in the form of a *proportion of the variance explained*:
+- **RSE** can be considered a measure of the *lack of fit* of the model. 
+a
+- *$R^2$* statistic provides an alternative that is in the form of a *proportion of the variance explained*, ranges from 0 to 1, a *good value* depends on teh application.
 
 $$R^2 = 1 - \frac{RSS}{TSS}$$
 where TSS is the *total sum of squarse*:
@@ -107,9 +107,91 @@ $$TSS = \Sigma (y_i - \bar{y})^2$$
 
 ## Multiple Linear Regression
 
+**Multiple linear regression** extends simple linear regression for *p* predictors:
+
+$$Y = \beta_{0} + \beta_{1}X_1 + \beta_{2}X_2 + ... +\beta_{p}X_p + \epsilon_i$$
+- $\beta_{j}$ is the *average* effect on $Y$ from $X_{i}$ holding all other predictors fixed.  
+
+- Fit is once again choosing the $\beta{j}$ that minimizes the RSS.
+
+- Example in book shows that although fitting *sales* against *newspaper* alone indicated a significant slope (0.055 +- 0.017), when you include *radio* in a multiple regression, *newspaper* no longer has any significant effect. (-0.001 +- 0.006) 
+
+**Important Questions**
+
+1. *Is at least one of the predictors $X_1$, $X_2$,  ... , $X_p$ useful in predicting
+the response?*
+
+    F statistic close to 1 when there is no relationship, otherwise greater then 1.
+
+$$F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}$$
+
+2. *Do all the predictors help to explain $Y$ , or is only a subset of the
+predictors useful?*
+
+    Variable selection methods include Forward selection, backward selection and mixed.
+
+3. *How well does the model fit the data?*
+
+    **$R^2$** still gives *proportion of the variance explained*, so look for values "close" to 1. Can also look at **RSE** which is generalized for multiple regression as:
+    
+$$RSE = \sqrt{\frac{1}{n-p-1}RSS}$$
+    
+
+4. *Given a set of predictor values, what response value should we predict,
+and how accurate is our prediction?* 
+
+    Three sets of uncertainty in predictions:
+    
+    * Uncertainty in the estimates of $\beta_i$
+    * Model bias
+    * Irreducible error $\epsilon$
+
 ## Qualitative Predictors
 
+* Dummy variables: if there are $k$ levels, introduce $k-1$ dummy variables which are equal to one ("one hot") when the underlying qualitative predictor takes that value. For example if there are 3 levels, introduce two new dummy variables and fit the model:
+
+$$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i$$
+
+| Qualitative Predicitor | $x_{i1}$ | $x_{i2}$ |
+| ---------------------- |:--------:|:--------:|
+| level 0    (baseline)  |    0     |    0     |
+| level 1                |    1     |    0     |
+| level 2                |    0     |    1     |
+
+* Coefficients are interpreted the average effect relative to the baseline.
+
+* Alternative is to use index variables, a different coefficient for each level:
+
+$$y_i = \beta_{0 1} + \beta_{0 2} +\beta_{0 3} + \epsilon_i$$
+    
 ## Extensions
+
+- Interaction / Synergy effects
+
+- Non-linear relationships (e.g. polynomial fits)
+
+## Potential Problems
+
+1. *Non-linear relationships* 
+
+    Residual plots are useful tool to see if any remaining trends exist. If so consider fitting transformation of the data. 
+    
+2. *Correlation of Error Terms*
+
+    Linear regression assumes that the error terms $\epsilon_i$ are uncorrelated. Residuals may indicate that this is not correct (obvious *tracking* in the data). One could also look at the autocorrelation of the residuals. What to do about it?
+    
+3. *Non-constant variance of error terms*
+
+    Again this can be revealed by examining the residuals.  Consider transformation of the predictors to remove non-constant variance. The figure below shows residuals demonstrating non-constant variance, and shows this being mitigated to a great extent by log transforming the data.
+    
+![Figure 3.11 from book](images/fig3_11.png)    
+
+4. *Outliers*
+
+5. *High Leverage Points* 
+
+6. *Collinearity*
+
 
 ## Meeting Videos
 
