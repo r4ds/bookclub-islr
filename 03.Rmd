@@ -112,7 +112,7 @@ $$TSS = \Sigma (y_i - \bar{y})^2$$
 $$Y = \beta_{0} + \beta_{1}X_1 + \beta_{2}X_2 + ... +\beta_{p}X_p + \epsilon_i$$
 - $\beta_{j}$ is the *average* effect on $Y$ from $X_{i}$ holding all other predictors fixed.  
 
-- Fit is once again choosing the $\beta{j}$ that minimizes the RSS.
+- Fit is once again choosing the $\beta_{j}$ that minimizes the RSS.
 
 - Example in book shows that although fitting *sales* against *newspaper* alone indicated a significant slope (0.055 +- 0.017), when you include *radio* in a multiple regression, *newspaper* no longer has any significant effect. (-0.001 +- 0.006) 
 
@@ -128,7 +128,7 @@ $$F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}$$
 2. *Do all the predictors help to explain $Y$ , or is only a subset of the
 predictors useful?*
 
-    Variable selection methods include Forward selection, backward selection and mixed.
+   p-values can help identify important predictors, but it is possible to be mislead by this especially with large number of predictors. Variable selection methods include Forward selection, backward selection and mixed. Topic is continued in Chapter 6.
 
 3. *How well does the model fit the data?*
 
@@ -167,8 +167,14 @@ $$y_i = \beta_{0 1} + \beta_{0 2} +\beta_{0 3} + \epsilon_i$$
 ## Extensions
 
 - Interaction / Synergy effects
-
+    
+    Include a product term to account for synergy where one changes in one variable changes the association of the Y with another:
+    
+$$Y = \beta_{0} + \beta_{1}X_1 + \beta_{2}X_2 +  \beta_{3}X_1 X_2 + \epsilon_i$$
+    
 - Non-linear relationships (e.g. polynomial fits)
+
+$$Y = \beta_{0} + \beta_{1}X + \beta_{2}X^2 + ... \beta_{n}X^n + \epsilon_i$$
 
 ## Potential Problems
 
@@ -188,9 +194,68 @@ $$y_i = \beta_{0 1} + \beta_{0 2} +\beta_{0 3} + \epsilon_i$$
 
 4. *Outliers*
 
+   - Outliers are points with for which $y_i$ is far from value predicted by the model (including irreducible error).  See point labeled '20' in figure 3.13.
+   - Detect outliers by plotting studentized residuals (residual $e_i$ divided by the estimated error) and look for residuals larger then 3 standard deviations in absolute value.
+   - An outlier may not effect the fit much but can have dramatic effect on the **RSE**. 
+   - Often outliers are mistakes in data collection and can be removed, but could also be an indicator of a deficient model.  
+
 5. *High Leverage Points* 
 
+   - These are points with unusual values of $x_i$.  Examples is point labeled '41' in figure 3.13.
+   - These points can have large impact on the fit, as in the example, including point 41 pulls slope up significantly.
+   - Use *leverage statistic* to identify high leverage points, which can be hard to identify in multiple regression.
+   
+![Figure 3.13 from book](images/fig3_13.png) 
 6. *Collinearity*
+
+   - Two or more predictor variables are closely related to one another.
+   - Simple collinearity can be identified by looking at correlations between predictors. 
+   - Causes the (marginal) standard error to grow (and p-values to grow)
+   - Often can be dealt with by removing one of the highly correlated predictors or combining them. 
+   - *Multicollinearity* (involving 3 or more predictors) is not so easy to identify. Use *Variance inflation factor*, which is the ratio of the variance of $\hat{\beta_j}$ when fitting the full model to fitting the parameter on its own. Can be computed using the formula:
+    
+$$VIF(\hat{\beta_j}) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
+    where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all the otehr predictors.
+    
+## Answers to the Marketing Plan questions
+
+1. **Is there a relationship between advertising budget and sales?**
+
+    Tool: Multiple regression, look at F-statistic.
+
+2. **How strong is the relationship between advertising budget and sales?** 
+
+    Tool: **$R^2$** and **RSE**
+    
+3. **Which media are associated with sales?**
+ 
+    Tool: p-values for each predictor's *t-statistic*.  Explored further in chapter 6.
+
+4. **How large is the association between each medium and sales?**
+
+    Tool: Confidence intervals on $\hat{\beta_j}$
+
+5. **How accurately can we predict future sales?**
+
+    Tool:: Prediction intervals for individual response, confidence intervals for average response.
+    
+    
+6. **Is the relationship linear?** 
+
+    Tool: Residual Plots
+    
+7. **Is there synergy among the advertising media?** 
+
+    Tool: Interaction terms and associated p-vales.
+    
+## Comparison of Linear Regression with K-Nearest Neighbors
+
+- This section examines the K-nearest neighbor (KNN) method (a non-parameteric method).
+- This is essentially a k-point moving average.
+- This serves to illustrate the Bias-Variance trade-off nicely  
+
+
+
 
 
 ## Meeting Videos
