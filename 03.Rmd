@@ -110,13 +110,13 @@ $$TSS = \Sigma (y_i - \bar{y})^2$$
 **Multiple linear regression** extends simple linear regression for *p* predictors:
 
 $$Y = \beta_{0} + \beta_{1}X_1 + \beta_{2}X_2 + ... +\beta_{p}X_p + \epsilon_i$$
-- $\beta_{j}$ is the *average* effect on $Y$ from $X_{i}$ holding all other predictors fixed.  
+- $\beta_{j}$ is the *average* effect on $Y$ from $X_{j}$ holding all other predictors fixed.  
 
 - Fit is once again choosing the $\beta_{j}$ that minimizes the RSS.
 
 - Example in book shows that although fitting *sales* against *newspaper* alone indicated a significant slope (0.055 +- 0.017), when you include *radio* in a multiple regression, *newspaper* no longer has any significant effect. (-0.001 +- 0.006) 
 
-**Important Questions**
+### Important Questions
 
 1. *Is at least one of the predictors $X_1$, $X_2$,  ... , $X_p$ useful in predicting
 the response?*
@@ -210,12 +210,12 @@ $$Y = \beta_{0} + \beta_{1}X + \beta_{2}X^2 + ... \beta_{n}X^n + \epsilon_i$$
 
    - Two or more predictor variables are closely related to one another.
    - Simple collinearity can be identified by looking at correlations between predictors. 
-   - Causes the (marginal) standard error to grow (and p-values to grow)
+   - Causes the standard error to grow (and p-values to grow)
    - Often can be dealt with by removing one of the highly correlated predictors or combining them. 
    - *Multicollinearity* (involving 3 or more predictors) is not so easy to identify. Use *Variance inflation factor*, which is the ratio of the variance of $\hat{\beta_j}$ when fitting the full model to fitting the parameter on its own. Can be computed using the formula:
     
 $$VIF(\hat{\beta_j}) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
-    where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all the otehr predictors.
+    where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all the other predictors.
     
 ## Answers to the Marketing Plan questions
 
