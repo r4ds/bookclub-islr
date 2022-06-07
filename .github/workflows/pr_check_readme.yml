@@ -1,0 +1,14 @@
+name: pr_check
+on:
+  pull_request:
+    branches: main
+    paths:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  bookdown:
+    name: pr_check_book
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No build required" '
