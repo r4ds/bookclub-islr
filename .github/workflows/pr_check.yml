@@ -1,9 +1,10 @@
+name: pr_check
 on:
   pull_request:
     branches: main
+    paths-ignore:
+      - 'README.md'
   workflow_dispatch:
-
-name: pr_check
 
 jobs:
   bookdown:
