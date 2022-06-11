@@ -45,5 +45,6 @@ Do these steps each time you present another chapter:
 8. `usethis::pr_push()` (pushes the changes up to github, and opens a "pull request" (PR) to let us know your work is ready).
 9. (If we request changes, make them)
 10. When your PR has been accepted ("merged"), `usethis::pr_finish()` to close out your branch and prepare your local repository for future work.
+11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push()` or click the `Push` button on the `Git` tab of Rstudio.
 
 When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.github.io/bookclub-islr/).
