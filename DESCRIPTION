@@ -34,6 +34,7 @@ Imports:
     magrittr,
     mgcv,
     patchwork,
+    proxy,
     randomForest,
     ranger,
     readr,
