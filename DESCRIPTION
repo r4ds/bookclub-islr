@@ -20,6 +20,7 @@ Imports:
     dlookr,
     doParallel,
     emo,
+    factoextra,
     finetune,
     gam,
     GGally,

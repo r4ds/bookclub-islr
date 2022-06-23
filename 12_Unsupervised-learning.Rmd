@@ -9,9 +9,6 @@
 - Perform **hierarchical clustering** to partition observations into a tree-like structure.
 
 
-
----
-
 ## Introduction
 
 **Unsupervised learning techniques** are used to reduce the dimension of the dataset.
