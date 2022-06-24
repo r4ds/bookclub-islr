@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Principal Component Analysis | Introduction to Statistical Learning Using R Book Club</title>
+  <title>12.2 Principal component analysis | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Principal Component Analysis | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="12.2 Principal component analysis | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Principal Component Analysis | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="12.2 Principal component analysis | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="unsupervised-learning-vs-supervised-learning.html"/>
-<link rel="next" href="principal-component-analysis-1.html"/>
+<link rel="prev" href="introduction-1.html"/>
+<link rel="next" href="geometric-interpretation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -467,39 +467,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="" data-path="unsupervised-learning-vs-supervised-learning.html"><a href="unsupervised-learning-vs-supervised-learning.html"><i class="fa fa-check"></i>Unsupervised Learning vs Supervised Learning</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-2.html"><a href="principal-component-analysis-2.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-recipe.html"><a href="pca-lab-recipe.html"><i class="fa fa-check"></i>PCA Lab: Recipe</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-loadings.html"><a href="pca-lab-loadings.html"><i class="fa fa-check"></i>PCA Lab: Loadings</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-variance.html"><a href="pca-lab-variance.html"><i class="fa fa-check"></i>PCA Lab: Variance</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion.html"><a href="matrix-completion.html"><i class="fa fa-check"></i>Matrix Completion</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-their-technique.html"><a href="matrix-completion-their-technique.html"><i class="fa fa-check"></i>Matrix Completion: Their Technique</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-setup.html"><a href="matrix-completion-lab-setup.html"><i class="fa fa-check"></i>Matrix Completion Lab: Setup</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-softimpute.html"><a href="matrix-completion-lab-softimpute.html"><i class="fa fa-check"></i>Matrix Completion Lab: softImpute</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering.html"><a href="k-means-clustering.html"><i class="fa fa-check"></i>K-Means Clustering</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-data.html"><a href="k-means-clustering-data.html"><i class="fa fa-check"></i>K-Means Clustering: Data</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-randomly-assign.html"><a href="k-means-clustering-randomly-assign.html"><i class="fa fa-check"></i>K-Means Clustering: Randomly Assign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-initial-centroids.html"><a href="k-means-clustering-initial-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: Initial Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-reassign.html"><a href="k-means-clustering-reassign.html"><i class="fa fa-check"></i>K-Means Clustering: Reassign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-new-centroids.html"><a href="k-means-clustering-new-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: New Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-final-result.html"><a href="k-means-clustering-final-result.html"><i class="fa fa-check"></i>K-Means Clustering: Final Result</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-warning.html"><a href="k-means-clustering-warning.html"><i class="fa fa-check"></i>K-Means Clustering: Warning</a></li>
-<li class="chapter" data-level="12.1" data-path="k-means-lab-setup.html"><a href="k-means-lab-setup.html"><i class="fa fa-check"></i><b>12.1</b> K-Means Lab: Setup</a></li>
-<li class="chapter" data-level="12.2" data-path="k-means-lab-3-clusters.html"><a href="k-means-lab-3-clusters.html"><i class="fa fa-check"></i><b>12.2</b> K-Means Lab: 3 Clusters</a></li>
-<li class="chapter" data-level="12.3" data-path="k-means-lab-multi.html"><a href="k-means-lab-multi.html"><i class="fa fa-check"></i><b>12.3</b> K-Means Lab: Multi</a></li>
-<li class="chapter" data-level="12.4" data-path="k-means-lab-finalize.html"><a href="k-means-lab-finalize.html"><i class="fa fa-check"></i><b>12.4</b> K-Means Lab: Finalize</a></li>
-<li class="chapter" data-level="12.5" data-path="k-means-lab-bad-choices.html"><a href="k-means-lab-bad-choices.html"><i class="fa fa-check"></i><b>12.5</b> K-Means Lab: Bad Choices</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering-types-of-linkage.html"><a href="hierarchical-clustering-types-of-linkage.html"><i class="fa fa-check"></i>Hierarchical Clustering: Types of Linkage</a></li>
-<li class="chapter" data-level="12.6" data-path="hierarchical-clustering-lab.html"><a href="hierarchical-clustering-lab.html"><i class="fa fa-check"></i><b>12.6</b> Hierarchical Clustering Lab</a></li>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
 <li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.6.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="12.6.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.6.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="12.6.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.6.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="12.6.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.6.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -557,22 +548,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="principal-component-analysis" class="section level2 unnumbered hasAnchor">
-<h2>Principal Component Analysis<a href="principal-component-analysis.html#principal-component-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="principal-component-analysis" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Principal component analysis<a href="principal-component-analysis.html#principal-component-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>PCA learning objectives</strong></p>
 <ul>
-<li>Also discussed in Chapter 6.</li>
-<li>Find axes with <em>most variance.</em></li>
-<li>We’ll demonstrate with this 2-feature dataset.</li>
+<li>understand <strong>principal component analysis (pca)</strong></li>
+<li>make a visualization using pca</li>
+<li>introduction to matrix decomposition</li>
 </ul>
-<p><img src="images/fig06-14.png" width="800" /></p>
+<hr />
+<div id="what-are-the-steps-to-principal-component-analysis" class="section level3 hasAnchor" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> What are the steps to principal component analysis?<a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Steps to unsupervised dimensionality reduction principal component analysis:</strong></p>
+<ol style="list-style-type: decimal">
+<li>variables normalization (<span class="math inline">\(z=\frac{x-\bar x}{sd(x)}\)</span>)</li>
+<li>highest variance component selection</li>
+<li>reduced variables linear combination</li>
+</ol>
+<p>Given these indexes, with <span class="math inline">\(m &lt; p\)</span>:</p>
+<ul>
+<li><span class="math inline">\(i={1,...,m}\)</span></li>
+<li><span class="math inline">\(j={1,...,p}\)</span></li>
+</ul>
+<p>This is our starting point, a <strong>n x p</strong> dataset <span class="math inline">\(X\)</span> made of a series of <span class="math inline">\(X_j\)</span> features, with <span class="math inline">\(j={1,...,p}\)</span>:</p>
+<p><span class="math display">\[
+X_{n,p} = 
+\begin{pmatrix}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,p} \\
+x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p} 
+\end{pmatrix}
+\]</span>
+Of which the first row (observation) is:</p>
+<p><span class="math display">\[X_{1},X_{2},...,X_{p}\]</span>
+The linear combination of <span class="math inline">\(X_j\)</span> and <span class="math inline">\(\beta_j\)</span>, with <span class="math inline">\(j={1,...,p}\)</span> shown here is just for the first element with <span class="math inline">\(i=1\)</span>:</p>
+<p><span class="math display">\[\beta_{11}x_{i1}+\beta_{21}x_{i2}+...+\beta_{p1}x_{ip}\]</span>
+This is the linear combination of the original data.</p>
+<p>The first step, as said, is the normalization of the observations:
+<span class="math display">\[z=\frac{x-\bar x}{sd(x)}\]</span></p>
+<p>What we want is to visualize our features on a reduced dimensional space while extrapolating the highest level of the information from original data.</p>
+<p>In order to do this, we reduce <span class="math inline">\(p\)</span> to a lower value <span class="math inline">\(M\)</span>: <span class="math inline">\(M &lt; p\)</span> to obtain a sample which is still representative of the level of variance in our data.</p>
+<p>Our new <span class="math inline">\(Z_m\)</span> composition is made of <span class="math inline">\(M\)</span> features, i.e. <span class="math inline">\(m = 1,...,M\)</span>:</p>
+<p><span class="math display">\[Z_1, Z_2, ..., Z_m\]</span></p>
+<p>To obtain a new linear combination:</p>
+<p><span class="math display">\[Z_m = \sum_{j=1}^p{\phi_{jm}X_j}=\phi_{1m}X_1+\phi_{2m}X_2+...+\phi_{pm}X_p\]</span></p>
+<p>And so, an approximation of the original features:</p>
+<p><span class="math display">\[x_{ij}\approx\sum_{m=1}^Mz_{im}\phi_{jm}\]</span></p>
+<p>We do this by <strong>normalizing</strong> these elements in the vector <span class="math inline">\(z=\frac{x-\bar x}{sd(x)}\)</span> to obtain a new vector of elements named <strong>loadings</strong>, <span class="math inline">\((\phi_{11},\phi_{21},...,\phi_{p1})^T\)</span>. In particular when <span class="math inline">\(M=min(n-1,p)\)</span>, we have: <span class="math inline">\(x_{ij}=\sum_{m=1}^Mz_{im}\phi_{jm}\)</span>.</p>
+<p>We <em>constrain</em> these <strong>lodings</strong> so their sum of squares would be equal to one:</p>
+<p><span class="math display">\[\sum_{j=1}^p{\phi_{j1}}^2=1\]</span></p>
+<p><strong>The Euclidean distance:</strong></p>
+<blockquote>
+<p>“The first <strong>M</strong> principal component <strong>score vectors</strong> and the first <strong>M</strong> principal component <strong>loading vectors</strong> provide <strong>the best M-dimensional approximation</strong> (in terms of <strong>Euclidean distance</strong>) to the ith observation xij.”</p>
+</blockquote>
+<p><span class="math display">\[\min_{}\left \{\sum_{j=1}^p\sum_{i=1}^n\left(x_{ij}-\sum_{m=1}^Mz_{im}\phi_{jm}\right)^2\right \}\]</span></p>
+<p><strong>The First pricipal component</strong></p>
+<p>Since we are only interested in <strong>variance</strong>, the total variance is defined as:</p>
+<p><span class="math display">\[\sum_{j=1}^pVar(X_j)=\sum_{j=1}^p\frac{1}{n}\sum_{i=1}^nx_{ij}^2\]</span></p>
+<p>The formula for the <strong>max sample variance explained</strong> by the <em>m</em>th principal component:</p>
+<p><span class="math display">\[\frac{1}{n}\sum_{i=1}^nz_{im}^2=\frac{1}{n}\sum_{i=1}^n\left(\sum_{j=1}^p\phi_{jm}x_{ij}\right)^2\]</span></p>
+<p><span class="math display">\[\max_{\phi_{11},\phi_{21},...,\phi_{p1}}\left \{\frac{1}{n}\sum_{i=1}^nz_{i1}^2\right \}\]</span>
+<span class="math display">\[\max_{\phi_{11},\phi_{21},...,\phi_{p1}}\left \{\frac{1}{n}\sum_{i=1}^n\left(\sum_{j=1}^p\phi_{j1}x_{ij}\right)^2\right \}\]</span>
+<span class="math display">\[subject \to\sum_{j=1}^p\phi_{j1}^2=1\]</span></p>
+<p>The calculation of this <em>objective</em> pass through the <strong>eigen value decomposition</strong> which alternative is the <strong>singular value decomposition</strong>.</p>
+<p><strong>How much of the information in a given data set is lost by projecting the observations onto the first few principal components?</strong></p>
+<p><strong>How much of the variance in the data is not contained in the first few principal components?</strong></p>
+<p>To answer this questions we need to consider the <strong>proportion of variance explained (PVE)</strong></p>
+<p>Maximizing the variance of the first M principal components, we minimize the mean squared error of the M-dimensional approximation, and viceversa.</p>
+<p>In conclusion, principal component analysis is a question of <strong>minimizing the approximation error or maximizing the variance</strong>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="unsupervised-learning-vs-supervised-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="principal-component-analysis-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="geometric-interpretation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -603,7 +656,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-islr/edit/main/12.Rmd",
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/12_Unsupervised-learning.Rmd",
 "text": "Edit"
 },
 "history": {

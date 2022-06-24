@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Hierarchical Clustering | Introduction to Statistical Learning Using R Book Club</title>
+  <title>12.8 Hierarchical clustering | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Hierarchical Clustering | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="12.8 Hierarchical clustering | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hierarchical Clustering | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="12.8 Hierarchical clustering | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="k-means-lab-bad-choices.html"/>
-<link rel="next" href="hierarchical-clustering-types-of-linkage.html"/>
+<link rel="prev" href="k-means.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -467,39 +467,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="" data-path="unsupervised-learning-vs-supervised-learning.html"><a href="unsupervised-learning-vs-supervised-learning.html"><i class="fa fa-check"></i>Unsupervised Learning vs Supervised Learning</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-2.html"><a href="principal-component-analysis-2.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-recipe.html"><a href="pca-lab-recipe.html"><i class="fa fa-check"></i>PCA Lab: Recipe</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-loadings.html"><a href="pca-lab-loadings.html"><i class="fa fa-check"></i>PCA Lab: Loadings</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-variance.html"><a href="pca-lab-variance.html"><i class="fa fa-check"></i>PCA Lab: Variance</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion.html"><a href="matrix-completion.html"><i class="fa fa-check"></i>Matrix Completion</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-their-technique.html"><a href="matrix-completion-their-technique.html"><i class="fa fa-check"></i>Matrix Completion: Their Technique</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-setup.html"><a href="matrix-completion-lab-setup.html"><i class="fa fa-check"></i>Matrix Completion Lab: Setup</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-softimpute.html"><a href="matrix-completion-lab-softimpute.html"><i class="fa fa-check"></i>Matrix Completion Lab: softImpute</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering.html"><a href="k-means-clustering.html"><i class="fa fa-check"></i>K-Means Clustering</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-data.html"><a href="k-means-clustering-data.html"><i class="fa fa-check"></i>K-Means Clustering: Data</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-randomly-assign.html"><a href="k-means-clustering-randomly-assign.html"><i class="fa fa-check"></i>K-Means Clustering: Randomly Assign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-initial-centroids.html"><a href="k-means-clustering-initial-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: Initial Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-reassign.html"><a href="k-means-clustering-reassign.html"><i class="fa fa-check"></i>K-Means Clustering: Reassign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-new-centroids.html"><a href="k-means-clustering-new-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: New Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-final-result.html"><a href="k-means-clustering-final-result.html"><i class="fa fa-check"></i>K-Means Clustering: Final Result</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-warning.html"><a href="k-means-clustering-warning.html"><i class="fa fa-check"></i>K-Means Clustering: Warning</a></li>
-<li class="chapter" data-level="12.1" data-path="k-means-lab-setup.html"><a href="k-means-lab-setup.html"><i class="fa fa-check"></i><b>12.1</b> K-Means Lab: Setup</a></li>
-<li class="chapter" data-level="12.2" data-path="k-means-lab-3-clusters.html"><a href="k-means-lab-3-clusters.html"><i class="fa fa-check"></i><b>12.2</b> K-Means Lab: 3 Clusters</a></li>
-<li class="chapter" data-level="12.3" data-path="k-means-lab-multi.html"><a href="k-means-lab-multi.html"><i class="fa fa-check"></i><b>12.3</b> K-Means Lab: Multi</a></li>
-<li class="chapter" data-level="12.4" data-path="k-means-lab-finalize.html"><a href="k-means-lab-finalize.html"><i class="fa fa-check"></i><b>12.4</b> K-Means Lab: Finalize</a></li>
-<li class="chapter" data-level="12.5" data-path="k-means-lab-bad-choices.html"><a href="k-means-lab-bad-choices.html"><i class="fa fa-check"></i><b>12.5</b> K-Means Lab: Bad Choices</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering-types-of-linkage.html"><a href="hierarchical-clustering-types-of-linkage.html"><i class="fa fa-check"></i>Hierarchical Clustering: Types of Linkage</a></li>
-<li class="chapter" data-level="12.6" data-path="hierarchical-clustering-lab.html"><a href="hierarchical-clustering-lab.html"><i class="fa fa-check"></i><b>12.6</b> Hierarchical Clustering Lab</a></li>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
 <li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.6.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="12.6.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.6.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="12.6.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.6.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="12.6.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.6.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -557,23 +548,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hierarchical-clustering" class="section level2 unnumbered hasAnchor">
-<h2>Hierarchical Clustering<a href="hierarchical-clustering.html#hierarchical-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Clusters of clusters of clusters.</li>
-<li>Start: <strong>Each point = cluster.</strong></li>
-<li>At each step, assign the <strong>2 closest clusters</strong> to a shared cluster.</li>
-<li><strong>Repeat.</strong></li>
-<li>Ends when all observations are in a <strong>single cluster.</strong></li>
-</ul>
+<div id="hierarchical-clustering" class="section level2 hasAnchor" number="12.8">
+<h2><span class="header-section-number">12.8</span> Hierarchical clustering<a href="hierarchical-clustering.html#hierarchical-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Hierarchical clustering, number of clusters are unknown in advance; usually it is a <strong>tree-like visual representation</strong> of the observations, called a <strong>dendrogram</strong>, that allows the understanding of the clusters for each possible number of clusters, from 1 to n.</p>
+<p>The algorithm defines some sort of dissimilarity measure between each pair of observations, with the use of Euclidean distance.</p>
+<div id="consideration-on-how-to-interpret-dendrogram-results" class="section level3 hasAnchor" number="12.8.1">
+<h3><span class="header-section-number">12.8.1</span> Consideration on how to interpret Dendrogram results<a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In general, there are 2n−1 possible reordering of the dendrogram, where n is the number of leaves, for this reason it is important to keep in mind that the positions of the two fused branches could be swapped without affecting the meaning of the dendrogram, and that it would be incorrect to conclude that two observations are similar on the basis that they are near each other on the dendrogram.</p>
+<p>Here we use <code>hclust()</code> function. And define the dissimilarity between two clusters.</p>
+<p><strong>What if one or both of the clusters contains multiple observations?</strong></p>
+<p>The concept of dissimilarity between a pair of observations needs to be extended to a pair of groups of observations.</p>
+<p>This extension is achieved by developing the notion of <strong>linkage</strong>, which defines the dissimilarity between two groups of observations.</p>
+<p>The four most common types of linkage: complete, average, single, and centroid.</p>
+<p><img src="images/12_linkage.png" /><!-- --></p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="hierarchical-clustering.html#cb417-1" aria-hidden="true" tabindex="-1"></a>res_hclust_complete <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb417-2"><a href="hierarchical-clustering.html#cb417-2" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb417-3"><a href="hierarchical-clustering.html#cb417-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb417-4"><a href="hierarchical-clustering.html#cb417-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb417-5"><a href="hierarchical-clustering.html#cb417-5" aria-hidden="true" tabindex="-1"></a>res_hclust_average <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb417-6"><a href="hierarchical-clustering.html#cb417-6" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb417-7"><a href="hierarchical-clustering.html#cb417-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb417-8"><a href="hierarchical-clustering.html#cb417-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb417-9"><a href="hierarchical-clustering.html#cb417-9" aria-hidden="true" tabindex="-1"></a>res_hclust_single <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb417-10"><a href="hierarchical-clustering.html#cb417-10" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb417-11"><a href="hierarchical-clustering.html#cb417-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="hierarchical-clustering.html#cb418-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_complete, <span class="at">main =</span> <span class="st">&quot;complete&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>Therefore, we cannot draw conclusions about the similarity of two observations based on their proximity along the horizontal axis. But on their position on the vertical axis.</p>
+<p><strong>Hierarchical</strong> refers to the fact that clusters, obtained by cutting the dendrogram at a given height, are necessarily nested within the clusters obtained by cutting the dendrogram at any greater height.</p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="hierarchical-clustering.html#cb420-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_average, <span class="at">main =</span> <span class="st">&quot;average&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="hierarchical-clustering.html#cb422-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span></span>
+<span id="cb422-2"><a href="hierarchical-clustering.html#cb422-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb422-3"><a href="hierarchical-clustering.html#cb422-3" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb422-4"><a href="hierarchical-clustering.html#cb422-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb422-5"><a href="hierarchical-clustering.html#cb422-5" aria-hidden="true" tabindex="-1"></a>  factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(<span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<hr />
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="k-means-lab-bad-choices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="hierarchical-clustering-types-of-linkage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="k-means.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -604,7 +630,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-islr/edit/main/12.Rmd",
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/12_Unsupervised-learning.Rmd",
 "text": "Edit"
 },
 "history": {

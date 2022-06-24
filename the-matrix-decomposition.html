@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Principal Component Analysis | Introduction to Statistical Learning Using R Book Club</title>
+  <title>12.5 The matrix decomposition | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Principal Component Analysis | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="12.5 The matrix decomposition | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Principal Component Analysis | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="12.5 The matrix decomposition | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="principal-component-analysis-1.html"/>
-<link rel="next" href="pca-lab-recipe.html"/>
+<link rel="prev" href="proportion-of-variance-explained.html"/>
+<link rel="next" href="clustering.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -467,39 +467,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="" data-path="unsupervised-learning-vs-supervised-learning.html"><a href="unsupervised-learning-vs-supervised-learning.html"><i class="fa fa-check"></i>Unsupervised Learning vs Supervised Learning</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-2.html"><a href="principal-component-analysis-2.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-recipe.html"><a href="pca-lab-recipe.html"><i class="fa fa-check"></i>PCA Lab: Recipe</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-loadings.html"><a href="pca-lab-loadings.html"><i class="fa fa-check"></i>PCA Lab: Loadings</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-variance.html"><a href="pca-lab-variance.html"><i class="fa fa-check"></i>PCA Lab: Variance</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion.html"><a href="matrix-completion.html"><i class="fa fa-check"></i>Matrix Completion</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-their-technique.html"><a href="matrix-completion-their-technique.html"><i class="fa fa-check"></i>Matrix Completion: Their Technique</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-setup.html"><a href="matrix-completion-lab-setup.html"><i class="fa fa-check"></i>Matrix Completion Lab: Setup</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-softimpute.html"><a href="matrix-completion-lab-softimpute.html"><i class="fa fa-check"></i>Matrix Completion Lab: softImpute</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering.html"><a href="k-means-clustering.html"><i class="fa fa-check"></i>K-Means Clustering</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-data.html"><a href="k-means-clustering-data.html"><i class="fa fa-check"></i>K-Means Clustering: Data</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-randomly-assign.html"><a href="k-means-clustering-randomly-assign.html"><i class="fa fa-check"></i>K-Means Clustering: Randomly Assign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-initial-centroids.html"><a href="k-means-clustering-initial-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: Initial Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-reassign.html"><a href="k-means-clustering-reassign.html"><i class="fa fa-check"></i>K-Means Clustering: Reassign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-new-centroids.html"><a href="k-means-clustering-new-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: New Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-final-result.html"><a href="k-means-clustering-final-result.html"><i class="fa fa-check"></i>K-Means Clustering: Final Result</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-warning.html"><a href="k-means-clustering-warning.html"><i class="fa fa-check"></i>K-Means Clustering: Warning</a></li>
-<li class="chapter" data-level="12.1" data-path="k-means-lab-setup.html"><a href="k-means-lab-setup.html"><i class="fa fa-check"></i><b>12.1</b> K-Means Lab: Setup</a></li>
-<li class="chapter" data-level="12.2" data-path="k-means-lab-3-clusters.html"><a href="k-means-lab-3-clusters.html"><i class="fa fa-check"></i><b>12.2</b> K-Means Lab: 3 Clusters</a></li>
-<li class="chapter" data-level="12.3" data-path="k-means-lab-multi.html"><a href="k-means-lab-multi.html"><i class="fa fa-check"></i><b>12.3</b> K-Means Lab: Multi</a></li>
-<li class="chapter" data-level="12.4" data-path="k-means-lab-finalize.html"><a href="k-means-lab-finalize.html"><i class="fa fa-check"></i><b>12.4</b> K-Means Lab: Finalize</a></li>
-<li class="chapter" data-level="12.5" data-path="k-means-lab-bad-choices.html"><a href="k-means-lab-bad-choices.html"><i class="fa fa-check"></i><b>12.5</b> K-Means Lab: Bad Choices</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering-types-of-linkage.html"><a href="hierarchical-clustering-types-of-linkage.html"><i class="fa fa-check"></i>Hierarchical Clustering: Types of Linkage</a></li>
-<li class="chapter" data-level="12.6" data-path="hierarchical-clustering-lab.html"><a href="hierarchical-clustering-lab.html"><i class="fa fa-check"></i><b>12.6</b> Hierarchical Clustering Lab</a></li>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
 <li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.6.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="12.6.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.6.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="12.6.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.6.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="12.6.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.6.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -557,21 +548,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="principal-component-analysis-2" class="section level2 unnumbered hasAnchor">
-<h2>Principal Component Analysis<a href="principal-component-analysis-2.html#principal-component-analysis-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-matrix-decomposition" class="section level2 hasAnchor" number="12.5">
+<h2><span class="header-section-number">12.5</span> The matrix decomposition<a href="the-matrix-decomposition.html#the-matrix-decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>The singular value decomposition (SVD):</strong></p>
+<p>the <code>svd()</code> function returns three components, u, d, and v.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="the-matrix-decomposition.html#cb393-1" aria-hidden="true" tabindex="-1"></a>sX <span class="ot">&lt;-</span> <span class="fu">svd</span>(X)</span>
+<span id="cb393-2"><a href="the-matrix-decomposition.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sX)</span></code></pre></div>
+<pre><code>## [1] &quot;d&quot; &quot;u&quot; &quot;v&quot;</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="the-matrix-decomposition.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(sX<span class="sc">$</span>v, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##        [,1]   [,2]   [,3]   [,4]
+## [1,] -0.536  0.418 -0.341  0.649
+## [2,] -0.583  0.188 -0.268 -0.743
+## [3,] -0.278 -0.873 -0.378  0.134
+## [4,] -0.543 -0.167  0.818  0.089</code></pre>
+<p><strong>v</strong> is equivalent to the <strong>loadings</strong>, <strong>u</strong> is equivalent to the <strong>standardized scores</strong>, and <strong>d</strong> is the matrix of the <strong>standard deviations</strong>.</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="the-matrix-decomposition.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(sX<span class="sc">$</span>d <span class="sc">*</span> <span class="fu">t</span>(sX<span class="sc">$</span>u)) <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<pre><code>##            [,1]       [,2]        [,3]         [,4]
+## [1,] -0.9756604  1.1220012 -0.43980366  0.154696581
+## [2,] -1.9305379  1.0624269  2.01950027 -0.434175454
+## [3,] -1.7454429 -0.7384595  0.05423025 -0.826264240
+## [4,]  0.1399989  1.1085423  0.11342217 -0.180973554
+## [5,] -2.4986128 -1.5274267  0.59254100 -0.338559240
+## [6,] -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="the-matrix-decomposition.html#cb399-1" aria-hidden="true" tabindex="-1"></a>pcob<span class="sc">$</span>x <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<pre><code>##             PC1        PC2         PC3          PC4
+## [1,] -0.9756604  1.1220012 -0.43980366  0.154696581
+## [2,] -1.9305379  1.0624269  2.01950027 -0.434175454
+## [3,] -1.7454429 -0.7384595  0.05423025 -0.826264240
+## [4,]  0.1399989  1.1085423  0.11342217 -0.180973554
+## [5,] -2.4986128 -1.5274267  0.59254100 -0.338559240
+## [6,] -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
+<div id="matrix-completion" class="section level3 hasAnchor" number="12.5.1">
+<h3><span class="header-section-number">12.5.1</span> Matrix Completion<a href="the-matrix-decomposition.html#matrix-completion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>Sometimes you want to <strong>fill in NAs intelligently.</strong></p>
+</blockquote>
+<p><strong>Technique</strong></p>
 <ul>
-<li>That line is the <strong>first principal component.</strong></li>
-<li>Distance from that line is the <strong>2nd (orthogonal to 1st).</strong></li>
+<li>Start with mean imputation per column.</li>
+<li>Use the computed PCA data to impute values.</li>
+<li>Recompute PCA and repeat.</li>
+<li>Technically they use <code>svd()</code> (singular-value decomposition) in the lab, which is called inside the <code>prcomp()</code> function, to more directly demonstrate what’s happening.</li>
 </ul>
-<p><img src="images/fig06-15b.png" width="800" /></p>
+<p><strong>Set up</strong></p>
+<ul>
+<li>First we set up a matrix with missing values.</li>
+<li>The code for this is in the book and not particularly interesting, but I’ve made the names suck less.</li>
+<li>I also don’t scale, because their package does this internally.</li>
+</ul>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="the-matrix-decomposition.html#cb401-1" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(USArrests)</span>
+<span id="cb401-2"><a href="the-matrix-decomposition.html#cb401-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-3"><a href="the-matrix-decomposition.html#cb401-3" aria-hidden="true" tabindex="-1"></a>n_omit <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb401-4"><a href="the-matrix-decomposition.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15</span>)</span>
+<span id="cb401-5"><a href="the-matrix-decomposition.html#cb401-5" aria-hidden="true" tabindex="-1"></a>target_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">50</span>), n_omit)</span>
+<span id="cb401-6"><a href="the-matrix-decomposition.html#cb401-6" aria-hidden="true" tabindex="-1"></a>target_cols <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, n_omit, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb401-7"><a href="the-matrix-decomposition.html#cb401-7" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">&lt;-</span> <span class="fu">cbind</span>(target_rows, target_cols)</span>
+<span id="cb401-8"><a href="the-matrix-decomposition.html#cb401-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(targets, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##      target_rows target_cols
+## [1,]          37           3
+## [2,]          47           1</code></pre>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="the-matrix-decomposition.html#cb403-1" aria-hidden="true" tabindex="-1"></a>arrests_na <span class="ot">&lt;-</span> arrests</span>
+<span id="cb403-2"><a href="the-matrix-decomposition.html#cb403-2" aria-hidden="true" tabindex="-1"></a>arrests_na[targets] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb403-3"><a href="the-matrix-decomposition.html#cb403-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arrests_na, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##      state Murder Assault UrbanPop Rape
+## [1,]     1     NA     236       58 21.2
+## [2,]     2     10      NA       48 44.5</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="the-matrix-decomposition.html#cb405-1" aria-hidden="true" tabindex="-1"></a>is_missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(arrests_na)</span></code></pre></div>
+<blockquote>
+<p>The <code>{softImpute}</code> package to do this, let’s use it!</p>
+</blockquote>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="the-matrix-decomposition.html#cb406-1" aria-hidden="true" tabindex="-1"></a>fit_svd <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">softImpute</span>(</span>
+<span id="cb406-2"><a href="the-matrix-decomposition.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  arrests_na, </span>
+<span id="cb406-3"><a href="the-matrix-decomposition.html#cb406-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;svd&quot;</span>,</span>
+<span id="cb406-4"><a href="the-matrix-decomposition.html#cb406-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">thresh =</span> <span class="fl">1e-16</span>,</span>
+<span id="cb406-5"><a href="the-matrix-decomposition.html#cb406-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">3000</span></span>
+<span id="cb406-6"><a href="the-matrix-decomposition.html#cb406-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb406-7"><a href="the-matrix-decomposition.html#cb406-7" aria-hidden="true" tabindex="-1"></a>arrests_imputed <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">complete</span>(arrests_na, fit_svd, <span class="at">unscale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb406-8"><a href="the-matrix-decomposition.html#cb406-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(arrests_imputed[is_missing], arrests[is_missing])</span></code></pre></div>
+<pre><code>## [1] 0.7249994</code></pre>
+<hr />
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="principal-component-analysis-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pca-lab-recipe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="proportion-of-variance-explained.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -602,7 +666,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-islr/edit/main/12.Rmd",
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/12_Unsupervised-learning.Rmd",
 "text": "Edit"
 },
 "history": {

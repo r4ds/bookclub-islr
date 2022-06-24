@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>K-Means Clustering: Data | Introduction to Statistical Learning Using R Book Club</title>
+  <title>12.7 K-means | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="K-Means Clustering: Data | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="12.7 K-means | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="K-Means Clustering: Data | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="12.7 K-means | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="k-means-clustering.html"/>
-<link rel="next" href="k-means-clustering-randomly-assign.html"/>
+<link rel="prev" href="clustering.html"/>
+<link rel="next" href="hierarchical-clustering.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -467,39 +467,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="" data-path="unsupervised-learning-vs-supervised-learning.html"><a href="unsupervised-learning-vs-supervised-learning.html"><i class="fa fa-check"></i>Unsupervised Learning vs Supervised Learning</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-2.html"><a href="principal-component-analysis-2.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-recipe.html"><a href="pca-lab-recipe.html"><i class="fa fa-check"></i>PCA Lab: Recipe</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-loadings.html"><a href="pca-lab-loadings.html"><i class="fa fa-check"></i>PCA Lab: Loadings</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-variance.html"><a href="pca-lab-variance.html"><i class="fa fa-check"></i>PCA Lab: Variance</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion.html"><a href="matrix-completion.html"><i class="fa fa-check"></i>Matrix Completion</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-their-technique.html"><a href="matrix-completion-their-technique.html"><i class="fa fa-check"></i>Matrix Completion: Their Technique</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-setup.html"><a href="matrix-completion-lab-setup.html"><i class="fa fa-check"></i>Matrix Completion Lab: Setup</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-softimpute.html"><a href="matrix-completion-lab-softimpute.html"><i class="fa fa-check"></i>Matrix Completion Lab: softImpute</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering.html"><a href="k-means-clustering.html"><i class="fa fa-check"></i>K-Means Clustering</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-data.html"><a href="k-means-clustering-data.html"><i class="fa fa-check"></i>K-Means Clustering: Data</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-randomly-assign.html"><a href="k-means-clustering-randomly-assign.html"><i class="fa fa-check"></i>K-Means Clustering: Randomly Assign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-initial-centroids.html"><a href="k-means-clustering-initial-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: Initial Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-reassign.html"><a href="k-means-clustering-reassign.html"><i class="fa fa-check"></i>K-Means Clustering: Reassign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-new-centroids.html"><a href="k-means-clustering-new-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: New Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-final-result.html"><a href="k-means-clustering-final-result.html"><i class="fa fa-check"></i>K-Means Clustering: Final Result</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-warning.html"><a href="k-means-clustering-warning.html"><i class="fa fa-check"></i>K-Means Clustering: Warning</a></li>
-<li class="chapter" data-level="12.1" data-path="k-means-lab-setup.html"><a href="k-means-lab-setup.html"><i class="fa fa-check"></i><b>12.1</b> K-Means Lab: Setup</a></li>
-<li class="chapter" data-level="12.2" data-path="k-means-lab-3-clusters.html"><a href="k-means-lab-3-clusters.html"><i class="fa fa-check"></i><b>12.2</b> K-Means Lab: 3 Clusters</a></li>
-<li class="chapter" data-level="12.3" data-path="k-means-lab-multi.html"><a href="k-means-lab-multi.html"><i class="fa fa-check"></i><b>12.3</b> K-Means Lab: Multi</a></li>
-<li class="chapter" data-level="12.4" data-path="k-means-lab-finalize.html"><a href="k-means-lab-finalize.html"><i class="fa fa-check"></i><b>12.4</b> K-Means Lab: Finalize</a></li>
-<li class="chapter" data-level="12.5" data-path="k-means-lab-bad-choices.html"><a href="k-means-lab-bad-choices.html"><i class="fa fa-check"></i><b>12.5</b> K-Means Lab: Bad Choices</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering-types-of-linkage.html"><a href="hierarchical-clustering-types-of-linkage.html"><i class="fa fa-check"></i>Hierarchical Clustering: Types of Linkage</a></li>
-<li class="chapter" data-level="12.6" data-path="hierarchical-clustering-lab.html"><a href="hierarchical-clustering-lab.html"><i class="fa fa-check"></i><b>12.6</b> Hierarchical Clustering Lab</a></li>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
 <li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.6.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="12.6.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.6.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="12.6.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.6.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="12.6.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.6.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -557,17 +548,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="k-means-clustering-data" class="section level2 unnumbered hasAnchor">
-<h2>K-Means Clustering: Data<a href="k-means-clustering-data.html#k-means-clustering-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="images/fig12-08a.png" width="400" /></p>
+<div id="k-means" class="section level2 hasAnchor" number="12.7">
+<h2><span class="header-section-number">12.7</span> K-means<a href="k-means.html#k-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>K-means clustering, we seek to partition the observations into a pre-specified clustering number of clusters.</p>
+<p><strong>Steps to K-means:</strong></p>
+<ul>
+<li>decide the number of clusters</li>
+<li>then the K-means algorithm will assign each observation to exactly one of the K clusters</li>
+</ul>
+<p>Let C1, . . . , CK denote sets containing the indices of the observations in each cluster</p>
+<p><strong>Rule of thumb</strong></p>
+<p>A good clustering is one for which the <strong>within-cluster variation</strong> is as small as possible.</p>
+<p><strong>Within-cluster variation</strong> measure: <span class="math inline">\(W(C_k)\)</span></p>
+<p>Minimize <span class="math inline">\(\sum_{k=1}^KW(C_k)\)</span></p>
+<p>In R we use the <code>kmeans()</code> function. Here is an example with two clusters:</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="k-means.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb408-2"><a href="k-means.html#cb408-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">50</span> <span class="sc">*</span> <span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb408-3"><a href="k-means.html#cb408-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb408-4"><a href="k-means.html#cb408-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">2</span>] <span class="sc">-</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="k-means.html#cb409-1" aria-hidden="true" tabindex="-1"></a>x_df <span class="ot">&lt;-</span><span class="fu">data.frame</span>(x) <span class="sc">%&gt;%</span></span>
+<span id="cb409-2"><a href="k-means.html#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">variant=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">each =</span> <span class="dv">25</span>)) </span>
+<span id="cb409-3"><a href="k-means.html#cb409-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb409-4"><a href="k-means.html#cb409-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x_df,<span class="fu">aes</span>(X1, X2, <span class="at">color =</span> variant)) <span class="sc">+</span></span>
+<span id="cb409-5"><a href="k-means.html#cb409-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="k-means.html#cb410-1" aria-hidden="true" tabindex="-1"></a>km.out <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(x, <span class="dv">2</span>, <span class="at">nstart =</span> <span class="dv">20</span>)</span>
+<span id="cb410-2"><a href="k-means.html#cb410-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb410-3"><a href="k-means.html#cb410-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(km.out)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##       x1     x2  size withinss cluster
+##    &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
+## 1  3.33  -4.08     25     63.2 1      
+## 2 -0.196 -0.185    25     65.4 2</code></pre>
+<p>Functions to use to extrapolate values:</p>
+<ul>
+<li>tidy()</li>
+<li>glance()</li>
+<li>augment()</li>
+</ul>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="k-means.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(km.out, <span class="at">data =</span> x_df) <span class="sc">%&gt;%</span></span>
+<span id="cb412-2"><a href="k-means.html#cb412-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(X1, X2, <span class="at">color =</span> .cluster)) <span class="sc">+</span></span>
+<span id="cb412-3"><a href="k-means.html#cb412-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>Try different clusters numbers to find the best one grouping.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="k-means.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb413-2"><a href="k-means.html#cb413-2" aria-hidden="true" tabindex="-1"></a>multi_kmeans <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">k =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb413-3"><a href="k-means.html#cb413-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb413-4"><a href="k-means.html#cb413-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> purrr<span class="sc">::</span><span class="fu">map</span>(k, <span class="sc">~</span> <span class="fu">kmeans</span>(x, <span class="at">centers =</span> .x, <span class="at">nstart =</span> <span class="dv">20</span>)),</span>
+<span id="cb413-5"><a href="k-means.html#cb413-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tot.withinss =</span> purrr<span class="sc">::</span><span class="fu">map_dbl</span>(model, <span class="sc">~</span> <span class="fu">glance</span>(.x)<span class="sc">$</span>tot.withinss)</span>
+<span id="cb413-6"><a href="k-means.html#cb413-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb413-7"><a href="k-means.html#cb413-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-8"><a href="k-means.html#cb413-8" aria-hidden="true" tabindex="-1"></a>multi_kmeans</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 3
+##        k model    tot.withinss
+##    &lt;int&gt; &lt;list&gt;          &lt;dbl&gt;
+##  1     1 &lt;kmeans&gt;        474. 
+##  2     2 &lt;kmeans&gt;        129. 
+##  3     3 &lt;kmeans&gt;         98.0
+##  4     4 &lt;kmeans&gt;         69.8
+##  5     5 &lt;kmeans&gt;         50.9
+##  6     6 &lt;kmeans&gt;         42.5
+##  7     7 &lt;kmeans&gt;         34.6
+##  8     8 &lt;kmeans&gt;         29.9
+##  9     9 &lt;kmeans&gt;         25.9
+## 10    10 &lt;kmeans&gt;         22.0</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="k-means.html#cb415-1" aria-hidden="true" tabindex="-1"></a>multi_kmeans_2 <span class="ot">&lt;-</span> multi_kmeans <span class="sc">%&gt;%</span></span>
+<span id="cb415-2"><a href="k-means.html#cb415-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(k<span class="sc">&gt;</span><span class="dv">1</span> <span class="sc">&amp;</span> k<span class="sc">&lt;=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb415-3"><a href="k-means.html#cb415-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(model) <span class="sc">%&gt;%</span></span>
+<span id="cb415-4"><a href="k-means.html#cb415-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pluck</span>(<span class="dv">1</span>)</span>
+<span id="cb415-5"><a href="k-means.html#cb415-5" aria-hidden="true" tabindex="-1"></a>multi_kmeans_3 <span class="ot">&lt;-</span> multi_kmeans <span class="sc">%&gt;%</span></span>
+<span id="cb415-6"><a href="k-means.html#cb415-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(k<span class="sc">&gt;</span><span class="dv">1</span> <span class="sc">&amp;</span> k<span class="sc">&lt;=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb415-7"><a href="k-means.html#cb415-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(model) <span class="sc">%&gt;%</span></span>
+<span id="cb415-8"><a href="k-means.html#cb415-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pluck</span>(<span class="dv">2</span>)</span>
+<span id="cb415-9"><a href="k-means.html#cb415-9" aria-hidden="true" tabindex="-1"></a>multi_kmeans_4 <span class="ot">&lt;-</span> multi_kmeans <span class="sc">%&gt;%</span></span>
+<span id="cb415-10"><a href="k-means.html#cb415-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(k<span class="sc">&gt;</span><span class="dv">1</span> <span class="sc">&amp;</span> k<span class="sc">&lt;=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb415-11"><a href="k-means.html#cb415-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(model) <span class="sc">%&gt;%</span></span>
+<span id="cb415-12"><a href="k-means.html#cb415-12" aria-hidden="true" tabindex="-1"></a><span class="fu">pluck</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="k-means.html#cb416-1" aria-hidden="true" tabindex="-1"></a>group1<span class="ot">&lt;-</span><span class="fu">augment</span>(multi_kmeans_2, <span class="at">data =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb416-2"><a href="k-means.html#cb416-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(X1, X2, <span class="at">color =</span> .cluster)) <span class="sc">+</span></span>
+<span id="cb416-3"><a href="k-means.html#cb416-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb416-4"><a href="k-means.html#cb416-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb416-5"><a href="k-means.html#cb416-5" aria-hidden="true" tabindex="-1"></a>group2<span class="ot">&lt;-</span><span class="fu">augment</span>(multi_kmeans_3, <span class="at">data =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb416-6"><a href="k-means.html#cb416-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(X1, X2, <span class="at">color =</span> .cluster)) <span class="sc">+</span></span>
+<span id="cb416-7"><a href="k-means.html#cb416-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb416-8"><a href="k-means.html#cb416-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb416-9"><a href="k-means.html#cb416-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb416-10"><a href="k-means.html#cb416-10" aria-hidden="true" tabindex="-1"></a>group3<span class="ot">&lt;-</span><span class="fu">augment</span>(multi_kmeans_4, <span class="at">data =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb416-11"><a href="k-means.html#cb416-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(X1, X2, <span class="at">color =</span> .cluster)) <span class="sc">+</span></span>
+<span id="cb416-12"><a href="k-means.html#cb416-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb416-13"><a href="k-means.html#cb416-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb416-14"><a href="k-means.html#cb416-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb416-15"><a href="k-means.html#cb416-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb416-16"><a href="k-means.html#cb416-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb416-17"><a href="k-means.html#cb416-17" aria-hidden="true" tabindex="-1"></a>group1<span class="sc">|</span>group2<span class="sc">|</span>group3</span></code></pre></div>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<hr />
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="k-means-clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="k-means-clustering-randomly-assign.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hierarchical-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -598,7 +681,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-islr/edit/main/12.Rmd",
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/12_Unsupervised-learning.Rmd",
 "text": "Edit"
 },
 "history": {

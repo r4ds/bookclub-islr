@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Hierarchical Clustering: Types of Linkage | Introduction to Statistical Learning Using R Book Club</title>
+  <title>12.3 Geometric interpretation | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Hierarchical Clustering: Types of Linkage | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="12.3 Geometric interpretation | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hierarchical Clustering: Types of Linkage | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="12.3 Geometric interpretation | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="hierarchical-clustering.html"/>
-<link rel="next" href="hierarchical-clustering-lab.html"/>
+<link rel="prev" href="principal-component-analysis.html"/>
+<link rel="next" href="proportion-of-variance-explained.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -467,39 +467,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="" data-path="unsupervised-learning-vs-supervised-learning.html"><a href="unsupervised-learning-vs-supervised-learning.html"><i class="fa fa-check"></i>Unsupervised Learning vs Supervised Learning</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-2.html"><a href="principal-component-analysis-2.html"><i class="fa fa-check"></i>Principal Component Analysis</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-recipe.html"><a href="pca-lab-recipe.html"><i class="fa fa-check"></i>PCA Lab: Recipe</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-loadings.html"><a href="pca-lab-loadings.html"><i class="fa fa-check"></i>PCA Lab: Loadings</a></li>
-<li class="chapter" data-level="" data-path="pca-lab-variance.html"><a href="pca-lab-variance.html"><i class="fa fa-check"></i>PCA Lab: Variance</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion.html"><a href="matrix-completion.html"><i class="fa fa-check"></i>Matrix Completion</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-their-technique.html"><a href="matrix-completion-their-technique.html"><i class="fa fa-check"></i>Matrix Completion: Their Technique</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-setup.html"><a href="matrix-completion-lab-setup.html"><i class="fa fa-check"></i>Matrix Completion Lab: Setup</a></li>
-<li class="chapter" data-level="" data-path="matrix-completion-lab-softimpute.html"><a href="matrix-completion-lab-softimpute.html"><i class="fa fa-check"></i>Matrix Completion Lab: softImpute</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering.html"><a href="k-means-clustering.html"><i class="fa fa-check"></i>K-Means Clustering</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-data.html"><a href="k-means-clustering-data.html"><i class="fa fa-check"></i>K-Means Clustering: Data</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-randomly-assign.html"><a href="k-means-clustering-randomly-assign.html"><i class="fa fa-check"></i>K-Means Clustering: Randomly Assign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-initial-centroids.html"><a href="k-means-clustering-initial-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: Initial Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-reassign.html"><a href="k-means-clustering-reassign.html"><i class="fa fa-check"></i>K-Means Clustering: Reassign</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-new-centroids.html"><a href="k-means-clustering-new-centroids.html"><i class="fa fa-check"></i>K-Means Clustering: New Centroids</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-final-result.html"><a href="k-means-clustering-final-result.html"><i class="fa fa-check"></i>K-Means Clustering: Final Result</a></li>
-<li class="chapter" data-level="" data-path="k-means-clustering-warning.html"><a href="k-means-clustering-warning.html"><i class="fa fa-check"></i>K-Means Clustering: Warning</a></li>
-<li class="chapter" data-level="12.1" data-path="k-means-lab-setup.html"><a href="k-means-lab-setup.html"><i class="fa fa-check"></i><b>12.1</b> K-Means Lab: Setup</a></li>
-<li class="chapter" data-level="12.2" data-path="k-means-lab-3-clusters.html"><a href="k-means-lab-3-clusters.html"><i class="fa fa-check"></i><b>12.2</b> K-Means Lab: 3 Clusters</a></li>
-<li class="chapter" data-level="12.3" data-path="k-means-lab-multi.html"><a href="k-means-lab-multi.html"><i class="fa fa-check"></i><b>12.3</b> K-Means Lab: Multi</a></li>
-<li class="chapter" data-level="12.4" data-path="k-means-lab-finalize.html"><a href="k-means-lab-finalize.html"><i class="fa fa-check"></i><b>12.4</b> K-Means Lab: Finalize</a></li>
-<li class="chapter" data-level="12.5" data-path="k-means-lab-bad-choices.html"><a href="k-means-lab-bad-choices.html"><i class="fa fa-check"></i><b>12.5</b> K-Means Lab: Bad Choices</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
-<li class="chapter" data-level="" data-path="hierarchical-clustering-types-of-linkage.html"><a href="hierarchical-clustering-types-of-linkage.html"><i class="fa fa-check"></i>Hierarchical Clustering: Types of Linkage</a></li>
-<li class="chapter" data-level="12.6" data-path="hierarchical-clustering-lab.html"><a href="hierarchical-clustering-lab.html"><i class="fa fa-check"></i><b>12.6</b> Hierarchical Clustering Lab</a></li>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
 <li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.6.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="12.6.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.6.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="12.6.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.6.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="12.6.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.6.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -557,48 +548,201 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hierarchical-clustering-types-of-linkage" class="section level2 unnumbered hasAnchor">
-<h2>Hierarchical Clustering: Types of Linkage<a href="hierarchical-clustering-types-of-linkage.html#hierarchical-clustering-types-of-linkage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<thead>
-<tr class="header">
-<th>Linkage</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Complete</td>
-<td>Largest pairwise distances between A &amp; B.</td>
-</tr>
-<tr class="even">
-<td>Single</td>
-<td>Smallest pairwise distances between A &amp; B.</td>
-</tr>
-<tr class="odd">
-<td>Average</td>
-<td>Average pairwise distances between A &amp; B.</td>
-</tr>
-<tr class="even">
-<td>Centroid</td>
-<td>Distance between centroids of A &amp; B.</td>
-</tr>
-</tbody>
-</table>
-<p>“Distance” can be different measures:</p>
+<div id="geometric-interpretation" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Geometric interpretation<a href="geometric-interpretation.html#geometric-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is the representation of the Ad Spending vs Population with the first and second principal components.
+Let’s go a bit more in deep about how to make such as visualization.
+<img src="images/fig06-14.png" /><!-- --></p>
+<p>source: <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/" class="uri">http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/</a></p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="geometric-interpretation.html#cb364-1" aria-hidden="true" tabindex="-1"></a>USArrests <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(USArrests, <span class="at">rownames =</span> <span class="st">&quot;state&quot;</span>)</span>
+<span id="cb364-2"><a href="geometric-interpretation.html#cb364-2" aria-hidden="true" tabindex="-1"></a>USArrests</span></code></pre></div>
+<pre><code>## # A tibble: 50 × 5
+##    state       Murder Assault UrbanPop  Rape
+##    &lt;chr&gt;        &lt;dbl&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1 Alabama       13.2     236       58  21.2
+##  2 Alaska        10       263       48  44.5
+##  3 Arizona        8.1     294       80  31  
+##  4 Arkansas       8.8     190       50  19.5
+##  5 California     9       276       91  40.6
+##  6 Colorado       7.9     204       78  38.7
+##  7 Connecticut    3.3     110       77  11.1
+##  8 Delaware       5.9     238       72  15.8
+##  9 Florida       15.4     335       80  31.9
+## 10 Georgia       17.4     211       60  25.8
+## # … with 40 more rows</code></pre>
+<p>Use of the <code>scale()</code> function to show how data are centered</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="geometric-interpretation.html#cb366-1" aria-hidden="true" tabindex="-1"></a>USArrests <span class="sc">%&gt;%</span></span>
+<span id="cb366-2"><a href="geometric-interpretation.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="sc">-</span>state) <span class="sc">%&gt;%</span></span>
+<span id="cb366-3"><a href="geometric-interpretation.html#cb366-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb366-4"><a href="geometric-interpretation.html#cb366-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb366-5"><a href="geometric-interpretation.html#cb366-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(mean)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##      Murder  Assault  UrbanPop     Rape
+##       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 -7.66e-17 1.11e-16 -4.33e-16 8.94e-17</code></pre>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="geometric-interpretation.html#cb368-1" aria-hidden="true" tabindex="-1"></a>USArrests <span class="sc">%&gt;%</span></span>
+<span id="cb368-2"><a href="geometric-interpretation.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="sc">-</span>state)<span class="sc">%&gt;%</span></span>
+<span id="cb368-3"><a href="geometric-interpretation.html#cb368-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">z_Murder=</span>(Murder<span class="sc">-</span><span class="fu">mean</span>(Murder))<span class="sc">/</span><span class="fu">sd</span>(Murder),</span>
+<span id="cb368-4"><a href="geometric-interpretation.html#cb368-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">z_Assault=</span>(Assault<span class="sc">-</span><span class="fu">mean</span>(Assault))<span class="sc">/</span><span class="fu">sd</span>(Assault),</span>
+<span id="cb368-5"><a href="geometric-interpretation.html#cb368-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">z_UrbanPop=</span>(UrbanPop<span class="sc">-</span><span class="fu">mean</span>(UrbanPop))<span class="sc">/</span><span class="fu">sd</span>(UrbanPop),</span>
+<span id="cb368-6"><a href="geometric-interpretation.html#cb368-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">z_Rape=</span>(Rape<span class="sc">-</span><span class="fu">mean</span>(Rape))<span class="sc">/</span><span class="fu">sd</span>(Rape)) <span class="sc">%&gt;%</span></span>
+<span id="cb368-7"><a href="geometric-interpretation.html#cb368-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(mean)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   Murder Assault UrbanPop  Rape  z_Murder z_Assault z_UrbanPop   z_Rape
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1   7.79    171.     65.5  21.2 -7.66e-17  1.11e-16  -4.33e-16 8.94e-17</code></pre>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="geometric-interpretation.html#cb370-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># z varables have mean zero</span></span></code></pre></div>
+<p>Representation of the <strong>loadings</strong>: <span class="math inline">\(\phi_1\)</span> and <span class="math inline">\(\phi_2\)</span> are the first and the second principal components.</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="geometric-interpretation.html#cb371-1" aria-hidden="true" tabindex="-1"></a>USArrests_pca <span class="ot">&lt;-</span> USArrests <span class="sc">%&gt;%</span></span>
+<span id="cb371-2"><a href="geometric-interpretation.html#cb371-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>state) <span class="sc">%&gt;%</span></span>
+<span id="cb371-3"><a href="geometric-interpretation.html#cb371-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb371-4"><a href="geometric-interpretation.html#cb371-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb371-5"><a href="geometric-interpretation.html#cb371-5" aria-hidden="true" tabindex="-1"></a>USArrests_pca</span></code></pre></div>
+<pre><code>## Standard deviations (1, .., p=4):
+## [1] 1.5748783 0.9948694 0.5971291 0.4164494
+## 
+## Rotation (n x k) = (4 x 4):
+##                 PC1        PC2        PC3         PC4
+## Murder   -0.5358995  0.4181809 -0.3412327  0.64922780
+## Assault  -0.5831836  0.1879856 -0.2681484 -0.74340748
+## UrbanPop -0.2781909 -0.8728062 -0.3780158  0.13387773
+## Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="geometric-interpretation.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(USArrests_pca, <span class="at">matrix =</span> <span class="st">&quot;loadings&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 3
+##    column      PC   value
+##    &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Murder       1 -0.536 
+##  2 Murder       2  0.418 
+##  3 Murder       3 -0.341 
+##  4 Murder       4  0.649 
+##  5 Assault      1 -0.583 
+##  6 Assault      2  0.188 
+##  7 Assault      3 -0.268 
+##  8 Assault      4 -0.743 
+##  9 UrbanPop     1 -0.278 
+## 10 UrbanPop     2 -0.873 
+## 11 UrbanPop     3 -0.378 
+## 12 UrbanPop     4  0.134 
+## 13 Rape         1 -0.543 
+## 14 Rape         2 -0.167 
+## 15 Rape         3  0.818 
+## 16 Rape         4  0.0890</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="geometric-interpretation.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(USArrests_pca, <span class="at">matrix =</span> <span class="st">&quot;scores&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 200 × 3
+##      row    PC  value
+##    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1     1 -0.976
+##  2     1     2  1.12 
+##  3     1     3 -0.440
+##  4     1     4  0.155
+##  5     2     1 -1.93 
+##  6     2     2  1.06 
+##  7     2     3  2.02 
+##  8     2     4 -0.434
+##  9     3     1 -1.75 
+## 10     3     2 -0.738
+## # … with 190 more rows</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="geometric-interpretation.html#cb377-1" aria-hidden="true" tabindex="-1"></a>label_value<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;1&quot;</span><span class="ot">=</span><span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;2&quot;</span><span class="ot">=</span><span class="st">&quot;PC2&quot;</span>,<span class="st">&quot;3&quot;</span><span class="ot">=</span><span class="st">&quot;PC3&quot;</span>,<span class="st">&quot;4&quot;</span><span class="ot">=</span><span class="st">&quot;PC4&quot;</span>)</span>
+<span id="cb377-2"><a href="geometric-interpretation.html#cb377-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-3"><a href="geometric-interpretation.html#cb377-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(USArrests_pca, <span class="at">matrix =</span> <span class="st">&quot;loadings&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb377-4"><a href="geometric-interpretation.html#cb377-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, column)) <span class="sc">+</span></span>
+<span id="cb377-5"><a href="geometric-interpretation.html#cb377-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> PC,<span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">.cols =</span> label_value)) <span class="sc">+</span></span>
+<span id="cb377-6"><a href="geometric-interpretation.html#cb377-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill=</span>column),<span class="at">show.legend =</span> F)<span class="sc">+</span></span>
+<span id="cb377-7"><a href="geometric-interpretation.html#cb377-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Loadings&quot;</span>,<span class="at">y=</span><span class="st">&quot;Predictors&quot;</span>)<span class="sc">+</span></span>
+<span id="cb377-8"><a href="geometric-interpretation.html#cb377-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Representation of the <strong>scores</strong></p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="geometric-interpretation.html#cb378-1" aria-hidden="true" tabindex="-1"></a>pca_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="sc">~</span>., <span class="at">data =</span> USArrests) <span class="sc">%&gt;%</span></span>
+<span id="cb378-2"><a href="geometric-interpretation.html#cb378-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb378-3"><a href="geometric-interpretation.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_pca</span>(<span class="fu">all_numeric</span>(), <span class="at">id =</span> <span class="st">&quot;pca&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb378-4"><a href="geometric-interpretation.html#cb378-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb378-5"><a href="geometric-interpretation.html#cb378-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bake</span>(<span class="at">new_data =</span> <span class="cn">NULL</span>)</span>
+<span id="cb378-6"><a href="geometric-interpretation.html#cb378-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-7"><a href="geometric-interpretation.html#cb378-7" aria-hidden="true" tabindex="-1"></a>pca_rec</span></code></pre></div>
+<pre><code>## # A tibble: 50 × 5
+##    state           PC1     PC2     PC3      PC4
+##    &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Alabama     -0.976   1.12   -0.440   0.155  
+##  2 Alaska      -1.93    1.06    2.02   -0.434  
+##  3 Arizona     -1.75   -0.738   0.0542 -0.826  
+##  4 Arkansas     0.140   1.11    0.113  -0.181  
+##  5 California  -2.50   -1.53    0.593  -0.339  
+##  6 Colorado    -1.50   -0.978   1.08    0.00145
+##  7 Connecticut  1.34   -1.08   -0.637  -0.117  
+##  8 Delaware    -0.0472 -0.322  -0.711  -0.873  
+##  9 Florida     -2.98    0.0388 -0.571  -0.0953 
+## 10 Georgia     -1.62    1.27   -0.339   1.07   
+## # … with 40 more rows</code></pre>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="geometric-interpretation.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loadings</span></span>
+<span id="cb380-2"><a href="geometric-interpretation.html#cb380-2" aria-hidden="true" tabindex="-1"></a>df_rotation<span class="ot">&lt;-</span>USArrests_pca<span class="sc">$</span>rotation <span class="sc">%&gt;%</span></span>
+<span id="cb380-3"><a href="geometric-interpretation.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb380-4"><a href="geometric-interpretation.html#cb380-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>()</span>
+<span id="cb380-5"><a href="geometric-interpretation.html#cb380-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb380-6"><a href="geometric-interpretation.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="co"># range(df_rotation$PC1)</span></span>
+<span id="cb380-7"><a href="geometric-interpretation.html#cb380-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb380-8"><a href="geometric-interpretation.html#cb380-8" aria-hidden="true" tabindex="-1"></a>pca_rec<span class="sc">%&gt;%</span></span>
+<span id="cb380-9"><a href="geometric-interpretation.html#cb380-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>PC1) <span class="sc">%&gt;%</span></span>
+<span id="cb380-10"><a href="geometric-interpretation.html#cb380-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="sc">-</span>PC1,<span class="sc">-</span>PC2,<span class="at">label=</span>state))<span class="sc">+</span></span>
+<span id="cb380-11"><a href="geometric-interpretation.html#cb380-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="st">&quot;.&quot;</span>)<span class="sc">+</span></span>
+<span id="cb380-12"><a href="geometric-interpretation.html#cb380-12" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">color=</span><span class="st">&quot;navy&quot;</span>,<span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb380-13"><a href="geometric-interpretation.html#cb380-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>,<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>,<span class="at">size=</span><span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb380-14"><a href="geometric-interpretation.html#cb380-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>,<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>,<span class="at">size=</span><span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb380-15"><a href="geometric-interpretation.html#cb380-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,<span class="at">se=</span>F,<span class="at">size=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb380-16"><a href="geometric-interpretation.html#cb380-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>df_rotation,</span>
+<span id="cb380-17"><a href="geometric-interpretation.html#cb380-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">xend=</span><span class="sc">-</span>PC1,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span><span class="sc">-</span>PC2),</span>
+<span id="cb380-18"><a href="geometric-interpretation.html#cb380-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb380-19"><a href="geometric-interpretation.html#cb380-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb380-20"><a href="geometric-interpretation.html#cb380-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">color=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb380-21"><a href="geometric-interpretation.html#cb380-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>df_rotation,</span>
+<span id="cb380-22"><a href="geometric-interpretation.html#cb380-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span><span class="sc">-</span>PC1,<span class="at">y=</span><span class="sc">-</span>PC2,<span class="at">label=</span>rowname),</span>
+<span id="cb380-23"><a href="geometric-interpretation.html#cb380-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">color=</span><span class="st">&quot;orange&quot;</span>,<span class="at">size=</span><span class="dv">3</span>,<span class="at">vjust=</span><span class="dv">0</span>,<span class="at">hjust=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb380-24"><a href="geometric-interpretation.html#cb380-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb380-25"><a href="geometric-interpretation.html#cb380-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="at">trans=</span><span class="sc">~</span>.<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb380-26"><a href="geometric-interpretation.html#cb380-26" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">name=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb380-27"><a href="geometric-interpretation.html#cb380-27" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>)))<span class="sc">+</span></span>
+<span id="cb380-28"><a href="geometric-interpretation.html#cb380-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;PC2&quot;</span>,</span>
+<span id="cb380-29"><a href="geometric-interpretation.html#cb380-29" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="at">trans=</span><span class="sc">~</span>.<span class="sc">*</span><span class="dv">1</span>, </span>
+<span id="cb380-30"><a href="geometric-interpretation.html#cb380-30" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">name=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb380-31"><a href="geometric-interpretation.html#cb380-31" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>)))<span class="sc">+</span></span>
+<span id="cb380-32"><a href="geometric-interpretation.html#cb380-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">#xlim(-3,3)+</span></span>
+<span id="cb380-33"><a href="geometric-interpretation.html#cb380-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Principal component scores and the loading vectors&quot;</span>,<span class="at">x=</span><span class="st">&quot;PC1&quot;</span>,<span class="at">y=</span><span class="st">&quot;PC2&quot;</span>)<span class="sc">+</span></span>
+<span id="cb380-34"><a href="geometric-interpretation.html#cb380-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>sources:</p>
 <ul>
-<li>Euclidean distance.</li>
-<li>Correlation.</li>
-<li>Presumably other distance measures.</li>
+<li><a href="https://stackoverflow.com/questions/26995923/ggplot2-how-to-plot-an-orthogonal-regression-line" class="uri">https://stackoverflow.com/questions/26995923/ggplot2-how-to-plot-an-orthogonal-regression-line</a></li>
 </ul>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="geometric-interpretation.html#cb382-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="sc">~</span>Assault<span class="sc">+</span>Murder, USArrests[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb382-2"><a href="geometric-interpretation.html#cb382-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-3"><a href="geometric-interpretation.html#cb382-3" aria-hidden="true" tabindex="-1"></a>slp <span class="ot">&lt;-</span> <span class="fu">with</span>(pca, <span class="dv">5</span><span class="sc">*</span>rotation[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">/</span> rotation[<span class="dv">2</span>,<span class="dv">2</span>])</span>
+<span id="cb382-4"><a href="geometric-interpretation.html#cb382-4" aria-hidden="true" tabindex="-1"></a>slp2 <span class="ot">&lt;-</span> <span class="fu">with</span>(pca, <span class="fl">0.5</span><span class="sc">*</span>rotation[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">/</span> rotation[<span class="dv">2</span>,<span class="dv">2</span>])</span>
+<span id="cb382-5"><a href="geometric-interpretation.html#cb382-5" aria-hidden="true" tabindex="-1"></a>int <span class="ot">&lt;-</span> <span class="fu">with</span>(pca, center[<span class="dv">2</span>] <span class="sc">-</span> slp<span class="sc">*</span>center[<span class="dv">1</span>])</span>
+<span id="cb382-6"><a href="geometric-interpretation.html#cb382-6" aria-hidden="true" tabindex="-1"></a>int2 <span class="ot">&lt;-</span> <span class="fu">with</span>(pca, center[<span class="dv">2</span>] <span class="sc">-</span> slp2<span class="sc">*</span>center[<span class="dv">1</span>])</span>
+<span id="cb382-7"><a href="geometric-interpretation.html#cb382-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-8"><a href="geometric-interpretation.html#cb382-8" aria-hidden="true" tabindex="-1"></a><span class="co">#pca$center</span></span>
+<span id="cb382-9"><a href="geometric-interpretation.html#cb382-9" aria-hidden="true" tabindex="-1"></a><span class="co">#pca$rotation</span></span>
+<span id="cb382-10"><a href="geometric-interpretation.html#cb382-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-11"><a href="geometric-interpretation.html#cb382-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(USArrests,<span class="fu">aes</span>(Assault,Murder))<span class="sc">+</span></span>
+<span id="cb382-12"><a href="geometric-interpretation.html#cb382-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.8</span>,<span class="at">color=</span><span class="st">&quot;purple&quot;</span>) <span class="sc">+</span></span>
+<span id="cb382-13"><a href="geometric-interpretation.html#cb382-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span>lm, <span class="at">color=</span><span class="st">&quot;darkgreen&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb382-14"><a href="geometric-interpretation.html#cb382-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span>slp, <span class="at">intercept=</span>int, </span>
+<span id="cb382-15"><a href="geometric-interpretation.html#cb382-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&quot;blue&quot;</span>,<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>,<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb382-16"><a href="geometric-interpretation.html#cb382-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span>slp2, <span class="at">intercept=</span>int2, </span>
+<span id="cb382-17"><a href="geometric-interpretation.html#cb382-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>,<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb382-18"><a href="geometric-interpretation.html#cb382-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Murder vs Assault&quot;</span>,</span>
+<span id="cb382-19"><a href="geometric-interpretation.html#cb382-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;First principal component &amp; second principal component&quot;</span>)<span class="sc">+</span></span>
+<span id="cb382-20"><a href="geometric-interpretation.html#cb382-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookclub-islr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="hierarchical-clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="hierarchical-clustering-lab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="principal-component-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="proportion-of-variance-explained.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -629,7 +773,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-islr/edit/main/12.Rmd",
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/12_Unsupervised-learning.Rmd",
 "text": "Edit"
 },
 "history": {
