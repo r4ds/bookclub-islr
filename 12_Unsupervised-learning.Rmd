@@ -144,7 +144,7 @@ source: http://www.sthda.com/english/articles/31-principal-component-methods-in-
 library(tidymodels)
 library(tidyverse)
 library(magrittr)
-library(factoextra) # ?
+library(factoextra)
 library(patchwork)
 library(proxy)
 library(ISLR2)
