@@ -367,6 +367,8 @@ where the expectation averages the probability over all possible values of X. Th
 
 <h4>**K-Nearest Neighbors**</h4>
 
+It is a classifier of unlabeled example which needs to be classified into one of the several labeled groups
+
 For real data, we do not know the conditional distribution of $Y$ given $X$, and so computing the Bayes classifier is impossible.
 
 Many approaches attempt to estimate the conditional distribution of $Y$ given $X$, and then classify a given observation to the class with highest estimated probability. One such method is the <mark>*K-nearest neighbors*</mark> (KNN) classifier.
