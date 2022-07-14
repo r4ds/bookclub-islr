@@ -673,14 +673,14 @@ library(rafalib)
 # BiocManager::install(c("genefilter", "qvalue"))
 # library(GSE5859Subset)
 # data(GSE5859Subset)
-# saveRDS(geneExpression,"data/geneExpression.rds")
-saveRDS(sampleInfo,"data/sampleInfo.rds")
+# saveRDS(geneExpression,"data/13_geneExpression.rds")
+saveRDS(sampleInfo,"data/13_sampleInfo.rds")
 ```
 
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-geneExpression <- readRDS("data/geneExpression.rds")
-sampleInfo<- readRDS(sampleInfo,"sampleInfo.rds")
+geneExpression <- readRDS("data/13_geneExpression.rds")
+sampleInfo<- readRDS(sampleInfo,"13_sampleInfo.rds")
 ```
 
 
