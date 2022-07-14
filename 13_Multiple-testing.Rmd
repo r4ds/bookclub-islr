@@ -8,8 +8,6 @@
 - Calculate p-values using **resampling**.
 
 
----
-
 ## How to deal with more than one hypothesis test
 
 In this chapter we focus on hypothesis testing to make inference.
