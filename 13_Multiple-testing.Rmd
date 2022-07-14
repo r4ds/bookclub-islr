@@ -84,7 +84,7 @@ $$T=\frac{\mu_{t}-\mu_{c}}{s\sqrt{\frac{1}{n_t}+\frac{1}{n_c}}}$$
 $$s=\sqrt{\frac{(n_{t}-1)s_{t}^2+(n_{t}-1)s_{c}^2}{n_{t}+n_{c}-2}}$$
 A *large* absolute value of the T-statistic is against the $H_0$.
 
-```{r 13-04}
+```{r 13-04, echo=FALSE}
 knitr::include_graphics("images/13_01.png")
 ```
 
@@ -101,7 +101,7 @@ The t-stat value is arbitrarily "LARGE", the p-value rescale it to (0 to 1), in 
 The smaller the p-value is the stronger is the evidence AGAINST the NULL hypothesis.
 
 
-```{r 13-05}
+```{r 13-05, echo=FALSE}
 knitr::include_graphics("images/13_02.png")
 ```
 
@@ -138,7 +138,7 @@ there is $1%$ chance of rejecting single $H_0$, and $\text{m x }0.01$ FALSE reje
 Probability of making at least 1 type I error.
 
 
-```{r 13-06}
+```{r 13-06, echo=FALSE}
 knitr::include_graphics("images/13_03.png")
 ```
 
@@ -160,18 +160,22 @@ With hypothesis that **m** tests are independents.
 1.  **Bonferroni correction**
 
 $$FWER\leq m\frac{\alpha}{m}=\alpha$$
-2.  **Holm's step down**
-3.  **Tukey's methos**
-4.  **Scheffè's method**
-
-
 We set a new $\alpha$ value which is lower in proportion.
 
 **Bonferroni** $\frac{\alpha}{m}=\text{new } \alpha$
 
+
+2.  **Holm's step down**
 **Holm's** $L=min{j:p_j>\frac{\alpha}{m+1-j}}$ is less conservative, with fewer type II errors and greater **power**.
 
 $$\text{min }\{p_j>\frac{\alpha}{m+1-j}\}$$
+
+
+These other two are subsequent methods to apply for further investigations:
+
+3.  **Tukey's method**
+
+4.  **Scheffè's method**
 
 
 ---
@@ -276,6 +280,7 @@ above, which indicates that we rejected $V=3$ of the $50$ true null hypotheses.
 
 In the simulation above, for the false null hypotheses, the ratio of the mean to the standard deviation
  was only $0.5/1 = 0.5$. This amounts to quite a weak signal, and
+
 it resulted in a high number of Type II errors.
 If we instead simulate data with a stronger signal, so that  the ratio of the mean to the standard deviation for the false null hypotheses equals $1$,
 then we make only $9$ Type II errors.
@@ -309,11 +314,11 @@ reproduce Figure 13.2. The  red, blue, and green lines correspond to $\alpha=0.0
 
 ```{r chunk7}
 par(mfrow = c(1, 1))
-plot(m, fwe1, type = "l", log = "x", ylim = c(0, 1), col = 2,
+plot(m, fwe1, type = "l", log = "x", ylim = c(0, 1), col = "red",
     ylab = "Family - Wise Error Rate",
     xlab = "Number of Hypotheses")
-lines(m, fwe2, col = 4)
-lines(m, fwe3, col = 3)
+lines(m, fwe2, col = "blue")
+lines(m, fwe3, col = "green")
 abline(h = 0.05, lty = 2)
 ```
 
@@ -405,6 +410,11 @@ a1 <- aov(returns ~ manager)
 TukeyHSD(x = a1)
 ```
 
+```{r}
+mean(TukeyHSD(x = a1)$manager[,4])
+
+```
+
 The `TukeyHSD()` function provides confidence intervals for the difference between each pair of managers (`lwr` and `upr`),
 as well as a $p$-value. All of these quantities
   have been adjusted for multiple testing. Notice that the $p$-value for the difference between Managers One and Two
@@ -415,6 +425,7 @@ We can plot the confidence intervals for the pairwise comparisons using the `plo
 plot(TukeyHSD(x = a1))
 ```
 
+---
 
 ## The False Discovery Rate
 
@@ -489,7 +500,7 @@ abline(a = 0, b = (q / m), col = 2, untf = TRUE)
 abline(h = 0.1 / 2000, col = 3)
 ```
 
-
+---
 
 ## A Re-Sampling Approach
 Here, we implement the re-sampling approach to hypothesis testing using the `Khan` dataset, which we investigated in Section 13.5.
@@ -631,6 +642,326 @@ e.g. the `samr` package in `R`.
 
 ---
 
+## Case Study: Multiple hypothesis test in Genomics
+
+
+This is an example of how to make **multiple hypothesis test** in Genomics.
+
+More information about this example can be found in [HarvardX Biomedical Data Science Open Online Training](https://rafalab.github.io/pages/harvardx.html) by [Prof. Rafael Irizarry](https://rafalab.github.io/)
+
+
+Here are some references:
+
+- [Introduction](https://genomicsclass.github.io/book/pages/intro_to_highthroughput_data.html)
+- [multiple testing](https://genomicsclass.github.io/book/pages/multiple_testing.html)
+- [EDA](https://genomicsclass.github.io/book/pages/eda_for_highthroughput.html)
+- [Bioconductor](https://www.bioconductor.org/)
+
+---
+
+## Load libraries and datasets
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+library(devtools)
+library(rafalib)
+#install_github("genomicsclass/GSE5859Subset")
+# BiocManager::install(c("genefilter", "qvalue"))
+
+library(GSE5859Subset)
+data(GSE5859Subset)
+library(genefilter) # rowttests function
+library(qvalue) # to calculate a qvalue and compare with p.adjust(...method="fdr")
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+ls()
+data(GSE5859Subset)
+try(data(package="GSE5859Subset"))
+```
+
+
+## Multiple T-test
+
+For calculating the t-test for all the genes in the **geneExpression** matrix, we use the `rowttests()` function from the {genefilter} package.
+
+We define the **NULL Hypothesis** with a vector of the same length of the unique elements in the dataset.
+```{r eval=FALSE, include=T}
+nullHypothesis <- c(rep(TRUE,m0), rep(FALSE,m-m0))
+null_hypothesis <- factor(nullHypothesis, levels=c("TRUE","FALSE"))
+```
+
+
+```{r}
+null_hypothesis <- factor(sampleInfo$group)
+```
+
+
+```{r eval=FALSE, include=T}
+?rowttests
+```
+
+Have a look a the genes matrix 
+```{r}
+dim(geneExpression)
+```
+
+```{r}
+geneExpression%>%
+  as.data.frame() %>%
+  rownames_to_column("gene") %>%
+  count(gene,sort=T)%>%
+  head
+```
+
+Statistics, difference in mean and p.value
+```{r}
+results <- rowttests(geneExpression,null_hypothesis)
+results2 <- rowttests(geneExpression,factor(rep("a","b",24)))
+results%>%head;results2%>%head
+```
+
+
+The results is 1383 genes have a pvalue lower than 5%
+```{r}
+results <- rowttests(geneExpression,null_hypothesis)
+sum(results$p.value<0.05)
+```
+
+```{r}
+mean(results$p.value<0.05)
+```
+
+### FWER Family Wise Error Rate
+
+What is the **probability to make at least 1 type I error**?
+
+First consider the nuber of hypothesis which is the number of genes in our case:
+```{r}
+m <- length(results$p.value) 
+m
+```
+
+Then calculate the FWER:
+```{r}
+1-(1-0.05)^m
+```
+
+So, the probability to make at least one type I error is 1! 
+if we set $\alpha$:
+$$P(\text{at least one rejection})=1−(1−k)^m=5\%$$
+$$k=1-0.95^{\frac{1}{m}}\approx 0.000005$$
+
+```{r}
+1-0.95^(1/m)
+```
+What we need to do next is to adjust this FWER to a suitable threshold applying some corrections, such as the **Bonferroni** correction procedure sets $k=\alpha/m$:
+```{r}
+1-(1-0.05/m)^m
+```
+
+```{r}
+0.05/m
+```
+
+
+
+
+```{r}
+sum(results$p.value<0.05/m)
+```
+
+Now, the number of hypothesis with a pvalue lower than 5% are 10 and the FWER adjusted is:
+```{r}
+mean(results$p.value<0.05/m)
+```
+
+### FDR False discovery rate
+
+This is referred to as a **discovery driven project or experiment**, as we are now going to adjust the threshold to a lower value than $\alpha$ through experiment just as the same as we have demonstrated above.
+
+
+>"The idea behind FDR is to focus on the random variable Q≡V/R with Q=0 when R=0 and V=0. Note that R=0 (nothing called significant) implies V=0 (no false positives). So Q is a random variable that can take values between 0 and 1 and we can define a rate by considering the average of Q. To better understand this concept here, we compute Q for the procedure: call everything p-value < 0.05 significant."
+
+Compare the FDR results for two methods.
+
+1.  First method: using `p.adjust()` function from {stats} package
+```{r}
+pvals = results$p.value
+pvals<-sort(pvals)
+
+# to find a q-value with the false discovery rate method
+fdr <- p.adjust(pvals, method="fdr")
+
+sum(fdr<0.05)
+```
+```{r}
+mean(fdr<0.05)
+```
+
+2.  Second method: using the `qvalue()` function from {qvalue} package
+```{r}
+res <- qvalue::qvalue(pvals)
+qvals <- res$qvalues
+#plot(pvals,qvals)
+sum(qvals<0.05)
+```
+```{r}
+mean(qvals<0.05)
+```
+
+The proportion of true null hypotheses:
+```{r}
+res$pi0
+```
+
+
+```{r eval=FALSE, include=FALSE}
+plot(qvals/fdr)
+abline(h=res$pi0,col=2)
+```
+
+
+```{r}
+hist(pvals,breaks=seq(0,1,len=21))
+expectedfreq <- length(pvals)/20 #per bin
+abline(h=expectedfreq*qvalue(pvals)$pi0,col=2,lty=2)
+```
+
+## Replications
+
+Little recap: **There is a trade-off between type I & type II error**
+
+- **Type I error** reject $H_0$ when $H_0$ is TRUE
+- **Type I error Rate** is the prob of type I error
+- **Type II error** no reject $H_0$ when $H_0$ is FALSE
+- **POWER** of hypothesis is the prob of not making type II error
+
+
+
+![](images/13_03.png){width=80%}
+
+![credit: Federica Gazzelloni](images/mht_tbl.png){width=80%}
+
+
+
+- R: sum of the number of pvalues which are below the threshold and will be rejected (n. rejections)
+- m: total hypothesis testing
+- m0: negatives
+- m1: m-m0 positives
+
+Now what we do is replicating the sample in a lab environment to obtain fake data, in order to do that we generate a matrix from a replication of normal distribution of the same size of our data.
+
+```{r fake}
+n <- 24
+m <- 8793
+delta <- 2 # this is the sample split in two
+positives <- 500 # m1
+# negatives
+m0<- m-positives # 8293
+
+mat <- matrix(rnorm(n*m),m,n)
+mat[1:positives,1:(n/2)] <- mat[1:positives,1:(n/2)] + delta
+```
+
+
+Then we do 1000 replications to see in what is the false discovery rate for this lab.
+```{r fake2, eval=FALSE, include=T}
+B<-1000
+set.seed(1173)
+results_global <- replicate(B,{
+  mat <- matrix(rnorm(n*m),m,n)
+  mat[1:positives,1:(n/2)] <- mat[1:positives,1:(n/2)] + delta
+  pvals = genefilter::rowttests(mat,null_hypothesis)$p.val
+  ##Bonferroni
+  FP1 <- sum(pvals[-(1:positives)]<=0.05/m)  
+  FN1 <- sum(pvals[1:positives]>0.05/m)
+  # p.adjust
+  qvals1 <- p.adjust(pvals,method = "fdr")
+  FP2<-sum(qvals1[-(1:positives)]<=0.05)
+  FN2 <- sum(qvals1[1:positives]>0.05)
+  # qvalue
+  qvals2 <- qvalue::qvalue(pvals)$qvalues
+  FP3<-sum(qvals2[-(1:positives)]<=0.05)
+  FN3 <- sum(qvals2[1:positives]>0.05)
+  c(FP1,FN1,FP2,FN2,FP3,FN3)
+}) 
+
+```
+
+```{r saverds,eval=FALSE, include=FALSE}
+# saveRDS(results_global,"data/results_global.rds")
+# rm(results_global)
+```
+
+```{r readrds,include=FALSE}
+results_global<-readRDS("data/results_global.rds")
+```
+
+```{r}
+class(results_global)
+```
+
+In this table are summarised the: false positives (FP) and the false negatives (FN) for three methods:
+
+- Bonferroni
+- FDR with p.adjust()
+- FDR with qvalue()
+
+The counts for FP and FN for the three cases:
+```{r results_global, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+results_global2<-results_global%>%
+  as_tibble()%>%
+  mutate(id=c("FP1","FN1","FP2-padjust","FN2-padjust","FP3-qvalue","FN3-qvalue"))%>%
+  relocate(id)%>%
+  column_to_rownames("id")
+results_global2%>%select(1:6)
+```
+
+The mean values or the proportions for the same methods:
+```{r echo=FALSE}
+data.frame(
+  id=c("FP","FN"),
+  "Bonferroni"=c(mean(results_global[1,]/m0),mean(results_global[2,]/positives)),
+  "FDR - padjust"=c(mean(results_global[3,]/m0),mean(results_global[4,]/positives)),
+  "FDR - qvalue"=c(mean(results_global[5,]/m0),mean(results_global[6,]/positives))
+)
+```
+
+
+---
+
+**Benjamini-Hochberg**
+
+$$p(i)≤\frac{i}{m}\alpha$$
+```{r}
+alpha <- 0.05
+i = seq(along=pvals)
+
+mypar(1,2)
+plot(i,sort(pvals))
+abline(0,i/m*alpha)
+##close-up
+plot(i[1:15],sort(pvals)[1:15],main="Close-up")
+abline(0,i/m*alpha)
+```
+
+
+```{r}
+k <- max( which( sort(pvals) < i/m*alpha) )
+cutoff <- sort(pvals)[k]
+cat("k =",k,"p-value cutoff=",cutoff)
+```
+
+
+```{r}
+fdr <- p.adjust(pvals, method="fdr")
+mypar(1,1)
+plot(pvals,fdr,log="xy")
+abline(h=alpha,v=cutoff)
+```
+
+
+---
 
 
 ## Meeting Videos
