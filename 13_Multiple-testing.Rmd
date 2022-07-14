@@ -661,8 +661,11 @@ Here are some references:
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(rafalib)
-library(genefilter) # rowttests function
-library(qvalue) # to calculate a qvalue and compare with p.adjust(...method="fdr")
+
+# These packages are referenced but not used by these notes.
+# Install them with BiocManager:install.
+# library(genefilter) # rowttests function
+# library(qvalue) # to calculate a qvalue and compare with p.adjust(...method="fdr")
 ```
 
 ```{r eval=FALSE, include=FALSE}
