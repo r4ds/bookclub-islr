@@ -662,45 +662,48 @@ Here are some references:
 ## Load libraries and datasets
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
-library(devtools)
 library(rafalib)
-#install_github("genomicsclass/GSE5859Subset")
-# BiocManager::install(c("genefilter", "qvalue"))
-
-library(GSE5859Subset)
-data(GSE5859Subset)
 library(genefilter) # rowttests function
 library(qvalue) # to calculate a qvalue and compare with p.adjust(...method="fdr")
 ```
 
+```{r eval=FALSE, include=FALSE}
+#install_github("genomicsclass/GSE5859Subset")
+# BiocManager::install(c("genefilter", "qvalue"))
+# library(GSE5859Subset)
+# data(GSE5859Subset)
+# saveRDS(geneExpression,"data/geneExpression.rds")
+saveRDS(sampleInfo,"data/sampleInfo.rds")
+```
+
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-ls()
-data(GSE5859Subset)
-try(data(package="GSE5859Subset"))
+geneExpression <- readRDS("data/geneExpression.rds")
+sampleInfo<- readRDS(sampleInfo,"sampleInfo.rds")
 ```
 
 
 ## Multiple T-test
 
 For calculating the t-test for all the genes in the **geneExpression** matrix, we use the `rowttests()` function from the {genefilter} package.
-
+```{r eval=FALSE, include=T}
+?rowttests
+```
 We define the **NULL Hypothesis** with a vector of the same length of the unique elements in the dataset.
+If our dataset is made of m unique elements and m0 are the number of positives, we can build a binary vector to use in the calculation of the pvalues.
+
+Here is an example on how to make a nullHypothesis vector.
 ```{r eval=FALSE, include=T}
 nullHypothesis <- c(rep(TRUE,m0), rep(FALSE,m-m0))
 null_hypothesis <- factor(nullHypothesis, levels=c("TRUE","FALSE"))
 ```
 
-
+In our case study we use the **geneExpression** matrix with genes expression data and the **sampleInfo** for retrieving the groups of positives and negatives within the dataset.
 ```{r}
 null_hypothesis <- factor(sampleInfo$group)
 ```
 
-
-```{r eval=FALSE, include=T}
-?rowttests
-```
-
-Have a look a the genes matrix 
+Have a look a the dimentsion of the geneExpression matrix:
 ```{r}
 dim(geneExpression)
 ```
@@ -713,7 +716,7 @@ geneExpression%>%
   head
 ```
 
-Statistics, difference in mean and p.value
+Statistics, difference in mean and p.value:
 ```{r}
 results <- rowttests(geneExpression,null_hypothesis)
 results2 <- rowttests(geneExpression,factor(rep("a","b",24)))
