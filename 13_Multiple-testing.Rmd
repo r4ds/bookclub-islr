@@ -840,7 +840,7 @@ Little recap: **There is a trade-off between type I & type II error**
 
 ![](images/13_03.png){width=80%}
 
-![credit: Federica Gazzelloni](images/mht_tbl.png){width=80%}
+![credit: Federica Gazzelloni](images/13_mht_tbl.png){width=80%}
 
 
 
