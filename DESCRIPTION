@@ -16,19 +16,12 @@ Imports:
     broomstick,
     car,
     cowplot,
-<<<<<<< HEAD
-    dlookr,
-    doParallel,
-    emo, 
-    finetune, 
-=======
     DiagrammeR,
     dlookr,
     doParallel,
-    emo,
+    emo, 
     factoextra,
-    finetune,
->>>>>>> main
+    finetune, 
     gam,
     GGally,
     ggthemes,
@@ -40,18 +33,11 @@ Imports:
     knitr,
     magrittr,
     mgcv,
-<<<<<<< HEAD
     patchwork, 
+    proxy,
     randomForest, 
     ranger, 
     readr, 
-=======
-    patchwork,
-    proxy,
-    randomForest,
-    ranger,
-    readr,
->>>>>>> main
     rmarkdown,
     rpart.plot,
     skimr,
@@ -60,11 +46,7 @@ Imports:
     tidymodels,
     tidyverse,
     titanic,
-<<<<<<< HEAD
     vip, 
-=======
-    vip,
->>>>>>> main
     xgboost
 Remotes:
     hadley/emo,
