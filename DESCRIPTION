@@ -35,6 +35,7 @@ Imports:
     mgcv,
     patchwork,
     proxy,
+    rafalib,
     randomForest,
     ranger,
     readr,
