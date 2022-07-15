@@ -10,7 +10,7 @@
 - Apply **shrinkage methods** to regularize the Cox model.
 - Calculate the generalized **AUC** for a survival model.
 
-```{r load_libraries, echo = FALSE}
+```{r 11load_libraries, echo = FALSE}
 library(ISLR2)
 library(survival)
 library(dplyr)
@@ -73,7 +73,7 @@ In Section 11.8.2, we examine the `Publication` data from Section 11.5.4. Finall
 ## Brain Cancer Data
 We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
 
-```{r dataset}
+```{r 11dataset}
 data("BrainCancer")
 dim(BrainCancer)
 head(BrainCancer)
@@ -81,11 +81,11 @@ head(BrainCancer)
 
 The rows index the 88 patients, while the columns contain the 8 predictors.
 
-```{r skim}
+```{r 11skim}
 skimr::skim_without_charts(BrainCancer)
 ```
 
-```{r}
+```{r 11count}
 BrainCancer %>% 
      count(status)
 ```
@@ -99,7 +99,7 @@ To begin the analysis, we re-create  the Kaplan-Meier survival curve  shown in  
 
 ![(11.2)](images/survival_function.png)
 
-```{r plot_KM_curve}
+```{r 11plot_KM_curve}
 fit.surv <- survfit(Surv(time, status) ~ 1, data = BrainCancer)
 plot(fit.surv, xlab = "Months",
     ylab = "Estimated Probability of Survival")
@@ -109,7 +109,7 @@ plot(fit.surv, xlab = "Months",
 
 Next we create Kaplan-Meier survival curves that are stratified by `sex`, in order to reproduce Figure 11.3.
 
-```{r KM_curve_sex}
+```{r 11KM_curve_sex}
 fit.sex <- survfit(Surv(time, status) ~ sex, data = BrainCancer)
 plot(fit.sex, xlab = "Months",
     ylab = "Estimated Probability of Survival", col = c(2,4))
@@ -119,7 +119,7 @@ legend("bottomleft", levels(BrainCancer$sex), col = c(2,4), lty = 1)
 ## Survminer package
 
 Using `survminer` package
-```{r survminer}
+```{r 11survminer}
 library(survminer)
 ggsurvplot(fit.sex, data = BrainCancer, 
            pval = TRUE,
@@ -131,7 +131,7 @@ ggsurvplot(fit.sex, data = BrainCancer,
 
 As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
 
-```{r logrank_test}
+```{r 11logrank_test}
 logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
 logrank.test
 ```
@@ -153,7 +153,7 @@ Why do we care about the hazard function? It turns out that a key approach for m
 ![Source: https://tinyheero.github.io/2016/05/12/survival-analysis.html](images/cum_hazard_function.png)
 
 Let's plot the cumulative hazard for the Brain cancer dataset with sex as covariate
-```{r cum_hazard_plot}
+```{r 11cum_hazard_plot}
 ggsurvplot(fit.sex, 
            data = BrainCancer, 
            conf.int = TRUE, 
@@ -183,7 +183,7 @@ The purpose of the model is to evaluate simultaneously the effect of several fac
 
 Let's fit the Cox proportional hazards models using the `coxph()`  function.
 To begin, we consider a model that uses `sex` as the only predictor.
-```{r coxph}
+```{r 11coxph}
 fit.cox <- coxph(Surv(time, status) ~ sex, data = BrainCancer)
 summary(fit.cox)
 ```
@@ -191,7 +191,7 @@ summary(fit.cox)
 Regardless of which test we use, we see that there is no clear evidence for a difference in survival between males and females.
 
 Let's run the Cox PH model with all covariates.
-```{r coxph_all}
+```{r 11coxph_all}
 fit_all_cox <- coxph(Surv(time, status) ~ ., data = BrainCancer)
 summary(fit_all_cox)
 ```
@@ -199,14 +199,14 @@ summary(fit_all_cox)
 ## Visualizing the estimated distribution of survival times
 
 Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.
-```{r, coxph_viz}
+```{r 11coxph_viz}
 # plot the baseline survival function
 ggsurvplot(survfit(fit_all_cox), data = BrainCancer, palette = "#2E9FDF",
            ggtheme = theme_minimal())
 ```
 
 Let's plot the Cox Proportional Hazards covariates coefficients estimates/CI
-```{r coxph_coef}
+```{r 11coxph_coef}
 library(ggstatsplot)
 ggcoefstats(fit_all_cox, 
             title = "Cox PH Model Covariates Coefficients Estimates/CI"
@@ -230,13 +230,13 @@ Here, we’ll discuss three types of diagnostics for the Cox model:
 The proportional hazards (PH) assumption can be checked using statistical tests and graphical diagnostics based on the *scaled Schoenfeld residuals*.
 
 In principle, the *Schoenfeld residuals* are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.
-```{r coxtest_1}
+```{r 11coxtest_1}
 test.ph <- cox.zph(fit_all_cox)
 test.ph
 ```
 
 It’s possible to do a graphical diagnostic using the function *ggcoxzph()* [in the `survminer` package], which produces, for each covariate, graphs of the scaled Schoenfeld residuals against the transformed time.
-```{r coxtest_2}
+```{r 11coxtest_2}
 ggcoxzph(test.ph)
 ```
 
@@ -251,7 +251,7 @@ To test influential observations or outliers, we can visualize either:
 - the dfbeta values
 
 The function *ggcoxdiagnostics()* [in `survminer` package] provides a convenient solution for checking influential observations.
-```{r cox_diag_dfbeta}
+```{r 11cox_diag_dfbeta}
 ggcoxdiagnostics(fit_all_cox, type = "dfbeta", linear.predictions = FALSE, ggtheme = theme_bw())
 ```
 
@@ -263,7 +263,7 @@ It’s also possible to check outliers by visualizing the deviance residuals. Th
 
 - Very large or small values are outliers, which are poorly predicted by the model.
 
-```{r cox_diag_deviance}
+```{r 11cox_diag_deviance}
 ggcoxdiagnostics(fit_all_cox, type = "deviance", linear.predictions = FALSE, ggtheme = theme_bw())
 ```
 
@@ -288,7 +288,7 @@ To assess the functional form of a continuous variable in a Cox proportional haz
 The covariates must be numerical.
 
 To test `sex`, it is necessary to convert the covariate to numerical.
-```{r cox_functional_1}
+```{r 11cox_functional_1}
 BC_sex <- BrainCancer %>% 
      mutate(sex = sex %>% as.numeric())
 
@@ -298,7 +298,7 @@ ggcoxfunctional(Surv(time, status) ~ sex + log(sex) + sqrt(sex), data = BC_sex)
 The function *ggcoxfunctional()* displays graphs of continuous covariates against martingale residuals of null cox proportional hazards model. This might help to properly choose the functional form of continuous variable in the Cox model. Fitted lines with lowess function should be **linear** to satisfy the Cox proportional hazards model assumptions.  Inthis case, the covariate `sex` passes the test.
 
 Let's test `gtv`
-```{r cox_functional_2}
+```{r 11cox_functional_2}
 ggcoxfunctional(Surv(time, status) ~ gtv + log(gtv) + sqrt(gtv), data = BrainCancer)
 ```
 
