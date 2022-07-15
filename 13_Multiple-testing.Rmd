@@ -244,13 +244,15 @@ Here are some references:
 ```{r chunk29, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(rafalib)
+```
+```{r chunk29hide, eval = FALSE}
+# BiocManager::install(c("genefilter", "qvalue"))
 library(genefilter) # rowttests function
 library(qvalue) # to calculate a qvalue and compare with p.adjust(...method="fdr")
 ```
 
 ```{r chunk29a, eval=FALSE, include=FALSE}
-#install_github("genomicsclass/GSE5859Subset")
-# BiocManager::install(c("genefilter", "qvalue"))
+# install_github("genomicsclass/GSE5859Subset")
 # library(GSE5859Subset)
 # data(GSE5859Subset)
 # saveRDS(geneExpression,"data/13_geneExpression.rds")
