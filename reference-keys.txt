@@ -282,8 +282,13 @@ controlling-fwer
 power
 false-discovery-rate-fdr
 benjamini-hochberg-procedure
+case-study-multiple-hypothesis-test-in-genomics
+load-libraries-and-datasets
+multiple-t-test
+fwer-family-wise-error-rate
+fdr-false-discovery-rate
+replications
 lab-multiple-testing
-review-of-hypothesis-tests
 the-family-wise-error-rate
 the-false-discovery-rate
 a-re-sampling-approach

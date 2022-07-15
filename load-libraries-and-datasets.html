@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13.9 Review of Hypothesis Tests | Introduction to Statistical Learning Using R Book Club</title>
+  <title>13.9 Load libraries and datasets | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13.9 Review of Hypothesis Tests | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="13.9 Load libraries and datasets | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13.9 Review of Hypothesis Tests | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="13.9 Load libraries and datasets | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-30" />
+<meta name="date" content="2022-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lab-multiple-testing.html"/>
-<link rel="next" href="the-family-wise-error-rate.html"/>
+<link rel="prev" href="case-study-multiple-hypothesis-test-in-genomics.html"/>
+<link rel="next" href="multiple-t-test.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -505,17 +505,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>13.5</b> Power</a></li>
 <li class="chapter" data-level="13.6" data-path="false-discovery-rate-fdr.html"><a href="false-discovery-rate-fdr.html"><i class="fa fa-check"></i><b>13.6</b> False Discovery Rate (FDR)</a></li>
 <li class="chapter" data-level="13.7" data-path="benjamini-hochberg-procedure.html"><a href="benjamini-hochberg-procedure.html"><i class="fa fa-check"></i><b>13.7</b> Benjamini-Hochberg procedure</a></li>
-<li class="chapter" data-level="13.8" data-path="lab-multiple-testing.html"><a href="lab-multiple-testing.html"><i class="fa fa-check"></i><b>13.8</b> Lab: Multiple Testing</a></li>
-<li class="chapter" data-level="13.9" data-path="review-of-hypothesis-tests.html"><a href="review-of-hypothesis-tests.html"><i class="fa fa-check"></i><b>13.9</b> Review of Hypothesis Tests</a></li>
-<li class="chapter" data-level="13.10" data-path="the-family-wise-error-rate.html"><a href="the-family-wise-error-rate.html"><i class="fa fa-check"></i><b>13.10</b> The Family-Wise Error Rate</a></li>
-<li class="chapter" data-level="13.11" data-path="the-false-discovery-rate.html"><a href="the-false-discovery-rate.html"><i class="fa fa-check"></i><b>13.11</b> The False Discovery Rate</a></li>
-<li class="chapter" data-level="13.12" data-path="a-re-sampling-approach.html"><a href="a-re-sampling-approach.html"><i class="fa fa-check"></i><b>13.12</b> A Re-Sampling Approach</a></li>
-<li class="chapter" data-level="13.13" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html"><i class="fa fa-check"></i><b>13.13</b> Meeting Videos</a>
+<li class="chapter" data-level="13.8" data-path="case-study-multiple-hypothesis-test-in-genomics.html"><a href="case-study-multiple-hypothesis-test-in-genomics.html"><i class="fa fa-check"></i><b>13.8</b> Case Study: Multiple hypothesis test in Genomics</a></li>
+<li class="chapter" data-level="13.9" data-path="load-libraries-and-datasets.html"><a href="load-libraries-and-datasets.html"><i class="fa fa-check"></i><b>13.9</b> Load libraries and datasets</a></li>
+<li class="chapter" data-level="13.10" data-path="multiple-t-test.html"><a href="multiple-t-test.html"><i class="fa fa-check"></i><b>13.10</b> Multiple T-test</a>
 <ul>
-<li class="chapter" data-level="13.13.1" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-1-12"><i class="fa fa-check"></i><b>13.13.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="13.13.2" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-2-12"><i class="fa fa-check"></i><b>13.13.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="13.13.3" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-3-12"><i class="fa fa-check"></i><b>13.13.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="13.13.4" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-4-12"><i class="fa fa-check"></i><b>13.13.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="13.10.1" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fwer-family-wise-error-rate"><i class="fa fa-check"></i><b>13.10.1</b> FWER Family Wise Error Rate</a></li>
+<li class="chapter" data-level="13.10.2" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fdr-false-discovery-rate"><i class="fa fa-check"></i><b>13.10.2</b> FDR False discovery rate</a></li>
+</ul></li>
+<li class="chapter" data-level="13.11" data-path="replications.html"><a href="replications.html"><i class="fa fa-check"></i><b>13.11</b> Replications</a></li>
+<li class="chapter" data-level="13.12" data-path="lab-multiple-testing.html"><a href="lab-multiple-testing.html"><i class="fa fa-check"></i><b>13.12</b> Lab: Multiple Testing</a></li>
+<li class="chapter" data-level="13.13" data-path="the-family-wise-error-rate.html"><a href="the-family-wise-error-rate.html"><i class="fa fa-check"></i><b>13.13</b> The Family-Wise Error Rate</a></li>
+<li class="chapter" data-level="13.14" data-path="the-false-discovery-rate.html"><a href="the-false-discovery-rate.html"><i class="fa fa-check"></i><b>13.14</b> The False Discovery Rate</a></li>
+<li class="chapter" data-level="13.15" data-path="a-re-sampling-approach.html"><a href="a-re-sampling-approach.html"><i class="fa fa-check"></i><b>13.15</b> A Re-Sampling Approach</a></li>
+<li class="chapter" data-level="13.16" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html"><i class="fa fa-check"></i><b>13.16</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="13.16.1" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-1-12"><i class="fa fa-check"></i><b>13.16.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="13.16.2" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-2-12"><i class="fa fa-check"></i><b>13.16.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="13.16.3" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-3-12"><i class="fa fa-check"></i><b>13.16.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="13.16.4" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-4-12"><i class="fa fa-check"></i><b>13.16.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="abbreviations.html"><a href="abbreviations.html"><i class="fa fa-check"></i>Abbreviations</a></li>
@@ -561,78 +568,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="review-of-hypothesis-tests" class="section level2 hasAnchor" number="13.9">
-<h2><span class="header-section-number">13.9</span> Review of Hypothesis Tests<a href="review-of-hypothesis-tests.html#review-of-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We begin by performing some one-sample <span class="math inline">\(t\)</span>-tests using the <code>t.test()</code> function.
-First we create 100 variables, each consisting of 10 observations. The first 50 variables have mean <span class="math inline">\(0.5\)</span> and variance <span class="math inline">\(1\)</span>,
-while the others have mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="review-of-hypothesis-tests.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
-<span id="cb430-2"><a href="review-of-hypothesis-tests.html#cb430-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb430-3"><a href="review-of-hypothesis-tests.html#cb430-3" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="fl">0.5</span></span></code></pre></div>
-<p>The <code>t.test()</code> function can perform a one-sample or a two-sample <span class="math inline">\(t\)</span>-test.
-By default, a one-sample test is performed. To begin, we test <span class="math inline">\(H_{0}: \mu_1=0\)</span>, the null hypothesis that the first variable has mean zero.</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="review-of-hypothesis-tests.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  x[, 1]
-## t = 2.0841, df = 9, p-value = 0.06682
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  -0.05171076  1.26242719
-## sample estimates:
-## mean of x 
-## 0.6053582</code></pre>
-<p>The <span class="math inline">\(p\)</span>-value comes out to <span class="math inline">\(0.067\)</span>, which is not quite low enough to reject the null hypothesis at level <span class="math inline">\(\alpha=0.05\)</span>.
-In this case, <span class="math inline">\(\mu_1=0.5\)</span>, so the null hypothesis is false. Therefore, we have made a Type II error by failing to reject the null hypothesis when
-the null hypothesis is false.</p>
-<p>We now test <span class="math inline">\(H_{0j}: \mu_j=0\)</span> for <span class="math inline">\(j=1,\ldots,100\)</span>. We compute the 100
-<span class="math inline">\(p\)</span>-values, and then construct a vector recording whether the <span class="math inline">\(j\)</span>th <span class="math inline">\(p\)</span>-value is less than or equal to 0.05, in which case we reject <span class="math inline">\(H_{0j}\)</span>,
-or greater than 0.05, in which case we do not reject <span class="math inline">\(H_{0j}\)</span>, for <span class="math inline">\(j=1,\ldots,100\)</span>.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="review-of-hypothesis-tests.html#cb433-1" aria-hidden="true" tabindex="-1"></a>p.values <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>)</span>
-<span id="cb433-2"><a href="review-of-hypothesis-tests.html#cb433-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
-<span id="cb433-3"><a href="review-of-hypothesis-tests.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb433-4"><a href="review-of-hypothesis-tests.html#cb433-4" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
-<span id="cb433-5"><a href="review-of-hypothesis-tests.html#cb433-5" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span></code></pre></div>
-<p>Since this is a simulated data set, we can create a <span class="math inline">\(2 \times 2\)</span> table similar to Table 13.2.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="review-of-hypothesis-tests.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
-<span id="cb434-2"><a href="review-of-hypothesis-tests.html#cb434-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
-<span id="cb434-3"><a href="review-of-hypothesis-tests.html#cb434-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>##                   
-## decision           H0 is False H0 is True
-##   Do not reject H0          40         47
-##   Reject H0                 10          3</code></pre>
-<p>Therefore, at level <span class="math inline">\(\alpha=0.05\)</span>, we reject just 10 of the 50 false null hypotheses,
-and we incorrectly reject 3 of the true null hypotheses. Using the notation from Section 13.3, we have <span class="math inline">\(W=40\)</span>, <span class="math inline">\(U=47\)</span>, <span class="math inline">\(S=10\)</span>, and <span class="math inline">\(V=3\)</span>.
-Note that the rows and columns of this table are reversed relative to Table 13.2.
-We have set <span class="math inline">\(\alpha=0.05\)</span>, which means that we expect to reject around <span class="math inline">\(5\%\)</span> of the true null hypotheses. This is in line with the <span class="math inline">\(2 \times 2\)</span> table
-above, which indicates that we rejected <span class="math inline">\(V=3\)</span> of the <span class="math inline">\(50\)</span> true null hypotheses.</p>
-<p>In the simulation above, for the false null hypotheses, the ratio of the mean to the standard deviation
-was only <span class="math inline">\(0.5/1 = 0.5\)</span>. This amounts to quite a weak signal, and
-it resulted in a high number of Type II errors.
-If we instead simulate data with a stronger signal, so that the ratio of the mean to the standard deviation for the false null hypotheses equals <span class="math inline">\(1\)</span>,
-then we make only <span class="math inline">\(9\)</span> Type II errors.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="review-of-hypothesis-tests.html#cb436-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb436-2"><a href="review-of-hypothesis-tests.html#cb436-2" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb436-3"><a href="review-of-hypothesis-tests.html#cb436-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
-<span id="cb436-4"><a href="review-of-hypothesis-tests.html#cb436-4" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb436-5"><a href="review-of-hypothesis-tests.html#cb436-5" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
-<span id="cb436-6"><a href="review-of-hypothesis-tests.html#cb436-6" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span>
-<span id="cb436-7"><a href="review-of-hypothesis-tests.html#cb436-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
-<span id="cb436-8"><a href="review-of-hypothesis-tests.html#cb436-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
-<span id="cb436-9"><a href="review-of-hypothesis-tests.html#cb436-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>##                   
-## decision           H0 is False H0 is True
-##   Do not reject H0           9         49
-##   Reject H0                 41          1</code></pre>
+<div id="load-libraries-and-datasets" class="section level2 hasAnchor" number="13.9">
+<h2><span class="header-section-number">13.9</span> Load libraries and datasets<a href="load-libraries-and-datasets.html#load-libraries-and-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="load-libraries-and-datasets.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb427-2"><a href="load-libraries-and-datasets.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rafalib)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="load-libraries-and-datasets.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(c(&quot;genefilter&quot;, &quot;qvalue&quot;))</span></span>
+<span id="cb428-2"><a href="load-libraries-and-datasets.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter) <span class="co"># rowttests function</span></span>
+<span id="cb428-3"><a href="load-libraries-and-datasets.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qvalue) <span class="co"># to calculate a qvalue and compare with p.adjust(...method=&quot;fdr&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="load-libraries-and-datasets.html#cb429-1" aria-hidden="true" tabindex="-1"></a>geneExpression <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_geneExpression.rds&quot;</span>)</span>
+<span id="cb429-2"><a href="load-libraries-and-datasets.html#cb429-2" aria-hidden="true" tabindex="-1"></a>sampleInfo<span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_sampleInfo.rds&quot;</span>)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="lab-multiple-testing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-family-wise-error-rate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="case-study-multiple-hypothesis-test-in-genomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

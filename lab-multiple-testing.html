@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13.8 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club</title>
+  <title>13.12 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13.8 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="13.12 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13.8 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="13.12 Lab: Multiple Testing | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-06-30" />
+<meta name="date" content="2022-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="benjamini-hochberg-procedure.html"/>
-<link rel="next" href="review-of-hypothesis-tests.html"/>
+<link rel="prev" href="replications.html"/>
+<link rel="next" href="the-family-wise-error-rate.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -505,17 +505,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>13.5</b> Power</a></li>
 <li class="chapter" data-level="13.6" data-path="false-discovery-rate-fdr.html"><a href="false-discovery-rate-fdr.html"><i class="fa fa-check"></i><b>13.6</b> False Discovery Rate (FDR)</a></li>
 <li class="chapter" data-level="13.7" data-path="benjamini-hochberg-procedure.html"><a href="benjamini-hochberg-procedure.html"><i class="fa fa-check"></i><b>13.7</b> Benjamini-Hochberg procedure</a></li>
-<li class="chapter" data-level="13.8" data-path="lab-multiple-testing.html"><a href="lab-multiple-testing.html"><i class="fa fa-check"></i><b>13.8</b> Lab: Multiple Testing</a></li>
-<li class="chapter" data-level="13.9" data-path="review-of-hypothesis-tests.html"><a href="review-of-hypothesis-tests.html"><i class="fa fa-check"></i><b>13.9</b> Review of Hypothesis Tests</a></li>
-<li class="chapter" data-level="13.10" data-path="the-family-wise-error-rate.html"><a href="the-family-wise-error-rate.html"><i class="fa fa-check"></i><b>13.10</b> The Family-Wise Error Rate</a></li>
-<li class="chapter" data-level="13.11" data-path="the-false-discovery-rate.html"><a href="the-false-discovery-rate.html"><i class="fa fa-check"></i><b>13.11</b> The False Discovery Rate</a></li>
-<li class="chapter" data-level="13.12" data-path="a-re-sampling-approach.html"><a href="a-re-sampling-approach.html"><i class="fa fa-check"></i><b>13.12</b> A Re-Sampling Approach</a></li>
-<li class="chapter" data-level="13.13" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html"><i class="fa fa-check"></i><b>13.13</b> Meeting Videos</a>
+<li class="chapter" data-level="13.8" data-path="case-study-multiple-hypothesis-test-in-genomics.html"><a href="case-study-multiple-hypothesis-test-in-genomics.html"><i class="fa fa-check"></i><b>13.8</b> Case Study: Multiple hypothesis test in Genomics</a></li>
+<li class="chapter" data-level="13.9" data-path="load-libraries-and-datasets.html"><a href="load-libraries-and-datasets.html"><i class="fa fa-check"></i><b>13.9</b> Load libraries and datasets</a></li>
+<li class="chapter" data-level="13.10" data-path="multiple-t-test.html"><a href="multiple-t-test.html"><i class="fa fa-check"></i><b>13.10</b> Multiple T-test</a>
 <ul>
-<li class="chapter" data-level="13.13.1" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-1-12"><i class="fa fa-check"></i><b>13.13.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="13.13.2" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-2-12"><i class="fa fa-check"></i><b>13.13.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="13.13.3" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-3-12"><i class="fa fa-check"></i><b>13.13.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="13.13.4" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-4-12"><i class="fa fa-check"></i><b>13.13.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="13.10.1" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fwer-family-wise-error-rate"><i class="fa fa-check"></i><b>13.10.1</b> FWER Family Wise Error Rate</a></li>
+<li class="chapter" data-level="13.10.2" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fdr-false-discovery-rate"><i class="fa fa-check"></i><b>13.10.2</b> FDR False discovery rate</a></li>
+</ul></li>
+<li class="chapter" data-level="13.11" data-path="replications.html"><a href="replications.html"><i class="fa fa-check"></i><b>13.11</b> Replications</a></li>
+<li class="chapter" data-level="13.12" data-path="lab-multiple-testing.html"><a href="lab-multiple-testing.html"><i class="fa fa-check"></i><b>13.12</b> Lab: Multiple Testing</a></li>
+<li class="chapter" data-level="13.13" data-path="the-family-wise-error-rate.html"><a href="the-family-wise-error-rate.html"><i class="fa fa-check"></i><b>13.13</b> The Family-Wise Error Rate</a></li>
+<li class="chapter" data-level="13.14" data-path="the-false-discovery-rate.html"><a href="the-false-discovery-rate.html"><i class="fa fa-check"></i><b>13.14</b> The False Discovery Rate</a></li>
+<li class="chapter" data-level="13.15" data-path="a-re-sampling-approach.html"><a href="a-re-sampling-approach.html"><i class="fa fa-check"></i><b>13.15</b> A Re-Sampling Approach</a></li>
+<li class="chapter" data-level="13.16" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html"><i class="fa fa-check"></i><b>13.16</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="13.16.1" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-1-12"><i class="fa fa-check"></i><b>13.16.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="13.16.2" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-2-12"><i class="fa fa-check"></i><b>13.16.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="13.16.3" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-3-12"><i class="fa fa-check"></i><b>13.16.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="13.16.4" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-4-12"><i class="fa fa-check"></i><b>13.16.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="abbreviations.html"><a href="abbreviations.html"><i class="fa fa-check"></i>Abbreviations</a></li>
@@ -561,16 +568,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lab-multiple-testing" class="section level2 hasAnchor" number="13.8">
-<h2><span class="header-section-number">13.8</span> Lab: Multiple Testing<a href="lab-multiple-testing.html#lab-multiple-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lab-multiple-testing" class="section level2 hasAnchor" number="13.12">
+<h2><span class="header-section-number">13.12</span> Lab: Multiple Testing<a href="lab-multiple-testing.html#lab-multiple-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Review of Hypothesis Tests</strong></p>
+<p>We begin by performing some one-sample <span class="math inline">\(t\)</span>-tests using the <code>t.test()</code> function.</p>
+<p>First we create 100 variables, each consisting of 10 observations. The first 50 variables have mean <span class="math inline">\(0.5\)</span> and variance <span class="math inline">\(1\)</span>, while the others have mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>.</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="lab-multiple-testing.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
+<span id="cb479-2"><a href="lab-multiple-testing.html#cb479-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb479-3"><a href="lab-multiple-testing.html#cb479-3" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="fl">0.5</span></span></code></pre></div>
+<p>Calculate the t-test.</p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="lab-multiple-testing.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x[, 1]
+## t = 2.0841, df = 9, p-value = 0.06682
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.05171076  1.26242719
+## sample estimates:
+## mean of x 
+## 0.6053582</code></pre>
+<p>And with a <code>for</code> we calculate the t-tests and the pvalues:</p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="lab-multiple-testing.html#cb482-1" aria-hidden="true" tabindex="-1"></a>p.values <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb482-2"><a href="lab-multiple-testing.html#cb482-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb482-3"><a href="lab-multiple-testing.html#cb482-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb482-4"><a href="lab-multiple-testing.html#cb482-4" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb482-5"><a href="lab-multiple-testing.html#cb482-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb482-6"><a href="lab-multiple-testing.html#cb482-6" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
+<span id="cb482-7"><a href="lab-multiple-testing.html#cb482-7" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="lab-multiple-testing.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
+<span id="cb483-2"><a href="lab-multiple-testing.html#cb483-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
+<span id="cb483-3"><a href="lab-multiple-testing.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                   
+## decision           H0 is False H0 is True
+##   Do not reject H0          40         47
+##   Reject H0                 10          3</code></pre>
+<p>Repeate the t-test:</p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="lab-multiple-testing.html#cb485-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb485-2"><a href="lab-multiple-testing.html#cb485-2" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb485-3"><a href="lab-multiple-testing.html#cb485-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-4"><a href="lab-multiple-testing.html#cb485-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb485-5"><a href="lab-multiple-testing.html#cb485-5" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb485-6"><a href="lab-multiple-testing.html#cb485-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-7"><a href="lab-multiple-testing.html#cb485-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-8"><a href="lab-multiple-testing.html#cb485-8" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
+<span id="cb485-9"><a href="lab-multiple-testing.html#cb485-9" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span>
+<span id="cb485-10"><a href="lab-multiple-testing.html#cb485-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-11"><a href="lab-multiple-testing.html#cb485-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb485-12"><a href="lab-multiple-testing.html#cb485-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
+<span id="cb485-13"><a href="lab-multiple-testing.html#cb485-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
+<span id="cb485-14"><a href="lab-multiple-testing.html#cb485-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                   
+## decision           H0 is False H0 is True
+##   Do not reject H0           9         49
+##   Reject H0                 41          1</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="benjamini-hochberg-procedure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="review-of-hypothesis-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="replications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-family-wise-error-rate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
