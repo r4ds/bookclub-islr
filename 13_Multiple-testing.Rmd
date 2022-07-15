@@ -300,19 +300,29 @@ geneExpression%>%
 ```
 
 Statistics, difference in mean and p.value:
-```{r chunk35}
+```{r chunk35, eval = FALSE}
 results <- rowttests(geneExpression,null_hypothesis)
 results2 <- rowttests(geneExpression,factor(rep("a","b",24)))
 results%>%head;results2%>%head
 ```
+```{r chunk35b, echo = FALSE}
+# saveRDS(results, "data/13_results35.rds")
+# saveRDS(results2, "data/13_results35_2.rds")
+results <- readRDS("data/13_results35.rds")
+results2 <- readRDS("data/13_results35_2.rds")
 
+results%>%head;results2%>%head
+```
 
 The results is 1383 genes have a pvalue lower than 5%
-```{r chunk36}
+```{r chunk36, eval = FALSE}
 results <- rowttests(geneExpression,null_hypothesis)
 sum(results$p.value<0.05)
 ```
-
+```{r chunk36b, echo = FALSE}
+# saveRDS(results, "data/13_results36.rds")
+results <- readRDS("data/13_results36.rds")
+```
 ```{r chunk37}
 mean(results$p.value<0.05)
 ```
@@ -387,8 +397,14 @@ mean(fdr<0.05)
 ```
 
 2.  Second method: using the `qvalue()` function from {qvalue} package
-```{r chunk47}
+```{r chunk47, eval = FALSE}
 res <- qvalue::qvalue(pvals)
+```
+```{r chunk47b, echo = FALSE}
+# saveRDS(res, "data/13_res47.rds")
+res <- readRDS("data/13_res47.rds")
+```
+```{r chunk47c}
 qvals <- res$qvalues
 #plot(pvals,qvals)
 sum(qvals<0.05)
@@ -405,17 +421,20 @@ res$pi0
 ```
 
 
-```{r chunk50, eval=FALSE, include=FALSE}
-plot(qvals/fdr)
-abline(h=res$pi0,col=2)
-```
-
-
-```{r chunk51}
+```{r chunk51, eval = FALSE}
 hist(pvals,breaks=seq(0,1,len=21))
 expectedfreq <- length(pvals)/20 #per bin
 abline(h=expectedfreq*qvalue(pvals)$pi0,col=2,lty=2)
 ```
+```{r chunk51b, echo = FALSE}
+hist(pvals,breaks=seq(0,1,len=21))
+expectedfreq <- length(pvals)/20 #per bin
+# h <- expectedfreq*qvalue::qvalue(pvals)$pi0
+# saveRDS(h, "data/13_h51.rds")
+h <- readRDS("data/13_h51.rds")
+abline(h=h,col=2,lty=2)
+```
+
 
 ## Replications
 
