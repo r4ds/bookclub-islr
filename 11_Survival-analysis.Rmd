@@ -19,7 +19,6 @@ editor_options:
 library(ISLR2)
 library(survival)
 library(dplyr)
-library(vembedr)
 ```
 
 ## What is survival (censored) data?
@@ -52,12 +51,7 @@ Survival analysis is common in many other fields, such as:
 
 ## Introduction to Survival Analysis (zedstatistics) ---
 
-<!-- `r knitr::include_url("https://www.youtube.com/embed/v1QqpG0rR1k")` -->
-
-```{r video_01, echo=FALSE}
-embed_youtube("v1QqpG0rR1k", ratio = "16by9") %>% 
-     use_align("center")
-```
+`r knitr::include_url("https://www.youtube.com/embed/v1QqpG0rR1k")`
 
 ## Types of censoring
 
