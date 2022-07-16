@@ -100,14 +100,6 @@ $$CV_{k} = \frac{1}{k}{\sum_{i=1}^{k}}MSE_{i}$$
 knitr::include_graphics("./images/fig5_6.jpg")#, error = FALSE)
 ```
 
-Why perform cross-validation?
-
-1.  To estimate the test error of a predictive model (i.e., to determine how well a given statistical learning procedure can be expected to perform on INDEPENDENT data)
-
-2.  Sometimes we are interested in comparing different statistical learning methods or a single method using different levels of flexibility in order to id the method that results in the lowest test error. In this case, the actual value of the test MSE is not important - the location of the minimum point on the test MSE curve is.
-
--   Notice in figure above that although CV curves sometimes underestimate the true test MSE, all CV curves come close to identifying the correct level of flexibility (i.e., flexiblility level that corresponds to the smallest test MSE)
-
 ## Bias-Variance Tradeoff and k-fold Cross-Validation
 
 -   As mentioned previously, the validation approach tends to overestimate the true test error, but there is low variance in the estimate since we just have one estimate of the test error.
