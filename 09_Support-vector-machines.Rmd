@@ -402,13 +402,44 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 
 ### Cohort 3
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/I7F49a6Xhw4")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:02:19	Mei Ling Soh:	https://r4ds.github.io/bookclub-islr/support-vector-machines.html
+00:04:52	Mei Ling Soh:	Is my audio working?
+00:05:09	Rose Hartman:	Yes, I think so!
+00:05:17	Mei Ling Soh:	👍
+00:05:30	Rose Hartman:	Oh, sorry, now it's not
+00:41:08	Mei Ling Soh:	https://www.youtube.com/watch?v=8A7L0GsBiLQ
+00:41:12	Rose Hartman:	Thank you!
+00:46:06	Fariborz Soroush:	my understanding of the radial one is it has 3d or higher dimensions capabilities, meaning that it will be nonlinear when it is plotted in a 2d domain.
+00:48:27	Fariborz Soroush:	true... it should be 3D+
+00:49:04	Fariborz Soroush:	think about the 2D projection of 3D complex objects.
+00:49:26	Mei Ling Soh:	👍
+00:50:34	Rose Hartman:	Thank you!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/ZYRmWNx1FX0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:03:14	Nilay Yönet:	Helloooo! I am joining from the library today! :) so I will be muted :)
+00:03:25	Mei Ling Soh:	No problem :)
+00:05:41	Nilay Yönet:	I can hear you :)
+00:06:34	Nilay Yönet:	I will stop my video, since my internet connection is unstable :(
+00:09:46	Nilay Yönet:	Mei Ling I cannot hear you?
+00:09:59	Jeremy Selva:	You are muted
+00:10:17	Nilay Yönet:	yes!  :)
+00:39:29	Mei Ling Soh:	https://juliasilge.com/blog/last-airbender/
+00:42:35	Mei Ling Soh:	https://www.listendata.com/2017/01/support-vector-machine-in-r-tutorial.html
+00:44:27	Nilay Yönet:	thank you! :) thank you also fro the links :)
+00:45:00	Nilay Yönet:	see you! :)
 ```
 </details>
 
