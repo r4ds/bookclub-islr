@@ -910,13 +910,26 @@ plot(Rs, FDRs, xlab = "Number of Rejections", type = "l",
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/tIifL-FfRV4")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:11:46	Ricardo Serrano:	Frequentists vs Bayesian Statistics https://towardsdatascience.com/frequentist-vs-bayesian-statistics-54a197db21
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/gp_aNi2oAeE")`
+
+`r knitr::include_url("https://www.youtube.com/embed/wwS-yXJKVNw")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:21:28	Ricardo Serrano:	Julia Silge blog episode use of tidymodels 'infer' package for statistical inference https://juliasilge.com/blog/tuskegee-airmen/
+01:08:00	Federica Gazzelloni:	resources from the course: https://rafalab.github.io/pages/harvardx.html
 ```
 </details>
 
