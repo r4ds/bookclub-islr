@@ -1199,12 +1199,28 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/0mPq9zBw7CE")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:06:40	Parnika Bhatia:	https://www.statlearning.com/
+00:06:53	Kevin Kent:	https://r4ds.github.io/bookclub-islr/
+00:09:59	Parnika Bhatia:	I agree!
+00:35:10	Shamsuddeen Hassan Muhammad:	The graph make sense
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/uDpJ0bfBuiQ")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:30	Ronald Legere:	Blueberries and oranges is going to stick , I love it ;)
+00:36:52	Ronald Legere:	Clustering is not until section 12.4, so I guess it will be a while ;)
+00:37:29	Sandra Muroy:	that's almost the end of the book!
+00:37:37	Sandra Muroy:	:)
 ```
 </details>

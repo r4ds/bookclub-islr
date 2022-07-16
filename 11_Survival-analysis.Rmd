@@ -345,13 +345,33 @@ https://www.merriam-webster.com/dictionary/minuend
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/8JhVCWNVpyw")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:27:58	Jim Gruman:	+1 zed stats is excellent
+00:28:55	Ricardo Serrano:	https://youtu.be/v1QqpG0rR1k
+00:37:00	Ricardo Serrano:	https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Survival/BS704_Survival5.html
+00:41:06	Jim Gruman:	🧟   The ggfortify package also contains methods for autoplotting simple km plots.
+00:50:26	Jim Gruman:	Hannah Frick's recent post on survival in tidymodels: https://www.tidyverse.org/blog/2021/11/survival-analysis-parsnip-adjacent/
+00:58:55	Jim Gruman:	Emily Zabor's intro guide is also a nice supplement to the ISLR survival chapter https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html#Part_1:_Introduction_to_Survival_Analysis
+01:06:52	Jim Gruman:	thank you Ricardo!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/EdNBZVNSXyA")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:14:15	Ricardo Serrano:	https://github.com/rserran/survival_analysis
+00:14:26	Federica Gazzelloni:	thank you!
+00:58:33	Jim Gruman:	yes
+00:59:38	Federica Gazzelloni:	let's talk on slack
+00:59:56	Jim Gruman:	see you all on slack
 ```
 </details>
 

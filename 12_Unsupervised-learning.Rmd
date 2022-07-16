@@ -636,15 +636,19 @@ x %>%
 
 ### Cohort 2
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/_sJ6I0HoqWA")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:20:14	Ricardo Serrano:	StatQuest PCA https://youtu.be/FgakZw6K1QQ
+00:35:35	Federica Gazzelloni:	http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/
+00:51:17	Federica Gazzelloni:	https://stackoverflow.com/questions/26995923/ggplot2-how-to-plot-an-orthogonal-regression-line
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/idZ3XFP_ikM")`
 
 ### Cohort 3
 

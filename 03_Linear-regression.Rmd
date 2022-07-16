@@ -455,12 +455,30 @@ $$VIF(\hat{\beta_j}) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/TZQYnH16lVI")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:12:53	shamsuddeenmuhammad:	Anyone with intuition why this is called Least Square Method?
+00:13:10	Ronald Legere:	you are minimizing the squares ;)
+00:13:24	Ronald Legere:	"Lease <sum of> square"
+00:13:27	Ronald Legere:	*least
+00:13:59	shamsuddeenmuhammad:	ok
+00:14:04	shamsuddeenmuhammad:	Thank you !
+00:14:14	Kevin Kent:	yeah, the choice of coefficients where you are minimizing the sum of squared errors
+00:32:32	Ronald Legere:	I just realized one of the real values of these kind of discussions is learning what other people were confused by that you perhaps should have been if you had thought about it more! If you see what I mean ;)
+00:32:51	Sandra Muroy:	absolutely!
+00:33:50	Kevin Kent:	haha, I love that. but it is really helpful to see how others think about things
+00:42:24	Ronald Legere:	https://en.wikipedia.org/wiki/Student%27s_t-distribution
+00:44:42	shamsuddeenmuhammad:	My stats is super rusty !
+01:04:54	shamsuddeenmuhammad:	ok, thank you !
+01:06:49	shamsuddeenmuhammad:	See yah next !
+01:06:54	shamsuddeenmuhammad:	I like that too
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/nD7n0PqK26Y")`
+
+`r knitr::include_url("https://www.youtube.com/embed/ZAXtHeALvQU")`
