@@ -12,11 +12,17 @@
 
 knitr::include_graphics('./images/fig5_1.jpg')#, error = FALSE)
 ```
+-   Best solution is to have a large test set (which is not often available)
+_   Some methods (AIC, BIC) make a mathematical adjustment to the training error rate in order to estimate the test error rate.
+
+-   Here we consider methods that estimate the test error by *holding out* a subset of the training observations from the fitting process. Then applying the statistical learning method to those held out observations
+
+We will:
 
 -   Use a **validation set** to estimate the test error of a predictive model.
 -   Use **leave-one-out cross-validation** to estimate the test error of a predictive model.
 -   Use **K-fold cross-validation** to estimate the test error of a predictive model.
--   Use **the bootstrap** to estimate the test error of a predictive model.
+-   Use **the bootstrap** to obtain standard errors of an estimate.
 -   Describe the **advantages and disadvantages** of the various methods for estimating model test error.
 
 ## Validation Set Approach
