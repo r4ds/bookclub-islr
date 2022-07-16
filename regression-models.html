@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11.13 Regression Models | Introduction to Statistical Learning Using R Book Club</title>
+  <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11.13 Regression Models | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
+  <meta name="github-repo" content="r4ds/bookclub-islr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11.13 Regression Models | Introduction to Statistical Learning Using R Book Club" />
+  
+  <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
+  
+
+<meta name="author" content="The R4DS Online Learning Community" />
+
+
+<meta name="date" content="2022-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="proportional-hazards.html"/>
+<link rel="next" href="visualizing-the-estimated-distribution-of-survival-times.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Statistical Learning Using R Book Club</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="book-club-meetings.html"><a href="book-club-meetings.html"><i class="fa fa-check"></i>Book club meetings</a></li>
+<li class="chapter" data-level="" data-path="st-edition-vs-2nd-edition.html"><a href="st-edition-vs-2nd-edition.html"><i class="fa fa-check"></i>1st edition vs 2nd edition</a></li>
+<li class="chapter" data-level="" data-path="pace.html"><a href="pace.html"><i class="fa fa-check"></i>Pace</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-is-statistical-learning.html"><a href="what-is-statistical-learning.html"><i class="fa fa-check"></i><b>1.1</b> What is statistical learning?</a></li>
+<li class="chapter" data-level="1.2" data-path="why-islr.html"><a href="why-islr.html"><i class="fa fa-check"></i><b>1.2</b> Why ISLR?</a></li>
+<li class="chapter" data-level="1.3" data-path="premises-of-islr.html"><a href="premises-of-islr.html"><i class="fa fa-check"></i><b>1.3</b> Premises of ISLR</a></li>
+<li class="chapter" data-level="1.4" data-path="notation.html"><a href="notation.html"><i class="fa fa-check"></i><b>1.4</b> Notation</a></li>
+<li class="chapter" data-level="1.5" data-path="what-have-we-gotten-ourselves-into.html"><a href="what-have-we-gotten-ourselves-into.html"><i class="fa fa-check"></i><b>1.5</b> What have we gotten ourselves into?</a></li>
+<li class="chapter" data-level="1.6" data-path="wheres-the-data.html"><a href="wheres-the-data.html"><i class="fa fa-check"></i><b>1.6</b> Where’s the data?</a></li>
+<li class="chapter" data-level="1.7" data-path="some-useful-resources.html"><a href="some-useful-resources.html"><i class="fa fa-check"></i><b>1.7</b> Some useful resources:</a></li>
+<li class="chapter" data-level="1.8" data-path="what-is-covered-in-the-book.html"><a href="what-is-covered-in-the-book.html"><i class="fa fa-check"></i><b>1.8</b> What is covered in the book?</a></li>
+<li class="chapter" data-level="1.9" data-path="how-is-the-book-divided.html"><a href="how-is-the-book-divided.html"><i class="fa fa-check"></i><b>1.9</b> How is the book divided?</a></li>
+<li class="chapter" data-level="1.10" data-path="some-examples-of-the-problems-addressed-with-statistical-analysis.html"><a href="some-examples-of-the-problems-addressed-with-statistical-analysis.html"><i class="fa fa-check"></i><b>1.10</b> Some examples of the problems addressed with statistical analysis</a></li>
+<li class="chapter" data-level="1.11" data-path="datasets-provided-in-the-islr2-package.html"><a href="datasets-provided-in-the-islr2-package.html"><i class="fa fa-check"></i><b>1.11</b> Datasets provided in the ISLR2 package</a>
+<ul>
+<li class="chapter" data-level="1.11.1" data-path="datasets-provided-in-the-islr2-package.html"><a href="datasets-provided-in-the-islr2-package.html#example-datasets"><i class="fa fa-check"></i><b>1.11.1</b> Example datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="meeting-videos.html"><a href="meeting-videos.html"><i class="fa fa-check"></i><b>1.12</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="1.12.1" data-path="meeting-videos.html"><a href="meeting-videos.html#cohort-1"><i class="fa fa-check"></i><b>1.12.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="1.12.2" data-path="meeting-videos.html"><a href="meeting-videos.html#cohort-2"><i class="fa fa-check"></i><b>1.12.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="1.12.3" data-path="meeting-videos.html"><a href="meeting-videos.html#cohort-3"><i class="fa fa-check"></i><b>1.12.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="1.12.4" data-path="meeting-videos.html"><a href="meeting-videos.html#cohort-4"><i class="fa fa-check"></i><b>1.12.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="learning.html"><a href="learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html"><i class="fa fa-check"></i><b>2.1</b> What is Statistical Learning?</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html#why-estimate-f"><i class="fa fa-check"></i><b>2.1.1</b> Why Estimate <span class="math inline">\(f\)</span>?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html#how-do-we-estimate-f"><i class="fa fa-check"></i><b>2.1.2</b> How do we estimate <span class="math inline">\(f\)</span>?</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html#prediction-accuracy-vs-model-interpretability"><i class="fa fa-check"></i><b>2.1.3</b> Prediction Accuracy vs Model Interpretability</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html#supervised-versus-unsupervised-learning"><i class="fa fa-check"></i><b>2.1.4</b> Supervised Versus Unsupervised Learning</a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-statistical-learning-1.html"><a href="what-is-statistical-learning-1.html#regression-versus-classification-problems"><i class="fa fa-check"></i><b>2.1.5</b> Regression Versus Classification Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="assessing-model-accuracy.html"><a href="assessing-model-accuracy.html"><i class="fa fa-check"></i><b>2.2</b> Assessing Model Accuracy</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="assessing-model-accuracy.html"><a href="assessing-model-accuracy.html#measuring-quality-of-fit"><i class="fa fa-check"></i><b>2.2.1</b> Measuring Quality of Fit</a></li>
+<li class="chapter" data-level="2.2.2" data-path="assessing-model-accuracy.html"><a href="assessing-model-accuracy.html#the-bias-variance-trade-off"><i class="fa fa-check"></i><b>2.2.2</b> The Bias-Variance Trade-Off</a></li>
+<li class="chapter" data-level="2.2.3" data-path="assessing-model-accuracy.html"><a href="assessing-model-accuracy.html#the-classification-setting"><i class="fa fa-check"></i><b>2.2.3</b> The Classification Setting</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+<li class="chapter" data-level="2.4" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html"><i class="fa fa-check"></i><b>2.4</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-1-1"><i class="fa fa-check"></i><b>2.4.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="2.4.2" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-2-1"><i class="fa fa-check"></i><b>2.4.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="2.4.3" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-3-1"><i class="fa fa-check"></i><b>2.4.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="2.4.4" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-4-1"><i class="fa fa-check"></i><b>2.4.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="questions-to-answer.html"><a href="questions-to-answer.html"><i class="fa fa-check"></i><b>3.1</b> Questions to Answer</a></li>
+<li class="chapter" data-level="3.2" data-path="simple-linear-regression-definition.html"><a href="simple-linear-regression-definition.html"><i class="fa fa-check"></i><b>3.2</b> Simple Linear Regression: Definition</a></li>
+<li class="chapter" data-level="3.3" data-path="simple-linear-regression-visualization.html"><a href="simple-linear-regression-visualization.html"><i class="fa fa-check"></i><b>3.3</b> Simple Linear Regression: Visualization</a></li>
+<li class="chapter" data-level="3.4" data-path="simple-linear-regression-math.html"><a href="simple-linear-regression-math.html"><i class="fa fa-check"></i><b>3.4</b> Simple Linear Regression: Math</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="simple-linear-regression-math.html"><a href="simple-linear-regression-math.html#visualization-of-fit"><i class="fa fa-check"></i><b>3.4.1</b> Visualization of Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="assessing-accuracy-of-coefficient-estimates.html"><a href="assessing-accuracy-of-coefficient-estimates.html"><i class="fa fa-check"></i><b>3.5</b> Assessing Accuracy of Coefficient Estimates</a></li>
+<li class="chapter" data-level="3.6" data-path="assessing-the-accuracy-of-the-model.html"><a href="assessing-the-accuracy-of-the-model.html"><i class="fa fa-check"></i><b>3.6</b> Assessing the Accuracy of the Model</a></li>
+<li class="chapter" data-level="3.7" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>3.7</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#important-questions"><i class="fa fa-check"></i><b>3.7.1</b> Important Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="qualitative-predictors.html"><a href="qualitative-predictors.html"><i class="fa fa-check"></i><b>3.8</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.9" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>3.9</b> Extensions</a></li>
+<li class="chapter" data-level="3.10" data-path="potential-problems.html"><a href="potential-problems.html"><i class="fa fa-check"></i><b>3.10</b> Potential Problems</a></li>
+<li class="chapter" data-level="3.11" data-path="answers-to-the-marketing-plan-questions.html"><a href="answers-to-the-marketing-plan-questions.html"><i class="fa fa-check"></i><b>3.11</b> Answers to the Marketing Plan questions</a></li>
+<li class="chapter" data-level="3.12" data-path="comparison-of-linear-regression-with-k-nearest-neighbors.html"><a href="comparison-of-linear-regression-with-k-nearest-neighbors.html"><i class="fa fa-check"></i><b>3.12</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.13" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>3.13</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="3.13.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>3.13.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="3.13.2" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-2-2"><i class="fa fa-check"></i><b>3.13.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="3.13.3" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-3-2"><i class="fa fa-check"></i><b>3.13.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="3.13.4" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-4-2"><i class="fa fa-check"></i><b>3.13.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="an-overview-of-classification.html"><a href="an-overview-of-classification.html"><i class="fa fa-check"></i><b>4.1</b> An Overview of Classification</a></li>
+<li class="chapter" data-level="4.2" data-path="why-not-linear-regression.html"><a href="why-not-linear-regression.html"><i class="fa fa-check"></i><b>4.2</b> Why NOT Linear Regression?</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4.3</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>4.3.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="4.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficient"><i class="fa fa-check"></i><b>4.3.2</b> Estimating the Regression Coefficient</a></li>
+<li class="chapter" data-level="4.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="4.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>4.3.4</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="generative-models-for-classification.html"><a href="generative-models-for-classification.html"><i class="fa fa-check"></i><b>4.4</b> Generative Models for Classification</a></li>
+<li class="chapter" data-level="4.5" data-path="a-comparison-of-classification-methods.html"><a href="a-comparison-of-classification-methods.html"><i class="fa fa-check"></i><b>4.5</b> A Comparison of Classification Methods</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="a-comparison-of-classification-methods.html"><a href="a-comparison-of-classification-methods.html#linear-discriminant-analysis-for-p-1"><i class="fa fa-check"></i><b>4.5.1</b> Linear Discriminant Analysis for p = 1</a></li>
+<li class="chapter" data-level="4.5.2" data-path="a-comparison-of-classification-methods.html"><a href="a-comparison-of-classification-methods.html#linear-discriminant-analysis-for-p-1-1"><i class="fa fa-check"></i><b>4.5.2</b> Linear Discriminant Analysis for p &gt; 1</a></li>
+<li class="chapter" data-level="4.5.3" data-path="a-comparison-of-classification-methods.html"><a href="a-comparison-of-classification-methods.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.5.3</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.5.4" data-path="a-comparison-of-classification-methods.html"><a href="a-comparison-of-classification-methods.html#naive-bayes"><i class="fa fa-check"></i><b>4.5.4</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="summary-of-the-classification-methods.html"><a href="summary-of-the-classification-methods.html"><i class="fa fa-check"></i><b>4.6</b> Summary of the classification methods</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="summary-of-the-classification-methods.html"><a href="summary-of-the-classification-methods.html#an-analytical-comparison"><i class="fa fa-check"></i><b>4.6.1</b> An Analytical Comparison</a></li>
+<li class="chapter" data-level="4.6.2" data-path="summary-of-the-classification-methods.html"><a href="summary-of-the-classification-methods.html#an-empirical-comparison"><i class="fa fa-check"></i><b>4.6.2</b> An Empirical Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>4.7</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="4.8" data-path="linear-regression-with-count-data---negative-values.html"><a href="linear-regression-with-count-data---negative-values.html"><i class="fa fa-check"></i><b>4.8</b> Linear regression with count data - negative values</a></li>
+<li class="chapter" data-level="4.9" data-path="linear-regression-with-count-data---heteroscedasticity.html"><a href="linear-regression-with-count-data---heteroscedasticity.html"><i class="fa fa-check"></i><b>4.9</b> Linear regression with count data - heteroscedasticity</a></li>
+<li class="chapter" data-level="4.10" data-path="problems-with-linear-regression-of-count-data.html"><a href="problems-with-linear-regression-of-count-data.html"><i class="fa fa-check"></i><b>4.10</b> Problems with linear regression of count data</a></li>
+<li class="chapter" data-level="4.11" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>4.11</b> Poisson distribution</a></li>
+<li class="chapter" data-level="4.12" data-path="poisson-regression-model-mean-lambda.html"><a href="poisson-regression-model-mean-lambda.html"><i class="fa fa-check"></i><b>4.12</b> Poisson Regression Model mean (lambda)</a></li>
+<li class="chapter" data-level="4.13" data-path="estimating-the-poisson-regression-parameters.html"><a href="estimating-the-poisson-regression-parameters.html"><i class="fa fa-check"></i><b>4.13</b> Estimating the Poisson Regression parameters</a></li>
+<li class="chapter" data-level="4.14" data-path="interpreting-poisson-regression.html"><a href="interpreting-poisson-regression.html"><i class="fa fa-check"></i><b>4.14</b> Interpreting Poisson Regression</a></li>
+<li class="chapter" data-level="4.15" data-path="advantages-of-poisson-regression.html"><a href="advantages-of-poisson-regression.html"><i class="fa fa-check"></i><b>4.15</b> Advantages of Poisson Regression</a></li>
+<li class="chapter" data-level="4.16" data-path="generalized-linear-models-1.html"><a href="generalized-linear-models-1.html"><i class="fa fa-check"></i><b>4.16</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="4.17" data-path="addendum---logistic-regression-assumptions.html"><a href="addendum---logistic-regression-assumptions.html"><i class="fa fa-check"></i><b>4.17</b> Addendum - Logistic Regression Assumptions</a></li>
+<li class="chapter" data-level="4.18" data-path="lab-classification-methods.html"><a href="lab-classification-methods.html"><i class="fa fa-check"></i><b>4.18</b> Lab: Classification Methods</a></li>
+<li class="chapter" data-level="4.19" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html"><i class="fa fa-check"></i><b>4.19</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="4.19.1" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-1-3"><i class="fa fa-check"></i><b>4.19.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="4.19.2" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-2-3"><i class="fa fa-check"></i><b>4.19.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="4.19.3" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-3-3"><i class="fa fa-check"></i><b>4.19.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="4.19.4" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-4-3"><i class="fa fa-check"></i><b>4.19.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="validation-set-approach.html"><a href="validation-set-approach.html"><i class="fa fa-check"></i><b>5.1</b> Validation Set Approach</a></li>
+<li class="chapter" data-level="5.2" data-path="validation-error-rate-varies-depending-on-data-set.html"><a href="validation-error-rate-varies-depending-on-data-set.html"><i class="fa fa-check"></i><b>5.2</b> Validation Error Rate Varies Depending on Data Set</a></li>
+<li class="chapter" data-level="5.3" data-path="leave-one-out-cross-validation-loocv.html"><a href="leave-one-out-cross-validation-loocv.html"><i class="fa fa-check"></i><b>5.3</b> Leave-One-Out Cross-Validation (LOOCV)</a></li>
+<li class="chapter" data-level="5.4" data-path="advantages-of-loocv-over-validation-set-approach.html"><a href="advantages-of-loocv-over-validation-set-approach.html"><i class="fa fa-check"></i><b>5.4</b> Advantages of LOOCV over Validation Set Approach</a></li>
+<li class="chapter" data-level="5.5" data-path="k-fold-cross-validation.html"><a href="k-fold-cross-validation.html"><i class="fa fa-check"></i><b>5.5</b> k-fold Cross-Validation</a></li>
+<li class="chapter" data-level="5.6" data-path="graphical-illustration-of-k-fold-approach.html"><a href="graphical-illustration-of-k-fold-approach.html"><i class="fa fa-check"></i><b>5.6</b> Graphical Illustration of k-fold Approach</a></li>
+<li class="chapter" data-level="5.7" data-path="advantages-of-k-fold-cross-validation-over-loocv.html"><a href="advantages-of-k-fold-cross-validation-over-loocv.html"><i class="fa fa-check"></i><b>5.7</b> Advantages of k-fold Cross-Validation over LOOCV</a></li>
+<li class="chapter" data-level="5.8" data-path="bias-variance-tradeoff-and-k-fold-cross-validation.html"><a href="bias-variance-tradeoff-and-k-fold-cross-validation.html"><i class="fa fa-check"></i><b>5.8</b> Bias-Variance Tradeoff and k-fold Cross-Validation</a></li>
+<li class="chapter" data-level="5.9" data-path="cross-validation-on-classification-problems.html"><a href="cross-validation-on-classification-problems.html"><i class="fa fa-check"></i><b>5.9</b> Cross-Validation on Classification Problems</a></li>
+<li class="chapter" data-level="5.10" data-path="logistic-polynomial-regression-bayes-decision-boundaries-and-k-fold-cross-validation.html"><a href="logistic-polynomial-regression-bayes-decision-boundaries-and-k-fold-cross-validation.html"><i class="fa fa-check"></i><b>5.10</b> Logistic Polynomial Regression, Bayes Decision Boundaries, and k-fold Cross Validation</a></li>
+<li class="chapter" data-level="5.11" data-path="the-bootstrap.html"><a href="the-bootstrap.html"><i class="fa fa-check"></i><b>5.11</b> The Bootstrap</a></li>
+<li class="chapter" data-level="5.12" data-path="population-distribution-compared-to-bootstrap-distribution.html"><a href="population-distribution-compared-to-bootstrap-distribution.html"><i class="fa fa-check"></i><b>5.12</b> Population Distribution Compared to Bootstrap Distribution</a></li>
+<li class="chapter" data-level="5.13" data-path="bootstrap-standard-error.html"><a href="bootstrap-standard-error.html"><i class="fa fa-check"></i><b>5.13</b> Bootstrap Standard Error</a></li>
+<li class="chapter" data-level="5.14" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html"><i class="fa fa-check"></i><b>5.14</b> Lab: Cross-Validation and the Bootstrap</a>
+<ul>
+<li class="chapter" data-level="5.14.1" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-validation-set-approach"><i class="fa fa-check"></i><b>5.14.1</b> The Validation Set Approach</a></li>
+<li class="chapter" data-level="5.14.2" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>5.14.2</b> Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="5.14.3" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#k-fold-cross-validation-1"><i class="fa fa-check"></i><b>5.14.3</b> k-Fold Cross-Validation</a></li>
+<li class="chapter" data-level="5.14.4" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-bootstrap-1"><i class="fa fa-check"></i><b>5.14.4</b> The Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="5.15" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html"><i class="fa fa-check"></i><b>5.15</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="5.15.1" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-1-4"><i class="fa fa-check"></i><b>5.15.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="5.15.2" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-2-4"><i class="fa fa-check"></i><b>5.15.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="5.15.3" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-3-4"><i class="fa fa-check"></i><b>5.15.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="5.15.4" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-4-4"><i class="fa fa-check"></i><b>5.15.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>6.1</b> Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="context-for-this-chapter.html"><a href="context-for-this-chapter.html"><i class="fa fa-check"></i>Context for This Chapter</a></li>
+<li class="chapter" data-level="" data-path="best-subset-selection-bss.html"><a href="best-subset-selection-bss.html"><i class="fa fa-check"></i>Best Subset Selection (BSS)</a></li>
+<li class="chapter" data-level="" data-path="bss-algorithm.html"><a href="bss-algorithm.html"><i class="fa fa-check"></i>BSS Algorithm</a></li>
+<li class="chapter" data-level="" data-path="behind-the-dots-bssing-islr2credit.html"><a href="behind-the-dots-bssing-islr2credit.html"><i class="fa fa-check"></i>Behind the dots, BSS’ing ISLR2::Credit</a></li>
+<li class="chapter" data-level="" data-path="best-subset-selection-bss-1.html"><a href="best-subset-selection-bss-1.html"><i class="fa fa-check"></i>Best Subset Selection (BSS)</a></li>
+<li class="chapter" data-level="" data-path="forward-stepwise-subset-selection-fsss.html"><a href="forward-stepwise-subset-selection-fsss.html"><i class="fa fa-check"></i>Forward Stepwise Subset Selection (FsSS)</a></li>
+<li class="chapter" data-level="" data-path="fsssing-islr2credit.html"><a href="fsssing-islr2credit.html"><i class="fa fa-check"></i>FsSS’ing ISLR2::Credit</a></li>
+<li class="chapter" data-level="" data-path="backward-stepwise-subset-selection-bsss.html"><a href="backward-stepwise-subset-selection-bsss.html"><i class="fa fa-check"></i>Backward Stepwise Subset Selection (BsSS)</a></li>
+<li class="chapter" data-level="" data-path="guided-searches.html"><a href="guided-searches.html"><i class="fa fa-check"></i>“Guided” searches</a></li>
+<li class="chapter" data-level="" data-path="choosing-the-best-model.html"><a href="choosing-the-best-model.html"><i class="fa fa-check"></i>Choosing the best model</a></li>
+<li class="chapter" data-level="" data-path="adjustment-methods.html"><a href="adjustment-methods.html"><i class="fa fa-check"></i>Adjustment Methods</a></li>
+<li class="chapter" data-level="" data-path="avoiding-adjustment-methods.html"><a href="avoiding-adjustment-methods.html"><i class="fa fa-check"></i>Avoiding Adjustment Methods</a></li>
+<li class="chapter" data-level="" data-path="various-variable-selection-methods-on-islr2credit.html"><a href="various-variable-selection-methods-on-islr2credit.html"><i class="fa fa-check"></i>Various variable selection methods on ISLR2::Credit</a></li>
+<li class="chapter" data-level="" data-path="in-conclusion.html"><a href="in-conclusion.html"><i class="fa fa-check"></i>In conclusion…</a></li>
+<li class="chapter" data-level="6.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>6.2</b> Shrinkage Methods</a></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="ols-review.html"><a href="ols-review.html"><i class="fa fa-check"></i>OLS review</a></li>
+<li class="chapter" data-level="" data-path="ridge-regression.html"><a href="ridge-regression.html"><i class="fa fa-check"></i>Ridge Regression</a></li>
+<li class="chapter" data-level="" data-path="ridge-regression-visually.html"><a href="ridge-regression-visually.html"><i class="fa fa-check"></i>Ridge Regression, Visually</a></li>
+<li class="chapter" data-level="" data-path="ridge-good.html"><a href="ridge-good.html"><i class="fa fa-check"></i>Ridge, good?</a></li>
+<li class="chapter" data-level="" data-path="preprocessing.html"><a href="preprocessing.html"><i class="fa fa-check"></i>Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="the-lasso.html"><a href="the-lasso.html"><i class="fa fa-check"></i>The Lasso</a></li>
+<li class="chapter" data-level="" data-path="justin-grimmer-homework.html"><a href="justin-grimmer-homework.html"><i class="fa fa-check"></i>Justin Grimmer Homework</a></li>
+<li class="chapter" data-level="" data-path="visualization-of-such-that-formulations.html"><a href="visualization-of-such-that-formulations.html"><i class="fa fa-check"></i>Visualization of “such that” formulations</a></li>
+<li class="chapter" data-level="" data-path="bayesian-interpretation.html"><a href="bayesian-interpretation.html"><i class="fa fa-check"></i>Bayesian Interpretation</a></li>
+<li class="chapter" data-level="" data-path="bayesian-interpretation-cont.html"><a href="bayesian-interpretation-cont.html"><i class="fa fa-check"></i>Bayesian Interpretation (cont)</a></li>
+<li class="chapter" data-level="" data-path="choosing-the-tuning-parameter.html"><a href="choosing-the-tuning-parameter.html"><i class="fa fa-check"></i>Choosing the tuning parameter</a></li>
+<li class="chapter" data-level="" data-path="tuning-lambda.html"><a href="tuning-lambda.html"><i class="fa fa-check"></i>Tuning <span class="math inline">\(\lambda\)</span></a></li>
+<li class="chapter" data-level="6.3" data-path="dimension-reduction-methods.html"><a href="dimension-reduction-methods.html"><i class="fa fa-check"></i><b>6.3</b> Dimension Reduction Methods</a></li>
+<li class="chapter" data-level="" data-path="the-math.html"><a href="the-math.html"><i class="fa fa-check"></i>The Math</a></li>
+<li class="chapter" data-level="" data-path="principal-components-regression.html"><a href="principal-components-regression.html"><i class="fa fa-check"></i>Principal Components Regression</a></li>
+<li class="chapter" data-level="" data-path="partial-least-squares.html"><a href="partial-least-squares.html"><i class="fa fa-check"></i>Partial Least Squares</a></li>
+<li class="chapter" data-level="6.4" data-path="considerations-in-high-dimensions.html"><a href="considerations-in-high-dimensions.html"><i class="fa fa-check"></i><b>6.4</b> Considerations in High Dimensions</a></li>
+<li class="chapter" data-level="" data-path="lasso-etc-vs-dimensionality.html"><a href="lasso-etc-vs-dimensionality.html"><i class="fa fa-check"></i>Lasso (etc) vs Dimensionality</a></li>
+<li class="chapter" data-level="6.5" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html"><i class="fa fa-check"></i><b>6.5</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-1-5"><i class="fa fa-check"></i><b>6.5.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="6.5.2" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-2-5"><i class="fa fa-check"></i><b>6.5.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="6.5.3" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-3-5"><i class="fa fa-check"></i><b>6.5.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="6.5.4" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-4-5"><i class="fa fa-check"></i><b>6.5.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="polynomial-and-step-regression.html"><a href="polynomial-and-step-regression.html"><i class="fa fa-check"></i><b>7.1</b> Polynomial and Step Regression</a></li>
+<li class="chapter" data-level="7.2" data-path="splines.html"><a href="splines.html"><i class="fa fa-check"></i><b>7.2</b> Splines</a></li>
+<li class="chapter" data-level="7.3" data-path="generalized-additive-models.html"><a href="generalized-additive-models.html"><i class="fa fa-check"></i><b>7.3</b> Generalized Additive Models</a></li>
+<li class="chapter" data-level="7.4" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html"><i class="fa fa-check"></i><b>7.4</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-1-6"><i class="fa fa-check"></i><b>7.4.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="7.4.2" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-2-6"><i class="fa fa-check"></i><b>7.4.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-3-6"><i class="fa fa-check"></i><b>7.4.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="7.4.4" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-4-6"><i class="fa fa-check"></i><b>7.4.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="decision-tree-terminology.html"><a href="decision-tree-terminology.html"><i class="fa fa-check"></i><b>8.1</b> Decision Tree Terminology</a></li>
+<li class="chapter" data-level="8.2" data-path="decision-trees-classification-explained-statquest.html"><a href="decision-trees-classification-explained-statquest.html"><i class="fa fa-check"></i><b>8.2</b> Decision Trees (Classification) Explained (StatQuest)</a></li>
+<li class="chapter" data-level="8.3" data-path="fitting-classification-trees.html"><a href="fitting-classification-trees.html"><i class="fa fa-check"></i><b>8.3</b> 8.1 Fitting Classification Trees</a></li>
+<li class="chapter" data-level="8.4" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>8.4</b> Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="8.5" data-path="correlation-analysis.html"><a href="correlation-analysis.html"><i class="fa fa-check"></i><b>8.5</b> Correlation Analysis</a></li>
+<li class="chapter" data-level="8.6" data-path="build-a-model.html"><a href="build-a-model.html"><i class="fa fa-check"></i><b>8.6</b> Build a model</a></li>
+<li class="chapter" data-level="8.7" data-path="visualize-our-decision-tree.html"><a href="visualize-our-decision-tree.html"><i class="fa fa-check"></i><b>8.7</b> Visualize our decision tree</a></li>
+<li class="chapter" data-level="8.8" data-path="evaluate-the-model.html"><a href="evaluate-the-model.html"><i class="fa fa-check"></i><b>8.8</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.9" data-path="tuning-the-model.html"><a href="tuning-the-model.html"><i class="fa fa-check"></i><b>8.9</b> Tuning the model</a></li>
+<li class="chapter" data-level="8.10" data-path="evaluate-the-model-1.html"><a href="evaluate-the-model-1.html"><i class="fa fa-check"></i><b>8.10</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.11" data-path="visualize-the-tuned-decision-tree-classification.html"><a href="visualize-the-tuned-decision-tree-classification.html"><i class="fa fa-check"></i><b>8.11</b> Visualize the tuned decision tree (classification)</a></li>
+<li class="chapter" data-level="8.12" data-path="variable-importance.html"><a href="variable-importance.html"><i class="fa fa-check"></i><b>8.12</b> Variable importance</a></li>
+<li class="chapter" data-level="8.13" data-path="final-evaluation.html"><a href="final-evaluation.html"><i class="fa fa-check"></i><b>8.13</b> Final evaluation</a></li>
+<li class="chapter" data-level="8.14" data-path="fitting-regression-trees.html"><a href="fitting-regression-trees.html"><i class="fa fa-check"></i><b>8.14</b> 8.2 - Fitting Regression Trees</a></li>
+<li class="chapter" data-level="8.15" data-path="decision-trees-regression-explained-statquest.html"><a href="decision-trees-regression-explained-statquest.html"><i class="fa fa-check"></i><b>8.15</b> Decision Trees (Regression) Explained (StatQuest)</a>
+<ul>
+<li class="chapter" data-level="8.15.1" data-path="decision-trees-regression-explained-statquest.html"><a href="decision-trees-regression-explained-statquest.html#eda"><i class="fa fa-check"></i><b>8.15.1</b> EDA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.16" data-path="correlation-analysis-1.html"><a href="correlation-analysis-1.html"><i class="fa fa-check"></i><b>8.16</b> Correlation Analysis</a></li>
+<li class="chapter" data-level="8.17" data-path="build-a-regression-tree.html"><a href="build-a-regression-tree.html"><i class="fa fa-check"></i><b>8.17</b> Build a regression tree</a></li>
+<li class="chapter" data-level="8.18" data-path="visualize-our-decision-tree-1.html"><a href="visualize-our-decision-tree-1.html"><i class="fa fa-check"></i><b>8.18</b> Visualize our decision tree</a></li>
+<li class="chapter" data-level="8.19" data-path="evaluate-the-model-2.html"><a href="evaluate-the-model-2.html"><i class="fa fa-check"></i><b>8.19</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.20" data-path="tuning-the-regression-model.html"><a href="tuning-the-regression-model.html"><i class="fa fa-check"></i><b>8.20</b> Tuning the regression model</a></li>
+<li class="chapter" data-level="8.21" data-path="evaluate-the-model-3.html"><a href="evaluate-the-model-3.html"><i class="fa fa-check"></i><b>8.21</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.22" data-path="visualize-the-tuned-decision-tree-regression.html"><a href="visualize-the-tuned-decision-tree-regression.html"><i class="fa fa-check"></i><b>8.22</b> Visualize the tuned decision tree (regression)</a></li>
+<li class="chapter" data-level="8.23" data-path="variable-importance-1.html"><a href="variable-importance-1.html"><i class="fa fa-check"></i><b>8.23</b> Variable importance</a></li>
+<li class="chapter" data-level="8.24" data-path="final-evaluation-1.html"><a href="final-evaluation-1.html"><i class="fa fa-check"></i><b>8.24</b> Final evaluation</a></li>
+<li class="chapter" data-level="8.25" data-path="bagging-and-random-forests.html"><a href="bagging-and-random-forests.html"><i class="fa fa-check"></i><b>8.25</b> 8.3 - Bagging and Random Forests</a></li>
+<li class="chapter" data-level="8.26" data-path="random-forest-diagram.html"><a href="random-forest-diagram.html"><i class="fa fa-check"></i><b>8.26</b> Random Forest Diagram</a></li>
+<li class="chapter" data-level="8.27" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>8.27</b> Example</a></li>
+<li class="chapter" data-level="8.28" data-path="evaluate-the-model-4.html"><a href="evaluate-the-model-4.html"><i class="fa fa-check"></i><b>8.28</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.29" data-path="variable-importance-2.html"><a href="variable-importance-2.html"><i class="fa fa-check"></i><b>8.29</b> Variable importance</a></li>
+<li class="chapter" data-level="8.30" data-path="random-forest-using-a-set-of-features-mtry.html"><a href="random-forest-using-a-set-of-features-mtry.html"><i class="fa fa-check"></i><b>8.30</b> Random Forest using a set of features (mtry)</a></li>
+<li class="chapter" data-level="8.31" data-path="evaluate-the-model-5.html"><a href="evaluate-the-model-5.html"><i class="fa fa-check"></i><b>8.31</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.32" data-path="variable-importance-3.html"><a href="variable-importance-3.html"><i class="fa fa-check"></i><b>8.32</b> Variable importance</a></li>
+<li class="chapter" data-level="8.33" data-path="boosting.html"><a href="boosting.html"><i class="fa fa-check"></i><b>8.33</b> Boosting</a></li>
+<li class="chapter" data-level="8.34" data-path="evaluate-the-model-6.html"><a href="evaluate-the-model-6.html"><i class="fa fa-check"></i><b>8.34</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.35" data-path="tuning-the-xgboost-regression-model.html"><a href="tuning-the-xgboost-regression-model.html"><i class="fa fa-check"></i><b>8.35</b> Tuning the xgboost regression model</a></li>
+<li class="chapter" data-level="8.36" data-path="grid-tuning-with-finetunerace_anova.html"><a href="grid-tuning-with-finetunerace_anova.html"><i class="fa fa-check"></i><b>8.36</b> Grid tuning with finetune::race_anova()</a></li>
+<li class="chapter" data-level="8.37" data-path="evaluate-the-model-7.html"><a href="evaluate-the-model-7.html"><i class="fa fa-check"></i><b>8.37</b> Evaluate the model</a></li>
+<li class="chapter" data-level="8.38" data-path="final-evauation.html"><a href="final-evauation.html"><i class="fa fa-check"></i><b>8.38</b> Final evauation</a></li>
+<li class="chapter" data-level="8.39" data-path="feature-importance.html"><a href="feature-importance.html"><i class="fa fa-check"></i><b>8.39</b> Feature importance</a></li>
+<li class="chapter" data-level="8.40" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html"><i class="fa fa-check"></i><b>8.40</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="8.40.1" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-1-7"><i class="fa fa-check"></i><b>8.40.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="8.40.2" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-2-7"><i class="fa fa-check"></i><b>8.40.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="8.40.3" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-3-7"><i class="fa fa-check"></i><b>8.40.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="8.40.4" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-4-7"><i class="fa fa-check"></i><b>8.40.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="maximal-margin-classifier-hyperplanes.html"><a href="maximal-margin-classifier-hyperplanes.html"><i class="fa fa-check"></i><b>9.1</b> Maximal Margin Classifier &amp; Hyperplanes</a></li>
+<li class="chapter" data-level="9.2" data-path="using-a-separating-hyperplane-to-classify.html"><a href="using-a-separating-hyperplane-to-classify.html"><i class="fa fa-check"></i><b>9.2</b> Using a Separating Hyperplane to Classify</a></li>
+<li class="chapter" data-level="9.3" data-path="visual-example-of-using-a-hyperplane-to-classify.html"><a href="visual-example-of-using-a-hyperplane-to-classify.html"><i class="fa fa-check"></i><b>9.3</b> Visual Example of Using a Hyperplane to Classify</a></li>
+<li class="chapter" data-level="9.4" data-path="maximal-margin-classifier.html"><a href="maximal-margin-classifier.html"><i class="fa fa-check"></i><b>9.4</b> Maximal Margin Classifier</a></li>
+<li class="chapter" data-level="9.5" data-path="visual-representation-of-maximal-margin-classifier.html"><a href="visual-representation-of-maximal-margin-classifier.html"><i class="fa fa-check"></i><b>9.5</b> Visual Representation of Maximal Margin Classifier</a></li>
+<li class="chapter" data-level="9.6" data-path="mathematics-of-the-mmc.html"><a href="mathematics-of-the-mmc.html"><i class="fa fa-check"></i><b>9.6</b> Mathematics of the MMC</a></li>
+<li class="chapter" data-level="9.7" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>9.7</b> Support Vector Classifiers</a></li>
+<li class="chapter" data-level="9.8" data-path="mathematics-of-the-svc.html"><a href="mathematics-of-the-svc.html"><i class="fa fa-check"></i><b>9.8</b> Mathematics of the SVC</a></li>
+<li class="chapter" data-level="9.9" data-path="visual-illustration-of-svc.html"><a href="visual-illustration-of-svc.html"><i class="fa fa-check"></i><b>9.9</b> Visual Illustration of SVC</a></li>
+<li class="chapter" data-level="9.10" data-path="support-vector-machines-1.html"><a href="support-vector-machines-1.html"><i class="fa fa-check"></i><b>9.10</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="9.11" data-path="support-vector-machines-cont..html"><a href="support-vector-machines-cont..html"><i class="fa fa-check"></i><b>9.11</b> Support Vector Machines, cont.</a></li>
+<li class="chapter" data-level="9.12" data-path="radial-kernels.html"><a href="radial-kernels.html"><i class="fa fa-check"></i><b>9.12</b> Radial Kernels</a></li>
+<li class="chapter" data-level="9.13" data-path="radial-kernels-cont..html"><a href="radial-kernels-cont..html"><i class="fa fa-check"></i><b>9.13</b> Radial Kernels, cont.</a></li>
+<li class="chapter" data-level="9.14" data-path="svms-with-more-than-two-classes.html"><a href="svms-with-more-than-two-classes.html"><i class="fa fa-check"></i><b>9.14</b> SVMs with More than Two Classes</a></li>
+<li class="chapter" data-level="9.15" data-path="lab-support-vector-classifier.html"><a href="lab-support-vector-classifier.html"><i class="fa fa-check"></i><b>9.15</b> Lab: Support Vector Classifier</a>
+<ul>
+<li class="chapter" data-level="9.15.1" data-path="lab-support-vector-classifier.html"><a href="lab-support-vector-classifier.html#tuning"><i class="fa fa-check"></i><b>9.15.1</b> Tuning</a></li>
+<li class="chapter" data-level="9.15.2" data-path="lab-support-vector-classifier.html"><a href="lab-support-vector-classifier.html#linearly-separable-data"><i class="fa fa-check"></i><b>9.15.2</b> Linearly separable data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.16" data-path="lab-support-vector-machine-non-linear-kernel.html"><a href="lab-support-vector-machine-non-linear-kernel.html"><i class="fa fa-check"></i><b>9.16</b> Lab: Support Vector Machine (non-linear kernel)</a></li>
+<li class="chapter" data-level="9.17" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html"><i class="fa fa-check"></i><b>9.17</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="9.17.1" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-1-8"><i class="fa fa-check"></i><b>9.17.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="9.17.2" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-2-8"><i class="fa fa-check"></i><b>9.17.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="9.17.3" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-3-8"><i class="fa fa-check"></i><b>9.17.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="9.17.4" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-4-8"><i class="fa fa-check"></i><b>9.17.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="slide-1.html"><a href="slide-1.html"><i class="fa fa-check"></i><b>10.1</b> Slide 1</a></li>
+<li class="chapter" data-level="10.2" data-path="slide-2.html"><a href="slide-2.html"><i class="fa fa-check"></i><b>10.2</b> Slide 2</a></li>
+<li class="chapter" data-level="10.3" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html"><i class="fa fa-check"></i><b>10.3</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-1-9"><i class="fa fa-check"></i><b>10.3.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="10.3.2" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-2-9"><i class="fa fa-check"></i><b>10.3.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="10.3.3" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-3-9"><i class="fa fa-check"></i><b>10.3.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="10.3.4" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-4-9"><i class="fa fa-check"></i><b>10.3.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="what-is-survival-censored-data.html"><a href="what-is-survival-censored-data.html"><i class="fa fa-check"></i><b>11.1</b> What is survival (censored) data?</a></li>
+<li class="chapter" data-level="11.2" data-path="aliases-for-survival-analysis.html"><a href="aliases-for-survival-analysis.html"><i class="fa fa-check"></i><b>11.2</b> Aliases for survival analysis</a></li>
+<li class="chapter" data-level="11.3" data-path="introduction-to-survival-analysis-zedstatistics.html"><a href="introduction-to-survival-analysis-zedstatistics.html"><i class="fa fa-check"></i><b>11.3</b> Introduction to Survival Analysis (zedstatistics) —</a></li>
+<li class="chapter" data-level="11.4" data-path="types-of-censoring.html"><a href="types-of-censoring.html"><i class="fa fa-check"></i><b>11.4</b> Types of censoring</a></li>
+<li class="chapter" data-level="11.5" data-path="lab-survival-analysis.html"><a href="lab-survival-analysis.html"><i class="fa fa-check"></i><b>11.5</b> Lab: Survival Analysis</a></li>
+<li class="chapter" data-level="11.6" data-path="brain-cancer-data.html"><a href="brain-cancer-data.html"><i class="fa fa-check"></i><b>11.6</b> Brain Cancer Data</a></li>
+<li class="chapter" data-level="11.7" data-path="kaplan-meier-survival-curve.html"><a href="kaplan-meier-survival-curve.html"><i class="fa fa-check"></i><b>11.7</b> Kaplan-Meier survival curve</a></li>
+<li class="chapter" data-level="11.8" data-path="km-curve-stratified-by-sex.html"><a href="km-curve-stratified-by-sex.html"><i class="fa fa-check"></i><b>11.8</b> KM curve stratified by sex</a></li>
+<li class="chapter" data-level="11.9" data-path="survminer-package.html"><a href="survminer-package.html"><i class="fa fa-check"></i><b>11.9</b> Survminer package</a></li>
+<li class="chapter" data-level="11.10" data-path="hazard-function.html"><a href="hazard-function.html"><i class="fa fa-check"></i><b>11.10</b> Hazard Function</a></li>
+<li class="chapter" data-level="11.11" data-path="cumulative-hazard-function.html"><a href="cumulative-hazard-function.html"><i class="fa fa-check"></i><b>11.11</b> Cumulative Hazard Function</a></li>
+<li class="chapter" data-level="11.12" data-path="proportional-hazards.html"><a href="proportional-hazards.html"><i class="fa fa-check"></i><b>11.12</b> Proportional Hazards</a></li>
+<li class="chapter" data-level="11.13" data-path="regression-models.html"><a href="regression-models.html"><i class="fa fa-check"></i><b>11.13</b> Regression Models</a>
+<ul>
+<li class="chapter" data-level="11.13.1" data-path="regression-models.html"><a href="regression-models.html#cox-proportional-hazards-hazards-model"><i class="fa fa-check"></i><b>11.13.1</b> Cox Proportional Hazards-Hazards Model</a></li>
+</ul></li>
+<li class="chapter" data-level="11.14" data-path="visualizing-the-estimated-distribution-of-survival-times.html"><a href="visualizing-the-estimated-distribution-of-survival-times.html"><i class="fa fa-check"></i><b>11.14</b> Visualizing the estimated distribution of survival times</a></li>
+<li class="chapter" data-level="11.15" data-path="cox-model-assumptions.html"><a href="cox-model-assumptions.html"><i class="fa fa-check"></i><b>11.15</b> Cox Model Assumptions</a></li>
+<li class="chapter" data-level="11.16" data-path="testing-proportional-hazard-assumptions.html"><a href="testing-proportional-hazard-assumptions.html"><i class="fa fa-check"></i><b>11.16</b> Testing proportional Hazard assumptions</a></li>
+<li class="chapter" data-level="11.17" data-path="testing-influential-observations.html"><a href="testing-influential-observations.html"><i class="fa fa-check"></i><b>11.17</b> Testing influential observations</a></li>
+<li class="chapter" data-level="11.18" data-path="meeting-videos-10.html"><a href="meeting-videos-10.html"><i class="fa fa-check"></i><b>11.18</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="11.18.1" data-path="meeting-videos-10.html"><a href="meeting-videos-10.html#cohort-1-10"><i class="fa fa-check"></i><b>11.18.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="11.18.2" data-path="meeting-videos-10.html"><a href="meeting-videos-10.html#cohort-2-10"><i class="fa fa-check"></i><b>11.18.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="11.18.3" data-path="meeting-videos-10.html"><a href="meeting-videos-10.html#cohort-3-10"><i class="fa fa-check"></i><b>11.18.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="11.18.4" data-path="meeting-videos-10.html"><a href="meeting-videos-10.html#cohort-4-10"><i class="fa fa-check"></i><b>11.18.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>12.2</b> Principal component analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-are-the-steps-to-principal-component-analysis"><i class="fa fa-check"></i><b>12.2.1</b> What are the steps to principal component analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="geometric-interpretation.html"><a href="geometric-interpretation.html"><i class="fa fa-check"></i><b>12.3</b> Geometric interpretation</a></li>
+<li class="chapter" data-level="12.4" data-path="proportion-of-variance-explained.html"><a href="proportion-of-variance-explained.html"><i class="fa fa-check"></i><b>12.4</b> Proportion of variance explained</a></li>
+<li class="chapter" data-level="12.5" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html"><i class="fa fa-check"></i><b>12.5</b> The matrix decomposition</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="the-matrix-decomposition.html"><a href="the-matrix-decomposition.html#matrix-completion"><i class="fa fa-check"></i><b>12.5.1</b> Matrix Completion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>12.6</b> Clustering</a></li>
+<li class="chapter" data-level="12.7" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>12.7</b> K-means</a></li>
+<li class="chapter" data-level="12.8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>12.8</b> Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#consideration-on-how-to-interpret-dendrogram-results"><i class="fa fa-check"></i><b>12.8.1</b> Consideration on how to interpret Dendrogram results</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12.9</b> References</a></li>
+<li class="chapter" data-level="" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html"><i class="fa fa-check"></i>Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-1-11"><i class="fa fa-check"></i><b>12.9.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="12.9.2" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-2-11"><i class="fa fa-check"></i><b>12.9.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="12.9.3" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-3-11"><i class="fa fa-check"></i><b>12.9.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="12.9.4" data-path="meeting-videos-11.html"><a href="meeting-videos-11.html#cohort-4-11"><i class="fa fa-check"></i><b>12.9.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="how-to-deal-with-more-than-one-hypothesis-test.html"><a href="how-to-deal-with-more-than-one-hypothesis-test.html"><i class="fa fa-check"></i><b>13.1</b> How to deal with more than one hypothesis test</a></li>
+<li class="chapter" data-level="13.2" data-path="hypothesis-testing-steps.html"><a href="hypothesis-testing-steps.html"><i class="fa fa-check"></i><b>13.2</b> Hypothesis testing steps</a></li>
+<li class="chapter" data-level="13.3" data-path="m-null-hypotheses.html"><a href="m-null-hypotheses.html"><i class="fa fa-check"></i><b>13.3</b> m NULL hypotheses</a></li>
+<li class="chapter" data-level="13.4" data-path="family-wise-error-rate-fwer.html"><a href="family-wise-error-rate-fwer.html"><i class="fa fa-check"></i><b>13.4</b> Family Wise Error Rate (FWER)</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="family-wise-error-rate-fwer.html"><a href="family-wise-error-rate-fwer.html#controlling-fwer"><i class="fa fa-check"></i><b>13.4.1</b> Controlling FWER</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>13.5</b> Power</a></li>
+<li class="chapter" data-level="13.6" data-path="false-discovery-rate-fdr.html"><a href="false-discovery-rate-fdr.html"><i class="fa fa-check"></i><b>13.6</b> False Discovery Rate (FDR)</a></li>
+<li class="chapter" data-level="13.7" data-path="benjamini-hochberg-procedure.html"><a href="benjamini-hochberg-procedure.html"><i class="fa fa-check"></i><b>13.7</b> Benjamini-Hochberg procedure</a></li>
+<li class="chapter" data-level="13.8" data-path="case-study-multiple-hypothesis-test-in-genomics.html"><a href="case-study-multiple-hypothesis-test-in-genomics.html"><i class="fa fa-check"></i><b>13.8</b> Case Study: Multiple hypothesis test in Genomics</a></li>
+<li class="chapter" data-level="13.9" data-path="load-libraries-and-datasets.html"><a href="load-libraries-and-datasets.html"><i class="fa fa-check"></i><b>13.9</b> Load libraries and datasets</a></li>
+<li class="chapter" data-level="13.10" data-path="multiple-t-test.html"><a href="multiple-t-test.html"><i class="fa fa-check"></i><b>13.10</b> Multiple T-test</a>
+<ul>
+<li class="chapter" data-level="13.10.1" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fwer-family-wise-error-rate"><i class="fa fa-check"></i><b>13.10.1</b> FWER Family Wise Error Rate</a></li>
+<li class="chapter" data-level="13.10.2" data-path="multiple-t-test.html"><a href="multiple-t-test.html#fdr-false-discovery-rate"><i class="fa fa-check"></i><b>13.10.2</b> FDR False discovery rate</a></li>
+</ul></li>
+<li class="chapter" data-level="13.11" data-path="replications.html"><a href="replications.html"><i class="fa fa-check"></i><b>13.11</b> Replications</a></li>
+<li class="chapter" data-level="13.12" data-path="lab-multiple-testing.html"><a href="lab-multiple-testing.html"><i class="fa fa-check"></i><b>13.12</b> Lab: Multiple Testing</a></li>
+<li class="chapter" data-level="13.13" data-path="the-family-wise-error-rate.html"><a href="the-family-wise-error-rate.html"><i class="fa fa-check"></i><b>13.13</b> The Family-Wise Error Rate</a></li>
+<li class="chapter" data-level="13.14" data-path="the-false-discovery-rate.html"><a href="the-false-discovery-rate.html"><i class="fa fa-check"></i><b>13.14</b> The False Discovery Rate</a></li>
+<li class="chapter" data-level="13.15" data-path="a-re-sampling-approach.html"><a href="a-re-sampling-approach.html"><i class="fa fa-check"></i><b>13.15</b> A Re-Sampling Approach</a></li>
+<li class="chapter" data-level="13.16" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html"><i class="fa fa-check"></i><b>13.16</b> Meeting Videos</a>
+<ul>
+<li class="chapter" data-level="13.16.1" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-1-12"><i class="fa fa-check"></i><b>13.16.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="13.16.2" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-2-12"><i class="fa fa-check"></i><b>13.16.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="13.16.3" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-3-12"><i class="fa fa-check"></i><b>13.16.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="13.16.4" data-path="meeting-videos-12.html"><a href="meeting-videos-12.html#cohort-4-12"><i class="fa fa-check"></i><b>13.16.4</b> Cohort 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="abbreviations.html"><a href="abbreviations.html"><i class="fa fa-check"></i>Abbreviations</a></li>
+<li class="chapter" data-level="" data-path="latex.html"><a href="latex.html"><i class="fa fa-check"></i>Appendix: Bookdown and LaTeX Notes</a>
+<ul>
+<li class="chapter" data-level="" data-path="markdown-highlighting.html"><a href="markdown-highlighting.html"><i class="fa fa-check"></i>Markdown highlighting</a></li>
+<li class="chapter" data-level="" data-path="text-coloring.html"><a href="text-coloring.html"><i class="fa fa-check"></i>Text coloring</a></li>
+<li class="chapter" data-level="" data-path="x99-4.html"><a href="x99-4.html"><i class="fa fa-check"></i>Section references</a></li>
+<li class="chapter" data-level="" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i>Footnotes</a></li>
+<li class="chapter" data-level="" data-path="formatting-text.html"><a href="formatting-text.html"><i class="fa fa-check"></i>Formatting Text</a></li>
+<li class="chapter" data-level="" data-path="figures.html"><a href="figures.html"><i class="fa fa-check"></i>Figures</a></li>
+<li class="chapter" data-level="" data-path="displaying-formula.html"><a href="displaying-formula.html"><i class="fa fa-check"></i>Displaying Formula</a>
+<ul>
+<li class="chapter" data-level="" data-path="displaying-formula.html"><a href="displaying-formula.html#formatting"><i class="fa fa-check"></i>Formatting</a></li>
+<li class="chapter" data-level="" data-path="displaying-formula.html"><a href="displaying-formula.html#symbols"><i class="fa fa-check"></i>Symbols</a></li>
+<li class="chapter" data-level="" data-path="displaying-formula.html"><a href="displaying-formula.html#notation-1"><i class="fa fa-check"></i>Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="equations.html"><a href="equations.html"><i class="fa fa-check"></i>Equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="equations.html"><a href="equations.html#basic-equation"><i class="fa fa-check"></i>Basic Equation</a></li>
+<li class="chapter" data-level="" data-path="equations.html"><a href="equations.html#case-when-equation-large-curly-brace"><i class="fa fa-check"></i>Case-When Equation (Large Curly Brace)</a></li>
+<li class="chapter" data-level="" data-path="equations.html"><a href="equations.html#alligned-with-underbars"><i class="fa fa-check"></i>Alligned with Underbars</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="greek-letters.html"><a href="greek-letters.html"><i class="fa fa-check"></i>Greek letters</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistical Learning Using R Book Club</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-models" class="section level2 hasAnchor" number="11.13">
+<h2><span class="header-section-number">11.13</span> Regression Models<a href="regression-models.html#regression-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cox-proportional-hazards-hazards-model" class="section level3 hasAnchor" number="11.13.1">
+<h3><span class="header-section-number">11.13.1</span> Cox Proportional Hazards-Hazards Model<a href="regression-models.html#cox-proportional-hazards-hazards-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>Cox proportional-hazards model (Cox, 1972)</strong> is essentially a regression model commonly used statistical in medical research for investigating the association between the survival time of patients and one or more predictor variables.</p>
+<p>The purpose of the model is to evaluate simultaneously the effect of several factors on survival. In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time. This rate is commonly referred as the hazard rate. Predictor variables (or factors) are usually termed <em>covariates</em> in the survival-analysis literature.</p>
+<p>Let’s fit the Cox proportional hazards models using the <code>coxph()</code> function.
+To begin, we consider a model that uses <code>sex</code> as the only predictor.</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="regression-models.html#cb374-1" aria-hidden="true" tabindex="-1"></a>fit.cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> BrainCancer)</span>
+<span id="cb374-2"><a href="regression-models.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.cox)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ sex, data = BrainCancer)
+## 
+##   n= 88, number of events= 35 
+## 
+##           coef exp(coef) se(coef)     z Pr(&gt;|z|)
+## sexMale 0.4077    1.5033   0.3420 1.192    0.233
+## 
+##         exp(coef) exp(-coef) lower .95 upper .95
+## sexMale     1.503     0.6652     0.769     2.939
+## 
+## Concordance= 0.565  (se = 0.045 )
+## Likelihood ratio test= 1.44  on 1 df,   p=0.2
+## Wald test            = 1.42  on 1 df,   p=0.2
+## Score (logrank) test = 1.44  on 1 df,   p=0.2</code></pre>
+<p>Regardless of which test we use, we see that there is no clear evidence for a difference in survival between males and females.</p>
+<p>Let’s run the Cox PH model with all covariates.</p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regression-models.html#cb376-1" aria-hidden="true" tabindex="-1"></a>fit_all_cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> ., <span class="at">data =</span> BrainCancer)</span>
+<span id="cb376-2"><a href="regression-models.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_all_cox)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ ., data = BrainCancer)
+## 
+##   n= 87, number of events= 35 
+##    (1 observation deleted due to missingness)
+## 
+##                        coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+## sexMale             0.18375   1.20171  0.36036  0.510  0.61012    
+## diagnosisLG glioma  0.91502   2.49683  0.63816  1.434  0.15161    
+## diagnosisHG glioma  2.15457   8.62414  0.45052  4.782 1.73e-06 ***
+## diagnosisOther      0.88570   2.42467  0.65787  1.346  0.17821    
+## locSupratentorial   0.44119   1.55456  0.70367  0.627  0.53066    
+## ki                 -0.05496   0.94653  0.01831 -3.001  0.00269 ** 
+## gtv                 0.03429   1.03489  0.02233  1.536  0.12466    
+## stereoSRT           0.17778   1.19456  0.60158  0.296  0.76760    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##                    exp(coef) exp(-coef) lower .95 upper .95
+## sexMale               1.2017     0.8321    0.5930    2.4352
+## diagnosisLG glioma    2.4968     0.4005    0.7148    8.7215
+## diagnosisHG glioma    8.6241     0.1160    3.5664   20.8546
+## diagnosisOther        2.4247     0.4124    0.6678    8.8031
+## locSupratentorial     1.5546     0.6433    0.3914    6.1741
+## ki                    0.9465     1.0565    0.9132    0.9811
+## gtv                   1.0349     0.9663    0.9906    1.0812
+## stereoSRT             1.1946     0.8371    0.3674    3.8839
+## 
+## Concordance= 0.794  (se = 0.04 )
+## Likelihood ratio test= 41.37  on 8 df,   p=2e-06
+## Wald test            = 38.7  on 8 df,   p=6e-06
+## Score (logrank) test = 46.59  on 8 df,   p=2e-07</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="proportional-hazards.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizing-the-estimated-distribution-of-survival-times.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/r4ds/bookclub-islr/edit/main/11_Survival-analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
