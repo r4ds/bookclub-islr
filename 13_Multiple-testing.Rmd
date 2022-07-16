@@ -903,15 +903,10 @@ plot(Rs, FDRs, xlab = "Number of Rejections", type = "l",
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/iwd20sDYUbY")`
 
-<details>
-<summary> Meeting chat log </summary>
+`r knitr::include_url("https://www.youtube.com/embed/7r7uhb2JCas")`
 
-```
-ADD LOG HERE
-```
-</details>
 
 ### Cohort 2
 
