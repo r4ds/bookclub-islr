@@ -594,8 +594,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The purpose of the model is to evaluate simultaneously the effect of several factors on survival. In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time. This rate is commonly referred as the hazard rate. Predictor variables (or factors) are usually termed <em>covariates</em> in the survival-analysis literature.</p>
 <p>Let’s fit the Cox proportional hazards models using the <code>coxph()</code> function.
 To begin, we consider a model that uses <code>sex</code> as the only predictor.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="regression-models.html#cb374-1" aria-hidden="true" tabindex="-1"></a>fit.cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> BrainCancer)</span>
-<span id="cb374-2"><a href="regression-models.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.cox)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regression-models.html#cb376-1" aria-hidden="true" tabindex="-1"></a>fit.cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> BrainCancer)</span>
+<span id="cb376-2"><a href="regression-models.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.cox)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, status) ~ sex, data = BrainCancer)
 ## 
@@ -613,8 +613,8 @@ To begin, we consider a model that uses <code>sex</code> as the only predictor.<
 ## Score (logrank) test = 1.44  on 1 df,   p=0.2</code></pre>
 <p>Regardless of which test we use, we see that there is no clear evidence for a difference in survival between males and females.</p>
 <p>Let’s run the Cox PH model with all covariates.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regression-models.html#cb376-1" aria-hidden="true" tabindex="-1"></a>fit_all_cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> ., <span class="at">data =</span> BrainCancer)</span>
-<span id="cb376-2"><a href="regression-models.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_all_cox)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="regression-models.html#cb378-1" aria-hidden="true" tabindex="-1"></a>fit_all_cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> ., <span class="at">data =</span> BrainCancer)</span>
+<span id="cb378-2"><a href="regression-models.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_all_cox)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, status) ~ ., data = BrainCancer)
 ## 

@@ -589,46 +589,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lab-support-vector-classifier" class="section level2 hasAnchor" number="9.15">
 <h2><span class="header-section-number">9.15</span> Lab: Support Vector Classifier<a href="lab-support-vector-classifier.html#lab-support-vector-classifier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This is a hybrid of <a href="https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/support-vector-machines.html">Emil’s tidymodels labs</a> and the original lab. I make sure our data matches theirs so we can compare more directly.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="lab-support-vector-classifier.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb317-2"><a href="lab-support-vector-classifier.html#cb317-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab) <span class="co"># We&#39;ll use the plot method from this.</span></span></code></pre></div>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="lab-support-vector-classifier.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb318-2"><a href="lab-support-vector-classifier.html#cb318-2" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb318-3"><a href="lab-support-vector-classifier.html#cb318-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span> (<span class="dv">20</span> <span class="sc">*</span> <span class="dv">2</span>), </span>
-<span id="cb318-4"><a href="lab-support-vector-classifier.html#cb318-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb318-5"><a href="lab-support-vector-classifier.html#cb318-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x2&quot;</span>))</span>
-<span id="cb318-6"><a href="lab-support-vector-classifier.html#cb318-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
-<span id="cb318-7"><a href="lab-support-vector-classifier.html#cb318-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb318-8"><a href="lab-support-vector-classifier.html#cb318-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb318-9"><a href="lab-support-vector-classifier.html#cb318-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)))</span>
-<span id="cb318-10"><a href="lab-support-vector-classifier.html#cb318-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb318-11"><a href="lab-support-vector-classifier.html#cb318-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb318-12"><a href="lab-support-vector-classifier.html#cb318-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="dv">1</span>, x1),</span>
-<span id="cb318-13"><a href="lab-support-vector-classifier.html#cb318-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="dv">1</span>, x2)</span>
-<span id="cb318-14"><a href="lab-support-vector-classifier.html#cb318-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb318-15"><a href="lab-support-vector-classifier.html#cb318-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb318-16"><a href="lab-support-vector-classifier.html#cb318-16" aria-hidden="true" tabindex="-1"></a>sim_data <span class="sc">%&gt;%</span> </span>
-<span id="cb318-17"><a href="lab-support-vector-classifier.html#cb318-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb318-18"><a href="lab-support-vector-classifier.html#cb318-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
-<span id="cb318-19"><a href="lab-support-vector-classifier.html#cb318-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="lab-support-vector-classifier.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb318-2"><a href="lab-support-vector-classifier.html#cb318-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab) <span class="co"># We&#39;ll use the plot method from this.</span></span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="lab-support-vector-classifier.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb319-2"><a href="lab-support-vector-classifier.html#cb319-2" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb319-3"><a href="lab-support-vector-classifier.html#cb319-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span> (<span class="dv">20</span> <span class="sc">*</span> <span class="dv">2</span>), </span>
+<span id="cb319-4"><a href="lab-support-vector-classifier.html#cb319-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb319-5"><a href="lab-support-vector-classifier.html#cb319-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x2&quot;</span>))</span>
+<span id="cb319-6"><a href="lab-support-vector-classifier.html#cb319-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb319-7"><a href="lab-support-vector-classifier.html#cb319-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb319-8"><a href="lab-support-vector-classifier.html#cb319-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb319-9"><a href="lab-support-vector-classifier.html#cb319-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)))</span>
+<span id="cb319-10"><a href="lab-support-vector-classifier.html#cb319-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb319-11"><a href="lab-support-vector-classifier.html#cb319-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb319-12"><a href="lab-support-vector-classifier.html#cb319-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="dv">1</span>, x1),</span>
+<span id="cb319-13"><a href="lab-support-vector-classifier.html#cb319-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="dv">1</span>, x2)</span>
+<span id="cb319-14"><a href="lab-support-vector-classifier.html#cb319-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb319-15"><a href="lab-support-vector-classifier.html#cb319-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-16"><a href="lab-support-vector-classifier.html#cb319-16" aria-hidden="true" tabindex="-1"></a>sim_data <span class="sc">%&gt;%</span> </span>
+<span id="cb319-17"><a href="lab-support-vector-classifier.html#cb319-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb319-18"><a href="lab-support-vector-classifier.html#cb319-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
+<span id="cb319-19"><a href="lab-support-vector-classifier.html#cb319-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-data-1.png" width="672" /></p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="lab-support-vector-classifier.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I generated this using their process then saved it to use here.</span></span>
-<span id="cb319-2"><a href="lab-support-vector-classifier.html#cb319-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/09-testdat.rds&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb319-3"><a href="lab-support-vector-classifier.html#cb319-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">x1 =</span> x<span class="fl">.1</span>, <span class="at">x2 =</span> x<span class="fl">.2</span>)</span>
-<span id="cb319-4"><a href="lab-support-vector-classifier.html#cb319-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb319-5"><a href="lab-support-vector-classifier.html#cb319-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="sc">%&gt;%</span> </span>
-<span id="cb319-6"><a href="lab-support-vector-classifier.html#cb319-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb319-7"><a href="lab-support-vector-classifier.html#cb319-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
-<span id="cb319-8"><a href="lab-support-vector-classifier.html#cb319-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="lab-support-vector-classifier.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I generated this using their process then saved it to use here.</span></span>
+<span id="cb320-2"><a href="lab-support-vector-classifier.html#cb320-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/09-testdat.rds&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb320-3"><a href="lab-support-vector-classifier.html#cb320-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">x1 =</span> x<span class="fl">.1</span>, <span class="at">x2 =</span> x<span class="fl">.2</span>)</span>
+<span id="cb320-4"><a href="lab-support-vector-classifier.html#cb320-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb320-5"><a href="lab-support-vector-classifier.html#cb320-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="sc">%&gt;%</span> </span>
+<span id="cb320-6"><a href="lab-support-vector-classifier.html#cb320-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb320-7"><a href="lab-support-vector-classifier.html#cb320-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
+<span id="cb320-8"><a href="lab-support-vector-classifier.html#cb320-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-data-2.png" width="672" /></p>
 <p>We create a spec for a model, which we’ll update throughout this lab with different costs.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="lab-support-vector-classifier.html#cb320-1" aria-hidden="true" tabindex="-1"></a>svm_linear_spec <span class="ot">&lt;-</span> <span class="fu">svm_poly</span>(<span class="at">degree =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb320-2"><a href="lab-support-vector-classifier.html#cb320-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb320-3"><a href="lab-support-vector-classifier.html#cb320-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;kernlab&quot;</span>, <span class="at">scaled =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="lab-support-vector-classifier.html#cb321-1" aria-hidden="true" tabindex="-1"></a>svm_linear_spec <span class="ot">&lt;-</span> <span class="fu">svm_poly</span>(<span class="at">degree =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb321-2"><a href="lab-support-vector-classifier.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb321-3"><a href="lab-support-vector-classifier.html#cb321-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;kernlab&quot;</span>, <span class="at">scaled =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Then we do a couple fits with manual cost.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="lab-support-vector-classifier.html#cb321-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb321-2"><a href="lab-support-vector-classifier.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb321-3"><a href="lab-support-vector-classifier.html#cb321-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
-<span id="cb321-4"><a href="lab-support-vector-classifier.html#cb321-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="lab-support-vector-classifier.html#cb322-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb322-2"><a href="lab-support-vector-classifier.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb322-3"><a href="lab-support-vector-classifier.html#cb322-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
+<span id="cb322-4"><a href="lab-support-vector-classifier.html#cb322-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Support Vector Machine object of class &quot;ksvm&quot; 
@@ -644,14 +644,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Objective Function Value : -52.4483 
 ## Training error : 0.15 
 ## Probability model included.</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="lab-support-vector-classifier.html#cb323-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10 <span class="sc">%&gt;%</span></span>
-<span id="cb323-2"><a href="lab-support-vector-classifier.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb323-3"><a href="lab-support-vector-classifier.html#cb323-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="lab-support-vector-classifier.html#cb324-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_10 <span class="sc">%&gt;%</span></span>
+<span id="cb324-2"><a href="lab-support-vector-classifier.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb324-3"><a href="lab-support-vector-classifier.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-simple_fits-1.png" width="672" /></p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="lab-support-vector-classifier.html#cb324-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb324-2"><a href="lab-support-vector-classifier.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb324-3"><a href="lab-support-vector-classifier.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
-<span id="cb324-4"><a href="lab-support-vector-classifier.html#cb324-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="lab-support-vector-classifier.html#cb325-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb325-2"><a href="lab-support-vector-classifier.html#cb325-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb325-3"><a href="lab-support-vector-classifier.html#cb325-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
+<span id="cb325-4"><a href="lab-support-vector-classifier.html#cb325-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Support Vector Machine object of class &quot;ksvm&quot; 
@@ -667,14 +667,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Objective Function Value : -1.189 
 ## Training error : 0.05 
 ## Probability model included.</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="lab-support-vector-classifier.html#cb326-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01 <span class="sc">%&gt;%</span></span>
-<span id="cb326-2"><a href="lab-support-vector-classifier.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb326-3"><a href="lab-support-vector-classifier.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="lab-support-vector-classifier.html#cb327-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_01 <span class="sc">%&gt;%</span></span>
+<span id="cb327-2"><a href="lab-support-vector-classifier.html#cb327-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb327-3"><a href="lab-support-vector-classifier.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-simple_fits-2.png" width="672" /></p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="lab-support-vector-classifier.html#cb327-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb327-2"><a href="lab-support-vector-classifier.html#cb327-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">0.01</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb327-3"><a href="lab-support-vector-classifier.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
-<span id="cb327-4"><a href="lab-support-vector-classifier.html#cb327-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="lab-support-vector-classifier.html#cb328-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb328-2"><a href="lab-support-vector-classifier.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">0.01</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb328-3"><a href="lab-support-vector-classifier.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data)</span>
+<span id="cb328-4"><a href="lab-support-vector-classifier.html#cb328-4" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Support Vector Machine object of class &quot;ksvm&quot; 
@@ -690,26 +690,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Objective Function Value : -0.1859 
 ## Training error : 0.25 
 ## Probability model included.</code></pre>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="lab-support-vector-classifier.html#cb329-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="sc">%&gt;%</span></span>
-<span id="cb329-2"><a href="lab-support-vector-classifier.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb329-3"><a href="lab-support-vector-classifier.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="lab-support-vector-classifier.html#cb330-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="sc">%&gt;%</span></span>
+<span id="cb330-2"><a href="lab-support-vector-classifier.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb330-3"><a href="lab-support-vector-classifier.html#cb330-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-simple_fits-3.png" width="672" /></p>
 <div id="tuning" class="section level3 hasAnchor" number="9.15.1">
 <h3><span class="header-section-number">9.15.1</span> Tuning<a href="lab-support-vector-classifier.html#tuning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s find the best cost.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="lab-support-vector-classifier.html#cb330-1" aria-hidden="true" tabindex="-1"></a>svm_linear_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb330-2"><a href="lab-support-vector-classifier.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(</span>
-<span id="cb330-3"><a href="lab-support-vector-classifier.html#cb330-3" aria-hidden="true" tabindex="-1"></a>    svm_linear_spec <span class="sc">%&gt;%</span> <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fu">tune</span>())</span>
-<span id="cb330-4"><a href="lab-support-vector-classifier.html#cb330-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb330-5"><a href="lab-support-vector-classifier.html#cb330-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(y <span class="sc">~</span> .)</span>
-<span id="cb330-6"><a href="lab-support-vector-classifier.html#cb330-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb330-7"><a href="lab-support-vector-classifier.html#cb330-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb330-8"><a href="lab-support-vector-classifier.html#cb330-8" aria-hidden="true" tabindex="-1"></a>sim_data_fold <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(sim_data, <span class="at">strata =</span> y)</span>
-<span id="cb330-9"><a href="lab-support-vector-classifier.html#cb330-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb330-10"><a href="lab-support-vector-classifier.html#cb330-10" aria-hidden="true" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost</span>(), <span class="at">levels =</span> <span class="dv">10</span>)</span>
-<span id="cb330-11"><a href="lab-support-vector-classifier.html#cb330-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb330-12"><a href="lab-support-vector-classifier.html#cb330-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Our grid isn&#39;t identical to the book, but it&#39;s close enough.</span></span>
-<span id="cb330-13"><a href="lab-support-vector-classifier.html#cb330-13" aria-hidden="true" tabindex="-1"></a>param_grid</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="lab-support-vector-classifier.html#cb331-1" aria-hidden="true" tabindex="-1"></a>svm_linear_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb331-2"><a href="lab-support-vector-classifier.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(</span>
+<span id="cb331-3"><a href="lab-support-vector-classifier.html#cb331-3" aria-hidden="true" tabindex="-1"></a>    svm_linear_spec <span class="sc">%&gt;%</span> <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fu">tune</span>())</span>
+<span id="cb331-4"><a href="lab-support-vector-classifier.html#cb331-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb331-5"><a href="lab-support-vector-classifier.html#cb331-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(y <span class="sc">~</span> .)</span>
+<span id="cb331-6"><a href="lab-support-vector-classifier.html#cb331-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-7"><a href="lab-support-vector-classifier.html#cb331-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb331-8"><a href="lab-support-vector-classifier.html#cb331-8" aria-hidden="true" tabindex="-1"></a>sim_data_fold <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(sim_data, <span class="at">strata =</span> y)</span>
+<span id="cb331-9"><a href="lab-support-vector-classifier.html#cb331-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-10"><a href="lab-support-vector-classifier.html#cb331-10" aria-hidden="true" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost</span>(), <span class="at">levels =</span> <span class="dv">10</span>)</span>
+<span id="cb331-11"><a href="lab-support-vector-classifier.html#cb331-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-12"><a href="lab-support-vector-classifier.html#cb331-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Our grid isn&#39;t identical to the book, but it&#39;s close enough.</span></span>
+<span id="cb331-13"><a href="lab-support-vector-classifier.html#cb331-13" aria-hidden="true" tabindex="-1"></a>param_grid</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 1
 ##         cost
 ##        &lt;dbl&gt;
@@ -723,35 +723,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8  3.17    
 ##  9 10.1     
 ## 10 32</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="lab-support-vector-classifier.html#cb332-1" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">tune_grid</span>(</span>
-<span id="cb332-2"><a href="lab-support-vector-classifier.html#cb332-2" aria-hidden="true" tabindex="-1"></a>  svm_linear_wf, </span>
-<span id="cb332-3"><a href="lab-support-vector-classifier.html#cb332-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">resamples =</span> sim_data_fold, </span>
-<span id="cb332-4"><a href="lab-support-vector-classifier.html#cb332-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> param_grid</span>
-<span id="cb332-5"><a href="lab-support-vector-classifier.html#cb332-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb332-6"><a href="lab-support-vector-classifier.html#cb332-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-7"><a href="lab-support-vector-classifier.html#cb332-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We ran this locally and then saved it so everyone doesn&#39;t need to wait for</span></span>
-<span id="cb332-8"><a href="lab-support-vector-classifier.html#cb332-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this to process each time they build the book.</span></span>
-<span id="cb332-9"><a href="lab-support-vector-classifier.html#cb332-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-10"><a href="lab-support-vector-classifier.html#cb332-10" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(tune_res, &quot;data/09-tune_res.rds&quot;)</span></span></code></pre></div>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="lab-support-vector-classifier.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="lab-support-vector-classifier.html#cb333-1" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">tune_grid</span>(</span>
+<span id="cb333-2"><a href="lab-support-vector-classifier.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  svm_linear_wf, </span>
+<span id="cb333-3"><a href="lab-support-vector-classifier.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">resamples =</span> sim_data_fold, </span>
+<span id="cb333-4"><a href="lab-support-vector-classifier.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> param_grid</span>
+<span id="cb333-5"><a href="lab-support-vector-classifier.html#cb333-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb333-6"><a href="lab-support-vector-classifier.html#cb333-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb333-7"><a href="lab-support-vector-classifier.html#cb333-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We ran this locally and then saved it so everyone doesn&#39;t need to wait for</span></span>
+<span id="cb333-8"><a href="lab-support-vector-classifier.html#cb333-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this to process each time they build the book.</span></span>
+<span id="cb333-9"><a href="lab-support-vector-classifier.html#cb333-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb333-10"><a href="lab-support-vector-classifier.html#cb333-10" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(tune_res, &quot;data/09-tune_res.rds&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="lab-support-vector-classifier.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-autoplot-tune_res-1.png" width="672" /></p>
 <p>Tune can pull out the best result for us.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="lab-support-vector-classifier.html#cb334-1" aria-hidden="true" tabindex="-1"></a>best_cost <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res, <span class="at">metric =</span> <span class="st">&quot;accuracy&quot;</span>)</span>
-<span id="cb334-2"><a href="lab-support-vector-classifier.html#cb334-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-3"><a href="lab-support-vector-classifier.html#cb334-3" aria-hidden="true" tabindex="-1"></a>svm_linear_final <span class="ot">&lt;-</span> <span class="fu">finalize_workflow</span>(svm_linear_wf, best_cost)</span>
-<span id="cb334-4"><a href="lab-support-vector-classifier.html#cb334-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-5"><a href="lab-support-vector-classifier.html#cb334-5" aria-hidden="true" tabindex="-1"></a>svm_linear_fit <span class="ot">&lt;-</span> svm_linear_final <span class="sc">%&gt;%</span> <span class="fu">fit</span>(sim_data)</span>
-<span id="cb334-6"><a href="lab-support-vector-classifier.html#cb334-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-7"><a href="lab-support-vector-classifier.html#cb334-7" aria-hidden="true" tabindex="-1"></a>svm_linear_fit <span class="sc">%&gt;%</span> </span>
-<span id="cb334-8"><a href="lab-support-vector-classifier.html#cb334-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
-<span id="cb334-9"><a href="lab-support-vector-classifier.html#cb334-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="lab-support-vector-classifier.html#cb335-1" aria-hidden="true" tabindex="-1"></a>best_cost <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res, <span class="at">metric =</span> <span class="st">&quot;accuracy&quot;</span>)</span>
+<span id="cb335-2"><a href="lab-support-vector-classifier.html#cb335-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-3"><a href="lab-support-vector-classifier.html#cb335-3" aria-hidden="true" tabindex="-1"></a>svm_linear_final <span class="ot">&lt;-</span> <span class="fu">finalize_workflow</span>(svm_linear_wf, best_cost)</span>
+<span id="cb335-4"><a href="lab-support-vector-classifier.html#cb335-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-5"><a href="lab-support-vector-classifier.html#cb335-5" aria-hidden="true" tabindex="-1"></a>svm_linear_fit <span class="ot">&lt;-</span> svm_linear_final <span class="sc">%&gt;%</span> <span class="fu">fit</span>(sim_data)</span>
+<span id="cb335-6"><a href="lab-support-vector-classifier.html#cb335-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-7"><a href="lab-support-vector-classifier.html#cb335-7" aria-hidden="true" tabindex="-1"></a>svm_linear_fit <span class="sc">%&gt;%</span> </span>
+<span id="cb335-8"><a href="lab-support-vector-classifier.html#cb335-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
+<span id="cb335-9"><a href="lab-support-vector-classifier.html#cb335-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction -1 1
 ##         -1  9 1
 ##         1   2 8</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="lab-support-vector-classifier.html#cb336-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="sc">%&gt;%</span> </span>
-<span id="cb336-2"><a href="lab-support-vector-classifier.html#cb336-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
-<span id="cb336-3"><a href="lab-support-vector-classifier.html#cb336-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="lab-support-vector-classifier.html#cb337-1" aria-hidden="true" tabindex="-1"></a>svm_linear_fit_001 <span class="sc">%&gt;%</span> </span>
+<span id="cb337-2"><a href="lab-support-vector-classifier.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
+<span id="cb337-3"><a href="lab-support-vector-classifier.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction -1  1
 ##         -1 11  6
@@ -759,22 +759,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="linearly-separable-data" class="section level3 hasAnchor" number="9.15.2">
 <h3><span class="header-section-number">9.15.2</span> Linearly separable data<a href="lab-support-vector-classifier.html#linearly-separable-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="lab-support-vector-classifier.html#cb338-1" aria-hidden="true" tabindex="-1"></a>sim_data_sep <span class="ot">&lt;-</span> sim_data <span class="sc">%&gt;%</span> </span>
-<span id="cb338-2"><a href="lab-support-vector-classifier.html#cb338-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb338-3"><a href="lab-support-vector-classifier.html#cb338-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="fl">0.5</span>, x1),</span>
-<span id="cb338-4"><a href="lab-support-vector-classifier.html#cb338-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="fl">0.5</span>, x2)</span>
-<span id="cb338-5"><a href="lab-support-vector-classifier.html#cb338-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb338-6"><a href="lab-support-vector-classifier.html#cb338-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb338-7"><a href="lab-support-vector-classifier.html#cb338-7" aria-hidden="true" tabindex="-1"></a>sim_data_sep <span class="sc">%&gt;%</span> </span>
-<span id="cb338-8"><a href="lab-support-vector-classifier.html#cb338-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb338-9"><a href="lab-support-vector-classifier.html#cb338-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
-<span id="cb338-10"><a href="lab-support-vector-classifier.html#cb338-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="lab-support-vector-classifier.html#cb339-1" aria-hidden="true" tabindex="-1"></a>sim_data_sep <span class="ot">&lt;-</span> sim_data <span class="sc">%&gt;%</span> </span>
+<span id="cb339-2"><a href="lab-support-vector-classifier.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb339-3"><a href="lab-support-vector-classifier.html#cb339-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="fl">0.5</span>, x1),</span>
+<span id="cb339-4"><a href="lab-support-vector-classifier.html#cb339-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="fl">0.5</span>, x2)</span>
+<span id="cb339-5"><a href="lab-support-vector-classifier.html#cb339-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb339-6"><a href="lab-support-vector-classifier.html#cb339-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-7"><a href="lab-support-vector-classifier.html#cb339-7" aria-hidden="true" tabindex="-1"></a>sim_data_sep <span class="sc">%&gt;%</span> </span>
+<span id="cb339-8"><a href="lab-support-vector-classifier.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb339-9"><a href="lab-support-vector-classifier.html#cb339-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(x1, x2, <span class="at">color =</span> y) <span class="sc">+</span></span>
+<span id="cb339-10"><a href="lab-support-vector-classifier.html#cb339-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-separate-1.png" width="672" /></p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="lab-support-vector-classifier.html#cb339-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb339-2"><a href="lab-support-vector-classifier.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">1e5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb339-3"><a href="lab-support-vector-classifier.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data_sep)</span>
-<span id="cb339-4"><a href="lab-support-vector-classifier.html#cb339-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-5"><a href="lab-support-vector-classifier.html#cb339-5" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="lab-support-vector-classifier.html#cb340-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb340-2"><a href="lab-support-vector-classifier.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="fl">1e5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb340-3"><a href="lab-support-vector-classifier.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data_sep)</span>
+<span id="cb340-4"><a href="lab-support-vector-classifier.html#cb340-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-5"><a href="lab-support-vector-classifier.html#cb340-5" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Support Vector Machine object of class &quot;ksvm&quot; 
@@ -790,15 +790,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Objective Function Value : -24.3753 
 ## Training error : 0 
 ## Probability model included.</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="lab-support-vector-classifier.html#cb341-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="sc">%&gt;%</span></span>
-<span id="cb341-2"><a href="lab-support-vector-classifier.html#cb341-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb341-3"><a href="lab-support-vector-classifier.html#cb341-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="lab-support-vector-classifier.html#cb342-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="sc">%&gt;%</span></span>
+<span id="cb342-2"><a href="lab-support-vector-classifier.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb342-3"><a href="lab-support-vector-classifier.html#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-separate-2.png" width="672" /></p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="lab-support-vector-classifier.html#cb342-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb342-2"><a href="lab-support-vector-classifier.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb342-3"><a href="lab-support-vector-classifier.html#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data_sep)</span>
-<span id="cb342-4"><a href="lab-support-vector-classifier.html#cb342-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-5"><a href="lab-support-vector-classifier.html#cb342-5" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="lab-support-vector-classifier.html#cb343-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="ot">&lt;-</span> svm_linear_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb343-2"><a href="lab-support-vector-classifier.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_args</span>(<span class="at">cost =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb343-3"><a href="lab-support-vector-classifier.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(y <span class="sc">~</span> ., <span class="at">data =</span> sim_data_sep)</span>
+<span id="cb343-4"><a href="lab-support-vector-classifier.html#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-5"><a href="lab-support-vector-classifier.html#cb343-5" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Support Vector Machine object of class &quot;ksvm&quot; 
@@ -814,26 +814,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Objective Function Value : -3.5451 
 ## Training error : 0.05 
 ## Probability model included.</code></pre>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="lab-support-vector-classifier.html#cb344-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="sc">%&gt;%</span></span>
-<span id="cb344-2"><a href="lab-support-vector-classifier.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb344-3"><a href="lab-support-vector-classifier.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="lab-support-vector-classifier.html#cb345-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="sc">%&gt;%</span></span>
+<span id="cb345-2"><a href="lab-support-vector-classifier.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb345-3"><a href="lab-support-vector-classifier.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/09-lab-separate-3.png" width="672" /></p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="lab-support-vector-classifier.html#cb345-1" aria-hidden="true" tabindex="-1"></a>test_data_sep <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
-<span id="cb345-2"><a href="lab-support-vector-classifier.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb345-3"><a href="lab-support-vector-classifier.html#cb345-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="fl">0.5</span>, x1),</span>
-<span id="cb345-4"><a href="lab-support-vector-classifier.html#cb345-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="fl">0.5</span>, x2)</span>
-<span id="cb345-5"><a href="lab-support-vector-classifier.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb345-6"><a href="lab-support-vector-classifier.html#cb345-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-7"><a href="lab-support-vector-classifier.html#cb345-7" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="sc">%&gt;%</span> </span>
-<span id="cb345-8"><a href="lab-support-vector-classifier.html#cb345-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data_sep) <span class="sc">%&gt;%</span></span>
-<span id="cb345-9"><a href="lab-support-vector-classifier.html#cb345-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="lab-support-vector-classifier.html#cb346-1" aria-hidden="true" tabindex="-1"></a>test_data_sep <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
+<span id="cb346-2"><a href="lab-support-vector-classifier.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb346-3"><a href="lab-support-vector-classifier.html#cb346-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x1 <span class="sc">+</span> <span class="fl">0.5</span>, x1),</span>
+<span id="cb346-4"><a href="lab-support-vector-classifier.html#cb346-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x2 =</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, x2 <span class="sc">+</span> <span class="fl">0.5</span>, x2)</span>
+<span id="cb346-5"><a href="lab-support-vector-classifier.html#cb346-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb346-6"><a href="lab-support-vector-classifier.html#cb346-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-7"><a href="lab-support-vector-classifier.html#cb346-7" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1e5 <span class="sc">%&gt;%</span> </span>
+<span id="cb346-8"><a href="lab-support-vector-classifier.html#cb346-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data_sep) <span class="sc">%&gt;%</span></span>
+<span id="cb346-9"><a href="lab-support-vector-classifier.html#cb346-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction -1 1
 ##         -1  9 1
 ##         1   2 8</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="lab-support-vector-classifier.html#cb347-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="sc">%&gt;%</span> </span>
-<span id="cb347-2"><a href="lab-support-vector-classifier.html#cb347-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data_sep) <span class="sc">%&gt;%</span></span>
-<span id="cb347-3"><a href="lab-support-vector-classifier.html#cb347-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="lab-support-vector-classifier.html#cb348-1" aria-hidden="true" tabindex="-1"></a>svm_fit_sep_1 <span class="sc">%&gt;%</span> </span>
+<span id="cb348-2"><a href="lab-support-vector-classifier.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">new_data =</span> test_data_sep) <span class="sc">%&gt;%</span></span>
+<span id="cb348-3"><a href="lab-support-vector-classifier.html#cb348-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> y, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction -1 1
 ##         -1  9 0

@@ -590,17 +590,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.5</span> The matrix decomposition<a href="the-matrix-decomposition.html#the-matrix-decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>The singular value decomposition (SVD):</strong></p>
 <p>the <code>svd()</code> function returns three components, u, d, and v.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="the-matrix-decomposition.html#cb428-1" aria-hidden="true" tabindex="-1"></a>sX <span class="ot">&lt;-</span> <span class="fu">svd</span>(X)</span>
-<span id="cb428-2"><a href="the-matrix-decomposition.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sX)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="the-matrix-decomposition.html#cb431-1" aria-hidden="true" tabindex="-1"></a>sX <span class="ot">&lt;-</span> <span class="fu">svd</span>(X)</span>
+<span id="cb431-2"><a href="the-matrix-decomposition.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sX)</span></code></pre></div>
 <pre><code>## [1] &quot;d&quot; &quot;u&quot; &quot;v&quot;</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="the-matrix-decomposition.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(sX<span class="sc">$</span>v, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="the-matrix-decomposition.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(sX<span class="sc">$</span>v, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##        [,1]   [,2]   [,3]   [,4]
 ## [1,] -0.536  0.418 -0.341  0.649
 ## [2,] -0.583  0.188 -0.268 -0.743
 ## [3,] -0.278 -0.873 -0.378  0.134
 ## [4,] -0.543 -0.167  0.818  0.089</code></pre>
 <p><strong>v</strong> is equivalent to the <strong>loadings</strong>, <strong>u</strong> is equivalent to the <strong>standardized scores</strong>, and <strong>d</strong> is the matrix of the <strong>standard deviations</strong>.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="the-matrix-decomposition.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(sX<span class="sc">$</span>d <span class="sc">*</span> <span class="fu">t</span>(sX<span class="sc">$</span>u)) <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="the-matrix-decomposition.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(sX<span class="sc">$</span>d <span class="sc">*</span> <span class="fu">t</span>(sX<span class="sc">$</span>u)) <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre><code>##            [,1]       [,2]        [,3]         [,4]
 ## [1,] -0.9756604  1.1220012 -0.43980366  0.154696581
 ## [2,] -1.9305379  1.0624269  2.01950027 -0.434175454
@@ -608,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4,]  0.1399989  1.1085423  0.11342217 -0.180973554
 ## [5,] -2.4986128 -1.5274267  0.59254100 -0.338559240
 ## [6,] -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="the-matrix-decomposition.html#cb434-1" aria-hidden="true" tabindex="-1"></a>pcob<span class="sc">$</span>x <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="the-matrix-decomposition.html#cb437-1" aria-hidden="true" tabindex="-1"></a>pcob<span class="sc">$</span>x <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre><code>##             PC1        PC2         PC3          PC4
 ## [1,] -0.9756604  1.1220012 -0.43980366  0.154696581
 ## [2,] -1.9305379  1.0624269  2.01950027 -0.434175454
@@ -634,35 +634,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The code for this is in the book and not particularly interesting, but I’ve made the names suck less.</li>
 <li>I also don’t scale, because their package does this internally.</li>
 </ul>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="the-matrix-decomposition.html#cb436-1" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(USArrests)</span>
-<span id="cb436-2"><a href="the-matrix-decomposition.html#cb436-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb436-3"><a href="the-matrix-decomposition.html#cb436-3" aria-hidden="true" tabindex="-1"></a>n_omit <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb436-4"><a href="the-matrix-decomposition.html#cb436-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15</span>)</span>
-<span id="cb436-5"><a href="the-matrix-decomposition.html#cb436-5" aria-hidden="true" tabindex="-1"></a>target_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">50</span>), n_omit)</span>
-<span id="cb436-6"><a href="the-matrix-decomposition.html#cb436-6" aria-hidden="true" tabindex="-1"></a>target_cols <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, n_omit, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb436-7"><a href="the-matrix-decomposition.html#cb436-7" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">&lt;-</span> <span class="fu">cbind</span>(target_rows, target_cols)</span>
-<span id="cb436-8"><a href="the-matrix-decomposition.html#cb436-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(targets, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="the-matrix-decomposition.html#cb439-1" aria-hidden="true" tabindex="-1"></a>arrests <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(USArrests)</span>
+<span id="cb439-2"><a href="the-matrix-decomposition.html#cb439-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb439-3"><a href="the-matrix-decomposition.html#cb439-3" aria-hidden="true" tabindex="-1"></a>n_omit <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb439-4"><a href="the-matrix-decomposition.html#cb439-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15</span>)</span>
+<span id="cb439-5"><a href="the-matrix-decomposition.html#cb439-5" aria-hidden="true" tabindex="-1"></a>target_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">50</span>), n_omit)</span>
+<span id="cb439-6"><a href="the-matrix-decomposition.html#cb439-6" aria-hidden="true" tabindex="-1"></a>target_cols <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, n_omit, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb439-7"><a href="the-matrix-decomposition.html#cb439-7" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">&lt;-</span> <span class="fu">cbind</span>(target_rows, target_cols)</span>
+<span id="cb439-8"><a href="the-matrix-decomposition.html#cb439-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(targets, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##      target_rows target_cols
 ## [1,]          37           3
 ## [2,]          47           1</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="the-matrix-decomposition.html#cb438-1" aria-hidden="true" tabindex="-1"></a>arrests_na <span class="ot">&lt;-</span> arrests</span>
-<span id="cb438-2"><a href="the-matrix-decomposition.html#cb438-2" aria-hidden="true" tabindex="-1"></a>arrests_na[targets] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb438-3"><a href="the-matrix-decomposition.html#cb438-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arrests_na, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="the-matrix-decomposition.html#cb441-1" aria-hidden="true" tabindex="-1"></a>arrests_na <span class="ot">&lt;-</span> arrests</span>
+<span id="cb441-2"><a href="the-matrix-decomposition.html#cb441-2" aria-hidden="true" tabindex="-1"></a>arrests_na[targets] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb441-3"><a href="the-matrix-decomposition.html#cb441-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arrests_na, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##      state Murder Assault UrbanPop Rape
 ## [1,]     1     NA     236       58 21.2
 ## [2,]     2     10      NA       48 44.5</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="the-matrix-decomposition.html#cb440-1" aria-hidden="true" tabindex="-1"></a>is_missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(arrests_na)</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="the-matrix-decomposition.html#cb443-1" aria-hidden="true" tabindex="-1"></a>is_missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(arrests_na)</span></code></pre></div>
 <blockquote>
 <p>The <code>{softImpute}</code> package to do this, let’s use it!</p>
 </blockquote>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="the-matrix-decomposition.html#cb441-1" aria-hidden="true" tabindex="-1"></a>fit_svd <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">softImpute</span>(</span>
-<span id="cb441-2"><a href="the-matrix-decomposition.html#cb441-2" aria-hidden="true" tabindex="-1"></a>  arrests_na, </span>
-<span id="cb441-3"><a href="the-matrix-decomposition.html#cb441-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;svd&quot;</span>,</span>
-<span id="cb441-4"><a href="the-matrix-decomposition.html#cb441-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">thresh =</span> <span class="fl">1e-16</span>,</span>
-<span id="cb441-5"><a href="the-matrix-decomposition.html#cb441-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">3000</span></span>
-<span id="cb441-6"><a href="the-matrix-decomposition.html#cb441-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb441-7"><a href="the-matrix-decomposition.html#cb441-7" aria-hidden="true" tabindex="-1"></a>arrests_imputed <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">complete</span>(arrests_na, fit_svd, <span class="at">unscale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb441-8"><a href="the-matrix-decomposition.html#cb441-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(arrests_imputed[is_missing], arrests[is_missing])</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="the-matrix-decomposition.html#cb444-1" aria-hidden="true" tabindex="-1"></a>fit_svd <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">softImpute</span>(</span>
+<span id="cb444-2"><a href="the-matrix-decomposition.html#cb444-2" aria-hidden="true" tabindex="-1"></a>  arrests_na, </span>
+<span id="cb444-3"><a href="the-matrix-decomposition.html#cb444-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;svd&quot;</span>,</span>
+<span id="cb444-4"><a href="the-matrix-decomposition.html#cb444-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">thresh =</span> <span class="fl">1e-16</span>,</span>
+<span id="cb444-5"><a href="the-matrix-decomposition.html#cb444-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">3000</span></span>
+<span id="cb444-6"><a href="the-matrix-decomposition.html#cb444-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb444-7"><a href="the-matrix-decomposition.html#cb444-7" aria-hidden="true" tabindex="-1"></a>arrests_imputed <span class="ot">&lt;-</span> softImpute<span class="sc">::</span><span class="fu">complete</span>(arrests_na, fit_svd, <span class="at">unscale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb444-8"><a href="the-matrix-decomposition.html#cb444-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(arrests_imputed[is_missing], arrests[is_missing])</span></code></pre></div>
 <pre><code>## [1] 0.7249994</code></pre>
 <hr />
 </div>

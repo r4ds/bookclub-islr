@@ -591,11 +591,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Review of Hypothesis Tests</strong></p>
 <p>We begin by performing some one-sample <span class="math inline">\(t\)</span>-tests using the <code>t.test()</code> function.</p>
 <p>First we create 100 variables, each consisting of 10 observations. The first 50 variables have mean <span class="math inline">\(0.5\)</span> and variance <span class="math inline">\(1\)</span>, while the others have mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(1\)</span>.</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="lab-multiple-testing.html#cb514-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
-<span id="cb514-2"><a href="lab-multiple-testing.html#cb514-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb514-3"><a href="lab-multiple-testing.html#cb514-3" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="fl">0.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="lab-multiple-testing.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
+<span id="cb517-2"><a href="lab-multiple-testing.html#cb517-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb517-3"><a href="lab-multiple-testing.html#cb517-3" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="fl">0.5</span></span></code></pre></div>
 <p>Calculate the t-test.</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="lab-multiple-testing.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="lab-multiple-testing.html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -608,35 +608,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mean of x 
 ## 0.6053582</code></pre>
 <p>And with a <code>for</code> we calculate the t-tests and the pvalues:</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="lab-multiple-testing.html#cb517-1" aria-hidden="true" tabindex="-1"></a>p.values <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>)</span>
-<span id="cb517-2"><a href="lab-multiple-testing.html#cb517-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb517-3"><a href="lab-multiple-testing.html#cb517-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
-<span id="cb517-4"><a href="lab-multiple-testing.html#cb517-4" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb517-5"><a href="lab-multiple-testing.html#cb517-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb517-6"><a href="lab-multiple-testing.html#cb517-6" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
-<span id="cb517-7"><a href="lab-multiple-testing.html#cb517-7" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="lab-multiple-testing.html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
-<span id="cb518-2"><a href="lab-multiple-testing.html#cb518-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
-<span id="cb518-3"><a href="lab-multiple-testing.html#cb518-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="lab-multiple-testing.html#cb520-1" aria-hidden="true" tabindex="-1"></a>p.values <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb520-2"><a href="lab-multiple-testing.html#cb520-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-3"><a href="lab-multiple-testing.html#cb520-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb520-4"><a href="lab-multiple-testing.html#cb520-4" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb520-5"><a href="lab-multiple-testing.html#cb520-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-6"><a href="lab-multiple-testing.html#cb520-6" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
+<span id="cb520-7"><a href="lab-multiple-testing.html#cb520-7" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="lab-multiple-testing.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
+<span id="cb521-2"><a href="lab-multiple-testing.html#cb521-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
+<span id="cb521-3"><a href="lab-multiple-testing.html#cb521-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##                   
 ## decision           H0 is False H0 is True
 ##   Do not reject H0          40         47
 ##   Reject H0                 10          3</code></pre>
 <p>Repeate the t-test:</p>
-<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="lab-multiple-testing.html#cb520-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb520-2"><a href="lab-multiple-testing.html#cb520-2" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb520-3"><a href="lab-multiple-testing.html#cb520-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-4"><a href="lab-multiple-testing.html#cb520-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
-<span id="cb520-5"><a href="lab-multiple-testing.html#cb520-5" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb520-6"><a href="lab-multiple-testing.html#cb520-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-7"><a href="lab-multiple-testing.html#cb520-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-8"><a href="lab-multiple-testing.html#cb520-8" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
-<span id="cb520-9"><a href="lab-multiple-testing.html#cb520-9" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span>
-<span id="cb520-10"><a href="lab-multiple-testing.html#cb520-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-11"><a href="lab-multiple-testing.html#cb520-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-12"><a href="lab-multiple-testing.html#cb520-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
-<span id="cb520-13"><a href="lab-multiple-testing.html#cb520-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
-<span id="cb520-14"><a href="lab-multiple-testing.html#cb520-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="lab-multiple-testing.html#cb523-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb523-2"><a href="lab-multiple-testing.html#cb523-2" aria-hidden="true" tabindex="-1"></a>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb523-3"><a href="lab-multiple-testing.html#cb523-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb523-4"><a href="lab-multiple-testing.html#cb523-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb523-5"><a href="lab-multiple-testing.html#cb523-5" aria-hidden="true" tabindex="-1"></a>  p.values[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb523-6"><a href="lab-multiple-testing.html#cb523-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb523-7"><a href="lab-multiple-testing.html#cb523-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb523-8"><a href="lab-multiple-testing.html#cb523-8" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Do not reject H0&quot;</span>, <span class="dv">100</span>)</span>
+<span id="cb523-9"><a href="lab-multiple-testing.html#cb523-9" aria-hidden="true" tabindex="-1"></a>decision[p.values <span class="sc">&lt;=</span> .<span class="dv">05</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Reject H0&quot;</span></span>
+<span id="cb523-10"><a href="lab-multiple-testing.html#cb523-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb523-11"><a href="lab-multiple-testing.html#cb523-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb523-12"><a href="lab-multiple-testing.html#cb523-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(decision,</span>
+<span id="cb523-13"><a href="lab-multiple-testing.html#cb523-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;H0 is False&quot;</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">&quot;H0 is True&quot;</span>, <span class="dv">50</span>))</span>
+<span id="cb523-14"><a href="lab-multiple-testing.html#cb523-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##                   
 ## decision           H0 is False H0 is True
 ##   Do not reject H0           9         49

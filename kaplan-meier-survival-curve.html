@@ -593,9 +593,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="images/survival_function.png" alt="" />
 <p class="caption">(11.2)</p>
 </div>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="kaplan-meier-survival-curve.html#cb366-1" aria-hidden="true" tabindex="-1"></a>fit.surv <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> BrainCancer)</span>
-<span id="cb366-2"><a href="kaplan-meier-survival-curve.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.surv, <span class="at">xlab =</span> <span class="st">&quot;Months&quot;</span>,</span>
-<span id="cb366-3"><a href="kaplan-meier-survival-curve.html#cb366-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="kaplan-meier-survival-curve.html#cb368-1" aria-hidden="true" tabindex="-1"></a>fit.surv <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> BrainCancer)</span>
+<span id="cb368-2"><a href="kaplan-meier-survival-curve.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.surv, <span class="at">xlab =</span> <span class="st">&quot;Months&quot;</span>,</span>
+<span id="cb368-3"><a href="kaplan-meier-survival-curve.html#cb368-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/11plot_KM_curve-1.png" width="672" /></p>
 </div>
             </section>

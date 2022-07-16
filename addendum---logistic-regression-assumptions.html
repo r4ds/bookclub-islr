@@ -588,9 +588,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="addendum---logistic-regression-assumptions" class="section level2 hasAnchor" number="4.17">
 <h2><span class="header-section-number">4.17</span> Addendum - Logistic Regression Assumptions<a href="addendum---logistic-regression-assumptions.html#addendum---logistic-regression-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="addendum---logistic-regression-assumptions.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb93-2"><a href="addendum---logistic-regression-assumptions.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(titanic)</span>
-<span id="cb93-3"><a href="addendum---logistic-regression-assumptions.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="addendum---logistic-regression-assumptions.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb94-2"><a href="addendum---logistic-regression-assumptions.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(titanic)</span>
+<span id="cb94-3"><a href="addendum---logistic-regression-assumptions.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <pre><code>## Loading required package: carData</code></pre>
 <p>Source: <a href="https://www.statology.org/assumptions-of-logistic-regression/">The 6 Assumptions of Logistic Regression (With Examples)</a></p>
 <p>Source: <a href="https://towardsdatascience.com/assumptions-of-logistic-regression-clearly-explained-44d85a22b290">Assumptions of Logistic Regression, Clearly Explained</a></p>
@@ -626,22 +626,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Logit(p) = log(p / (1-p)) where p is the probability of a positive outcome.</p>
 <p>Use <code>Box-Tidwell</code> test to check this assumption.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="addendum---logistic-regression-assumptions.html#cb95-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic_train <span class="sc">%&gt;%</span> </span>
-<span id="cb95-2"><a href="addendum---logistic-regression-assumptions.html#cb95-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">select</span>(Survived, Age, Fare) <span class="sc">%&gt;%</span> </span>
-<span id="cb95-3"><a href="addendum---logistic-regression-assumptions.html#cb95-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb95-4"><a href="addendum---logistic-regression-assumptions.html#cb95-4" aria-hidden="true" tabindex="-1"></a>     janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb95-5"><a href="addendum---logistic-regression-assumptions.html#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-6"><a href="addendum---logistic-regression-assumptions.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(titanic)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="addendum---logistic-regression-assumptions.html#cb96-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic_train <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="addendum---logistic-regression-assumptions.html#cb96-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">select</span>(Survived, Age, Fare) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-3"><a href="addendum---logistic-regression-assumptions.html#cb96-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb96-4"><a href="addendum---logistic-regression-assumptions.html#cb96-4" aria-hidden="true" tabindex="-1"></a>     janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb96-5"><a href="addendum---logistic-regression-assumptions.html#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="addendum---logistic-regression-assumptions.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(titanic)</span></code></pre></div>
 <pre><code>## Rows: 714
 ## Columns: 3
 ## $ survived &lt;int&gt; 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1…
 ## $ age      &lt;dbl&gt; 22, 38, 26, 35, 35, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55, 2, …
 ## $ fare     &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 51.8625, 21.0750, 1…</code></pre>
 <p>Build the model</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="addendum---logistic-regression-assumptions.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># survived (target  ~ age + fare)</span></span>
-<span id="cb97-2"><a href="addendum---logistic-regression-assumptions.html#cb97-2" aria-hidden="true" tabindex="-1"></a>log_reg <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> age <span class="sc">+</span> fare, <span class="at">data =</span> titanic, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb97-3"><a href="addendum---logistic-regression-assumptions.html#cb97-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-4"><a href="addendum---logistic-regression-assumptions.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log_reg)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="addendum---logistic-regression-assumptions.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># survived (target  ~ age + fare)</span></span>
+<span id="cb98-2"><a href="addendum---logistic-regression-assumptions.html#cb98-2" aria-hidden="true" tabindex="-1"></a>log_reg <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> age <span class="sc">+</span> fare, <span class="at">data =</span> titanic, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb98-3"><a href="addendum---logistic-regression-assumptions.html#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="addendum---logistic-regression-assumptions.html#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log_reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = survived ~ age + fare, family = binomial(link = &quot;logit&quot;), 
@@ -667,10 +667,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>Box_Tidwell test</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="addendum---logistic-regression-assumptions.html#cb99-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic <span class="sc">%&gt;%</span> </span>
-<span id="cb99-2"><a href="addendum---logistic-regression-assumptions.html#cb99-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">age_1 =</span> age <span class="sc">+</span> <span class="dv">1</span>, <span class="at">fare_1 =</span> fare <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb99-3"><a href="addendum---logistic-regression-assumptions.html#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-4"><a href="addendum---logistic-regression-assumptions.html#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxTidwell</span>(survived <span class="sc">~</span> age_1 <span class="sc">+</span> fare_1, <span class="at">data =</span> titanic)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="addendum---logistic-regression-assumptions.html#cb100-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic <span class="sc">%&gt;%</span> </span>
+<span id="cb100-2"><a href="addendum---logistic-regression-assumptions.html#cb100-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">age_1 =</span> age <span class="sc">+</span> <span class="dv">1</span>, <span class="at">fare_1 =</span> fare <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb100-3"><a href="addendum---logistic-regression-assumptions.html#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="addendum---logistic-regression-assumptions.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxTidwell</span>(survived <span class="sc">~</span> age_1 <span class="sc">+</span> fare_1, <span class="at">data =</span> titanic)</span></code></pre></div>
 <pre><code>##        MLE of lambda Score Statistic (z)  Pr(&gt;|z|)    
 ## age_1       -0.48631              1.3237    0.1856    
 ## fare_1       0.10111             -5.5619 2.668e-08 ***

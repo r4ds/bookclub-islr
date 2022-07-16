@@ -589,18 +589,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="survminer-package" class="section level2 hasAnchor" number="11.9">
 <h2><span class="header-section-number">11.9</span> Survminer package<a href="survminer-package.html#survminer-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Using <code>survminer</code> package</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="survminer-package.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="survminer-package.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code></pre></div>
 <pre><code>## Loading required package: ggpubr</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="survminer-package.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit.sex, <span class="at">data =</span> BrainCancer, </span>
-<span id="cb370-2"><a href="survminer-package.html#cb370-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb370-3"><a href="survminer-package.html#cb370-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb370-4"><a href="survminer-package.html#cb370-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">risk.table =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb370-5"><a href="survminer-package.html#cb370-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.title =</span> <span class="st">&quot;Sex&quot;</span>, </span>
-<span id="cb370-6"><a href="survminer-package.html#cb370-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="survminer-package.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit.sex, <span class="at">data =</span> BrainCancer, </span>
+<span id="cb372-2"><a href="survminer-package.html#cb372-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb372-3"><a href="survminer-package.html#cb372-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb372-4"><a href="survminer-package.html#cb372-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">risk.table =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb372-5"><a href="survminer-package.html#cb372-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.title =</span> <span class="st">&quot;Sex&quot;</span>, </span>
+<span id="cb372-6"><a href="survminer-package.html#cb372-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>))</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/11survminer-1.png" width="672" /></p>
 <p>As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the <code>survdiff()</code> function.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="survminer-package.html#cb371-1" aria-hidden="true" tabindex="-1"></a>logrank.test <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> BrainCancer)</span>
-<span id="cb371-2"><a href="survminer-package.html#cb371-2" aria-hidden="true" tabindex="-1"></a>logrank.test</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="survminer-package.html#cb373-1" aria-hidden="true" tabindex="-1"></a>logrank.test <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> BrainCancer)</span>
+<span id="cb373-2"><a href="survminer-package.html#cb373-2" aria-hidden="true" tabindex="-1"></a>logrank.test</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = Surv(time, status) ~ sex, data = BrainCancer)
 ## 

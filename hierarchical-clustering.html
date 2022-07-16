@@ -599,32 +599,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This extension is achieved by developing the notion of <strong>linkage</strong>, which defines the dissimilarity between two groups of observations.</p>
 <p>The four most common types of linkage: complete, average, single, and centroid.</p>
 <p><img src="images/12_linkage.png" width="513" /></p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="hierarchical-clustering.html#cb452-1" aria-hidden="true" tabindex="-1"></a>res_hclust_complete <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
-<span id="cb452-2"><a href="hierarchical-clustering.html#cb452-2" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb452-3"><a href="hierarchical-clustering.html#cb452-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb452-4"><a href="hierarchical-clustering.html#cb452-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb452-5"><a href="hierarchical-clustering.html#cb452-5" aria-hidden="true" tabindex="-1"></a>res_hclust_average <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
-<span id="cb452-6"><a href="hierarchical-clustering.html#cb452-6" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb452-7"><a href="hierarchical-clustering.html#cb452-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb452-8"><a href="hierarchical-clustering.html#cb452-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb452-9"><a href="hierarchical-clustering.html#cb452-9" aria-hidden="true" tabindex="-1"></a>res_hclust_single <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
-<span id="cb452-10"><a href="hierarchical-clustering.html#cb452-10" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb452-11"><a href="hierarchical-clustering.html#cb452-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="hierarchical-clustering.html#cb453-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_complete, <span class="at">main =</span> <span class="st">&quot;complete&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="hierarchical-clustering.html#cb455-1" aria-hidden="true" tabindex="-1"></a>res_hclust_complete <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb455-2"><a href="hierarchical-clustering.html#cb455-2" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb455-3"><a href="hierarchical-clustering.html#cb455-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb455-4"><a href="hierarchical-clustering.html#cb455-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb455-5"><a href="hierarchical-clustering.html#cb455-5" aria-hidden="true" tabindex="-1"></a>res_hclust_average <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb455-6"><a href="hierarchical-clustering.html#cb455-6" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb455-7"><a href="hierarchical-clustering.html#cb455-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb455-8"><a href="hierarchical-clustering.html#cb455-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb455-9"><a href="hierarchical-clustering.html#cb455-9" aria-hidden="true" tabindex="-1"></a>res_hclust_single <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb455-10"><a href="hierarchical-clustering.html#cb455-10" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb455-11"><a href="hierarchical-clustering.html#cb455-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="hierarchical-clustering.html#cb456-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_complete, <span class="at">main =</span> <span class="st">&quot;complete&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
 ## &quot;none&quot;)` instead.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>Therefore, we cannot draw conclusions about the similarity of two observations based on their proximity along the horizontal axis. But on their position on the vertical axis.</p>
 <p><strong>Hierarchical</strong> refers to the fact that clusters, obtained by cutting the dendrogram at a given height, are necessarily nested within the clusters obtained by cutting the dendrogram at any greater height.</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="hierarchical-clustering.html#cb455-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_average, <span class="at">main =</span> <span class="st">&quot;average&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="hierarchical-clustering.html#cb458-1" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(res_hclust_average, <span class="at">main =</span> <span class="st">&quot;average&quot;</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
 ## &quot;none&quot;)` instead.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="hierarchical-clustering.html#cb457-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span></span>
-<span id="cb457-2"><a href="hierarchical-clustering.html#cb457-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb457-3"><a href="hierarchical-clustering.html#cb457-3" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb457-4"><a href="hierarchical-clustering.html#cb457-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb457-5"><a href="hierarchical-clustering.html#cb457-5" aria-hidden="true" tabindex="-1"></a>  factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(<span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="hierarchical-clustering.html#cb460-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span></span>
+<span id="cb460-2"><a href="hierarchical-clustering.html#cb460-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb460-3"><a href="hierarchical-clustering.html#cb460-3" aria-hidden="true" tabindex="-1"></a>  stats<span class="sc">::</span><span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb460-4"><a href="hierarchical-clustering.html#cb460-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>(<span class="at">method =</span> <span class="st">&quot;complete&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb460-5"><a href="hierarchical-clustering.html#cb460-5" aria-hidden="true" tabindex="-1"></a>  factoextra<span class="sc">::</span><span class="fu">fviz_dend</span>(<span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
 ## &quot;none&quot;)` instead.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>

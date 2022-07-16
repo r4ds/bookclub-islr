@@ -589,27 +589,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="text-coloring" class="section level2 unnumbered hasAnchor">
 <h2>Text coloring<a href="text-coloring.html#text-coloring" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To add color you can use CSS or R code like this:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="text-coloring.html#cb577-1" aria-hidden="true" tabindex="-1"></a>color_text <span class="ot">&lt;-</span> <span class="cf">function</span>(x, color){</span>
-<span id="cb577-2"><a href="text-coloring.html#cb577-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_latex_output</span>())</span>
-<span id="cb577-3"><a href="text-coloring.html#cb577-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">textcolor{&quot;</span>,color,<span class="st">&quot;}{&quot;</span>,x,<span class="st">&quot;}&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb577-4"><a href="text-coloring.html#cb577-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>())</span>
-<span id="cb577-5"><a href="text-coloring.html#cb577-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;&lt;font color=&#39;&quot;</span>,color,<span class="st">&quot;&#39;&gt;&quot;</span>,x,<span class="st">&quot;&lt;/font&gt;&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb577-6"><a href="text-coloring.html#cb577-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb577-7"><a href="text-coloring.html#cb577-7" aria-hidden="true" tabindex="-1"></a>    x</span>
-<span id="cb577-8"><a href="text-coloring.html#cb577-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb577-9"><a href="text-coloring.html#cb577-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb577-10"><a href="text-coloring.html#cb577-10" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb577-11"><a href="text-coloring.html#cb577-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_latex_output</span>())</span>
-<span id="cb577-12"><a href="text-coloring.html#cb577-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">textcolor{&quot;</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&quot;}{&quot;</span>,x,<span class="st">&quot;}&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb577-13"><a href="text-coloring.html#cb577-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>())</span>
-<span id="cb577-14"><a href="text-coloring.html#cb577-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;&lt;font color=&#39;red&#39;&gt;&quot;</span>,x,<span class="st">&quot;&lt;/font&gt;&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb577-15"><a href="text-coloring.html#cb577-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb577-16"><a href="text-coloring.html#cb577-16" aria-hidden="true" tabindex="-1"></a>    x</span>
-<span id="cb577-17"><a href="text-coloring.html#cb577-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="text-coloring.html#cb580-1" aria-hidden="true" tabindex="-1"></a>color_text <span class="ot">&lt;-</span> <span class="cf">function</span>(x, color){</span>
+<span id="cb580-2"><a href="text-coloring.html#cb580-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_latex_output</span>())</span>
+<span id="cb580-3"><a href="text-coloring.html#cb580-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">textcolor{&quot;</span>,color,<span class="st">&quot;}{&quot;</span>,x,<span class="st">&quot;}&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb580-4"><a href="text-coloring.html#cb580-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>())</span>
+<span id="cb580-5"><a href="text-coloring.html#cb580-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;&lt;font color=&#39;&quot;</span>,color,<span class="st">&quot;&#39;&gt;&quot;</span>,x,<span class="st">&quot;&lt;/font&gt;&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb580-6"><a href="text-coloring.html#cb580-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb580-7"><a href="text-coloring.html#cb580-7" aria-hidden="true" tabindex="-1"></a>    x</span>
+<span id="cb580-8"><a href="text-coloring.html#cb580-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb580-9"><a href="text-coloring.html#cb580-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb580-10"><a href="text-coloring.html#cb580-10" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb580-11"><a href="text-coloring.html#cb580-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_latex_output</span>())</span>
+<span id="cb580-12"><a href="text-coloring.html#cb580-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">textcolor{&quot;</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&quot;}{&quot;</span>,x,<span class="st">&quot;}&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb580-13"><a href="text-coloring.html#cb580-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>())</span>
+<span id="cb580-14"><a href="text-coloring.html#cb580-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;&lt;font color=&#39;red&#39;&gt;&quot;</span>,x,<span class="st">&quot;&lt;/font&gt;&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb580-15"><a href="text-coloring.html#cb580-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb580-16"><a href="text-coloring.html#cb580-16" aria-hidden="true" tabindex="-1"></a>    x</span>
+<span id="cb580-17"><a href="text-coloring.html#cb580-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The strng <font color='red'>This is colored with the red function</font> comes from:</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="text-coloring.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r red(&quot;This is colored with the red function&quot;)</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="text-coloring.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r red(&quot;This is colored with the red function&quot;)</span><span class="st">`</span></span></code></pre></div>
 <p>The string <font color='#E0B0FF'>This is colored with the color_text function set to mauve</font> comes from:</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="text-coloring.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r color_text(&quot;This is colored with the color_text function set to mauve&quot;, &quot;#E0B0FF&quot;)</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="text-coloring.html#cb582-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r color_text(&quot;This is colored with the color_text function set to mauve&quot;, &quot;#E0B0FF&quot;)</span><span class="st">`</span></span></code></pre></div>
 </div>
             </section>
 
