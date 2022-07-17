@@ -10,7 +10,7 @@
 
 ```{r fig5-1, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Training- versus Test-Set Performance. Souce: https://hastie.su.domains/ISLR2/Slides/Ch5_Resampling_Methods.pdf"}
 
-knitr::include_graphics('./images/fig5_1.jpg')#, error = FALSE)
+knitr::include_graphics('./images/fig5_1.jpg')
 
 ```
 
@@ -46,7 +46,7 @@ We will:
 
 ```{r fig5-2, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Left: The validation set approach was used to estimated the test mean squared error from predicting mpg as a polynomial function of horsepower. Right: The estimated test error varies depending on the validation and training sets used."}
 
-knitr::include_graphics('./images/fig5_2.jpg')#, error = FALSE)
+knitr::include_graphics('./images/fig5_2.jpg')
 ```
 
 ## Leave-One-Out Cross-Validation (LOOCV)
@@ -89,7 +89,7 @@ $$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}\left(\frac{y_{i} - \hat{y_{i}}}{1 - h_{i}
 
 ```{r fig5-5, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "The data set is split five times such that all observations are included in one validation set. The model is estimated on 80% of the data five different times, the predictions are made for the remaining 20%, and the test MSEs are averaged."}
 
-knitr::include_graphics("./images/fig5_5.jpg")#, error = FALSE)
+knitr::include_graphics("./images/fig5_5.jpg")
 
 ```
 
@@ -106,7 +106,7 @@ $$CV_{k} = \frac{1}{k}{\sum_{i=1}^{k}}MSE_{i}$$
 
 ```{r fig5-6, echo=FALSE, cache=FALSE,  fig.align='center', fig.cap="The estimated test errors for LOOCV and k-fold cross validation is compared to the true test error for the three simulated data sets from Chapter 2. True test error is shown in blue, LOOCV error is the dashed black line, and 10-fold error is shown in orange."}
 
-knitr::include_graphics("./images/fig5_6.jpg")#, error = FALSE)
+knitr::include_graphics("./images/fig5_6.JPG")
 ```
 
 ## Bias-Variance Tradeoff and k-fold Cross-Validation
@@ -133,7 +133,7 @@ $$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}Err_{i}$$ where $Err_{i} = I(Y_{i}\neq\hat
 
 ```{r fig5-7, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="Estimated decision boundaries of polynomial logistic regression models for simulated data are shown. The Bayes decision boundary is the dashed purple line."}
 
-knitr::include_graphics("./images/fig5_7.jpg")#, error = FALSE)
+knitr::include_graphics("./images/fig5_7.JPG")
 ```
 
 -   In practice, the true test error and Bayes error rate are unknown, so we need to estimate the test error rate.
@@ -326,7 +326,7 @@ coef(glm.fit)
 coef(lm.fit)
 ```
 
-In this section we use `glm()` as it can be used with \`cv.glm() function to compare results.
+In this section we use `glm()` as it can be used with `cv.glm()` function to compare results.
 
 In the cv.glm function, the two numbers in the **delta vector** contain the **cross-validation results** or the **LOOCV statistic**
 
@@ -495,13 +495,8 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 `r knitr::include_url("https://www.youtube.com/embed/Obt6EZeBfIw")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
+<summary>Meeting chat log</summary>
+```
     00:14:53    jonathan.bratt: Sorry, didn’t realize I was unmuted. :)
     00:15:03    Raymond Balise: be right back… I am listening
     00:15:16    August: time series can also be analysed with features, which means you can use decision trees, and not rely on the sequential indexing.
@@ -519,19 +514,14 @@ Meeting chat log
     00:32:10    jonathan.bratt: Can you use the arrow keys?
     00:38:11    August: This is quite interesting: https://machinelearningmastery.com/how-to-configure-k-fold-cross-validation/
     00:39:53    Mei Ling Soh:   Thanks, August!
-
+```
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/JMDQsvVqMT8")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
+<summary>Meeting chat log</summary>
+```
     00:11:39    Jon Harmon (jonthegeek):    https://twitter.com/whyRconf
     00:14:38    SriRam: go for one page view, not scrolling view
     00:25:46    Wayne Defreitas:    lol
@@ -539,7 +529,7 @@ Meeting chat log
     00:45:45    Wayne Defreitas:    This was great thank you
     00:46:27    Mei Ling Soh:   Great! Thanks
     00:49:19    jonathan.bratt: Ch6 is long
-
+```
 </details>
 
 ### Cohort 2
@@ -547,37 +537,27 @@ Meeting chat log
 `r knitr::include_url("https://www.youtube.com/embed/RQfPmCVuPC8")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
+<summary>Meeting chat log</summary>
+```
     00:29:18    Ricardo Serrano:    https://www.statology.org/assumptions-of-logistic-regression/
     00:29:26    Ricardo Serrano:    https://towardsdatascience.com/assumptions-of-logistic-regression-clearly-explained-44d85a22b290
     01:06:18    Jim Gruman: thank you Federica!!! more horsepower 🐎
     01:07:47    Jim Gruman: I need to jump off. Talk to you all next week. Ciao
-
+```
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/iDxpBea8AI0")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
+<summary>Meeting chat log</summary>
+```
     00:18:27    Federica Gazzelloni:    Hello Jenny!
     00:18:44    jlsmith3:   Good morning!
     00:39:57    Ricardo Serrano:    References for bias/variance https://www.bmc.com/blogs/bias-variance-machine-learning/
     00:40:26    Ricardo Serrano:    https://youtu.be/EuBBz3bI-aA
     00:40:36    Federica Gazzelloni:    Thanks Ricardo!
     00:57:55    Jim Gruman: 🐎 thank you everybody!
-
+```
 </details>
 
 ### Cohort 3
@@ -589,20 +569,15 @@ Meeting chat log
 `r knitr::include_url("https://www.youtube.com/embed/b--hZlZqJ6I")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
+<summary>Meeting chat log</summary>
+```
     00:07:07    Nilay Yönet:    https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/resampling-methods.html
     00:33:41    Mei Ling Soh:   Maybe we can wrap up the lab soon?
     00:37:48    Fariborz Soroush:   👍
     01:04:24    Mei Ling Soh:   Two more minutes to go
     01:05:19    Nilay Yönet:    https://onmee.github.io/assets/docs/ISLR/Resampling-Methods.pdf
     01:05:22    Nilay Yönet:    https://waxworksmath.com/Authors/G_M/James/WWW/chapter_5.html
-
+```
 </details>
 
 ### Cohort 4
@@ -610,13 +585,8 @@ Meeting chat log
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
-    ADD LOG HERE
-
+<summary>Meeting chat log</summary>
+```
+ADD LOG HERE
+```
 </details>
