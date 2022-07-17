@@ -2,7 +2,7 @@
 
 **Learning objectives:**
 
--   Big picture: to learn about 2 resampling methods: **cross-validation** and the **bootstrap**
+-   **Big picture** - to learn about 2 resampling methods: **cross-validation** and the **bootstrap**
 
     -   Both refit a model to samples formed from the training set to obtain additional information about the fitted model: e.g. they provide estimates of test-set prediction error and the standard deviation and bias of parameter estimates.
 
@@ -165,7 +165,7 @@ $${\alpha} = \frac{{\sigma}_{Y}^{2}-{\sigma}_{XY}}{{\sigma}_{X}^{2}+{\sigma}_{Y}
 
 -   The quantities $Var(X)$, $Var(Y)$ and $Cov(X, Y)$ are unknown but we can estimate them from a dataset that contains measurements for X and Y.
 
--   Simulated 100 pairs of data points (X, Y) four times and got four estimates for $\hat{\alpha}$ ranging from 0.532 to 0.657.
+-   Simulated 100 pairs of data points (X, Y) four times and got four values for $\hat{\alpha}$ ranging from 0.532 to 0.657.
 
 -   Now, how accurate is this as an estimate of ${\alpha}$?
 
@@ -175,7 +175,7 @@ $${\alpha} = \frac{{\sigma}_{Y}^{2}-{\sigma}_{XY}}{{\sigma}_{X}^{2}+{\sigma}_{Y}
     -   The mean over all 1,000 estimates of ${\alpha}$ = 0.5996
     -   Std dev of the estimate is:
 
-$$ \sqrt{\frac{1}{1000-1}\sum_{r=1}^{1000}(\hat{\alpha}_{r}-\bar{\alpha})^{2}} = 0.083$$ - Gives fairly good estimate of accuracy of ${\alpha}$ (we expect $\hat{alpha}$ to differ from ${\alpha}$ by \~ 0.08)
+$$ \sqrt{\frac{1}{1000-1}\sum_{r=1}^{1000}(\hat{\alpha}_{r}-\bar{\alpha})^{2}} = 0.083$$ - Gives fairly good estimate of accuracy of ${\alpha}$ (we expect $\hat{\alpha}$ to differ from ${\alpha}$ by \~ 0.08)
 
 ## Population Distribution Compared to Bootstrap Distribution
 
@@ -200,7 +200,7 @@ $$SE_{B(\hat{\alpha})} = \sqrt{\frac{1}{B-1}\sum_{r=1}^{B}\left(\hat{\alpha}^{*r
 
 where $B$ is the number of bootstrap samples, $*$ indicates it's a bootstrap estimate of $\hat{\alpha}$ and $\frac{1}{B}\sum_{r'=1}^{B}\hat{\alpha}^{*r'}$ is the mean of $\hat{\alpha}^{*r'}$
 
--   This was = 0.087 in our example
+-   This was = **0.087** in our example
 
 -   Compare to the estimate we obtained using 1,000 simulated data sets from the true population:
 
