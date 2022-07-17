@@ -868,12 +868,6 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/gMQ22j5VYTg")`
 
-<details>
-<summary> Meeting chat log </summary>
-
-```
-ADD LOG HERE
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/a-NVS5-SRe0")`

@@ -1,8 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 # Tree-Based Methods
 
 **Learning objectives:**
@@ -743,13 +738,40 @@ doParallel::stopImplicitCluster()
 
 ### Cohort 3
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/Ruv7LABdmK8")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:06:04	Fariborz Soroush:	Hi All... after a long time I am back :D
+00:06:24	Mei Ling Soh:	Welcome back!!!! 🥳
+00:06:57	Fariborz Soroush:	Thanks :)
+00:08:52	Fariborz Soroush:	I can do 12 :D
+00:10:06	Fariborz Soroush:	I sighed up for 12
+00:10:18	Fariborz Soroush:	*signed!!
+00:10:21	Fariborz Soroush:	:))
+00:12:47	Rose Hartman:	Apologies --- I wish I could help, but I've got some medical stuff going on and there's a good chance I'll be hospitalized for an extended period soon, so not a good idea for me to sign up to lead anything right now.
+00:15:10	Jeremy Selva:	https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter8
+00:20:06	Fariborz Soroush:	I love stat quest … :))
+00:20:15	Rose Hartman:	me too 🙂
+00:20:18	Mei Ling Soh:	Me too.
+00:31:58	Rose Hartman:	Yes, unfortunately
+01:01:29	Jeremy Selva:	https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter8-lab/
+01:01:48	Jeremy Selva:	https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter8
+01:04:13	Fariborz Soroush:	Thanks a lot Jeremy. Great presentation.
+01:04:34	Rose Hartman:	Bye, thank you!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/RbzMFuGNrFg")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:25:31	Rose Hartman:	Apologies, I have to jump off. See you in two weeks!
+00:26:55	Mei Ling Soh:	https://yardstick.tidymodels.org/reference/conf_mat.html
 ```
 </details>
 

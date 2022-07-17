@@ -10,3 +10,5 @@ libs
 bookclub-islr.Rmd
 bookclub-islr.html
 bookclub-islr.knit.md
+bookclub-islr_cache
+*.html
