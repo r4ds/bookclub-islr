@@ -8,12 +8,15 @@
 
 -   Recall that the training error rate is often quite different from the test error rate and can dramatically underestimate it
 
-```{r fig5-1, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Training- versus Test-Set Performance. Souce: https://hastie.su.domains/ISLR2/Slides/Ch5_Resampling_Methods.pdf}
+```{r fig5-1, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Training- versus Test-Set Performance. Souce: https://hastie.su.domains/ISLR2/Slides/Ch5_Resampling_Methods.pdf"}
 
 knitr::include_graphics('./images/fig5_1.jpg')#, error = FALSE)
+
 ```
+
 -   Best solution is to have a large test set (which is not often available)
-_   Some methods (AIC, BIC) make a mathematical adjustment to the training error rate in order to estimate the test error rate.
+
+-   Some methods (AIC, BIC) make a mathematical adjustment to the training error rate in order to estimate the test error rate.
 
 -   Here we consider methods that estimate the test error by *holding out* a subset of the training observations from the fitting process. Then applying the statistical learning method to those held out observations
 
