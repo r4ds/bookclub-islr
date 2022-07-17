@@ -8,7 +8,7 @@
 
 -   Recall that the training error rate is often quite different from the test error rate and can dramatically underestimate it
 
-```{r fig5-1, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Training- versus Test-Set Performance. Souce: https://hastie.su.domains/ISLR2/Slides/Ch5_Resampling_Methods.pdf"}
+```{r fig5-1, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Training- versus Test-Set Performance. Source: https://hastie.su.domains/ISLR2/Slides/Ch5_Resampling_Methods.pdf"}
 
 knitr::include_graphics('./images/fig5_1.jpg')
 
