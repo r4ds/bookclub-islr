@@ -46,7 +46,7 @@ We will:
 
 ```{r fig5-2, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "Left: The validation set approach was used to estimated the test mean squared error from predicting mpg as a polynomial function of horsepower. Right: The estimated test error varies depending on the validation and training sets used."}
 
-knitr::include_graphics('./images/fig5_2.jpg')
+knitr::include_graphics('./images/fig5_2.png')
 ```
 
 ## Leave-One-Out Cross-Validation (LOOCV)
@@ -89,7 +89,7 @@ $$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}\left(\frac{y_{i} - \hat{y_{i}}}{1 - h_{i}
 
 ```{r fig5-5, echo=FALSE, cache=FALSE, fig.align='center', fig.cap= "The data set is split five times such that all observations are included in one validation set. The model is estimated on 80% of the data five different times, the predictions are made for the remaining 20%, and the test MSEs are averaged."}
 
-knitr::include_graphics("./images/fig5_5.jpg")
+knitr::include_graphics("./images/fig5_5.png")
 
 ```
 
@@ -106,7 +106,7 @@ $$CV_{k} = \frac{1}{k}{\sum_{i=1}^{k}}MSE_{i}$$
 
 ```{r fig5-6, echo=FALSE, cache=FALSE,  fig.align='center', fig.cap="The estimated test errors for LOOCV and k-fold cross validation is compared to the true test error for the three simulated data sets from Chapter 2. True test error is shown in blue, LOOCV error is the dashed black line, and 10-fold error is shown in orange."}
 
-knitr::include_graphics("./images/fig5_6.JPG")
+knitr::include_graphics("./images/fig5_6.png")
 ```
 
 ## Bias-Variance Tradeoff and k-fold Cross-Validation
@@ -133,7 +133,7 @@ $$CV_{n} = \frac{1}{n}{\sum_{i=1}^{n}}Err_{i}$$ where $Err_{i} = I(Y_{i}\neq\hat
 
 ```{r fig5-7, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="Estimated decision boundaries of polynomial logistic regression models for simulated data are shown. The Bayes decision boundary is the dashed purple line."}
 
-knitr::include_graphics("./images/fig5_7.JPG")
+knitr::include_graphics("./images/fig5_7.png")
 ```
 
 -   In practice, the true test error and Bayes error rate are unknown, so we need to estimate the test error rate.
@@ -141,7 +141,7 @@ knitr::include_graphics("./images/fig5_7.JPG")
 
 ```{r fig5-8, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The test error rate (beige), the training error rate (blue), and the 10-fold cross validation error rate (black) are shown for polynomial logistic regression and KNN classification."}
 
-knitr::include_graphics("./images/fig5_8.JPG")
+knitr::include_graphics("./images/fig5_8.png")
 ```
 
 ## The Bootstrap
@@ -184,7 +184,7 @@ $$ \sqrt{\frac{1}{1000-1}\sum_{r=1}^{1000}(\hat{\alpha}_{r}-\bar{\alpha})^{2}} =
 
 ```{r fig5-10, echo=FALSE, cache=FALSE, fig.align='center', fig.cap="The distribution of the mean of alpha is shown on the left, with 1000 samples generated from the true population. A bootstrap distribution is shown in the middle, with 1000 samples taken from the original sample. Note that both confidence intervals contain the true alpha (pink line) in the right panel, and that the spread of both distributions is similar."}
 
-knitr::include_graphics("./images/fig5_10.JPG")
+knitr::include_graphics("./images/fig5_10.png")
 
 ```
 
