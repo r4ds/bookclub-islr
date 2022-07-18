@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.14 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club</title>
+  <title>5.15 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.14 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club" />
+  <meta property="og:title" content="5.15 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-islr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.14 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club" />
+  <meta name="twitter:title" content="5.15 Lab: Cross-Validation and the Bootstrap | Introduction to Statistical Learning Using R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Introduction to Statistical Learning Using R Book Club." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-16" />
+<meta name="date" content="2022-07-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -284,21 +284,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.9" data-path="cross-validation-on-classification-problems.html"><a href="cross-validation-on-classification-problems.html"><i class="fa fa-check"></i><b>5.9</b> Cross-Validation on Classification Problems</a></li>
 <li class="chapter" data-level="5.10" data-path="logistic-polynomial-regression-bayes-decision-boundaries-and-k-fold-cross-validation.html"><a href="logistic-polynomial-regression-bayes-decision-boundaries-and-k-fold-cross-validation.html"><i class="fa fa-check"></i><b>5.10</b> Logistic Polynomial Regression, Bayes Decision Boundaries, and k-fold Cross Validation</a></li>
 <li class="chapter" data-level="5.11" data-path="the-bootstrap.html"><a href="the-bootstrap.html"><i class="fa fa-check"></i><b>5.11</b> The Bootstrap</a></li>
-<li class="chapter" data-level="5.12" data-path="population-distribution-compared-to-bootstrap-distribution.html"><a href="population-distribution-compared-to-bootstrap-distribution.html"><i class="fa fa-check"></i><b>5.12</b> Population Distribution Compared to Bootstrap Distribution</a></li>
-<li class="chapter" data-level="5.13" data-path="bootstrap-standard-error.html"><a href="bootstrap-standard-error.html"><i class="fa fa-check"></i><b>5.13</b> Bootstrap Standard Error</a></li>
-<li class="chapter" data-level="5.14" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html"><i class="fa fa-check"></i><b>5.14</b> Lab: Cross-Validation and the Bootstrap</a>
+<li class="chapter" data-level="5.12" data-path="a-simple-bootstrap-example.html"><a href="a-simple-bootstrap-example.html"><i class="fa fa-check"></i><b>5.12</b> A simple bootstrap example</a></li>
+<li class="chapter" data-level="5.13" data-path="population-distribution-compared-to-bootstrap-distribution.html"><a href="population-distribution-compared-to-bootstrap-distribution.html"><i class="fa fa-check"></i><b>5.13</b> Population Distribution Compared to Bootstrap Distribution</a></li>
+<li class="chapter" data-level="5.14" data-path="bootstrap-standard-error.html"><a href="bootstrap-standard-error.html"><i class="fa fa-check"></i><b>5.14</b> Bootstrap Standard Error</a></li>
+<li class="chapter" data-level="5.15" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html"><i class="fa fa-check"></i><b>5.15</b> Lab: Cross-Validation and the Bootstrap</a>
 <ul>
-<li class="chapter" data-level="5.14.1" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-validation-set-approach"><i class="fa fa-check"></i><b>5.14.1</b> The Validation Set Approach</a></li>
-<li class="chapter" data-level="5.14.2" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>5.14.2</b> Leave-One-Out Cross-Validation</a></li>
-<li class="chapter" data-level="5.14.3" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#k-fold-cross-validation-1"><i class="fa fa-check"></i><b>5.14.3</b> k-Fold Cross-Validation</a></li>
-<li class="chapter" data-level="5.14.4" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-bootstrap-1"><i class="fa fa-check"></i><b>5.14.4</b> The Bootstrap</a></li>
+<li class="chapter" data-level="5.15.1" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-validation-set-approach"><i class="fa fa-check"></i><b>5.15.1</b> The Validation Set Approach</a></li>
+<li class="chapter" data-level="5.15.2" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>5.15.2</b> Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="5.15.3" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#k-fold-cross-validation-1"><i class="fa fa-check"></i><b>5.15.3</b> k-Fold Cross-Validation</a></li>
+<li class="chapter" data-level="5.15.4" data-path="lab-cross-validation-and-the-bootstrap.html"><a href="lab-cross-validation-and-the-bootstrap.html#the-bootstrap-1"><i class="fa fa-check"></i><b>5.15.4</b> The Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="5.15" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html"><i class="fa fa-check"></i><b>5.15</b> Meeting Videos</a>
+<li class="chapter" data-level="5.16" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html"><i class="fa fa-check"></i><b>5.16</b> Meeting Videos</a>
 <ul>
-<li class="chapter" data-level="5.15.1" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-1-4"><i class="fa fa-check"></i><b>5.15.1</b> Cohort 1</a></li>
-<li class="chapter" data-level="5.15.2" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-2-4"><i class="fa fa-check"></i><b>5.15.2</b> Cohort 2</a></li>
-<li class="chapter" data-level="5.15.3" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-3-4"><i class="fa fa-check"></i><b>5.15.3</b> Cohort 3</a></li>
-<li class="chapter" data-level="5.15.4" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-4-4"><i class="fa fa-check"></i><b>5.15.4</b> Cohort 4</a></li>
+<li class="chapter" data-level="5.16.1" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-1-4"><i class="fa fa-check"></i><b>5.16.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="5.16.2" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-2-4"><i class="fa fa-check"></i><b>5.16.2</b> Cohort 2</a></li>
+<li class="chapter" data-level="5.16.3" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-3-4"><i class="fa fa-check"></i><b>5.16.3</b> Cohort 3</a></li>
+<li class="chapter" data-level="5.16.4" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-4-4"><i class="fa fa-check"></i><b>5.16.4</b> Cohort 4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
@@ -586,11 +587,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lab-cross-validation-and-the-bootstrap" class="section level2 hasAnchor" number="5.14">
-<h2><span class="header-section-number">5.14</span> Lab: Cross-Validation and the Bootstrap<a href="lab-cross-validation-and-the-bootstrap.html#lab-cross-validation-and-the-bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lab-cross-validation-and-the-bootstrap" class="section level2 hasAnchor" number="5.15">
+<h2><span class="header-section-number">5.15</span> Lab: Cross-Validation and the Bootstrap<a href="lab-cross-validation-and-the-bootstrap.html#lab-cross-validation-and-the-bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Resampling techniques</strong></p>
-<div id="the-validation-set-approach" class="section level3 hasAnchor" number="5.14.1">
-<h3><span class="header-section-number">5.14.1</span> The Validation Set Approach<a href="lab-cross-validation-and-the-bootstrap.html#the-validation-set-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-validation-set-approach" class="section level3 hasAnchor" number="5.15.1">
+<h3><span class="header-section-number">5.15.1</span> The Validation Set Approach<a href="lab-cross-validation-and-the-bootstrap.html#the-validation-set-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>to estimate the test error rates</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="lab-cross-validation-and-the-bootstrap.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
 <span id="cb109-2"><a href="lab-cross-validation-and-the-bootstrap.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -670,8 +671,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb123-12"><a href="lab-cross-validation-and-the-bootstrap.html#cb123-12" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">+</span>p2</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/05L-plot2-1.png" width="672" /></p>
 </div>
-<div id="leave-one-out-cross-validation" class="section level3 hasAnchor" number="5.14.2">
-<h3><span class="header-section-number">5.14.2</span> Leave-One-Out Cross-Validation<a href="lab-cross-validation-and-the-bootstrap.html#leave-one-out-cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="leave-one-out-cross-validation" class="section level3 hasAnchor" number="5.15.2">
+<h3><span class="header-section-number">5.15.2</span> Leave-One-Out Cross-Validation<a href="lab-cross-validation-and-the-bootstrap.html#leave-one-out-cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>LOOCV estimate</strong> for generalized linear models</p>
 <ul>
 <li>glm()</li>
@@ -687,7 +688,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="lab-cross-validation-and-the-bootstrap.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm.fit)</span></code></pre></div>
 <pre><code>## (Intercept)  horsepower 
 ##  39.9358610  -0.1578447</code></pre>
-<p>In this section we use <code>glm()</code> as it can be used with `cv.glm() function to compare results.</p>
+<p>In this section we use <code>glm()</code> as it can be used with <code>cv.glm()</code> function to compare results.</p>
 <p>In the cv.glm function, the two numbers in the <strong>delta vector</strong> contain the <strong>cross-validation results</strong> or the <strong>LOOCV statistic</strong></p>
 <blockquote>
 <p>LOOCV estimate for the MSE test error is the average of <span class="math inline">\(n\)</span> tests error estimates:</p>
@@ -724,8 +725,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-9"><a href="lab-cross-validation-and-the-bootstrap.html#cb132-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">size=</span><span class="fl">0.2</span>))</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/05L-plot3-1.png" width="672" /></p>
 </div>
-<div id="k-fold-cross-validation-1" class="section level3 hasAnchor" number="5.14.3">
-<h3><span class="header-section-number">5.14.3</span> k-Fold Cross-Validation<a href="lab-cross-validation-and-the-bootstrap.html#k-fold-cross-validation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="k-fold-cross-validation-1" class="section level3 hasAnchor" number="5.15.3">
+<h3><span class="header-section-number">5.15.3</span> k-Fold Cross-Validation<a href="lab-cross-validation-and-the-bootstrap.html#k-fold-cross-validation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>cv.glm() function is also used to implement <strong>k-fold CV</strong>.</p>
 <p>computation time shorter</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="lab-cross-validation-and-the-bootstrap.html#cb133-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
@@ -751,18 +752,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb135-11"><a href="lab-cross-validation-and-the-bootstrap.html#cb135-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">size=</span><span class="fl">0.2</span>))</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/05L-plot4-1.png" width="672" /></p>
 </div>
-<div id="the-bootstrap-1" class="section level3 hasAnchor" number="5.14.4">
-<h3><span class="header-section-number">5.14.4</span> The Bootstrap<a href="lab-cross-validation-and-the-bootstrap.html#the-bootstrap-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-bootstrap-1" class="section level3 hasAnchor" number="5.15.4">
+<h3><span class="header-section-number">5.15.4</span> The Bootstrap<a href="lab-cross-validation-and-the-bootstrap.html#the-bootstrap-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Bootstrap approach can be applied in almost all situations.</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="lab-cross-validation-and-the-bootstrap.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Portfolio&quot;</span>)</span></code></pre></div>
-<div id="estimating-the-accuracy-of-a-statistic-of-interest" class="section level4 hasAnchor" number="5.14.4.1">
-<h4><span class="header-section-number">5.14.4.1</span> Estimating the Accuracy of a Statistic of Interest<a href="lab-cross-validation-and-the-bootstrap.html#estimating-the-accuracy-of-a-statistic-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="estimating-the-accuracy-of-a-statistic-of-interest" class="section level4 hasAnchor" number="5.15.4.1">
+<h4><span class="header-section-number">5.15.4.1</span> Estimating the Accuracy of a Statistic of Interest<a href="lab-cross-validation-and-the-bootstrap.html#estimating-the-accuracy-of-a-statistic-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>to assess the variability associated with the regression coefficients in a linear model fit, we need to quantify the uncertainty, and choose <span class="math inline">\(\alpha\)</span> in order minimize the total risk, or variance, of the investment.</li>
 </ul>
 <p><span class="math inline">\(\alpha\)</span> is the fraction we want to invest in <span class="math inline">\(X\)</span> and <span class="math inline">\((1-\alpha)\)</span> is the fraction we want to invest in <span class="math inline">\(Y\)</span></p>
-<p><span class="math display">\[Var=\alpha X+(1-\alpha)Y)\]</span>
-<span class="math display">\[\alpha=\frac{\sigma^2_{Y}-\sigma_{XY}}{\sigma^2_{X}+\sigma^2_{Y}-2\sigma_{XY}}\]</span></p>
+<p><span class="math display">\[Var=\alpha X+(1-\alpha)Y)\]</span> <span class="math display">\[\alpha=\frac{\sigma^2_{Y}-\sigma_{XY}}{\sigma^2_{X}+\sigma^2_{Y}-2\sigma_{XY}}\]</span></p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="lab-cross-validation-and-the-bootstrap.html#cb137-1" aria-hidden="true" tabindex="-1"></a>alpha.fn <span class="ot">&lt;-</span> <span class="cf">function</span>(data,index) {</span>
 <span id="cb137-2"><a href="lab-cross-validation-and-the-bootstrap.html#cb137-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> data<span class="sc">$</span>X[index]</span>
 <span id="cb137-3"><a href="lab-cross-validation-and-the-bootstrap.html#cb137-3" aria-hidden="true" tabindex="-1"></a>  Y <span class="ot">&lt;-</span> data<span class="sc">$</span>Y[index]</span>
@@ -790,8 +790,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##      original       bias    std. error
 ## t1* 0.5758321 0.0007959475  0.08969074</code></pre>
 </div>
-<div id="estimating-the-accuracy-of-a-linear-regression-model" class="section level4 hasAnchor" number="5.14.4.2">
-<h4><span class="header-section-number">5.14.4.2</span> Estimating the Accuracy of a Linear Regression Model<a href="lab-cross-validation-and-the-bootstrap.html#estimating-the-accuracy-of-a-linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="estimating-the-accuracy-of-a-linear-regression-model" class="section level4 hasAnchor" number="5.15.4.2">
+<h4><span class="header-section-number">5.15.4.2</span> Estimating the Accuracy of a Linear Regression Model<a href="lab-cross-validation-and-the-bootstrap.html#estimating-the-accuracy-of-a-linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>to assess the variability of the coefficient estimates and predictions</li>
 </ul>

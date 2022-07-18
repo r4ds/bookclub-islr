@@ -21,6 +21,7 @@ fig:fig4-13
 fig:fig4-14
 fig:unnamed-chunk-28
 fig:tab4-11
+fig:fig5-1
 fig:fig5-2
 fig:fig5-5
 fig:fig5-6
@@ -138,6 +139,7 @@ bias-variance-tradeoff-and-k-fold-cross-validation
 cross-validation-on-classification-problems
 logistic-polynomial-regression-bayes-decision-boundaries-and-k-fold-cross-validation
 the-bootstrap
+a-simple-bootstrap-example
 population-distribution-compared-to-bootstrap-distribution
 bootstrap-standard-error
 lab-cross-validation-and-the-bootstrap
