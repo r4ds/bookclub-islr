@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,41 +590,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="correlation-analysis" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Correlation Analysis<a href="correlation-analysis.html#correlation-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Correlation heatmap (Pearson)</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="correlation-analysis.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert factor features to numeric for correlation analysis</span></span>
-<span id="cb205-2"><a href="correlation-analysis.html#cb205-2" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="ot">&lt;-</span> carseats <span class="sc">%&gt;%</span> </span>
-<span id="cb205-3"><a href="correlation-analysis.html#cb205-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">High =</span> <span class="fu">ifelse</span>(High <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span> , <span class="dv">1</span>), </span>
-<span id="cb205-4"><a href="correlation-analysis.html#cb205-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Urban =</span> <span class="fu">ifelse</span>(Urban <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb205-5"><a href="correlation-analysis.html#cb205-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">US =</span> <span class="fu">ifelse</span>(US <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb205-6"><a href="correlation-analysis.html#cb205-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ShelveLoc =</span> <span class="fu">case_when</span>(</span>
-<span id="cb205-7"><a href="correlation-analysis.html#cb205-7" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&#39;Bad&#39;</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb205-8"><a href="correlation-analysis.html#cb205-8" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span> <span class="sc">~</span> <span class="dv">2</span>, </span>
-<span id="cb205-9"><a href="correlation-analysis.html#cb205-9" aria-hidden="true" tabindex="-1"></a>                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
-<span id="cb205-10"><a href="correlation-analysis.html#cb205-10" aria-hidden="true" tabindex="-1"></a>            ))</span>
-<span id="cb205-11"><a href="correlation-analysis.html#cb205-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-12"><a href="correlation-analysis.html#cb205-12" aria-hidden="true" tabindex="-1"></a>carseats_num</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="correlation-analysis.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert factor features to numeric for correlation analysis</span></span>
+<span id="cb206-2"><a href="correlation-analysis.html#cb206-2" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="ot">&lt;-</span> carseats <span class="sc">%&gt;%</span> </span>
+<span id="cb206-3"><a href="correlation-analysis.html#cb206-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">High =</span> <span class="fu">ifelse</span>(High <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span> , <span class="dv">1</span>), </span>
+<span id="cb206-4"><a href="correlation-analysis.html#cb206-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Urban =</span> <span class="fu">ifelse</span>(Urban <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb206-5"><a href="correlation-analysis.html#cb206-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">US =</span> <span class="fu">ifelse</span>(US <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb206-6"><a href="correlation-analysis.html#cb206-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ShelveLoc =</span> <span class="fu">case_when</span>(</span>
+<span id="cb206-7"><a href="correlation-analysis.html#cb206-7" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&#39;Bad&#39;</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb206-8"><a href="correlation-analysis.html#cb206-8" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span> <span class="sc">~</span> <span class="dv">2</span>, </span>
+<span id="cb206-9"><a href="correlation-analysis.html#cb206-9" aria-hidden="true" tabindex="-1"></a>                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb206-10"><a href="correlation-analysis.html#cb206-10" aria-hidden="true" tabindex="-1"></a>            ))</span>
+<span id="cb206-11"><a href="correlation-analysis.html#cb206-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-12"><a href="correlation-analysis.html#cb206-12" aria-hidden="true" tabindex="-1"></a>carseats_num</span></code></pre></div>
 <pre><code>## # A tibble: 400 × 11
-##    CompPrice Income Advertising Population Price ShelveLoc   Age Education Urban
-##        &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
-##  1       138     73          11        276   120         1    42        17     1
-##  2       111     48          16        260    83         3    65        10     1
-##  3       113     35          10        269    80         2    59        12     1
-##  4       117    100           4        466    97         2    55        14     1
-##  5       141     64           3        340   128         1    38        13     1
-##  6       124    113          13        501    72         1    78        16     0
-##  7       115    105           0         45   108         2    71        15     1
-##  8       136     81          15        425   120         3    67        10     1
-##  9       132    110           0        108   124         2    76        10     0
-## 10       132    113           0        131   124         2    76        17     0
-## # … with 390 more rows, and 2 more variables: US &lt;dbl&gt;, High &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="correlation-analysis.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlookr)</span></code></pre></div>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="correlation-analysis.html#cb208-1" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="sc">%&gt;%</span> </span>
-<span id="cb208-2"><a href="correlation-analysis.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb208-3"><a href="correlation-analysis.html#cb208-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+##    CompPr…¹ Income Adver…² Popul…³ Price Shelv…⁴   Age Educa…⁵ Urban    US  High
+##       &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1      138     73      11     276   120       1    42      17     1     1     1
+##  2      111     48      16     260    83       3    65      10     1     1     1
+##  3      113     35      10     269    80       2    59      12     1     1     1
+##  4      117    100       4     466    97       2    55      14     1     1     0
+##  5      141     64       3     340   128       1    38      13     1     0     0
+##  6      124    113      13     501    72       1    78      16     0     1     1
+##  7      115    105       0      45   108       2    71      15     1     0     0
+##  8      136     81      15     425   120       3    67      10     1     1     1
+##  9      132    110       0     108   124       2    76      10     0     0     0
+## 10      132    113       0     131   124       2    76      17     0     1     0
+## # … with 390 more rows, and abbreviated variable names ¹​CompPrice,
+## #   ²​Advertising, ³​Population, ⁴​ShelveLoc, ⁵​Education
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="correlation-analysis.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlookr)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="correlation-analysis.html#cb209-1" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="sc">%&gt;%</span> </span>
+<span id="cb209-2"><a href="correlation-analysis.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb209-3"><a href="correlation-analysis.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/Pearson_correlation_class-1.png" width="672" /></p>
 <p>Correlation heatmap (Spearman)</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="correlation-analysis.html#cb209-1" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="sc">%&gt;%</span> </span>
-<span id="cb209-2"><a href="correlation-analysis.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>(<span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb209-3"><a href="correlation-analysis.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="correlation-analysis.html#cb210-1" aria-hidden="true" tabindex="-1"></a>carseats_num <span class="sc">%&gt;%</span> </span>
+<span id="cb210-2"><a href="correlation-analysis.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>(<span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb210-3"><a href="correlation-analysis.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/Spearman_correlation_class-1.png" width="672" /></p>
 </div>
             </section>

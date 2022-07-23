@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,18 +590,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualizing-the-estimated-distribution-of-survival-times" class="section level2 hasAnchor" number="11.14">
 <h2><span class="header-section-number">11.14</span> Visualizing the estimated distribution of survival times<a href="visualizing-the-estimated-distribution-of-survival-times.html#visualizing-the-estimated-distribution-of-survival-times" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the baseline survival function</span></span>
-<span id="cb380-2"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(fit_all_cox), <span class="at">data =</span> BrainCancer, <span class="at">palette =</span> <span class="st">&quot;#2E9FDF&quot;</span>,</span>
-<span id="cb380-3"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb380-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the baseline survival function</span></span>
+<span id="cb381-2"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb381-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(<span class="fu">survfit</span>(fit_all_cox), <span class="at">data =</span> BrainCancer, <span class="at">palette =</span> <span class="st">&quot;#2E9FDF&quot;</span>,</span>
+<span id="cb381-3"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb381-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/11coxph_viz-1.png" width="672" /></p>
 <p>Let’s plot the Cox Proportional Hazards covariates coefficients estimates/CI</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span></code></pre></div>
 <pre><code>## You can cite this package as:
 ##      Patil, I. (2021). Visualizations with statistical details: The &#39;ggstatsplot&#39; approach.
 ##      Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(fit_all_cox, </span>
-<span id="cb383-2"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb383-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Cox PH Model Covariates Coefficients Estimates/CI&quot;</span></span>
-<span id="cb383-3"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb383-3" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(fit_all_cox, </span>
+<span id="cb384-2"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb384-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Cox PH Model Covariates Coefficients Estimates/CI&quot;</span></span>
+<span id="cb384-3"><a href="visualizing-the-estimated-distribution-of-survival-times.html#cb384-3" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/11coxph_coef-1.png" width="672" /></p>
 </div>
             </section>

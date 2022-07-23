@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,16 +590,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="correlation-analysis-1" class="section level2 hasAnchor" number="8.16">
 <h2><span class="header-section-number">8.16</span> Correlation Analysis<a href="correlation-analysis-1.html#correlation-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pearson correlation</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="correlation-analysis-1.html#cb246-1" aria-hidden="true" tabindex="-1"></a>Carseats <span class="sc">%&gt;%</span> </span>
-<span id="cb246-2"><a href="correlation-analysis-1.html#cb246-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Urban =</span> <span class="fu">ifelse</span>(Urban <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb246-3"><a href="correlation-analysis-1.html#cb246-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">US =</span> <span class="fu">ifelse</span>(US <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb246-4"><a href="correlation-analysis-1.html#cb246-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ShelveLoc =</span> <span class="fu">case_when</span>(</span>
-<span id="cb246-5"><a href="correlation-analysis-1.html#cb246-5" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&#39;Bad&#39;</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb246-6"><a href="correlation-analysis-1.html#cb246-6" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span> <span class="sc">~</span> <span class="dv">2</span>, </span>
-<span id="cb246-7"><a href="correlation-analysis-1.html#cb246-7" aria-hidden="true" tabindex="-1"></a>                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span>)</span>
-<span id="cb246-8"><a href="correlation-analysis-1.html#cb246-8" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span> </span>
-<span id="cb246-9"><a href="correlation-analysis-1.html#cb246-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb246-10"><a href="correlation-analysis-1.html#cb246-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="correlation-analysis-1.html#cb247-1" aria-hidden="true" tabindex="-1"></a>Carseats <span class="sc">%&gt;%</span> </span>
+<span id="cb247-2"><a href="correlation-analysis-1.html#cb247-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Urban =</span> <span class="fu">ifelse</span>(Urban <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb247-3"><a href="correlation-analysis-1.html#cb247-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">US =</span> <span class="fu">ifelse</span>(US <span class="sc">==</span> <span class="st">&quot;No&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb247-4"><a href="correlation-analysis-1.html#cb247-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ShelveLoc =</span> <span class="fu">case_when</span>(</span>
+<span id="cb247-5"><a href="correlation-analysis-1.html#cb247-5" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&#39;Bad&#39;</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb247-6"><a href="correlation-analysis-1.html#cb247-6" aria-hidden="true" tabindex="-1"></a>                 ShelveLoc <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span> <span class="sc">~</span> <span class="dv">2</span>, </span>
+<span id="cb247-7"><a href="correlation-analysis-1.html#cb247-7" aria-hidden="true" tabindex="-1"></a>                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span>)</span>
+<span id="cb247-8"><a href="correlation-analysis-1.html#cb247-8" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span> </span>
+<span id="cb247-9"><a href="correlation-analysis-1.html#cb247-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb247-10"><a href="correlation-analysis-1.html#cb247-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/Pearson_correlation_reg-1.png" width="672" /></p>
 </div>
             </section>

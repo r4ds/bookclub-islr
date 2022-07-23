@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,17 +590,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="build-a-model" class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> Build a model<a href="build-a-model.html#build-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Split dataset into train/test</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="build-a-model.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb210-2"><a href="build-a-model.html#cb210-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(carseats, <span class="at">prop =</span> <span class="fl">0.75</span>, <span class="at">strata =</span> High)</span>
-<span id="cb210-3"><a href="build-a-model.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb210-4"><a href="build-a-model.html#cb210-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
-<span id="cb210-5"><a href="build-a-model.html#cb210-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="build-a-model.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb211-2"><a href="build-a-model.html#cb211-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(carseats, <span class="at">prop =</span> <span class="fl">0.75</span>, <span class="at">strata =</span> High)</span>
+<span id="cb211-3"><a href="build-a-model.html#cb211-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="build-a-model.html#cb211-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
+<span id="cb211-5"><a href="build-a-model.html#cb211-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
 <p>Create decision tree classification spec</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="build-a-model.html#cb211-1" aria-hidden="true" tabindex="-1"></a>class_tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb211-2"><a href="build-a-model.html#cb211-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb211-3"><a href="build-a-model.html#cb211-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="build-a-model.html#cb212-1" aria-hidden="true" tabindex="-1"></a>class_tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb212-2"><a href="build-a-model.html#cb212-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb212-3"><a href="build-a-model.html#cb212-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
 <p>Fit the decision tree model</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="build-a-model.html#cb212-1" aria-hidden="true" tabindex="-1"></a>class_tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(class_tree_spec, High <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="build-a-model.html#cb213-1" aria-hidden="true" tabindex="-1"></a>class_tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(class_tree_spec, High <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
 </div>
             </section>
 

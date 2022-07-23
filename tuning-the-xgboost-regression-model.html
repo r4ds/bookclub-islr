@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,16 +590,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tuning-the-xgboost-regression-model" class="section level2 hasAnchor" number="8.35">
 <h2><span class="header-section-number">8.35</span> Tuning the xgboost regression model<a href="tuning-the-xgboost-regression-model.html#tuning-the-xgboost-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We are using the <code>Carseats</code> dataset. Let’s do the validation split with a different seed.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="tuning-the-xgboost-regression-model.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1001</span>)</span>
-<span id="cb292-2"><a href="tuning-the-xgboost-regression-model.html#cb292-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Carseats)</span>
-<span id="cb292-3"><a href="tuning-the-xgboost-regression-model.html#cb292-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb292-4"><a href="tuning-the-xgboost-regression-model.html#cb292-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
-<span id="cb292-5"><a href="tuning-the-xgboost-regression-model.html#cb292-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
-<p>Create the bootstrap folds.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="tuning-the-xgboost-regression-model.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2341</span>)</span>
-<span id="cb293-2"><a href="tuning-the-xgboost-regression-model.html#cb293-2" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>, <span class="at">strata =</span> Sales)</span>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="tuning-the-xgboost-regression-model.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1001</span>)</span>
+<span id="cb293-2"><a href="tuning-the-xgboost-regression-model.html#cb293-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Carseats)</span>
 <span id="cb293-3"><a href="tuning-the-xgboost-regression-model.html#cb293-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb293-4"><a href="tuning-the-xgboost-regression-model.html#cb293-4" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
+<span id="cb293-4"><a href="tuning-the-xgboost-regression-model.html#cb293-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
+<span id="cb293-5"><a href="tuning-the-xgboost-regression-model.html#cb293-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
+<p>Create the bootstrap folds.</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="tuning-the-xgboost-regression-model.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2341</span>)</span>
+<span id="cb294-2"><a href="tuning-the-xgboost-regression-model.html#cb294-2" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>, <span class="at">strata =</span> Sales)</span>
+<span id="cb294-3"><a href="tuning-the-xgboost-regression-model.html#cb294-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-4"><a href="tuning-the-xgboost-regression-model.html#cb294-4" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
 <pre><code>## # Bootstrap sampling using stratification with apparent sample 
 ## # A tibble: 101 × 2
 ##    splits            id          
@@ -614,22 +614,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/99]&gt;  Bootstrap008
 ##  9 &lt;split [300/108]&gt; Bootstrap009
 ## 10 &lt;split [300/103]&gt; Bootstrap010
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>Model spec</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="tuning-the-xgboost-regression-model.html#cb295-1" aria-hidden="true" tabindex="-1"></a>xgb_spec <span class="ot">&lt;-</span> </span>
-<span id="cb295-2"><a href="tuning-the-xgboost-regression-model.html#cb295-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">boost_tree</span>(</span>
-<span id="cb295-3"><a href="tuning-the-xgboost-regression-model.html#cb295-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trees =</span> <span class="dv">2000</span>, </span>
-<span id="cb295-4"><a href="tuning-the-xgboost-regression-model.html#cb295-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">mtry =</span> <span class="fu">tune</span>(), </span>
-<span id="cb295-5"><a href="tuning-the-xgboost-regression-model.html#cb295-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_n =</span> <span class="fu">tune</span>(), </span>
-<span id="cb295-6"><a href="tuning-the-xgboost-regression-model.html#cb295-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">tree_depth =</span> <span class="fu">tune</span>(), </span>
-<span id="cb295-7"><a href="tuning-the-xgboost-regression-model.html#cb295-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">learn_rate =</span> <span class="fu">tune</span>()</span>
-<span id="cb295-8"><a href="tuning-the-xgboost-regression-model.html#cb295-8" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">%&gt;%</span> </span>
-<span id="cb295-9"><a href="tuning-the-xgboost-regression-model.html#cb295-9" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;xgboost&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb295-10"><a href="tuning-the-xgboost-regression-model.html#cb295-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="tuning-the-xgboost-regression-model.html#cb296-1" aria-hidden="true" tabindex="-1"></a>xgb_spec <span class="ot">&lt;-</span> </span>
+<span id="cb296-2"><a href="tuning-the-xgboost-regression-model.html#cb296-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">boost_tree</span>(</span>
+<span id="cb296-3"><a href="tuning-the-xgboost-regression-model.html#cb296-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trees =</span> <span class="dv">2000</span>, </span>
+<span id="cb296-4"><a href="tuning-the-xgboost-regression-model.html#cb296-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">mtry =</span> <span class="fu">tune</span>(), </span>
+<span id="cb296-5"><a href="tuning-the-xgboost-regression-model.html#cb296-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_n =</span> <span class="fu">tune</span>(), </span>
+<span id="cb296-6"><a href="tuning-the-xgboost-regression-model.html#cb296-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">tree_depth =</span> <span class="fu">tune</span>(), </span>
+<span id="cb296-7"><a href="tuning-the-xgboost-regression-model.html#cb296-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">learn_rate =</span> <span class="fu">tune</span>()</span>
+<span id="cb296-8"><a href="tuning-the-xgboost-regression-model.html#cb296-8" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">%&gt;%</span> </span>
+<span id="cb296-9"><a href="tuning-the-xgboost-regression-model.html#cb296-9" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;xgboost&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb296-10"><a href="tuning-the-xgboost-regression-model.html#cb296-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
 <p>Create the workflow()</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="tuning-the-xgboost-regression-model.html#cb296-1" aria-hidden="true" tabindex="-1"></a>xgb_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb296-2"><a href="tuning-the-xgboost-regression-model.html#cb296-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_model</span>(xgb_spec) <span class="sc">%&gt;%</span> </span>
-<span id="cb296-3"><a href="tuning-the-xgboost-regression-model.html#cb296-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_formula</span>(Sales <span class="sc">~</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="tuning-the-xgboost-regression-model.html#cb297-1" aria-hidden="true" tabindex="-1"></a>xgb_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb297-2"><a href="tuning-the-xgboost-regression-model.html#cb297-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_model</span>(xgb_spec) <span class="sc">%&gt;%</span> </span>
+<span id="cb297-3"><a href="tuning-the-xgboost-regression-model.html#cb297-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_formula</span>(Sales <span class="sc">~</span> .)</span></code></pre></div>
 </div>
             </section>
 

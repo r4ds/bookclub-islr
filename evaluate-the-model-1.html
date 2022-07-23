@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -589,36 +589,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="evaluate-the-model-1" class="section level2 hasAnchor" number="8.10">
 <h2><span class="header-section-number">8.10</span> Evaluate the model<a href="evaluate-the-model-1.html#evaluate-the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="evaluate-the-model-1.html#cb229-1" aria-hidden="true" tabindex="-1"></a>tune_res <span class="sc">%&gt;%</span> </span>
-<span id="cb229-2"><a href="evaluate-the-model-1.html#cb229-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">collect_metrics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="evaluate-the-model-1.html#cb230-1" aria-hidden="true" tabindex="-1"></a>tune_res <span class="sc">%&gt;%</span> </span>
+<span id="cb230-2"><a href="evaluate-the-model-1.html#cb230-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">collect_metrics</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 125 × 9
-##    cost_complexity tree_depth min_n .metric  .estimator  mean     n std_err
-##              &lt;dbl&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-##  1        0.0001            3    10 accuracy binary     0.716   101 0.00374
-##  2        0.000562          3    10 accuracy binary     0.716   101 0.00374
-##  3        0.00316           3    10 accuracy binary     0.716   101 0.00374
-##  4        0.0178            3    10 accuracy binary     0.715   101 0.00365
-##  5        0.1               3    10 accuracy binary     0.697   101 0.00474
-##  6        0.0001            4    10 accuracy binary     0.718   101 0.00449
-##  7        0.000562          4    10 accuracy binary     0.718   101 0.00449
-##  8        0.00316           4    10 accuracy binary     0.718   101 0.00449
-##  9        0.0178            4    10 accuracy binary     0.724   101 0.00405
-## 10        0.1               4    10 accuracy binary     0.697   101 0.00471
-## # … with 115 more rows, and 1 more variable: .config &lt;chr&gt;</code></pre>
+##    cost_complexity tree_depth min_n .metric  .esti…¹  mean     n std_err .config
+##              &lt;dbl&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+##  1        0.0001            3    10 accuracy binary  0.716   101 0.00374 Prepro…
+##  2        0.000562          3    10 accuracy binary  0.716   101 0.00374 Prepro…
+##  3        0.00316           3    10 accuracy binary  0.716   101 0.00374 Prepro…
+##  4        0.0178            3    10 accuracy binary  0.715   101 0.00365 Prepro…
+##  5        0.1               3    10 accuracy binary  0.697   101 0.00474 Prepro…
+##  6        0.0001            4    10 accuracy binary  0.718   101 0.00449 Prepro…
+##  7        0.000562          4    10 accuracy binary  0.718   101 0.00449 Prepro…
+##  8        0.00316           4    10 accuracy binary  0.718   101 0.00449 Prepro…
+##  9        0.0178            4    10 accuracy binary  0.724   101 0.00405 Prepro…
+## 10        0.1               4    10 accuracy binary  0.697   101 0.00471 Prepro…
+## # … with 115 more rows, and abbreviated variable name ¹​.estimator
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>Using <code>autoplot()</code> shows which values of <code>cost_complexity</code> appear to produce the highest accuracy.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="evaluate-the-model-1.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="evaluate-the-model-1.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/plot_tuning_results_class-1.png" width="672" /></p>
 <p>We can now select the best performing model with <code>select_best()</code>, finalize the workflow by updating the value of <code>cost_complexity, tree_depth, and min_n</code> and fit the model on the full training data set.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="evaluate-the-model-1.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select best model</span></span>
-<span id="cb232-2"><a href="evaluate-the-model-1.html#cb232-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res)</span>
-<span id="cb232-3"><a href="evaluate-the-model-1.html#cb232-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb232-4"><a href="evaluate-the-model-1.html#cb232-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model with best model hyperparameters</span></span>
-<span id="cb232-5"><a href="evaluate-the-model-1.html#cb232-5" aria-hidden="true" tabindex="-1"></a>class_tree_final <span class="ot">&lt;-</span> <span class="fu">finalize_model</span>(tree_spec, best_model)</span>
-<span id="cb232-6"><a href="evaluate-the-model-1.html#cb232-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb232-7"><a href="evaluate-the-model-1.html#cb232-7" aria-hidden="true" tabindex="-1"></a><span class="co"># refit training dataset with best model hyperparameters</span></span>
-<span id="cb232-8"><a href="evaluate-the-model-1.html#cb232-8" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(class_tree_final, High <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span>
-<span id="cb232-9"><a href="evaluate-the-model-1.html#cb232-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb232-10"><a href="evaluate-the-model-1.html#cb232-10" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="evaluate-the-model-1.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select best model</span></span>
+<span id="cb233-2"><a href="evaluate-the-model-1.html#cb233-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res)</span>
+<span id="cb233-3"><a href="evaluate-the-model-1.html#cb233-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-4"><a href="evaluate-the-model-1.html#cb233-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model with best model hyperparameters</span></span>
+<span id="cb233-5"><a href="evaluate-the-model-1.html#cb233-5" aria-hidden="true" tabindex="-1"></a>class_tree_final <span class="ot">&lt;-</span> <span class="fu">finalize_model</span>(tree_spec, best_model)</span>
+<span id="cb233-6"><a href="evaluate-the-model-1.html#cb233-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-7"><a href="evaluate-the-model-1.html#cb233-7" aria-hidden="true" tabindex="-1"></a><span class="co"># refit training dataset with best model hyperparameters</span></span>
+<span id="cb233-8"><a href="evaluate-the-model-1.html#cb233-8" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(class_tree_final, High <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span>
+<span id="cb233-9"><a href="evaluate-the-model-1.html#cb233-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-10"><a href="evaluate-the-model-1.html#cb233-10" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## n= 300 

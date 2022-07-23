@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -596,7 +596,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:dials&#39;:
 ## 
 ##     prune</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="fitting-classification-trees.html#cb198-1" aria-hidden="true" tabindex="-1"></a>Carseats</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="fitting-classification-trees.html#cb199-1" aria-hidden="true" tabindex="-1"></a>Carseats</span></code></pre></div>
 <pre><code>##     Sales CompPrice Income Advertising Population Price ShelveLoc Age Education
 ## 1    9.50       138     73          11        276   120       Bad  42        17
 ## 2   11.22       111     48          16        260    83      Good  65        10
@@ -1399,7 +1399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 398   Yes Yes
 ## 399   Yes Yes
 ## 400   Yes Yes</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="fitting-classification-trees.html#cb200-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="fitting-classification-trees.html#cb201-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(Carseats)</span></code></pre></div>
 <table>
 <caption>(#tab:skim_dataset)Data summary</caption>
 <tbody>
@@ -1605,9 +1605,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>We create a new variable <code>High</code> to denote if <code>Sales &lt;= 8</code>, then the <code>Sales</code> predictor is removed as it is a perfect predictor of <code>High</code>.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="fitting-classification-trees.html#cb201-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Carseats) <span class="sc">%&gt;%</span></span>
-<span id="cb201-2"><a href="fitting-classification-trees.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">High =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(Sales <span class="sc">&gt;</span> <span class="dv">8</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb201-3"><a href="fitting-classification-trees.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Sales)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="fitting-classification-trees.html#cb202-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Carseats) <span class="sc">%&gt;%</span></span>
+<span id="cb202-2"><a href="fitting-classification-trees.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">High =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(Sales <span class="sc">&gt;</span> <span class="dv">8</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb202-3"><a href="fitting-classification-trees.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Sales)</span></code></pre></div>
 </div>
             </section>
 

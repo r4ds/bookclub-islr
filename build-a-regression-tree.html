@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,17 +590,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="build-a-regression-tree" class="section level2 hasAnchor" number="8.17">
 <h2><span class="header-section-number">8.17</span> Build a regression tree<a href="build-a-regression-tree.html#build-a-regression-tree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can reuse <code>class_tree_spec</code> as a base for the regression decision tree specification.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="build-a-regression-tree.html#cb247-1" aria-hidden="true" tabindex="-1"></a>reg_tree_spec <span class="ot">&lt;-</span> class_tree_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb247-2"><a href="build-a-regression-tree.html#cb247-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="build-a-regression-tree.html#cb248-1" aria-hidden="true" tabindex="-1"></a>reg_tree_spec <span class="ot">&lt;-</span> class_tree_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb248-2"><a href="build-a-regression-tree.html#cb248-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
 <p>We are using the <code>Carseats</code> dataset. Let’s do the validation split.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="build-a-regression-tree.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1010</span>)</span>
-<span id="cb248-2"><a href="build-a-regression-tree.html#cb248-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Carseats)</span>
-<span id="cb248-3"><a href="build-a-regression-tree.html#cb248-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-4"><a href="build-a-regression-tree.html#cb248-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
-<span id="cb248-5"><a href="build-a-regression-tree.html#cb248-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="build-a-regression-tree.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1010</span>)</span>
+<span id="cb249-2"><a href="build-a-regression-tree.html#cb249-2" aria-hidden="true" tabindex="-1"></a>carseats_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Carseats)</span>
+<span id="cb249-3"><a href="build-a-regression-tree.html#cb249-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-4"><a href="build-a-regression-tree.html#cb249-4" aria-hidden="true" tabindex="-1"></a>carseats_train <span class="ot">&lt;-</span> <span class="fu">training</span>(carseats_split)</span>
+<span id="cb249-5"><a href="build-a-regression-tree.html#cb249-5" aria-hidden="true" tabindex="-1"></a>carseats_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(carseats_split)</span></code></pre></div>
 <p>Fit the decision tree regression model</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="build-a-regression-tree.html#cb249-1" aria-hidden="true" tabindex="-1"></a>reg_tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(reg_tree_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span>
-<span id="cb249-2"><a href="build-a-regression-tree.html#cb249-2" aria-hidden="true" tabindex="-1"></a>reg_tree_fit</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="build-a-regression-tree.html#cb250-1" aria-hidden="true" tabindex="-1"></a>reg_tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(reg_tree_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span>
+<span id="cb250-2"><a href="build-a-regression-tree.html#cb250-2" aria-hidden="true" tabindex="-1"></a>reg_tree_fit</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## n= 300 

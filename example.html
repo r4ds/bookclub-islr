@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,11 +591,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.27</span> Example<a href="example.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here, we apply bagging and random forests to the <code>Carseats</code> data set. We will be using the randomForest package as the engine. A bagging model is the same as a random forest where mtry is equal to the number of predictors. We can specify the <code>mtry</code> to be .cols() which means that the number of columns in the predictor matrix is used. This is useful if you want to make the specification more general and usable to many different data sets. .cols() is one of many <code>descriptors</code> in the <code>parsnip</code> package. We also set <code>importance = TRUE</code> in set_engine() to tell the engine to save the information regarding variable importance. This is needed for this engine if we want to use the <code>vip</code> package later.</p>
 <p>For a more detailed explanation of <code>bagging</code> and its counterpart <code>boosting</code>, read this <a href="https://quantdare.com/what-is-the-difference-between-bagging-and-boosting/">link</a></p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="example.html#cb270-1" aria-hidden="true" tabindex="-1"></a>bagging_spec <span class="ot">&lt;-</span> <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="fu">.cols</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb270-2"><a href="example.html#cb270-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;randomForest&quot;</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb270-3"><a href="example.html#cb270-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="example.html#cb271-1" aria-hidden="true" tabindex="-1"></a>bagging_spec <span class="ot">&lt;-</span> <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="fu">.cols</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb271-2"><a href="example.html#cb271-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;randomForest&quot;</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb271-3"><a href="example.html#cb271-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
 <p>Fit the model.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="example.html#cb271-1" aria-hidden="true" tabindex="-1"></a>bagging_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(bagging_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="example.html#cb272-1" aria-hidden="true" tabindex="-1"></a>bagging_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(bagging_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
 </div>
             </section>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -598,10 +598,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>where <span class="math inline">\(Y\)</span> is the dependent variable (i.e., what we are trying to predict), <span class="math inline">\(E(Y)\)</span> denotes the expected value, and <span class="math inline">\(g(Y)\)</span> denotes the link function that links the expected value to the predictor variables <span class="math inline">\(x_1,…,x_p\)</span>.</p>
 <p>The terms <span class="math inline">\(s_1(x_1),…,s_p(x_p)\)</span> denote smooth, <em>nonparametric</em> functions. Note that, in the context of regression models, the terminology <em>nonparametric</em> means that the shape of predictor functions are fully determined by the data as opposed to <em>parametric</em> functions that are defined by a typically small set of parameters. This can allow for more flexible estimation of the underlying predictive patterns without knowing upfront what these patterns look like.</p>
 <p>The <code>mgcv</code> version:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="generalized-additive-models.html#cb183-1" aria-hidden="true" tabindex="-1"></a>gam.m3 <span class="ot">&lt;-</span></span>
-<span id="cb183-2"><a href="generalized-additive-models.html#cb183-2" aria-hidden="true" tabindex="-1"></a>  mgcv<span class="sc">::</span><span class="fu">gam</span>(wage <span class="sc">~</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(year), <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(age), <span class="at">k =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage)</span>
-<span id="cb183-3"><a href="generalized-additive-models.html#cb183-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-4"><a href="generalized-additive-models.html#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam.m3)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="generalized-additive-models.html#cb184-1" aria-hidden="true" tabindex="-1"></a>gam.m3 <span class="ot">&lt;-</span></span>
+<span id="cb184-2"><a href="generalized-additive-models.html#cb184-2" aria-hidden="true" tabindex="-1"></a>  mgcv<span class="sc">::</span><span class="fu">gam</span>(wage <span class="sc">~</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(year), <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(age), <span class="at">k =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage)</span>
+<span id="cb184-3"><a href="generalized-additive-models.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-4"><a href="generalized-additive-models.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam.m3)</span></code></pre></div>
 <pre><code>## 
 ## Family: gaussian 
 ## Link function: identity 
@@ -629,25 +629,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## R-sq.(adj) =  0.289   Deviance explained = 29.1%
 ## GCV = 1241.3  Scale est. = 1237.4    n = 3000</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="generalized-additive-models.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb185-2"><a href="generalized-additive-models.html#cb185-2" aria-hidden="true" tabindex="-1"></a>mgcv<span class="sc">::</span><span class="fu">plot.gam</span>(</span>
-<span id="cb185-3"><a href="generalized-additive-models.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  gam.m3,</span>
-<span id="cb185-4"><a href="generalized-additive-models.html#cb185-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb185-5"><a href="generalized-additive-models.html#cb185-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">all.terms =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb185-6"><a href="generalized-additive-models.html#cb185-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb185-7"><a href="generalized-additive-models.html#cb185-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade.col =</span> <span class="dv">2</span>,</span>
-<span id="cb185-8"><a href="generalized-additive-models.html#cb185-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb185-9"><a href="generalized-additive-models.html#cb185-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
-<span id="cb185-10"><a href="generalized-additive-models.html#cb185-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="generalized-additive-models.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb186-2"><a href="generalized-additive-models.html#cb186-2" aria-hidden="true" tabindex="-1"></a>mgcv<span class="sc">::</span><span class="fu">plot.gam</span>(</span>
+<span id="cb186-3"><a href="generalized-additive-models.html#cb186-3" aria-hidden="true" tabindex="-1"></a>  gam.m3,</span>
+<span id="cb186-4"><a href="generalized-additive-models.html#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb186-5"><a href="generalized-additive-models.html#cb186-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">all.terms =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb186-6"><a href="generalized-additive-models.html#cb186-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb186-7"><a href="generalized-additive-models.html#cb186-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade.col =</span> <span class="dv">2</span>,</span>
+<span id="cb186-8"><a href="generalized-additive-models.html#cb186-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb186-9"><a href="generalized-additive-models.html#cb186-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
+<span id="cb186-10"><a href="generalized-additive-models.html#cb186-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chapter7-5-1-1.png" width="672" /></p>
 <p>A comparable model, built with lm and natural cubic splines, plotted as the GAM contributions to the <code>wage</code>:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="generalized-additive-models.html#cb186-1" aria-hidden="true" tabindex="-1"></a>gam<span class="sc">::</span><span class="fu">plot.Gam</span>(</span>
-<span id="cb186-2"><a href="generalized-additive-models.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(wage <span class="sc">~</span> <span class="fu">ns</span>(year, <span class="at">df =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">ns</span>(age, <span class="at">df =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage),</span>
-<span id="cb186-3"><a href="generalized-additive-models.html#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb186-4"><a href="generalized-additive-models.html#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">rugplot =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb186-5"><a href="generalized-additive-models.html#cb186-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb186-6"><a href="generalized-additive-models.html#cb186-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
-<span id="cb186-7"><a href="generalized-additive-models.html#cb186-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="generalized-additive-models.html#cb187-1" aria-hidden="true" tabindex="-1"></a>gam<span class="sc">::</span><span class="fu">plot.Gam</span>(</span>
+<span id="cb187-2"><a href="generalized-additive-models.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(wage <span class="sc">~</span> <span class="fu">ns</span>(year, <span class="at">df =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">ns</span>(age, <span class="at">df =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage),</span>
+<span id="cb187-3"><a href="generalized-additive-models.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb187-4"><a href="generalized-additive-models.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">rugplot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb187-5"><a href="generalized-additive-models.html#cb187-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb187-6"><a href="generalized-additive-models.html#cb187-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
+<span id="cb187-7"><a href="generalized-additive-models.html#cb187-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chapter7-5-2-1.png" width="672" /><img src="bookclub-islr_files/figure-html/chapter7-5-2-2.png" width="672" /><img src="bookclub-islr_files/figure-html/chapter7-5-2-3.png" width="672" /></p>
 <h4>
 Why Use GAMs?
@@ -665,10 +665,10 @@ Fitting GAMs in R
 <p>The two main packages in R that can be used to fit generalized additive models are <code>gam</code> and <code>mgcv</code>. The <code>gam</code> package was written by Trevor Hastie and is more or less frequentist. The <code>mgcv</code> package was written by Simon Wood, and, while it follows the same framework in many ways, it is much more general because it considers GAM to be any penalized GLM (and Bayesian). The differences are described in detail in the documentation for <code>mgcv</code>.</p>
 <p>I discovered that <code>gam</code> and <code>mgcv</code> do not work well when loaded at the same time. Restart the R session if you want to switch between the two packages – detaching one of the packages is not sufficient.</p>
 <p>An example of a classification GAM model:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="generalized-additive-models.html#cb187-1" aria-hidden="true" tabindex="-1"></a>gam.lr <span class="ot">&lt;-</span></span>
-<span id="cb187-2"><a href="generalized-additive-models.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  mgcv<span class="sc">::</span><span class="fu">gam</span>(<span class="fu">I</span>(wage <span class="sc">&gt;</span> <span class="dv">250</span>) <span class="sc">~</span> <span class="fu">as.numeric</span>(year) <span class="sc">+</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(age), <span class="at">k =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage)</span>
-<span id="cb187-3"><a href="generalized-additive-models.html#cb187-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb187-4"><a href="generalized-additive-models.html#cb187-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam.lr)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="generalized-additive-models.html#cb188-1" aria-hidden="true" tabindex="-1"></a>gam.lr <span class="ot">&lt;-</span></span>
+<span id="cb188-2"><a href="generalized-additive-models.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  mgcv<span class="sc">::</span><span class="fu">gam</span>(<span class="fu">I</span>(wage <span class="sc">&gt;</span> <span class="dv">250</span>) <span class="sc">~</span> <span class="fu">as.numeric</span>(year) <span class="sc">+</span> <span class="fu">s</span>(<span class="fu">as.numeric</span>(age), <span class="at">k =</span> <span class="dv">5</span>) <span class="sc">+</span> education, <span class="at">data =</span> Wage)</span>
+<span id="cb188-3"><a href="generalized-additive-models.html#cb188-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-4"><a href="generalized-additive-models.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam.lr)</span></code></pre></div>
 <pre><code>## 
 ## Family: gaussian 
 ## Link function: identity 
@@ -696,16 +696,16 @@ Fitting GAMs in R
 ## 
 ## R-sq.(adj) =  0.0452   Deviance explained = 4.73%
 ## GCV = 0.024548  Scale est. = 0.024488  n = 3000</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="generalized-additive-models.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb189-2"><a href="generalized-additive-models.html#cb189-2" aria-hidden="true" tabindex="-1"></a>mgcv<span class="sc">::</span><span class="fu">plot.gam</span>(</span>
-<span id="cb189-3"><a href="generalized-additive-models.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  gam.lr,</span>
-<span id="cb189-4"><a href="generalized-additive-models.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb189-5"><a href="generalized-additive-models.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">all.terms =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb189-6"><a href="generalized-additive-models.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb189-7"><a href="generalized-additive-models.html#cb189-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade.col =</span> <span class="dv">2</span>,</span>
-<span id="cb189-8"><a href="generalized-additive-models.html#cb189-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb189-9"><a href="generalized-additive-models.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
-<span id="cb189-10"><a href="generalized-additive-models.html#cb189-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="generalized-additive-models.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb190-2"><a href="generalized-additive-models.html#cb190-2" aria-hidden="true" tabindex="-1"></a>mgcv<span class="sc">::</span><span class="fu">plot.gam</span>(</span>
+<span id="cb190-3"><a href="generalized-additive-models.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  gam.lr,</span>
+<span id="cb190-4"><a href="generalized-additive-models.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb190-5"><a href="generalized-additive-models.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">all.terms =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb190-6"><a href="generalized-additive-models.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb190-7"><a href="generalized-additive-models.html#cb190-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade.col =</span> <span class="dv">2</span>,</span>
+<span id="cb190-8"><a href="generalized-additive-models.html#cb190-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rug =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb190-9"><a href="generalized-additive-models.html#cb190-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">0</span></span>
+<span id="cb190-10"><a href="generalized-additive-models.html#cb190-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chapter7-5-3-1.png" width="672" /></p>
 </div>
             </section>

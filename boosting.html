@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,11 +590,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="boosting" class="section level2 hasAnchor" number="8.33">
 <h2><span class="header-section-number">8.33</span> Boosting<a href="boosting.html#boosting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will now fit a boosted tree model. The <code>xgboost</code> package has a good implementation of boosted trees. It has many parameters to tune and we know that setting trees too high can lead to <strong>overfitting</strong>. Nevertheless, let us try fitting a boosted tree. We set <code>tree = 5000</code> to grow 5000 trees with a maximal depth of 4 by setting <code>tree_depth = 4</code>.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="boosting.html#cb286-1" aria-hidden="true" tabindex="-1"></a>boost_spec <span class="ot">&lt;-</span> <span class="fu">boost_tree</span>(<span class="at">trees =</span> <span class="dv">5000</span>, <span class="at">tree_depth =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb286-2"><a href="boosting.html#cb286-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;xgboost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb286-3"><a href="boosting.html#cb286-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="boosting.html#cb287-1" aria-hidden="true" tabindex="-1"></a>boost_spec <span class="ot">&lt;-</span> <span class="fu">boost_tree</span>(<span class="at">trees =</span> <span class="dv">5000</span>, <span class="at">tree_depth =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb287-2"><a href="boosting.html#cb287-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;xgboost&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb287-3"><a href="boosting.html#cb287-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
 <p>Fit the model.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="boosting.html#cb287-1" aria-hidden="true" tabindex="-1"></a>boost_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(boost_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="boosting.html#cb288-1" aria-hidden="true" tabindex="-1"></a>boost_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(boost_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
 </div>
             </section>
 

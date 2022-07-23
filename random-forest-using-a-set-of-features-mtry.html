@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,11 +590,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="random-forest-using-a-set-of-features-mtry" class="section level2 hasAnchor" number="8.30">
 <h2><span class="header-section-number">8.30</span> Random Forest using a set of features (mtry)<a href="random-forest-using-a-set-of-features-mtry.html#random-forest-using-a-set-of-features-mtry" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>By default, <code>randomForest()</code> p / 3 variables when building a random forest of regression trees, and sqrt(p) variables when building a random forest of classification trees. Here we use <code>mtry = 6</code>, <code>trees = 2000</code> and <code>min_n = 10</code>.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="random-forest-using-a-set-of-features-mtry.html#cb278-1" aria-hidden="true" tabindex="-1"></a>rf_spec <span class="ot">&lt;-</span> <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="dv">6</span>, <span class="at">trees =</span> <span class="dv">2000</span>, <span class="at">min_n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb278-2"><a href="random-forest-using-a-set-of-features-mtry.html#cb278-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;randomForest&quot;</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb278-3"><a href="random-forest-using-a-set-of-features-mtry.html#cb278-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="random-forest-using-a-set-of-features-mtry.html#cb279-1" aria-hidden="true" tabindex="-1"></a>rf_spec <span class="ot">&lt;-</span> <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="dv">6</span>, <span class="at">trees =</span> <span class="dv">2000</span>, <span class="at">min_n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb279-2"><a href="random-forest-using-a-set-of-features-mtry.html#cb279-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;randomForest&quot;</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb279-3"><a href="random-forest-using-a-set-of-features-mtry.html#cb279-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span></code></pre></div>
 <p>Fit the model</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="random-forest-using-a-set-of-features-mtry.html#cb279-1" aria-hidden="true" tabindex="-1"></a>rf_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(rf_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="random-forest-using-a-set-of-features-mtry.html#cb280-1" aria-hidden="true" tabindex="-1"></a>rf_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(rf_spec, Sales <span class="sc">~</span> ., <span class="at">data =</span> carseats_train)</span></code></pre></div>
 </div>
             </section>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -589,13 +589,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="load-libraries-and-datasets" class="section level2 hasAnchor" number="13.9">
 <h2><span class="header-section-number">13.9</span> Load libraries and datasets<a href="load-libraries-and-datasets.html#load-libraries-and-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="load-libraries-and-datasets.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb465-2"><a href="load-libraries-and-datasets.html#cb465-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rafalib)</span></code></pre></div>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="load-libraries-and-datasets.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(c(&quot;genefilter&quot;, &quot;qvalue&quot;))</span></span>
-<span id="cb466-2"><a href="load-libraries-and-datasets.html#cb466-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter) <span class="co"># rowttests function</span></span>
-<span id="cb466-3"><a href="load-libraries-and-datasets.html#cb466-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qvalue) <span class="co"># to calculate a qvalue and compare with p.adjust(...method=&quot;fdr&quot;)</span></span></code></pre></div>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="load-libraries-and-datasets.html#cb467-1" aria-hidden="true" tabindex="-1"></a>geneExpression <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_geneExpression.rds&quot;</span>)</span>
-<span id="cb467-2"><a href="load-libraries-and-datasets.html#cb467-2" aria-hidden="true" tabindex="-1"></a>sampleInfo<span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_sampleInfo.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="load-libraries-and-datasets.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb467-2"><a href="load-libraries-and-datasets.html#cb467-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rafalib)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="load-libraries-and-datasets.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(c(&quot;genefilter&quot;, &quot;qvalue&quot;))</span></span>
+<span id="cb468-2"><a href="load-libraries-and-datasets.html#cb468-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter) <span class="co"># rowttests function</span></span>
+<span id="cb468-3"><a href="load-libraries-and-datasets.html#cb468-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qvalue) <span class="co"># to calculate a qvalue and compare with p.adjust(...method=&quot;fdr&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="load-libraries-and-datasets.html#cb469-1" aria-hidden="true" tabindex="-1"></a>geneExpression <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_geneExpression.rds&quot;</span>)</span>
+<span id="cb469-2"><a href="load-libraries-and-datasets.html#cb469-2" aria-hidden="true" tabindex="-1"></a>sampleInfo<span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/13_sampleInfo.rds&quot;</span>)</span></code></pre></div>
 </div>
             </section>
 

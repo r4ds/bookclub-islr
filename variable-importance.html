@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,11 +590,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="variable-importance" class="section level2 hasAnchor" number="8.12">
 <h2><span class="header-section-number">8.12</span> Variable importance<a href="variable-importance.html#variable-importance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>broomstick</code> package (<a href="https://github.com/njtierney/broomstick/" class="uri">https://github.com/njtierney/broomstick/</a>) enables the analyst to extract the decision tree variable importance from the fitted model.</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="variable-importance.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb235-2"><a href="variable-importance.html#cb235-2" aria-hidden="true" tabindex="-1"></a>broomstick<span class="sc">::</span><span class="fu">tidy</span>(class_tree_final_fit<span class="sc">$</span>fit) <span class="sc">%&gt;%</span> </span>
-<span id="cb235-3"><a href="variable-importance.html#cb235-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">variable =</span> variable <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_rev</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb235-4"><a href="variable-importance.html#cb235-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> variable, <span class="at">x =</span> importance)) <span class="sc">+</span> </span>
-<span id="cb235-5"><a href="variable-importance.html#cb235-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="variable-importance.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb236-2"><a href="variable-importance.html#cb236-2" aria-hidden="true" tabindex="-1"></a>broomstick<span class="sc">::</span><span class="fu">tidy</span>(class_tree_final_fit<span class="sc">$</span>fit) <span class="sc">%&gt;%</span> </span>
+<span id="cb236-3"><a href="variable-importance.html#cb236-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">variable =</span> variable <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_rev</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb236-4"><a href="variable-importance.html#cb236-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> variable, <span class="at">x =</span> importance)) <span class="sc">+</span> </span>
+<span id="cb236-5"><a href="variable-importance.html#cb236-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/variable_importance_class-1.png" width="672" /></p>
 </div>
             </section>

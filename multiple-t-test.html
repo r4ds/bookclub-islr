@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,22 +590,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-t-test" class="section level2 hasAnchor" number="13.10">
 <h2><span class="header-section-number">13.10</span> Multiple T-test<a href="multiple-t-test.html#multiple-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For calculating the t-test for all the genes in the <strong>geneExpression</strong> matrix, we use the <code>rowttests()</code> function from the {genefilter} package.</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="multiple-t-test.html#cb468-1" aria-hidden="true" tabindex="-1"></a>?rowttests</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="multiple-t-test.html#cb470-1" aria-hidden="true" tabindex="-1"></a>?rowttests</span></code></pre></div>
 <p>We define the <strong>NULL Hypothesis</strong> with a vector of the same length of the unique elements in the dataset.
 If our dataset is made of m unique elements and m0 are the number of positives, we can build a binary vector to use in the calculation of the pvalues.</p>
 <p>Here is an example on how to make a nullHypothesis vector.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="multiple-t-test.html#cb469-1" aria-hidden="true" tabindex="-1"></a>nullHypothesis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">TRUE</span>,m0), <span class="fu">rep</span>(<span class="cn">FALSE</span>,m<span class="sc">-</span>m0))</span>
-<span id="cb469-2"><a href="multiple-t-test.html#cb469-2" aria-hidden="true" tabindex="-1"></a>null_hypothesis <span class="ot">&lt;-</span> <span class="fu">factor</span>(nullHypothesis, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;TRUE&quot;</span>,<span class="st">&quot;FALSE&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="multiple-t-test.html#cb471-1" aria-hidden="true" tabindex="-1"></a>nullHypothesis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">TRUE</span>,m0), <span class="fu">rep</span>(<span class="cn">FALSE</span>,m<span class="sc">-</span>m0))</span>
+<span id="cb471-2"><a href="multiple-t-test.html#cb471-2" aria-hidden="true" tabindex="-1"></a>null_hypothesis <span class="ot">&lt;-</span> <span class="fu">factor</span>(nullHypothesis, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;TRUE&quot;</span>,<span class="st">&quot;FALSE&quot;</span>))</span></code></pre></div>
 <p>In our case study we use the <strong>geneExpression</strong> matrix with genes expression data and the <strong>sampleInfo</strong> for retrieving the groups of positives and negatives within the dataset.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="multiple-t-test.html#cb470-1" aria-hidden="true" tabindex="-1"></a>null_hypothesis <span class="ot">&lt;-</span> <span class="fu">factor</span>(sampleInfo<span class="sc">$</span>group)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="multiple-t-test.html#cb472-1" aria-hidden="true" tabindex="-1"></a>null_hypothesis <span class="ot">&lt;-</span> <span class="fu">factor</span>(sampleInfo<span class="sc">$</span>group)</span></code></pre></div>
 <p>Have a look a the dimentsion of the geneExpression matrix:</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="multiple-t-test.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(geneExpression)</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="multiple-t-test.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(geneExpression)</span></code></pre></div>
 <pre><code>## [1] 8793   24</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="multiple-t-test.html#cb473-1" aria-hidden="true" tabindex="-1"></a>geneExpression<span class="sc">%&gt;%</span></span>
-<span id="cb473-2"><a href="multiple-t-test.html#cb473-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb473-3"><a href="multiple-t-test.html#cb473-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb473-4"><a href="multiple-t-test.html#cb473-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gene,<span class="at">sort=</span>T)<span class="sc">%&gt;%</span></span>
-<span id="cb473-5"><a href="multiple-t-test.html#cb473-5" aria-hidden="true" tabindex="-1"></a>  head</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="multiple-t-test.html#cb475-1" aria-hidden="true" tabindex="-1"></a>geneExpression<span class="sc">%&gt;%</span></span>
+<span id="cb475-2"><a href="multiple-t-test.html#cb475-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb475-3"><a href="multiple-t-test.html#cb475-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;gene&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb475-4"><a href="multiple-t-test.html#cb475-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gene,<span class="at">sort=</span>T)<span class="sc">%&gt;%</span></span>
+<span id="cb475-5"><a href="multiple-t-test.html#cb475-5" aria-hidden="true" tabindex="-1"></a>  head</span></code></pre></div>
 <pre><code>##        gene n
 ## 1 1007_s_at 1
 ## 2   1053_at 1
@@ -614,9 +614,9 @@ If our dataset is made of m unique elements and m0 are the number of positives, 
 ## 5 1255_g_at 1
 ## 6   1294_at 1</code></pre>
 <p>Statistics, difference in mean and p.value:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="multiple-t-test.html#cb475-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,null_hypothesis)</span>
-<span id="cb475-2"><a href="multiple-t-test.html#cb475-2" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,<span class="fu">factor</span>(<span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="dv">24</span>)))</span>
-<span id="cb475-3"><a href="multiple-t-test.html#cb475-3" aria-hidden="true" tabindex="-1"></a>results<span class="sc">%&gt;%</span>head;results2<span class="sc">%&gt;%</span>head</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="multiple-t-test.html#cb477-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,null_hypothesis)</span>
+<span id="cb477-2"><a href="multiple-t-test.html#cb477-2" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,<span class="fu">factor</span>(<span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="dv">24</span>)))</span>
+<span id="cb477-3"><a href="multiple-t-test.html#cb477-3" aria-hidden="true" tabindex="-1"></a>results<span class="sc">%&gt;%</span>head;results2<span class="sc">%&gt;%</span>head</span></code></pre></div>
 <pre><code>##             statistic           dm    p.value
 ## 1007_s_at -2.11988375 -0.186257601 0.04553344
 ## 1053_at    2.26498355  0.226080913 0.03370683
@@ -632,35 +632,35 @@ If our dataset is made of m unique elements and m0 are the number of positives, 
 ## 1255_g_at  148.2109 3.221102 8.729094e-36
 ## 1294_at    161.7306 7.277389 1.174338e-36</code></pre>
 <p>The results is 1383 genes have a pvalue lower than 5%</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="multiple-t-test.html#cb478-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,null_hypothesis)</span>
-<span id="cb478-2"><a href="multiple-t-test.html#cb478-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="multiple-t-test.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="multiple-t-test.html#cb480-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rowttests</span>(geneExpression,null_hypothesis)</span>
+<span id="cb480-2"><a href="multiple-t-test.html#cb480-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="multiple-t-test.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1572842</code></pre>
 <div id="fwer-family-wise-error-rate" class="section level3 hasAnchor" number="13.10.1">
 <h3><span class="header-section-number">13.10.1</span> FWER Family Wise Error Rate<a href="multiple-t-test.html#fwer-family-wise-error-rate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What is the <strong>probability to make at least 1 type I error</strong>?</p>
 <p>First consider the nuber of hypothesis which is the number of genes in our case:</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="multiple-t-test.html#cb481-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">length</span>(results<span class="sc">$</span>p.value) </span>
-<span id="cb481-2"><a href="multiple-t-test.html#cb481-2" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="multiple-t-test.html#cb483-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">length</span>(results<span class="sc">$</span>p.value) </span>
+<span id="cb483-2"><a href="multiple-t-test.html#cb483-2" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
 <pre><code>## [1] 8793</code></pre>
 <p>Then calculate the FWER:</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="multiple-t-test.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="fl">-0.05</span>)<span class="sc">^</span>m</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="multiple-t-test.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="fl">-0.05</span>)<span class="sc">^</span>m</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>So, the probability to make at least one type I error is 1!
 if we set <span class="math inline">\(\alpha\)</span>:
 <span class="math display">\[P(\text{at least one rejection})=1−(1−k)^m=5\%\]</span>
 <span class="math display">\[k=1-0.95^{\frac{1}{m}}\approx 0.000005\]</span></p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="multiple-t-test.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="fl">-0.95</span><span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>m)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="multiple-t-test.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="fl">-0.95</span><span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>m)</span></code></pre></div>
 <pre><code>## [1] 5.833407e-06</code></pre>
 <p>What we need to do next is to adjust this FWER to a suitable threshold applying some corrections, such as the <strong>Bonferroni</strong> correction procedure sets <span class="math inline">\(k=\alpha/m\)</span>:</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="multiple-t-test.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span>m)<span class="sc">^</span>m</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="multiple-t-test.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span>m)<span class="sc">^</span>m</span></code></pre></div>
 <pre><code>## [1] 0.04877071</code></pre>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="multiple-t-test.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.05</span><span class="sc">/</span>m</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="multiple-t-test.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.05</span><span class="sc">/</span>m</span></code></pre></div>
 <pre><code>## [1] 5.686341e-06</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="multiple-t-test.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="multiple-t-test.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>Now, the number of hypothesis with a pvalue lower than 5% are 10 and the FWER adjusted is:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="multiple-t-test.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="multiple-t-test.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(results<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span></code></pre></div>
 <pre><code>## [1] 0.001137268</code></pre>
 </div>
 <div id="fdr-false-discovery-rate" class="section level3 hasAnchor" number="13.10.2">
@@ -673,32 +673,32 @@ if we set <span class="math inline">\(\alpha\)</span>:
 <ol style="list-style-type: decimal">
 <li>First method: using <code>p.adjust()</code> function from {stats} package</li>
 </ol>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="multiple-t-test.html#cb495-1" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> results<span class="sc">$</span>p.value</span>
-<span id="cb495-2"><a href="multiple-t-test.html#cb495-2" aria-hidden="true" tabindex="-1"></a>pvals<span class="ot">&lt;-</span><span class="fu">sort</span>(pvals)</span>
-<span id="cb495-3"><a href="multiple-t-test.html#cb495-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb495-4"><a href="multiple-t-test.html#cb495-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to find a q-value with the false discovery rate method</span></span>
-<span id="cb495-5"><a href="multiple-t-test.html#cb495-5" aria-hidden="true" tabindex="-1"></a>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb495-6"><a href="multiple-t-test.html#cb495-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb495-7"><a href="multiple-t-test.html#cb495-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(fdr<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="multiple-t-test.html#cb497-1" aria-hidden="true" tabindex="-1"></a>pvals <span class="ot">=</span> results<span class="sc">$</span>p.value</span>
+<span id="cb497-2"><a href="multiple-t-test.html#cb497-2" aria-hidden="true" tabindex="-1"></a>pvals<span class="ot">&lt;-</span><span class="fu">sort</span>(pvals)</span>
+<span id="cb497-3"><a href="multiple-t-test.html#cb497-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-4"><a href="multiple-t-test.html#cb497-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to find a q-value with the false discovery rate method</span></span>
+<span id="cb497-5"><a href="multiple-t-test.html#cb497-5" aria-hidden="true" tabindex="-1"></a>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb497-6"><a href="multiple-t-test.html#cb497-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-7"><a href="multiple-t-test.html#cb497-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(fdr<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 13</code></pre>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="multiple-t-test.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fdr<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="multiple-t-test.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fdr<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 0.001478449</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Second method: using the <code>qvalue()</code> function from {qvalue} package</li>
 </ol>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="multiple-t-test.html#cb499-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> qvalue<span class="sc">::</span><span class="fu">qvalue</span>(pvals)</span></code></pre></div>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="multiple-t-test.html#cb500-1" aria-hidden="true" tabindex="-1"></a>qvals <span class="ot">&lt;-</span> res<span class="sc">$</span>qvalues</span>
-<span id="cb500-2"><a href="multiple-t-test.html#cb500-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(pvals,qvals)</span></span>
-<span id="cb500-3"><a href="multiple-t-test.html#cb500-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(qvals<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="multiple-t-test.html#cb501-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> qvalue<span class="sc">::</span><span class="fu">qvalue</span>(pvals)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="multiple-t-test.html#cb502-1" aria-hidden="true" tabindex="-1"></a>qvals <span class="ot">&lt;-</span> res<span class="sc">$</span>qvalues</span>
+<span id="cb502-2"><a href="multiple-t-test.html#cb502-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(pvals,qvals)</span></span>
+<span id="cb502-3"><a href="multiple-t-test.html#cb502-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(qvals<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 22</code></pre>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="multiple-t-test.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(qvals<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="multiple-t-test.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(qvals<span class="sc">&lt;</span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 0.00250199</code></pre>
 <p>The proportion of true null hypotheses:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="multiple-t-test.html#cb504-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>pi0</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="multiple-t-test.html#cb506-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>pi0</span></code></pre></div>
 <pre><code>## [1] 0.6695739</code></pre>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="multiple-t-test.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvals,<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">len=</span><span class="dv">21</span>))</span>
-<span id="cb506-2"><a href="multiple-t-test.html#cb506-2" aria-hidden="true" tabindex="-1"></a>expectedfreq <span class="ot">&lt;-</span> <span class="fu">length</span>(pvals)<span class="sc">/</span><span class="dv">20</span> <span class="co">#per bin</span></span>
-<span id="cb506-3"><a href="multiple-t-test.html#cb506-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span>expectedfreq<span class="sc">*</span><span class="fu">qvalue</span>(pvals)<span class="sc">$</span>pi0,<span class="at">col=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="multiple-t-test.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvals,<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">len=</span><span class="dv">21</span>))</span>
+<span id="cb508-2"><a href="multiple-t-test.html#cb508-2" aria-hidden="true" tabindex="-1"></a>expectedfreq <span class="ot">&lt;-</span> <span class="fu">length</span>(pvals)<span class="sc">/</span><span class="dv">20</span> <span class="co">#per bin</span></span>
+<span id="cb508-3"><a href="multiple-t-test.html#cb508-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span>expectedfreq<span class="sc">*</span><span class="fu">qvalue</span>(pvals)<span class="sc">$</span>pi0,<span class="at">col=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chunk51b-1.png" width="672" /></p>
 </div>
 </div>

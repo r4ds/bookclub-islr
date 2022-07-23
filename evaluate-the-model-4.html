@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,14 +590,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="evaluate-the-model-4" class="section level2 hasAnchor" number="8.28">
 <h2><span class="header-section-number">8.28</span> Evaluate the model<a href="evaluate-the-model-4.html#evaluate-the-model-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>… and we take a look at the testing performance (notice an improvement over the decision tree).</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="evaluate-the-model-4.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span></span>
-<span id="cb272-2"><a href="evaluate-the-model-4.html#cb272-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> Sales, <span class="at">estimate =</span> .pred)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="evaluate-the-model-4.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span></span>
+<span id="cb273-2"><a href="evaluate-the-model-4.html#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> Sales, <span class="at">estimate =</span> .pred)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric .estimator .estimate
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard       0.671</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="evaluate-the-model-4.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span></span>
-<span id="cb274-2"><a href="evaluate-the-model-4.html#cb274-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> Sales, <span class="at">estimate =</span> .pred)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="evaluate-the-model-4.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span></span>
+<span id="cb275-2"><a href="evaluate-the-model-4.html#cb275-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> Sales, <span class="at">estimate =</span> .pred)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric .estimator .estimate
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
@@ -605,10 +605,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Training RMSE: <strong>0.671</strong>
 Testing RMSE: <strong>1.35 (overfit)</strong></p>
 <p>We can also create a quick scatterplot between the true and predicted value to see if we can make any diagnostics.</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="evaluate-the-model-4.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span> </span>
-<span id="cb276-2"><a href="evaluate-the-model-4.html#cb276-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sales, .pred)) <span class="sc">+</span> </span>
-<span id="cb276-3"><a href="evaluate-the-model-4.html#cb276-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_abline</span>() <span class="sc">+</span> </span>
-<span id="cb276-4"><a href="evaluate-the-model-4.html#cb276-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="evaluate-the-model-4.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(bagging_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span> </span>
+<span id="cb277-2"><a href="evaluate-the-model-4.html#cb277-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sales, .pred)) <span class="sc">+</span> </span>
+<span id="cb277-3"><a href="evaluate-the-model-4.html#cb277-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_abline</span>() <span class="sc">+</span> </span>
+<span id="cb277-4"><a href="evaluate-the-model-4.html#cb277-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/rf_bagging_scatterplot_actual_pred-1.png" width="672" /></p>
 </div>
             </section>

@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,25 +590,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="grid-tuning-with-finetunerace_anova" class="section level2 hasAnchor" number="8.36">
 <h2><span class="header-section-number">8.36</span> Grid tuning with finetune::race_anova()<a href="grid-tuning-with-finetunerace_anova.html#grid-tuning-with-finetunerace_anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Tune the <code>xgboost</code> model with <code>race_anova()</code> to accelerate the tuning speed.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="grid-tuning-with-finetunerace_anova.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(finetune)</span></span>
-<span id="cb297-2"><a href="grid-tuning-with-finetunerace_anova.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb297-3"><a href="grid-tuning-with-finetunerace_anova.html#cb297-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(4242)</span></span>
-<span id="cb297-4"><a href="grid-tuning-with-finetunerace_anova.html#cb297-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb297-5"><a href="grid-tuning-with-finetunerace_anova.html#cb297-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tictoc::tic()</span></span>
-<span id="cb297-6"><a href="grid-tuning-with-finetunerace_anova.html#cb297-6" aria-hidden="true" tabindex="-1"></a><span class="co"># xgb_rs &lt;- </span></span>
-<span id="cb297-7"><a href="grid-tuning-with-finetunerace_anova.html#cb297-7" aria-hidden="true" tabindex="-1"></a><span class="co">#      tune_race_anova(</span></span>
-<span id="cb297-8"><a href="grid-tuning-with-finetunerace_anova.html#cb297-8" aria-hidden="true" tabindex="-1"></a><span class="co">#      xgb_wf, </span></span>
-<span id="cb297-9"><a href="grid-tuning-with-finetunerace_anova.html#cb297-9" aria-hidden="true" tabindex="-1"></a><span class="co">#      carseats_boot, </span></span>
-<span id="cb297-10"><a href="grid-tuning-with-finetunerace_anova.html#cb297-10" aria-hidden="true" tabindex="-1"></a><span class="co">#      grid = 30, </span></span>
-<span id="cb297-11"><a href="grid-tuning-with-finetunerace_anova.html#cb297-11" aria-hidden="true" tabindex="-1"></a><span class="co">#      control = control_race(verbose_elim = TRUE)</span></span>
-<span id="cb297-12"><a href="grid-tuning-with-finetunerace_anova.html#cb297-12" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb297-13"><a href="grid-tuning-with-finetunerace_anova.html#cb297-13" aria-hidden="true" tabindex="-1"></a><span class="co"># tictoc::toc()</span></span>
-<span id="cb297-14"><a href="grid-tuning-with-finetunerace_anova.html#cb297-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb297-15"><a href="grid-tuning-with-finetunerace_anova.html#cb297-15" aria-hidden="true" tabindex="-1"></a><span class="co"># save xgb_rs</span></span>
-<span id="cb297-16"><a href="grid-tuning-with-finetunerace_anova.html#cb297-16" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(xgb_rs, &#39;data/08_boost_tree_racing_grid_results.rds&#39;)</span></span>
-<span id="cb297-17"><a href="grid-tuning-with-finetunerace_anova.html#cb297-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb297-18"><a href="grid-tuning-with-finetunerace_anova.html#cb297-18" aria-hidden="true" tabindex="-1"></a>xgb_rs <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&#39;data/08_boost_tree_racing_grid_results.rds&#39;</span>)</span>
-<span id="cb297-19"><a href="grid-tuning-with-finetunerace_anova.html#cb297-19" aria-hidden="true" tabindex="-1"></a>xgb_rs</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="grid-tuning-with-finetunerace_anova.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(finetune)</span></span>
+<span id="cb298-2"><a href="grid-tuning-with-finetunerace_anova.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb298-3"><a href="grid-tuning-with-finetunerace_anova.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(4242)</span></span>
+<span id="cb298-4"><a href="grid-tuning-with-finetunerace_anova.html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb298-5"><a href="grid-tuning-with-finetunerace_anova.html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tictoc::tic()</span></span>
+<span id="cb298-6"><a href="grid-tuning-with-finetunerace_anova.html#cb298-6" aria-hidden="true" tabindex="-1"></a><span class="co"># xgb_rs &lt;- </span></span>
+<span id="cb298-7"><a href="grid-tuning-with-finetunerace_anova.html#cb298-7" aria-hidden="true" tabindex="-1"></a><span class="co">#      tune_race_anova(</span></span>
+<span id="cb298-8"><a href="grid-tuning-with-finetunerace_anova.html#cb298-8" aria-hidden="true" tabindex="-1"></a><span class="co">#      xgb_wf, </span></span>
+<span id="cb298-9"><a href="grid-tuning-with-finetunerace_anova.html#cb298-9" aria-hidden="true" tabindex="-1"></a><span class="co">#      carseats_boot, </span></span>
+<span id="cb298-10"><a href="grid-tuning-with-finetunerace_anova.html#cb298-10" aria-hidden="true" tabindex="-1"></a><span class="co">#      grid = 30, </span></span>
+<span id="cb298-11"><a href="grid-tuning-with-finetunerace_anova.html#cb298-11" aria-hidden="true" tabindex="-1"></a><span class="co">#      control = control_race(verbose_elim = TRUE)</span></span>
+<span id="cb298-12"><a href="grid-tuning-with-finetunerace_anova.html#cb298-12" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb298-13"><a href="grid-tuning-with-finetunerace_anova.html#cb298-13" aria-hidden="true" tabindex="-1"></a><span class="co"># tictoc::toc()</span></span>
+<span id="cb298-14"><a href="grid-tuning-with-finetunerace_anova.html#cb298-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-15"><a href="grid-tuning-with-finetunerace_anova.html#cb298-15" aria-hidden="true" tabindex="-1"></a><span class="co"># save xgb_rs</span></span>
+<span id="cb298-16"><a href="grid-tuning-with-finetunerace_anova.html#cb298-16" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(xgb_rs, &#39;data/08_boost_tree_racing_grid_results.rds&#39;)</span></span>
+<span id="cb298-17"><a href="grid-tuning-with-finetunerace_anova.html#cb298-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-18"><a href="grid-tuning-with-finetunerace_anova.html#cb298-18" aria-hidden="true" tabindex="-1"></a>xgb_rs <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&#39;data/08_boost_tree_racing_grid_results.rds&#39;</span>)</span>
+<span id="cb298-19"><a href="grid-tuning-with-finetunerace_anova.html#cb298-19" aria-hidden="true" tabindex="-1"></a>xgb_rs</span></code></pre></div>
 <pre><code>## # Tuning results
 ## # Bootstrap sampling using stratification with apparent sample 
 ## # A tibble: 101 × 5
@@ -624,7 +624,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/116]&gt; Bootstrap003     30 &lt;tibble [2 × 8]&gt;  &lt;tibble [0 × 3]&gt;
 ##  9 &lt;split [300/109]&gt; Bootstrap004     66 &lt;tibble [2 × 8]&gt;  &lt;tibble [0 × 3]&gt;
 ## 10 &lt;split [300/106]&gt; Bootstrap005     72 &lt;tibble [2 × 8]&gt;  &lt;tibble [0 × 3]&gt;
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
             </section>
 

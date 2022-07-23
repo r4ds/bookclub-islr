@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,16 +590,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tuning-the-regression-model" class="section level2 hasAnchor" number="8.20">
 <h2><span class="header-section-number">8.20</span> Tuning the regression model<a href="tuning-the-regression-model.html#tuning-the-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now let us again try to tune the <code>cost_complexity</code> to find the best performing model.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="tuning-the-regression-model.html#cb256-1" aria-hidden="true" tabindex="-1"></a>reg_tree_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb256-2"><a href="tuning-the-regression-model.html#cb256-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_model</span>(reg_tree_spec <span class="sc">%&gt;%</span> <span class="fu">set_args</span>(<span class="at">cost_complexity =</span> <span class="fu">tune</span>())) <span class="sc">%&gt;%</span> </span>
-<span id="cb256-3"><a href="tuning-the-regression-model.html#cb256-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_formula</span>(Sales <span class="sc">~</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="tuning-the-regression-model.html#cb257-1" aria-hidden="true" tabindex="-1"></a>reg_tree_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb257-2"><a href="tuning-the-regression-model.html#cb257-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_model</span>(reg_tree_spec <span class="sc">%&gt;%</span> <span class="fu">set_args</span>(<span class="at">cost_complexity =</span> <span class="fu">tune</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb257-3"><a href="tuning-the-regression-model.html#cb257-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">add_formula</span>(Sales <span class="sc">~</span> .)</span></code></pre></div>
 <p>Create the bootstrap folds.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="tuning-the-regression-model.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
-<span id="cb257-2"><a href="tuning-the-regression-model.html#cb257-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-3"><a href="tuning-the-regression-model.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bootstraps_samples are defined in line 158</span></span>
-<span id="cb257-4"><a href="tuning-the-regression-model.html#cb257-4" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb257-5"><a href="tuning-the-regression-model.html#cb257-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-6"><a href="tuning-the-regression-model.html#cb257-6" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="tuning-the-regression-model.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb258-2"><a href="tuning-the-regression-model.html#cb258-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-3"><a href="tuning-the-regression-model.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bootstraps_samples are defined in line 158</span></span>
+<span id="cb258-4"><a href="tuning-the-regression-model.html#cb258-4" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb258-5"><a href="tuning-the-regression-model.html#cb258-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-6"><a href="tuning-the-regression-model.html#cb258-6" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
 <pre><code>## # Bootstrap sampling with apparent sample 
 ## # A tibble: 101 × 2
 ##    splits            id          
@@ -614,17 +614,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/118]&gt; Bootstrap008
 ##  9 &lt;split [300/107]&gt; Bootstrap009
 ## 10 &lt;split [300/115]&gt; Bootstrap010
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>Create the tuning grid.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="tuning-the-regression-model.html#cb259-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost_complexity</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>)), <span class="at">levels =</span> <span class="dv">10</span>)</span>
-<span id="cb259-2"><a href="tuning-the-regression-model.html#cb259-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb259-3"><a href="tuning-the-regression-model.html#cb259-3" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">tune_grid</span>(</span>
-<span id="cb259-4"><a href="tuning-the-regression-model.html#cb259-4" aria-hidden="true" tabindex="-1"></a>  reg_tree_wf, </span>
-<span id="cb259-5"><a href="tuning-the-regression-model.html#cb259-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">resamples =</span> carseats_boot, </span>
-<span id="cb259-6"><a href="tuning-the-regression-model.html#cb259-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> param_grid</span>
-<span id="cb259-7"><a href="tuning-the-regression-model.html#cb259-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb259-8"><a href="tuning-the-regression-model.html#cb259-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb259-9"><a href="tuning-the-regression-model.html#cb259-9" aria-hidden="true" tabindex="-1"></a>tune_res</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="tuning-the-regression-model.html#cb260-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost_complexity</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>)), <span class="at">levels =</span> <span class="dv">10</span>)</span>
+<span id="cb260-2"><a href="tuning-the-regression-model.html#cb260-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-3"><a href="tuning-the-regression-model.html#cb260-3" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">tune_grid</span>(</span>
+<span id="cb260-4"><a href="tuning-the-regression-model.html#cb260-4" aria-hidden="true" tabindex="-1"></a>  reg_tree_wf, </span>
+<span id="cb260-5"><a href="tuning-the-regression-model.html#cb260-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">resamples =</span> carseats_boot, </span>
+<span id="cb260-6"><a href="tuning-the-regression-model.html#cb260-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> param_grid</span>
+<span id="cb260-7"><a href="tuning-the-regression-model.html#cb260-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb260-8"><a href="tuning-the-regression-model.html#cb260-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-9"><a href="tuning-the-regression-model.html#cb260-9" aria-hidden="true" tabindex="-1"></a>tune_res</span></code></pre></div>
 <pre><code>## # Tuning results
 ## # Bootstrap sampling with apparent sample 
 ## # A tibble: 101 × 4
@@ -640,7 +641,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/128]&gt; Bootstrap007 &lt;tibble [20 × 5]&gt; &lt;tibble [0 × 3]&gt;
 ##  9 &lt;split [300/118]&gt; Bootstrap008 &lt;tibble [20 × 5]&gt; &lt;tibble [0 × 3]&gt;
 ## 10 &lt;split [300/107]&gt; Bootstrap009 &lt;tibble [20 × 5]&gt; &lt;tibble [0 × 3]&gt;
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
             </section>
 

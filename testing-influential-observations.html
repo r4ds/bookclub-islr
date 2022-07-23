@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -595,7 +595,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>the dfbeta values</p></li>
 </ul>
 <p>The function <em>ggcoxdiagnostics()</em> [in <code>survminer</code> package] provides a convenient solution for checking influential observations.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="testing-influential-observations.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxdiagnostics</span>(fit_all_cox, <span class="at">type =</span> <span class="st">&quot;dfbeta&quot;</span>, <span class="at">linear.predictions =</span> <span class="cn">FALSE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="testing-influential-observations.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxdiagnostics</span>(fit_all_cox, <span class="at">type =</span> <span class="st">&quot;dfbeta&quot;</span>, <span class="at">linear.predictions =</span> <span class="cn">FALSE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>())</span></code></pre></div>
 <pre><code>## Warning: `gather_()` was deprecated in tidyr 1.2.0.
 ## Please use `gather()` instead.
 ## This warning is displayed once every 8 hours.
@@ -608,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Negative values correspond to individual that “lived too long”.</p></li>
 <li><p>Very large or small values are outliers, which are poorly predicted by the model.</p></li>
 </ul>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="testing-influential-observations.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxdiagnostics</span>(fit_all_cox, <span class="at">type =</span> <span class="st">&quot;deviance&quot;</span>, <span class="at">linear.predictions =</span> <span class="cn">FALSE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="testing-influential-observations.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxdiagnostics</span>(fit_all_cox, <span class="at">type =</span> <span class="st">&quot;deviance&quot;</span>, <span class="at">linear.predictions =</span> <span class="cn">FALSE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>())</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="bookclub-islr_files/figure-html/11cox_diag_deviance-1.png" width="672" /></p>
 <p>The pattern looks fairly symmetric around 0.</p>
@@ -624,16 +624,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To assess the functional form of a continuous variable in a Cox proportional hazards model, we’ll use the function <em>ggcoxfunctional()</em> [in the <code>survminer</code> R package].</p>
 <p>The covariates must be numerical.</p>
 <p>To test <code>sex</code>, it is necessary to convert the covariate to numerical.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="testing-influential-observations.html#cb392-1" aria-hidden="true" tabindex="-1"></a>BC_sex <span class="ot">&lt;-</span> BrainCancer <span class="sc">%&gt;%</span> </span>
-<span id="cb392-2"><a href="testing-influential-observations.html#cb392-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">sex =</span> sex <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>())</span>
-<span id="cb392-3"><a href="testing-influential-observations.html#cb392-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb392-4"><a href="testing-influential-observations.html#cb392-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxfunctional</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex <span class="sc">+</span> <span class="fu">log</span>(sex) <span class="sc">+</span> <span class="fu">sqrt</span>(sex), <span class="at">data =</span> BC_sex)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="testing-influential-observations.html#cb393-1" aria-hidden="true" tabindex="-1"></a>BC_sex <span class="ot">&lt;-</span> BrainCancer <span class="sc">%&gt;%</span> </span>
+<span id="cb393-2"><a href="testing-influential-observations.html#cb393-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">sex =</span> sex <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>())</span>
+<span id="cb393-3"><a href="testing-influential-observations.html#cb393-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-4"><a href="testing-influential-observations.html#cb393-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxfunctional</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex <span class="sc">+</span> <span class="fu">log</span>(sex) <span class="sc">+</span> <span class="fu">sqrt</span>(sex), <span class="at">data =</span> BC_sex)</span></code></pre></div>
 <pre><code>## Warning: arguments formula is deprecated; will be removed in the next version;
 ## please use fit instead.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/11cox_functional_1-1.png" width="672" /></p>
 <p>The function <em>ggcoxfunctional()</em> displays graphs of continuous covariates against martingale residuals of null cox proportional hazards model. This might help to properly choose the functional form of continuous variable in the Cox model. Fitted lines with lowess function should be <strong>linear</strong> to satisfy the Cox proportional hazards model assumptions. Inthis case, the covariate <code>sex</code> passes the test.</p>
 <p>Let’s test <code>gtv</code></p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="testing-influential-observations.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxfunctional</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> gtv <span class="sc">+</span> <span class="fu">log</span>(gtv) <span class="sc">+</span> <span class="fu">sqrt</span>(gtv), <span class="at">data =</span> BrainCancer)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="testing-influential-observations.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxfunctional</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> gtv <span class="sc">+</span> <span class="fu">log</span>(gtv) <span class="sc">+</span> <span class="fu">sqrt</span>(gtv), <span class="at">data =</span> BrainCancer)</span></code></pre></div>
 <pre><code>## Warning: arguments formula is deprecated; will be removed in the next version;
 ## please use fit instead.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/11cox_functional_2-1.png" width="672" /></p>

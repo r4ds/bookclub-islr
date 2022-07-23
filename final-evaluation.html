@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,28 +590,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="final-evaluation" class="section level2 hasAnchor" number="8.13">
 <h2><span class="header-section-number">8.13</span> Final evaluation<a href="final-evaluation.html#final-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Confusion matrix (train, best model)</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="final-evaluation.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span> </span>
-<span id="cb236-2"><a href="final-evaluation.html#cb236-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">conf_mat</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="final-evaluation.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span> </span>
+<span id="cb237-2"><a href="final-evaluation.html#cb237-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">conf_mat</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction  No Yes
 ##        No  160  24
 ##        Yes  17  99</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="final-evaluation.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span> </span>
-<span id="cb238-2"><a href="final-evaluation.html#cb238-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">accuracy</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="final-evaluation.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_train) <span class="sc">%&gt;%</span> </span>
+<span id="cb239-2"><a href="final-evaluation.html#cb239-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">accuracy</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric  .estimator .estimate
 ##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 ## 1 accuracy binary         0.863</code></pre>
 <p>Training accuracy: <strong>86.3%</strong></p>
 <p>Confusion matrix (test, best model)</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="final-evaluation.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span></span>
-<span id="cb240-2"><a href="final-evaluation.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="final-evaluation.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span></span>
+<span id="cb241-2"><a href="final-evaluation.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>##           Truth
 ## Prediction No Yes
 ##        No  39   9
 ##        Yes 20  32</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="final-evaluation.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span> </span>
-<span id="cb242-2"><a href="final-evaluation.html#cb242-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">accuracy</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="final-evaluation.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(class_tree_final_fit, <span class="at">new_data =</span> carseats_test) <span class="sc">%&gt;%</span> </span>
+<span id="cb243-2"><a href="final-evaluation.html#cb243-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">accuracy</span>(<span class="at">truth =</span> High, <span class="at">estimate =</span> .pred_class)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric  .estimator .estimate
 ##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;

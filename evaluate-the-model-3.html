@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,15 +590,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="evaluate-the-model-3" class="section level2 hasAnchor" number="8.21">
 <h2><span class="header-section-number">8.21</span> Evaluate the model<a href="evaluate-the-model-3.html#evaluate-the-model-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It appears that higher complexity works are to be preferred according to our cross-validation.</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="evaluate-the-model-3.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="evaluate-the-model-3.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(tune_res)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/plot_tuning_results_reg-1.png" width="672" /></p>
 <p>We select the best-performing model according to <code>"rmse"</code> and fit the final model on the whole training data set.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="evaluate-the-model-3.html#cb262-1" aria-hidden="true" tabindex="-1"></a>best_complexity <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res, <span class="at">metric =</span> <span class="st">&quot;rmse&quot;</span>)</span>
-<span id="cb262-2"><a href="evaluate-the-model-3.html#cb262-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-3"><a href="evaluate-the-model-3.html#cb262-3" aria-hidden="true" tabindex="-1"></a>reg_tree_final <span class="ot">&lt;-</span> <span class="fu">finalize_workflow</span>(reg_tree_wf, best_complexity)</span>
-<span id="cb262-4"><a href="evaluate-the-model-3.html#cb262-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-5"><a href="evaluate-the-model-3.html#cb262-5" aria-hidden="true" tabindex="-1"></a>reg_tree_final_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(reg_tree_final, <span class="at">data =</span> carseats_train)</span>
-<span id="cb262-6"><a href="evaluate-the-model-3.html#cb262-6" aria-hidden="true" tabindex="-1"></a>reg_tree_final_fit</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="evaluate-the-model-3.html#cb263-1" aria-hidden="true" tabindex="-1"></a>best_complexity <span class="ot">&lt;-</span> <span class="fu">select_best</span>(tune_res, <span class="at">metric =</span> <span class="st">&quot;rmse&quot;</span>)</span>
+<span id="cb263-2"><a href="evaluate-the-model-3.html#cb263-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb263-3"><a href="evaluate-the-model-3.html#cb263-3" aria-hidden="true" tabindex="-1"></a>reg_tree_final <span class="ot">&lt;-</span> <span class="fu">finalize_workflow</span>(reg_tree_wf, best_complexity)</span>
+<span id="cb263-4"><a href="evaluate-the-model-3.html#cb263-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb263-5"><a href="evaluate-the-model-3.html#cb263-5" aria-hidden="true" tabindex="-1"></a>reg_tree_final_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(reg_tree_final, <span class="at">data =</span> carseats_train)</span>
+<span id="cb263-6"><a href="evaluate-the-model-3.html#cb263-6" aria-hidden="true" tabindex="-1"></a>reg_tree_final_fit</span></code></pre></div>
 <pre><code>## ══ Workflow [trained] ══════════════════════════════════════════════════════════
 ## Preprocessor: Formula
 ## Model: decision_tree()

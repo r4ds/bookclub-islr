@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,9 +590,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualize-the-tuned-decision-tree-classification" class="section level2 hasAnchor" number="8.11">
 <h2><span class="header-section-number">8.11</span> Visualize the tuned decision tree (classification)<a href="visualize-the-tuned-decision-tree-classification.html#visualize-the-tuned-decision-tree-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>At last, we can visualize the model, and we see that the better-performing model is less complex than the original model we fit.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="visualize-the-tuned-decision-tree-classification.html#cb234-1" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit <span class="sc">%&gt;%</span></span>
-<span id="cb234-2"><a href="visualize-the-tuned-decision-tree-classification.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb234-3"><a href="visualize-the-tuned-decision-tree-classification.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rpart.plot</span>(<span class="at">roundint =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="visualize-the-tuned-decision-tree-classification.html#cb235-1" aria-hidden="true" tabindex="-1"></a>class_tree_final_fit <span class="sc">%&gt;%</span></span>
+<span id="cb235-2"><a href="visualize-the-tuned-decision-tree-classification.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb235-3"><a href="visualize-the-tuned-decision-tree-classification.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rpart.plot</span>(<span class="at">roundint =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/plot_final_fit_tree_class_diagram-1.png" width="672" /></p>
 </div>
             </section>

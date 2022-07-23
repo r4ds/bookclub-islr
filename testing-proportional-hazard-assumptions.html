@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,8 +591,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.16</span> Testing proportional Hazard assumptions<a href="testing-proportional-hazard-assumptions.html#testing-proportional-hazard-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The proportional hazards (PH) assumption can be checked using statistical tests and graphical diagnostics based on the <em>scaled Schoenfeld residuals</em>.</p>
 <p>In principle, the <em>Schoenfeld residuals</em> are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="testing-proportional-hazard-assumptions.html#cb384-1" aria-hidden="true" tabindex="-1"></a>test.ph <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(fit_all_cox)</span>
-<span id="cb384-2"><a href="testing-proportional-hazard-assumptions.html#cb384-2" aria-hidden="true" tabindex="-1"></a>test.ph</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="testing-proportional-hazard-assumptions.html#cb385-1" aria-hidden="true" tabindex="-1"></a>test.ph <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(fit_all_cox)</span>
+<span id="cb385-2"><a href="testing-proportional-hazard-assumptions.html#cb385-2" aria-hidden="true" tabindex="-1"></a>test.ph</span></code></pre></div>
 <pre><code>##             chisq df    p
 ## sex       0.82855  1 0.36
 ## diagnosis 1.38692  3 0.71
@@ -602,7 +602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## stereo    0.00623  1 0.94
 ## GLOBAL    3.61020  8 0.89</code></pre>
 <p>It’s possible to do a graphical diagnostic using the function <em>ggcoxzph()</em> [in the <code>survminer</code> package], which produces, for each covariate, graphs of the scaled Schoenfeld residuals against the transformed time.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="testing-proportional-hazard-assumptions.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxzph</span>(test.ph)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="testing-proportional-hazard-assumptions.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoxzph</span>(test.ph)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/11coxtest_2-1.png" width="672" /></p>
 <p>From the graphical inspection, there is no pattern with time. The assumption of proportional hazards appears to be supported for the model covariates.</p>
 </div>

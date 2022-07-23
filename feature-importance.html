@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -589,9 +589,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="feature-importance" class="section level2 hasAnchor" number="8.39">
 <h2><span class="header-section-number">8.39</span> Feature importance<a href="feature-importance.html#feature-importance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="feature-importance.html#cb309-1" aria-hidden="true" tabindex="-1"></a>xgb_fit <span class="ot">&lt;-</span> <span class="fu">extract_fit_parsnip</span>(xgb_last_fit)</span>
-<span id="cb309-2"><a href="feature-importance.html#cb309-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb309-3"><a href="feature-importance.html#cb309-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(xgb_fit, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">num_features =</span> <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="feature-importance.html#cb310-1" aria-hidden="true" tabindex="-1"></a>xgb_fit <span class="ot">&lt;-</span> <span class="fu">extract_fit_parsnip</span>(xgb_last_fit)</span>
+<span id="cb310-2"><a href="feature-importance.html#cb310-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-3"><a href="feature-importance.html#cb310-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(xgb_fit, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">num_features =</span> <span class="dv">12</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/boost_variable_importance-1.png" width="672" /></p>
 <p>Stop parallel cluster</p>
 </div>

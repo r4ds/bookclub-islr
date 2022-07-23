@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -608,36 +608,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>m1: m-m0 positives</li>
 </ul>
 <p>Now what we do is replicating the sample in a lab environment to obtain fake data, in order to do that we generate a matrix from a replication of normal distribution of the same size of our data.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="replications.html#cb507-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">24</span></span>
-<span id="cb507-2"><a href="replications.html#cb507-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">8793</span></span>
-<span id="cb507-3"><a href="replications.html#cb507-3" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># this is the sample split in two</span></span>
-<span id="cb507-4"><a href="replications.html#cb507-4" aria-hidden="true" tabindex="-1"></a>positives <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="co"># m1</span></span>
-<span id="cb507-5"><a href="replications.html#cb507-5" aria-hidden="true" tabindex="-1"></a><span class="co"># negatives</span></span>
-<span id="cb507-6"><a href="replications.html#cb507-6" aria-hidden="true" tabindex="-1"></a>m0<span class="ot">&lt;-</span> m<span class="sc">-</span>positives <span class="co"># 8293</span></span>
-<span id="cb507-7"><a href="replications.html#cb507-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb507-8"><a href="replications.html#cb507-8" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>m),m,n)</span>
-<span id="cb507-9"><a href="replications.html#cb507-9" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="ot">&lt;-</span> mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="sc">+</span> delta</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="replications.html#cb509-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb509-2"><a href="replications.html#cb509-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">8793</span></span>
+<span id="cb509-3"><a href="replications.html#cb509-3" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># this is the sample split in two</span></span>
+<span id="cb509-4"><a href="replications.html#cb509-4" aria-hidden="true" tabindex="-1"></a>positives <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="co"># m1</span></span>
+<span id="cb509-5"><a href="replications.html#cb509-5" aria-hidden="true" tabindex="-1"></a><span class="co"># negatives</span></span>
+<span id="cb509-6"><a href="replications.html#cb509-6" aria-hidden="true" tabindex="-1"></a>m0<span class="ot">&lt;-</span> m<span class="sc">-</span>positives <span class="co"># 8293</span></span>
+<span id="cb509-7"><a href="replications.html#cb509-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb509-8"><a href="replications.html#cb509-8" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>m),m,n)</span>
+<span id="cb509-9"><a href="replications.html#cb509-9" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="ot">&lt;-</span> mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="sc">+</span> delta</span></code></pre></div>
 <p>Then we do 1000 replications to see in what is the false discovery rate for this lab.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="replications.html#cb508-1" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="dv">1000</span></span>
-<span id="cb508-2"><a href="replications.html#cb508-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1173</span>)</span>
-<span id="cb508-3"><a href="replications.html#cb508-3" aria-hidden="true" tabindex="-1"></a>results_global <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B,{</span>
-<span id="cb508-4"><a href="replications.html#cb508-4" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>m),m,n)</span>
-<span id="cb508-5"><a href="replications.html#cb508-5" aria-hidden="true" tabindex="-1"></a>  mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="ot">&lt;-</span> mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="sc">+</span> delta</span>
-<span id="cb508-6"><a href="replications.html#cb508-6" aria-hidden="true" tabindex="-1"></a>  pvals <span class="ot">=</span> genefilter<span class="sc">::</span><span class="fu">rowttests</span>(mat,null_hypothesis)<span class="sc">$</span>p.val</span>
-<span id="cb508-7"><a href="replications.html#cb508-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">##Bonferroni</span></span>
-<span id="cb508-8"><a href="replications.html#cb508-8" aria-hidden="true" tabindex="-1"></a>  FP1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(pvals[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span><span class="sc">/</span>m)  </span>
-<span id="cb508-9"><a href="replications.html#cb508-9" aria-hidden="true" tabindex="-1"></a>  FN1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(pvals[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span>
-<span id="cb508-10"><a href="replications.html#cb508-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># p.adjust</span></span>
-<span id="cb508-11"><a href="replications.html#cb508-11" aria-hidden="true" tabindex="-1"></a>  qvals1 <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals,<span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb508-12"><a href="replications.html#cb508-12" aria-hidden="true" tabindex="-1"></a>  FP2<span class="ot">&lt;-</span><span class="fu">sum</span>(qvals1[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span>)</span>
-<span id="cb508-13"><a href="replications.html#cb508-13" aria-hidden="true" tabindex="-1"></a>  FN2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(qvals1[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span>)</span>
-<span id="cb508-14"><a href="replications.html#cb508-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># qvalue</span></span>
-<span id="cb508-15"><a href="replications.html#cb508-15" aria-hidden="true" tabindex="-1"></a>  qvals2 <span class="ot">&lt;-</span> qvalue<span class="sc">::</span><span class="fu">qvalue</span>(pvals)<span class="sc">$</span>qvalues</span>
-<span id="cb508-16"><a href="replications.html#cb508-16" aria-hidden="true" tabindex="-1"></a>  FP3<span class="ot">&lt;-</span><span class="fu">sum</span>(qvals2[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span>)</span>
-<span id="cb508-17"><a href="replications.html#cb508-17" aria-hidden="true" tabindex="-1"></a>  FN3 <span class="ot">&lt;-</span> <span class="fu">sum</span>(qvals2[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span>)</span>
-<span id="cb508-18"><a href="replications.html#cb508-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(FP1,FN1,FP2,FN2,FP3,FN3)</span>
-<span id="cb508-19"><a href="replications.html#cb508-19" aria-hidden="true" tabindex="-1"></a>}) </span></code></pre></div>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="replications.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(results_global)</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="replications.html#cb510-1" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb510-2"><a href="replications.html#cb510-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1173</span>)</span>
+<span id="cb510-3"><a href="replications.html#cb510-3" aria-hidden="true" tabindex="-1"></a>results_global <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B,{</span>
+<span id="cb510-4"><a href="replications.html#cb510-4" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>m),m,n)</span>
+<span id="cb510-5"><a href="replications.html#cb510-5" aria-hidden="true" tabindex="-1"></a>  mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="ot">&lt;-</span> mat[<span class="dv">1</span><span class="sc">:</span>positives,<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">/</span><span class="dv">2</span>)] <span class="sc">+</span> delta</span>
+<span id="cb510-6"><a href="replications.html#cb510-6" aria-hidden="true" tabindex="-1"></a>  pvals <span class="ot">=</span> genefilter<span class="sc">::</span><span class="fu">rowttests</span>(mat,null_hypothesis)<span class="sc">$</span>p.val</span>
+<span id="cb510-7"><a href="replications.html#cb510-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">##Bonferroni</span></span>
+<span id="cb510-8"><a href="replications.html#cb510-8" aria-hidden="true" tabindex="-1"></a>  FP1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(pvals[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span><span class="sc">/</span>m)  </span>
+<span id="cb510-9"><a href="replications.html#cb510-9" aria-hidden="true" tabindex="-1"></a>  FN1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(pvals[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span><span class="sc">/</span>m)</span>
+<span id="cb510-10"><a href="replications.html#cb510-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># p.adjust</span></span>
+<span id="cb510-11"><a href="replications.html#cb510-11" aria-hidden="true" tabindex="-1"></a>  qvals1 <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals,<span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb510-12"><a href="replications.html#cb510-12" aria-hidden="true" tabindex="-1"></a>  FP2<span class="ot">&lt;-</span><span class="fu">sum</span>(qvals1[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span>)</span>
+<span id="cb510-13"><a href="replications.html#cb510-13" aria-hidden="true" tabindex="-1"></a>  FN2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(qvals1[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span>)</span>
+<span id="cb510-14"><a href="replications.html#cb510-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># qvalue</span></span>
+<span id="cb510-15"><a href="replications.html#cb510-15" aria-hidden="true" tabindex="-1"></a>  qvals2 <span class="ot">&lt;-</span> qvalue<span class="sc">::</span><span class="fu">qvalue</span>(pvals)<span class="sc">$</span>qvalues</span>
+<span id="cb510-16"><a href="replications.html#cb510-16" aria-hidden="true" tabindex="-1"></a>  FP3<span class="ot">&lt;-</span><span class="fu">sum</span>(qvals2[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>positives)]<span class="sc">&lt;=</span><span class="fl">0.05</span>)</span>
+<span id="cb510-17"><a href="replications.html#cb510-17" aria-hidden="true" tabindex="-1"></a>  FN3 <span class="ot">&lt;-</span> <span class="fu">sum</span>(qvals2[<span class="dv">1</span><span class="sc">:</span>positives]<span class="sc">&gt;</span><span class="fl">0.05</span>)</span>
+<span id="cb510-18"><a href="replications.html#cb510-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(FP1,FN1,FP2,FN2,FP3,FN3)</span>
+<span id="cb510-19"><a href="replications.html#cb510-19" aria-hidden="true" tabindex="-1"></a>}) </span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="replications.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(results_global)</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
 <p>In this table are summarised the: false positives (FP) and the false negatives (FN) for three methods:</p>
 <ul>
@@ -660,24 +660,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <p><strong>Benjamini-Hochberg</strong></p>
 <p><span class="math display">\[p(i)≤\frac{i}{m}\alpha\]</span></p>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="replications.html#cb513-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb513-2"><a href="replications.html#cb513-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">along=</span>pvals)</span>
-<span id="cb513-3"><a href="replications.html#cb513-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb513-4"><a href="replications.html#cb513-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mypar</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb513-5"><a href="replications.html#cb513-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(i,<span class="fu">sort</span>(pvals))</span>
-<span id="cb513-6"><a href="replications.html#cb513-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,i<span class="sc">/</span>m<span class="sc">*</span>alpha)</span>
-<span id="cb513-7"><a href="replications.html#cb513-7" aria-hidden="true" tabindex="-1"></a><span class="do">##close-up</span></span>
-<span id="cb513-8"><a href="replications.html#cb513-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(i[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>],<span class="fu">sort</span>(pvals)[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>],<span class="at">main=</span><span class="st">&quot;Close-up&quot;</span>)</span>
-<span id="cb513-9"><a href="replications.html#cb513-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,i<span class="sc">/</span>m<span class="sc">*</span>alpha)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="replications.html#cb515-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb515-2"><a href="replications.html#cb515-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">along=</span>pvals)</span>
+<span id="cb515-3"><a href="replications.html#cb515-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-4"><a href="replications.html#cb515-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mypar</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb515-5"><a href="replications.html#cb515-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(i,<span class="fu">sort</span>(pvals))</span>
+<span id="cb515-6"><a href="replications.html#cb515-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,i<span class="sc">/</span>m<span class="sc">*</span>alpha)</span>
+<span id="cb515-7"><a href="replications.html#cb515-7" aria-hidden="true" tabindex="-1"></a><span class="do">##close-up</span></span>
+<span id="cb515-8"><a href="replications.html#cb515-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(i[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>],<span class="fu">sort</span>(pvals)[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>],<span class="at">main=</span><span class="st">&quot;Close-up&quot;</span>)</span>
+<span id="cb515-9"><a href="replications.html#cb515-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,i<span class="sc">/</span>m<span class="sc">*</span>alpha)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chunk54-1.png" width="672" /></p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="replications.html#cb514-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">which</span>( <span class="fu">sort</span>(pvals) <span class="sc">&lt;</span> i<span class="sc">/</span>m<span class="sc">*</span>alpha) )</span>
-<span id="cb514-2"><a href="replications.html#cb514-2" aria-hidden="true" tabindex="-1"></a>cutoff <span class="ot">&lt;-</span> <span class="fu">sort</span>(pvals)[k]</span>
-<span id="cb514-3"><a href="replications.html#cb514-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;k =&quot;</span>,k,<span class="st">&quot;p-value cutoff=&quot;</span>,cutoff)</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="replications.html#cb516-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">which</span>( <span class="fu">sort</span>(pvals) <span class="sc">&lt;</span> i<span class="sc">/</span>m<span class="sc">*</span>alpha) )</span>
+<span id="cb516-2"><a href="replications.html#cb516-2" aria-hidden="true" tabindex="-1"></a>cutoff <span class="ot">&lt;-</span> <span class="fu">sort</span>(pvals)[k]</span>
+<span id="cb516-3"><a href="replications.html#cb516-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;k =&quot;</span>,k,<span class="st">&quot;p-value cutoff=&quot;</span>,cutoff)</span></code></pre></div>
 <pre><code>## k = 13 p-value cutoff= 3.83879e-05</code></pre>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="replications.html#cb516-1" aria-hidden="true" tabindex="-1"></a>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb516-2"><a href="replications.html#cb516-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mypar</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb516-3"><a href="replications.html#cb516-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pvals,fdr,<span class="at">log=</span><span class="st">&quot;xy&quot;</span>)</span>
-<span id="cb516-4"><a href="replications.html#cb516-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span>alpha,<span class="at">v=</span>cutoff)</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="replications.html#cb518-1" aria-hidden="true" tabindex="-1"></a>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb518-2"><a href="replications.html#cb518-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mypar</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb518-3"><a href="replications.html#cb518-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pvals,fdr,<span class="at">log=</span><span class="st">&quot;xy&quot;</span>)</span>
+<span id="cb518-4"><a href="replications.html#cb518-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span>alpha,<span class="at">v=</span>cutoff)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chunk56-1.png" width="672" /></p>
 <hr />
 </div>

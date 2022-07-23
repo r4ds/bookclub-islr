@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,12 +590,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tuning-the-model" class="section level2 hasAnchor" number="8.9">
 <h2><span class="header-section-number">8.9</span> Tuning the model<a href="tuning-the-model.html#tuning-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s try to tune the <code>cost_complexity</code> of the decision tree to find a more optimal complexity. We use the <code>class_tree_spec</code> object and use the <code>set_args()</code> function to specify that we want to tune <code>cost_complexity</code>. This is then passed directly into the workflow object to avoid creating an intermediate object. Also, since the dataset has 400 observations (rows), we’ll apply boostrapping to increase the sample number in each fold. <strong>WARNING: Bootstraps resample number has a direct relationship with execution time. For academic purposes, a value of 100 is used. However, in a development stage, the greater the number of resamples, the greater the statistical significance of the model.</strong></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="tuning-the-model.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb222-2"><a href="tuning-the-model.html#cb222-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb222-3"><a href="tuning-the-model.html#cb222-3" aria-hidden="true" tabindex="-1"></a>bootstraps_samples <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb222-4"><a href="tuning-the-model.html#cb222-4" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>, <span class="at">strata =</span> High)</span>
-<span id="cb222-5"><a href="tuning-the-model.html#cb222-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb222-6"><a href="tuning-the-model.html#cb222-6" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="tuning-the-model.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb223-2"><a href="tuning-the-model.html#cb223-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-3"><a href="tuning-the-model.html#cb223-3" aria-hidden="true" tabindex="-1"></a>bootstraps_samples <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb223-4"><a href="tuning-the-model.html#cb223-4" aria-hidden="true" tabindex="-1"></a>carseats_boot <span class="ot">&lt;-</span> <span class="fu">bootstraps</span>(carseats_train, <span class="at">times =</span> bootstraps_samples, <span class="at">apparent =</span> <span class="cn">TRUE</span>, <span class="at">strata =</span> High)</span>
+<span id="cb223-5"><a href="tuning-the-model.html#cb223-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-6"><a href="tuning-the-model.html#cb223-6" aria-hidden="true" tabindex="-1"></a>carseats_boot</span></code></pre></div>
 <pre><code>## # Bootstrap sampling using stratification with apparent sample 
 ## # A tibble: 101 × 2
 ##    splits            id          
@@ -610,36 +610,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/117]&gt; Bootstrap008
 ##  9 &lt;split [300/107]&gt; Bootstrap009
 ## 10 &lt;split [300/117]&gt; Bootstrap010
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>To be able to tune the variable we need 2 more objects. With the <code>resamples</code> object, we will use a k-fold bootstrap data set, and a grid of values to try. Since we are only tuning 2 hyperparameters it is fine to stay with a regular grid.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="tuning-the-model.html#cb224-1" aria-hidden="true" tabindex="-1"></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(</span>
-<span id="cb224-2"><a href="tuning-the-model.html#cb224-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">cost_complexity =</span> <span class="fu">tune</span>(), </span>
-<span id="cb224-3"><a href="tuning-the-model.html#cb224-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">tree_depth =</span> <span class="fu">tune</span>(), </span>
-<span id="cb224-4"><a href="tuning-the-model.html#cb224-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">min_n =</span> <span class="fu">tune</span>()</span>
-<span id="cb224-5"><a href="tuning-the-model.html#cb224-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">%&gt;%</span> </span>
-<span id="cb224-6"><a href="tuning-the-model.html#cb224-6" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb224-7"><a href="tuning-the-model.html#cb224-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="tuning-the-model.html#cb225-1" aria-hidden="true" tabindex="-1"></a>tree_spec <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(</span>
+<span id="cb225-2"><a href="tuning-the-model.html#cb225-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">cost_complexity =</span> <span class="fu">tune</span>(), </span>
+<span id="cb225-3"><a href="tuning-the-model.html#cb225-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">tree_depth =</span> <span class="fu">tune</span>(), </span>
+<span id="cb225-4"><a href="tuning-the-model.html#cb225-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">min_n =</span> <span class="fu">tune</span>()</span>
+<span id="cb225-5"><a href="tuning-the-model.html#cb225-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-6"><a href="tuning-the-model.html#cb225-6" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-7"><a href="tuning-the-model.html#cb225-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
 <p>Setup parallel processing —-</p>
 <pre><code>## [1] 9</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="tuning-the-model.html#cb226-1" aria-hidden="true" tabindex="-1"></a>tree_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost_complexity</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>)), </span>
-<span id="cb226-2"><a href="tuning-the-model.html#cb226-2" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">tree_depth</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)), </span>
-<span id="cb226-3"><a href="tuning-the-model.html#cb226-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">min_n</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)), </span>
-<span id="cb226-4"><a href="tuning-the-model.html#cb226-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="dv">5</span></span>
-<span id="cb226-5"><a href="tuning-the-model.html#cb226-5" aria-hidden="true" tabindex="-1"></a>                          )</span></code></pre></div>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="tuning-the-model.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(2001)</span></span>
-<span id="cb227-2"><a href="tuning-the-model.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tune_res &lt;- tune_grid(</span></span>
-<span id="cb227-3"><a href="tuning-the-model.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   tree_spec, </span></span>
-<span id="cb227-4"><a href="tuning-the-model.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   High ~ ., </span></span>
-<span id="cb227-5"><a href="tuning-the-model.html#cb227-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   resamples = carseats_boot, </span></span>
-<span id="cb227-6"><a href="tuning-the-model.html#cb227-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   grid = tree_grid, </span></span>
-<span id="cb227-7"><a href="tuning-the-model.html#cb227-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   metrics = metric_set(accuracy)</span></span>
-<span id="cb227-8"><a href="tuning-the-model.html#cb227-8" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb227-9"><a href="tuning-the-model.html#cb227-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb227-10"><a href="tuning-the-model.html#cb227-10" aria-hidden="true" tabindex="-1"></a><span class="co"># save tune_res</span></span>
-<span id="cb227-11"><a href="tuning-the-model.html#cb227-11" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(tune_res, &#39;data/08_tree_tune_grid_results.rds&#39;)</span></span>
-<span id="cb227-12"><a href="tuning-the-model.html#cb227-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb227-13"><a href="tuning-the-model.html#cb227-13" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&#39;data/08_tree_tune_grid_results.rds&#39;</span>)</span>
-<span id="cb227-14"><a href="tuning-the-model.html#cb227-14" aria-hidden="true" tabindex="-1"></a>tune_res</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="tuning-the-model.html#cb227-1" aria-hidden="true" tabindex="-1"></a>tree_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">cost_complexity</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>)), </span>
+<span id="cb227-2"><a href="tuning-the-model.html#cb227-2" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">tree_depth</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)), </span>
+<span id="cb227-3"><a href="tuning-the-model.html#cb227-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">min_n</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)), </span>
+<span id="cb227-4"><a href="tuning-the-model.html#cb227-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="dv">5</span></span>
+<span id="cb227-5"><a href="tuning-the-model.html#cb227-5" aria-hidden="true" tabindex="-1"></a>                          )</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="tuning-the-model.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(2001)</span></span>
+<span id="cb228-2"><a href="tuning-the-model.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tune_res &lt;- tune_grid(</span></span>
+<span id="cb228-3"><a href="tuning-the-model.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   tree_spec, </span></span>
+<span id="cb228-4"><a href="tuning-the-model.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   High ~ ., </span></span>
+<span id="cb228-5"><a href="tuning-the-model.html#cb228-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   resamples = carseats_boot, </span></span>
+<span id="cb228-6"><a href="tuning-the-model.html#cb228-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   grid = tree_grid, </span></span>
+<span id="cb228-7"><a href="tuning-the-model.html#cb228-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   metrics = metric_set(accuracy)</span></span>
+<span id="cb228-8"><a href="tuning-the-model.html#cb228-8" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb228-9"><a href="tuning-the-model.html#cb228-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-10"><a href="tuning-the-model.html#cb228-10" aria-hidden="true" tabindex="-1"></a><span class="co"># save tune_res</span></span>
+<span id="cb228-11"><a href="tuning-the-model.html#cb228-11" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(tune_res, &#39;data/08_tree_tune_grid_results.rds&#39;)</span></span>
+<span id="cb228-12"><a href="tuning-the-model.html#cb228-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-13"><a href="tuning-the-model.html#cb228-13" aria-hidden="true" tabindex="-1"></a>tune_res <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&#39;data/08_tree_tune_grid_results.rds&#39;</span>)</span>
+<span id="cb228-14"><a href="tuning-the-model.html#cb228-14" aria-hidden="true" tabindex="-1"></a>tune_res</span></code></pre></div>
 <pre><code>## # Tuning results
 ## # Bootstrap sampling using stratification with apparent sample 
 ## # A tibble: 101 × 4
@@ -655,7 +656,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 &lt;split [300/112]&gt; Bootstrap007 &lt;tibble [125 × 7]&gt; &lt;tibble [0 × 3]&gt;
 ##  9 &lt;split [300/117]&gt; Bootstrap008 &lt;tibble [125 × 7]&gt; &lt;tibble [0 × 3]&gt;
 ## 10 &lt;split [300/107]&gt; Bootstrap009 &lt;tibble [125 × 7]&gt; &lt;tibble [0 × 3]&gt;
-## # … with 91 more rows</code></pre>
+## # … with 91 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
             </section>
 

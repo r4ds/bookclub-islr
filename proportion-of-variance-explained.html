@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,25 +590,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="proportion-of-variance-explained" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Proportion of variance explained<a href="proportion-of-variance-explained.html#proportion-of-variance-explained" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>First we look at the <strong>variance</strong></p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="proportion-of-variance-explained.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(USArrests_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="proportion-of-variance-explained.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(USArrests_pca)</span></code></pre></div>
 <pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;   &quot;scale&quot;    &quot;x&quot;</code></pre>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="proportion-of-variance-explained.html#cb424-1" aria-hidden="true" tabindex="-1"></a>pr.var <span class="ot">&lt;-</span> USArrests_pca<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb424-2"><a href="proportion-of-variance-explained.html#cb424-2" aria-hidden="true" tabindex="-1"></a>pr.var</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="proportion-of-variance-explained.html#cb426-1" aria-hidden="true" tabindex="-1"></a>pr.var <span class="ot">&lt;-</span> USArrests_pca<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb426-2"><a href="proportion-of-variance-explained.html#cb426-2" aria-hidden="true" tabindex="-1"></a>pr.var</span></code></pre></div>
 <pre><code>## [1] 2.4802416 0.9897652 0.3565632 0.1734301</code></pre>
 <p><strong>Proportion of variance explained</strong> by each principal component:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="proportion-of-variance-explained.html#cb426-1" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> pr.var <span class="sc">/</span> <span class="fu">sum</span>(pr.var)</span>
-<span id="cb426-2"><a href="proportion-of-variance-explained.html#cb426-2" aria-hidden="true" tabindex="-1"></a>pve</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="proportion-of-variance-explained.html#cb428-1" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> pr.var <span class="sc">/</span> <span class="fu">sum</span>(pr.var)</span>
+<span id="cb428-2"><a href="proportion-of-variance-explained.html#cb428-2" aria-hidden="true" tabindex="-1"></a>pve</span></code></pre></div>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="proportion-of-variance-explained.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb428-2"><a href="proportion-of-variance-explained.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pve, <span class="at">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
-<span id="cb428-3"><a href="proportion-of-variance-explained.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb428-4"><a href="proportion-of-variance-explained.html#cb428-4" aria-hidden="true" tabindex="-1"></a><span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span>
-<span id="cb428-5"><a href="proportion-of-variance-explained.html#cb428-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(pve), <span class="at">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
-<span id="cb428-6"><a href="proportion-of-variance-explained.html#cb428-6" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="proportion-of-variance-explained.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb430-2"><a href="proportion-of-variance-explained.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pve, <span class="at">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb430-3"><a href="proportion-of-variance-explained.html#cb430-3" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb430-4"><a href="proportion-of-variance-explained.html#cb430-4" aria-hidden="true" tabindex="-1"></a><span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb430-5"><a href="proportion-of-variance-explained.html#cb430-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(pve), <span class="at">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb430-6"><a href="proportion-of-variance-explained.html#cb430-6" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="proportion-of-variance-explained.html#cb429-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(<span class="fu">scale</span>(USArrests[,<span class="sc">-</span><span class="dv">1</span>])) </span>
-<span id="cb429-2"><a href="proportion-of-variance-explained.html#cb429-2" aria-hidden="true" tabindex="-1"></a>pcob <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(X)</span>
-<span id="cb429-3"><a href="proportion-of-variance-explained.html#cb429-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcob)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="proportion-of-variance-explained.html#cb431-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(<span class="fu">scale</span>(USArrests[,<span class="sc">-</span><span class="dv">1</span>])) </span>
+<span id="cb431-2"><a href="proportion-of-variance-explained.html#cb431-2" aria-hidden="true" tabindex="-1"></a>pcob <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(X)</span>
+<span id="cb431-3"><a href="proportion-of-variance-explained.html#cb431-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcob)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.5749 0.9949 0.59713 0.41645

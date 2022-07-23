@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,18 +590,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exploratory-data-analysis-eda" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Exploratory Data Analysis (EDA)<a href="exploratory-data-analysis-eda.html#exploratory-data-analysis-eda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s count <code>High</code></p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="exploratory-data-analysis-eda.html#cb202-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="sc">%&gt;%</span> </span>
-<span id="cb202-2"><a href="exploratory-data-analysis-eda.html#cb202-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">count</span>(High)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="exploratory-data-analysis-eda.html#cb203-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="sc">%&gt;%</span> </span>
+<span id="cb203-2"><a href="exploratory-data-analysis-eda.html#cb203-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">count</span>(High)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   High      n
 ##   &lt;fct&gt; &lt;int&gt;
 ## 1 No      236
 ## 2 Yes     164</code></pre>
 <p><code>High</code> plot</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="exploratory-data-analysis-eda.html#cb204-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="sc">%&gt;%</span> </span>
-<span id="cb204-2"><a href="exploratory-data-analysis-eda.html#cb204-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(High, <span class="at">fill =</span> High)) <span class="sc">+</span> </span>
-<span id="cb204-3"><a href="exploratory-data-analysis-eda.html#cb204-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb204-4"><a href="exploratory-data-analysis-eda.html#cb204-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;none&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="exploratory-data-analysis-eda.html#cb205-1" aria-hidden="true" tabindex="-1"></a>carseats <span class="sc">%&gt;%</span> </span>
+<span id="cb205-2"><a href="exploratory-data-analysis-eda.html#cb205-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(High, <span class="at">fill =</span> High)) <span class="sc">+</span> </span>
+<span id="cb205-3"><a href="exploratory-data-analysis-eda.html#cb205-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb205-4"><a href="exploratory-data-analysis-eda.html#cb205-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;none&#39;</span>)</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/countplot_High-1.png" width="672" /></p>
 </div>
             </section>

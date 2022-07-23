@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,15 +591,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.13</span> The Family-Wise Error Rate<a href="the-family-wise-error-rate.html#the-family-wise-error-rate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If the null hypothesis is true for each of <span class="math inline">\(m\)</span> independent hypothesis tests, then the FWER is equal to <span class="math inline">\(1-(1-\alpha)^m\)</span>.</p>
 <p>We can use this expression to compute the FWER for <span class="math inline">\(m=1,\ldots, 500\)</span> and <span class="math inline">\(\alpha=0.05\)</span>, <span class="math inline">\(0.01\)</span>, and <span class="math inline">\(0.001\)</span>.</p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="the-family-wise-error-rate.html#cb525-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
-<span id="cb525-2"><a href="the-family-wise-error-rate.html#cb525-2" aria-hidden="true" tabindex="-1"></a>fwe1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>)<span class="sc">^</span>m</span>
-<span id="cb525-3"><a href="the-family-wise-error-rate.html#cb525-3" aria-hidden="true" tabindex="-1"></a>fwe2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>)<span class="sc">^</span>m</span>
-<span id="cb525-4"><a href="the-family-wise-error-rate.html#cb525-4" aria-hidden="true" tabindex="-1"></a>fwe3 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>)<span class="sc">^</span>m</span></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="the-family-wise-error-rate.html#cb527-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb527-2"><a href="the-family-wise-error-rate.html#cb527-2" aria-hidden="true" tabindex="-1"></a>fwe1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>)<span class="sc">^</span>m</span>
+<span id="cb527-3"><a href="the-family-wise-error-rate.html#cb527-3" aria-hidden="true" tabindex="-1"></a>fwe2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>)<span class="sc">^</span>m</span>
+<span id="cb527-4"><a href="the-family-wise-error-rate.html#cb527-4" aria-hidden="true" tabindex="-1"></a>fwe3 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>)<span class="sc">^</span>m</span></code></pre></div>
 <p>We now conduct a one-sample <span class="math inline">\(t\)</span>-test for each of the first five managers in the <code>Fund</code> dataset, in order to test the null hypothesis that the <span class="math inline">\(j\)</span>th fund manager’s mean return equals zero, <span class="math inline">\(H_{0j}: \mu_j=0\)</span>.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="the-family-wise-error-rate.html#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb526-2"><a href="the-family-wise-error-rate.html#cb526-2" aria-hidden="true" tabindex="-1"></a>fund.mini <span class="ot">&lt;-</span> Fund[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb526-3"><a href="the-family-wise-error-rate.html#cb526-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb526-4"><a href="the-family-wise-error-rate.html#cb526-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fund.mini[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="the-family-wise-error-rate.html#cb528-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb528-2"><a href="the-family-wise-error-rate.html#cb528-2" aria-hidden="true" tabindex="-1"></a>fund.mini <span class="ot">&lt;-</span> Fund[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb528-3"><a href="the-family-wise-error-rate.html#cb528-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb528-4"><a href="the-family-wise-error-rate.html#cb528-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fund.mini[, <span class="dv">1</span>], <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -611,30 +611,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## mean of x 
 ##         3</code></pre>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="the-family-wise-error-rate.html#cb528-1" aria-hidden="true" tabindex="-1"></a>fund.pvalue <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb528-2"><a href="the-family-wise-error-rate.html#cb528-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb528-3"><a href="the-family-wise-error-rate.html#cb528-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb528-4"><a href="the-family-wise-error-rate.html#cb528-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb528-5"><a href="the-family-wise-error-rate.html#cb528-5" aria-hidden="true" tabindex="-1"></a>  fund.pvalue[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(fund.mini[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb528-6"><a href="the-family-wise-error-rate.html#cb528-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb528-7"><a href="the-family-wise-error-rate.html#cb528-7" aria-hidden="true" tabindex="-1"></a>fund.pvalue</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="the-family-wise-error-rate.html#cb530-1" aria-hidden="true" tabindex="-1"></a>fund.pvalue <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb530-2"><a href="the-family-wise-error-rate.html#cb530-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb530-3"><a href="the-family-wise-error-rate.html#cb530-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb530-4"><a href="the-family-wise-error-rate.html#cb530-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb530-5"><a href="the-family-wise-error-rate.html#cb530-5" aria-hidden="true" tabindex="-1"></a>  fund.pvalue[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(fund.mini[, i], <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb530-6"><a href="the-family-wise-error-rate.html#cb530-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb530-7"><a href="the-family-wise-error-rate.html#cb530-7" aria-hidden="true" tabindex="-1"></a>fund.pvalue</span></code></pre></div>
 <pre><code>## [1] 0.006202355 0.918271152 0.011600983 0.600539601 0.755781508</code></pre>
 <p>We will make a correction with Bonferroni’s method and Holm’s method to control the FWER.</p>
 <p>To do this, we use the <code>p.adjust()</code> function.</p>
 <p>In other words, the adjusted <span class="math inline">\(p\)</span>-values resulting from the <code>p.adjust()</code> function can be compared to the desired FWER in order to determine whether or not to reject each hypothesis.</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="the-family-wise-error-rate.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(fund.pvalue, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="the-family-wise-error-rate.html#cb532-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(fund.pvalue, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.03101178 1.00000000 0.05800491 1.00000000 1.00000000</code></pre>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="the-family-wise-error-rate.html#cb532-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmin</span>(fund.pvalue <span class="sc">*</span> <span class="dv">5</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="the-family-wise-error-rate.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmin</span>(fund.pvalue <span class="sc">*</span> <span class="dv">5</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.03101178 1.00000000 0.05800491 1.00000000 1.00000000</code></pre>
 <p>Therefore, using Bonferroni’s method, we are able to reject the null hypothesis only for Manager One while controlling the FWER at <span class="math inline">\(0.05\)</span>.</p>
 <p>By contrast, using Holm’s method, the adjusted <span class="math inline">\(p\)</span>-values indicate that we can reject the null hypotheses for Managers One and Three at a FWER of <span class="math inline">\(0.05\)</span>.</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="the-family-wise-error-rate.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(fund.pvalue, <span class="at">method =</span> <span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="the-family-wise-error-rate.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(fund.pvalue, <span class="at">method =</span> <span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.03101178 1.00000000 0.04640393 1.00000000 1.00000000</code></pre>
 <p>Manager One performs well, whereas Manager Two has poor performance.</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="the-family-wise-error-rate.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fund.mini, <span class="dv">2</span>, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="the-family-wise-error-rate.html#cb538-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fund.mini, <span class="dv">2</span>, mean)</span></code></pre></div>
 <pre><code>## Manager1 Manager2 Manager3 Manager4 Manager5 
 ##      3.0     -0.1      2.8      0.5      0.3</code></pre>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="the-family-wise-error-rate.html#cb538-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fund.mini[, <span class="dv">1</span>], fund.mini[, <span class="dv">2</span>], <span class="at">paired =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="the-family-wise-error-rate.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fund.mini[, <span class="dv">1</span>], fund.mini[, <span class="dv">2</span>], <span class="at">paired =</span> T)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -647,10 +647,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mean difference 
 ##             3.1</code></pre>
 <p>Here, we use the <code>TukeyHSD()</code> function to apply Tukey’s methodin order to adjust for multiple testing.</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="the-family-wise-error-rate.html#cb540-1" aria-hidden="true" tabindex="-1"></a>returns <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">as.matrix</span>(fund.mini))</span>
-<span id="cb540-2"><a href="the-family-wise-error-rate.html#cb540-2" aria-hidden="true" tabindex="-1"></a>manager <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>), <span class="fu">rep</span>(<span class="dv">50</span>, <span class="dv">5</span>))</span>
-<span id="cb540-3"><a href="the-family-wise-error-rate.html#cb540-3" aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(returns <span class="sc">~</span> manager)</span>
-<span id="cb540-4"><a href="the-family-wise-error-rate.html#cb540-4" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1)</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="the-family-wise-error-rate.html#cb542-1" aria-hidden="true" tabindex="-1"></a>returns <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">as.matrix</span>(fund.mini))</span>
+<span id="cb542-2"><a href="the-family-wise-error-rate.html#cb542-2" aria-hidden="true" tabindex="-1"></a>manager <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>), <span class="fu">rep</span>(<span class="dv">50</span>, <span class="dv">5</span>))</span>
+<span id="cb542-3"><a href="the-family-wise-error-rate.html#cb542-3" aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(returns <span class="sc">~</span> manager)</span>
+<span id="cb542-4"><a href="the-family-wise-error-rate.html#cb542-4" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -668,12 +668,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4-3 -2.3 -6.1865435 1.5865435 0.4819994
 ## 5-3 -2.5 -6.3865435 1.3865435 0.3948292
 ## 5-4 -0.2 -4.0865435 3.6865435 0.9999095</code></pre>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="the-family-wise-error-rate.html#cb542-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1)<span class="sc">$</span>manager[,<span class="dv">4</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="the-family-wise-error-rate.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1)<span class="sc">$</span>manager[,<span class="dv">4</span>])</span></code></pre></div>
 <pre><code>## [1] 0.600986</code></pre>
 <p>The <code>TukeyHSD()</code> function provides confidence intervals for the difference between each pair of managers (<code>lwr</code> and <code>upr</code>), as well as a <span class="math inline">\(p\)</span>-value.</p>
 <p>All of these quantities have been adjusted for multiple testing.</p>
 <p>Let’s plot the confidence intervals for the pairwise comparisons using the <code>plot()</code> function.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="the-family-wise-error-rate.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1))</span></code></pre></div>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="the-family-wise-error-rate.html#cb546-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(<span class="at">x =</span> a1))</span></code></pre></div>
 <p><img src="bookclub-islr_files/figure-html/chunk14-1.png" width="672" /></p>
 <hr />
 </div>

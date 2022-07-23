@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,12 +590,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="final-evauation" class="section level2 hasAnchor" number="8.38">
 <h2><span class="header-section-number">8.38</span> Final evauation<a href="final-evauation.html#final-evauation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Last fit</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="final-evauation.html#cb305-1" aria-hidden="true" tabindex="-1"></a>xgb_last_fit <span class="ot">&lt;-</span> </span>
-<span id="cb305-2"><a href="final-evauation.html#cb305-2" aria-hidden="true" tabindex="-1"></a>     xgb_wf <span class="sc">%&gt;%</span> </span>
-<span id="cb305-3"><a href="final-evauation.html#cb305-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">finalize_workflow</span>(<span class="fu">select_best</span>(xgb_rs, <span class="st">&quot;rmse&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb305-4"><a href="final-evauation.html#cb305-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">last_fit</span>(carseats_split)</span>
-<span id="cb305-5"><a href="final-evauation.html#cb305-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb305-6"><a href="final-evauation.html#cb305-6" aria-hidden="true" tabindex="-1"></a>xgb_last_fit</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="final-evauation.html#cb306-1" aria-hidden="true" tabindex="-1"></a>xgb_last_fit <span class="ot">&lt;-</span> </span>
+<span id="cb306-2"><a href="final-evauation.html#cb306-2" aria-hidden="true" tabindex="-1"></a>     xgb_wf <span class="sc">%&gt;%</span> </span>
+<span id="cb306-3"><a href="final-evauation.html#cb306-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">finalize_workflow</span>(<span class="fu">select_best</span>(xgb_rs, <span class="st">&quot;rmse&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb306-4"><a href="final-evauation.html#cb306-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">last_fit</span>(carseats_split)</span>
+<span id="cb306-5"><a href="final-evauation.html#cb306-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-6"><a href="final-evauation.html#cb306-6" aria-hidden="true" tabindex="-1"></a>xgb_last_fit</span></code></pre></div>
 <pre><code>## # Resampling results
 ## # Manual resampling 
 ## # A tibble: 1 × 6
@@ -603,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;list&gt;            &lt;chr&gt;            &lt;list&gt;   &lt;list&gt;   &lt;list&gt;       &lt;list&gt;    
 ## 1 &lt;split [300/100]&gt; train/test split &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;     &lt;workflow&gt;</code></pre>
 <p>Collect metrics</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="final-evauation.html#cb307-1" aria-hidden="true" tabindex="-1"></a>xgb_last_fit <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="final-evauation.html#cb308-1" aria-hidden="true" tabindex="-1"></a>xgb_last_fit <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   .metric .estimator .estimate .config             
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               

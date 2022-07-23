@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -590,10 +590,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="brain-cancer-data" class="section level2 hasAnchor" number="11.6">
 <h2><span class="header-section-number">11.6</span> Brain Cancer Data<a href="brain-cancer-data.html#brain-cancer-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We begin with the <code>BrainCancer</code> data set, which is part of the <code>ISLR2</code> package.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="brain-cancer-data.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BrainCancer&quot;</span>)</span>
-<span id="cb361-2"><a href="brain-cancer-data.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(BrainCancer)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="brain-cancer-data.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BrainCancer&quot;</span>)</span>
+<span id="cb362-2"><a href="brain-cancer-data.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(BrainCancer)</span></code></pre></div>
 <pre><code>## [1] 88  8</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="brain-cancer-data.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BrainCancer)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="brain-cancer-data.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(BrainCancer)</span></code></pre></div>
 <pre><code>##      sex  diagnosis            loc ki   gtv stereo status  time
 ## 1 Female Meningioma Infratentorial 90  6.11    SRS      0 57.64
 ## 2   Male  HG glioma Supratentorial 90 19.35    SRT      1  8.98
@@ -602,7 +602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   Male  HG glioma Supratentorial 90  5.06    SRT      1  6.30
 ## 6 Female Meningioma Supratentorial 80  4.82    SRS      0 52.75</code></pre>
 <p>The rows index the 88 patients, while the columns contain the 8 predictors.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="brain-cancer-data.html#cb365-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim_without_charts</span>(BrainCancer)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="brain-cancer-data.html#cb366-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim_without_charts</span>(BrainCancer)</span></code></pre></div>
 <table style="width: auto;" class="table table-condensed">
 <caption>
 <span id="tab:11skim">Table 11.1: </span>Data summary
@@ -953,8 +953,8 @@ time
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="brain-cancer-data.html#cb366-1" aria-hidden="true" tabindex="-1"></a>BrainCancer <span class="sc">%&gt;%</span> </span>
-<span id="cb366-2"><a href="brain-cancer-data.html#cb366-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">count</span>(status)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="brain-cancer-data.html#cb367-1" aria-hidden="true" tabindex="-1"></a>BrainCancer <span class="sc">%&gt;%</span> </span>
+<span id="cb367-2"><a href="brain-cancer-data.html#cb367-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">count</span>(status)</span></code></pre></div>
 <pre><code>##   status  n
 ## 1      0 53
 ## 2      1 35</code></pre>

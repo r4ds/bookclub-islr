@@ -23,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -594,9 +594,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="eda" class="section level3 hasAnchor" number="8.15.1">
 <h3><span class="header-section-number">8.15.1</span> EDA<a href="decision-trees-regression-explained-statquest.html#eda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s plot a histogram for <code>Sales</code> (target)</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="decision-trees-regression-explained-statquest.html#cb244-1" aria-hidden="true" tabindex="-1"></a>Carseats <span class="sc">%&gt;%</span> </span>
-<span id="cb244-2"><a href="decision-trees-regression-explained-statquest.html#cb244-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sales)) <span class="sc">+</span> </span>
-<span id="cb244-3"><a href="decision-trees-regression-explained-statquest.html#cb244-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="decision-trees-regression-explained-statquest.html#cb245-1" aria-hidden="true" tabindex="-1"></a>Carseats <span class="sc">%&gt;%</span> </span>
+<span id="cb245-2"><a href="decision-trees-regression-explained-statquest.html#cb245-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sales)) <span class="sc">+</span> </span>
+<span id="cb245-3"><a href="decision-trees-regression-explained-statquest.html#cb245-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookclub-islr_files/figure-html/plot_Sales-2.png" width="672" /></p>
 </div>
