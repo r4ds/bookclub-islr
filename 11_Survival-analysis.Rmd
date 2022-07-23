@@ -377,6 +377,19 @@ https://www.merriam-webster.com/dictionary/minuend
 
 ### Cohort 3
 
+`r knitr::include_url("https://www.youtube.com/embed/Ivl1tOWOfEM")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:01:30	Mei Ling Soh:	https://www.youtube.com/watch?v=AsNTP8Kwu80&vl=en
+00:02:57	Mei Ling Soh:	https://www.rstudio.com/blog/torch/
+00:05:11	Mei Ling Soh:	https://rstudio.github.io/reticulate/
+00:54:05	Fariborz Soroush:	No question here :D
+```
+</details>
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
