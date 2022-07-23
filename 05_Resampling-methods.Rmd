@@ -582,6 +582,18 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 
 ### Cohort 4
 
+`r knitr::include_url("https://www.youtube.com/embed/N7hQaxyFOpM")`
+
+<details>
+<summary>Meeting chat log</summary>
+```
+00:37:41	Ronald Legere:	https://en.wikipedia.org/wiki/Bootstrapping_(statistics)
+00:54:52	shamsuddeen:	Hello, I wil leave now. See you next week !
+00:55:04	Sandra Muroy:	bye Sham!
+00:55:13	shamsuddeen:	Thank you Sandra
+```
+</details>
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
