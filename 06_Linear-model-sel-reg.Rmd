@@ -12,11 +12,11 @@
 
 ## Subset Selection
 
-## Context for This Chapter {.unnumbered}
+### Context for This Chapter {.unnumbered}
 
 - `lm(y ~ ., data)`
 - $p \approx n, p = n, p > n$
-- perdiction error
+- prediction error
   - low bias (by assumption)
   - ... but variance $p \approx n$
   - ... or meaninglessness $p = n$
@@ -28,7 +28,7 @@
 - "To perform best subset selection, we fit a separate least squares regression best subset for each possible combination of the *p* preditors."
 - "That is, we fit all *p* models selection that contain exactly one predictor, all $(^p_2) = p(p - 1)/2$ models that contain exactly two predictors, and so forth."
 
-## BSS Algorithm {.unnumbered}
+### BSS Algorithm {.unnumbered}
 
 1. Start with the null model (intercept-only model), $\mathcal{M}_0$.
 2. For $k = 1, 2, ..., p$:
@@ -36,11 +36,11 @@
   - Let $\mathcal{M}_k$ denote the best of these $(^p_k)$ models, where *best* is defined as having the lowest RSS, lowest deviance, etc
 3. Choose the best model among $\mathcal{M}_0, ..., \mathcal{M}_p$, where *best* is defined as having the lowest $C_p$, $BIC$, $AIC$, cross-valided MSE, or, alternatively, *highest* adjusted $R^2$
 
-## BSS Algorithm {.unlisted .unnumbered}
+### BSS Algorithm {.unlisted .unnumbered}
 
 (Figure 6.1 from book)
 
-## Behind the dots, BSS'ing ISLR2::Credit {.unnumbered}
+### Behind the dots, BSS'ing ISLR2::Credit {.unnumbered}
 
 - $(^{11}_1) = 11$
 - $(^{11}_2) = 55$
@@ -49,7 +49,7 @@
 - $(^{11}_5) = 462$
 - 462, 300, 165, 55, 11, 1 ...
 
-## Best Subset Selection (BSS) {.unnumbered}
+### Best Subset Selection (BSS) {.unnumbered}
 
 - Pros
   - Selects the best subset
@@ -66,7 +66,7 @@
   - Select the predictor that raises $R^2$ the most and add it to model $\mathcal{M}_{k - 1}$ to create model $\mathcal{M}_k$
 3. Select the model among $\mathcal{M}_0, ..., \mathcal{M}_k$ that minimizes validation error (or some estimate of it)
 
-## FsSS'ing ISLR2::Credit {.unnumbered}
+### FsSS'ing ISLR2::Credit {.unnumbered}
 
 - $(^{11}_1) = 11$ (same as BSS)
 - $(^{10}_1) = 10$ (instead of 55)
@@ -102,7 +102,7 @@
 - Going with $\mathcal{M}_p$ doesn't provide either of the benefits: model interpretability and variance reduction (overfitting)
 - We'll need to estimate test error!
 
-## Adjustment Methods {.unnumbered}
+### Adjustment Methods {.unnumbered}
 
 - $C_p = \frac{1}{n}(Rss + 2k\hat{\sigma}^2)$
 - $\hat{\sigma}^2$ is an "estimate of variance of the error $\epsilon$ associated with each response measurement"
@@ -112,7 +112,7 @@
 - $BIC = k \cdot ln(N) - 2ln(\hat{L})$
 - adjusted $R^2 = 1 - \frac{RSS}{TSS} \cdot \frac{n-1}{n-k-1}$
 
-## Avoiding Adjustment Methods {.unnumbered}
+### Avoiding Adjustment Methods {.unnumbered}
 
 - $\hat{\sigma}^2$ can be hard to come by
 - model *df*, too
@@ -153,19 +153,19 @@
 - there's one model parameter $\lambda$ doesn't shrink
   - ($\hat{\beta_0}$)
 
-## Ridge Regression, Visually {.unnumbered}
+### Ridge Regression, Visually {.unnumbered}
 
 (figure showing ridge regression)
 
 $$\|\beta\|_2 = \sqrt{\sum_{j=1}^p{\beta_j^2}}$$
 
-## Ridge, good? {.unnumbered}
+### Ridge, good? {.unnumbered}
 
 (figure of ridge success(?))
 
 - "One can show that computations required to solve (6.5), simultaneously for all values of $\lambda$, are almost identical to those for fitting a model using least squares."
 
-## Preprocessing {.unnumbered}
+### Preprocessing {.unnumbered}
 
 - $\beta_j^R$ aren't scale invariant, so:
 $$\tilde{x}_{ij} = \frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_i^n{(x_{ij} - \bar{x}_j)^2}}}$$
@@ -177,17 +177,17 @@ $$\tilde{x}_{ij} = \frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_i^n{(x_{ij} - \bar{x}_j)^
 - Shrinks coefficients to 0 (sparse models)
 - In `glmnet` $\alpha = 1$ is the default in:
 $$\lambda[(1 - \alpha)\|\beta\|_2^2/2 + \alpha\|\beta\|_1]$$
-## The Lasso, Visually {.unnumbered}
+### The Lasso, Visually {.unnumbered}
 
 (figure of the lasso)
 
 $$\|\beta\|_1 = \sum_{j=1}^p{|\beta_j|}$$
 
-## Justin Grimmer Homework {.unnumbered}
+### Justin Grimmer Homework {.unnumbered}
 
 (figure from homework Justin found online)
 
-## Visualization of "such that" formulations {.unnumbered}
+### Visualization of "such that" formulations {.unnumbered}
 
 (figure of contours)
 
@@ -199,7 +199,7 @@ $$X = (X_1, ..., X_p)$$
 $$\beta = (\beta_0, \beta_1, ..., \beta_p)^T$$
 $$P(\beta|X, Y) \propto f(Y|X,\beta)P(\beta|X) = f(Y|X, \beta)P(\beta)$$
 
-## Bayesian Interpretation (cont) {.unnumbered}
+### Bayesian Interpretation (cont) {.unnumbered}
 
 $$P(\beta) = \prod_{j=1}^p{g(\beta_j)}$$
 
@@ -211,7 +211,7 @@ $$P(\beta) = \prod_{j=1}^p{g(\beta_j)}$$
 
 - Left: Lasso, Right: Lasso is solid, ridge is dotted
 
-## Tuning $\lambda$ {.unnumbered}
+### Tuning $\lambda$ {.unnumbered}
 
 (figures)
 
@@ -224,7 +224,7 @@ $$Z_m = \sum_{j=1}^p{\phi_{jm}X_j}$$
 
 - Linear regression using the transformed predictors can "often" outperform linear regression using the original predictors.
 
-## The Math {.unnumbered}
+### The Math {.unnumbered}
 
 $$Z_m = \sum_{j=1}^p{\phi_{jm}X_j}$$
 $$y_i = \theta_0 + \sum_{m=1}^M{\theta_mz_{im} + \epsilon_i}, i = 1, ..., n$$
@@ -236,19 +236,19 @@ $$\beta_j = \sum_{m=1}^M{\theta_m\phi_{jm}}$$
 - Dimension reduction constrains $\beta_j$
   - Can increase bias, but (significantly) reduce variance when $M \ll p$
 
-## Principal Components Regression {.unnumbered}
+### Principal Components Regression {.unnumbered}
 
 - [Allison Horst's whale-shark-vs-krill](https://twitter.com/allison_horst/status/1288904459490213888):
 
 ![imagine you're a whale shark...](images/pca_whale_shark.png)
 
-## Principal Components Regression {.unnumbered .unlisted}
+### Principal Components Regression {.unnumbered .unlisted}
 
 - [Allison Horst's whale-shark-vs-krill](https://twitter.com/allison_horst/status/1288904459490213888):
 
 ![...approaching this delicious krill swarm](images/pca_krill.png)
 
-## Principal Components Regression {.unnumbered .unlisted}
+### Principal Components Regression {.unnumbered .unlisted}
 
 (Future cohorts: Try to get a screenshot of everyone turning their head like the shark; Cohort 1 mostly had their cameras off, so I didn't get a head turn)
 
@@ -258,13 +258,13 @@ $$\beta_j = \sum_{m=1}^M{\theta_m\phi_{jm}}$$
 - Second principal component = orthoganol to 1st, best fit remaining
 - Etc
 
-## Principal Components Regression {.unnumbered .unlisted}
+### Principal Components Regression {.unnumbered .unlisted}
 
 ![Figure 6.15](images/06_pca_1.png)
 
 $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\mathrm{ad} - \overline{\mathrm{ad}})$$
 
-## Principal Components Regression {.unnumbered .unlisted}
+### Principal Components Regression {.unnumbered .unlisted}
 
 ![Figure 6.19](images/06_pcr_simulated2.png)
 
@@ -275,13 +275,13 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
   - More like ridge than lasso.
 - Best to standardize variables before PCR.
 
-## Principal Components Regression {.unnumbered .unlisted}
+### Principal Components Regression {.unnumbered .unlisted}
 
 ![Figure 6.18](images/06_pcr_simulated.png)
 
 - When variation in $X$ isn't strongly correlated with variation in $Y$, PCR isn't as effective.
 
-## Partial Least Squares {.unnumbered}
+### Partial Least Squares {.unnumbered}
 
 - Partial Least Squares (PLS) is like PCA, but supervised (use $Y$ to choose).
 - In this figure, `pop` is more related to $Y$ than is `ad`.
@@ -297,14 +297,14 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 
 ![Figure 6.22](images/fig06-22.png)
 
-## Considerations in High Dimensions {.unnumbered .unlisted}
+### Considerations in High Dimensions {.unnumbered .unlisted}
 
 - Modern data can have a *huge* number of predictors (eg: 500k SNPs, every word ever entered in a search)
 - When $n < p$, linear regression memorizes the training data, but can ***suck*** on test data.
 
 ![Figure 6.23](images/fig06-23.png)
 
-## Lasso (etc) vs Dimensionality {.unnumbered}
+### Lasso (etc) vs Dimensionality {.unnumbered}
 
 - Reducing flexibility (all the stuff in this chapter) can help.
 - It's important to choose good tuning parameters for whatever method you use.
