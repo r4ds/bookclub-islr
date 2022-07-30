@@ -178,9 +178,11 @@ Graphically:
 
 
 ```{r, echo= FALSE}
-knitr::include_graphics(rep("images/figure6_8.png"))
+knitr::include_graphics(rep("images/figure6_7.png"))
 ```
 
+"the lasso constraint has corners at each of the axes, and
+so the ellipse will often intersect the constraint region at an axis"
 
 ## Bayesian Interpretation {.unnumbered}
 
@@ -188,22 +190,17 @@ $$X = (X_1, ..., X_p)$$
 $$\beta = (\beta_0, \beta_1, ..., \beta_p)^T$$
 $$P(\beta|X, Y) \propto f(Y|X,\beta)P(\beta|X) = f(Y|X, \beta)P(\beta)$$
 
-### Bayesian Interpretation (cont) {.unnumbered}
+Often the prior takes the form: 
 
 $$P(\beta) = \prod_{j=1}^p{g(\beta_j)}$$
 
-(gaussian prior images)
+- Gaussian prior for each $\beta$ corresponds to ridge regression.
+- Double exponential prior for each $\beta$ corresponds to lasso.
 
-## Choosing the tuning parameter {.unnumbered}
-
-(figures)
-
-- Left: Lasso, Right: Lasso is solid, ridge is dotted
-
-### Tuning $\lambda$ {.unnumbered}
-
-(figures)
-
+```{r, echo= FALSE}
+knitr::include_graphics(rep("images/figure6_11.png"))
+```
+ 
 ## Dimension Reduction Methods
 
 - Transform predictors before use.
@@ -227,25 +224,14 @@ $$\beta_j = \sum_{m=1}^M{\theta_m\phi_{jm}}$$
 
 ### Principal Components Regression {.unnumbered}
 
-- [Allison Horst's whale-shark-vs-krill](https://twitter.com/allison_horst/status/1288904459490213888):
-
-![imagine you're a whale shark...](images/pca_whale_shark.png)
-
-### Principal Components Regression {.unnumbered .unlisted}
-
-- [Allison Horst's whale-shark-vs-krill](https://twitter.com/allison_horst/status/1288904459490213888):
-
-![...approaching this delicious krill swarm](images/pca_krill.png)
-
-### Principal Components Regression {.unnumbered .unlisted}
-
-(Future cohorts: Try to get a screenshot of everyone turning their head like the shark; Cohort 1 mostly had their cameras off, so I didn't get a head turn)
-
 - PCA chooses $\phi$s to capture as much variance as possible.
 - Will be discussed in more detail in Chapter 12.
-- First principal component = line of best fit to the data
-- Second principal component = orthoganol to 1st, best fit remaining
+- First principal component =   direction of the data is that along which the
+observations vary the most.
+- Second principal component = orthogonal to 1st, capture next most variance
 - Etc
+
+![Figure 6.14](images/fig06-14.png)
 
 ### Principal Components Regression {.unnumbered .unlisted}
 
@@ -291,7 +277,7 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 - Modern data can have a *huge* number of predictors (eg: 500k SNPs, every word ever entered in a search)
 - When $n < p$, linear regression memorizes the training data, but can ***suck*** on test data.
 
-![Figure 6.23](images/fig06-23.png)
+![Figure 6.23 - simulated data set with n = 20 training observations, all unrelated to outcome.](images/fig06-23.png)
 
 ### Lasso (etc) vs Dimensionality {.unnumbered}
 
@@ -299,7 +285,7 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 - It's important to choose good tuning parameters for whatever method you use.
 - Features that aren't associated with $Y$ increase test error ("curse of dimensionality").
   - Fit to noise in training, noise in test is different.
-- When $p > n$, *never* use train MSE, p-values, $R^2$, etc, because they're likely to be wildly different from test values.
+- When $p > n$, *never* use train MSE, p-values, $R^2$, etc, as evidence of goodness of fit because they're likely to be wildly different from test values.
 
 ![Figure 6.24](images/fig06-24.png)
 
