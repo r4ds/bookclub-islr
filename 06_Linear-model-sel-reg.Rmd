@@ -243,9 +243,8 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 ### Principal Components Regression {.unnumbered .unlisted}
 
 ![Figure 6.19](images/06_pcr_simulated2.png)
-
-- Assume most of the variation in $X$ is associated with variation in $Y$.
 - Mitigate overfitting by reducing number of variables.
+- Assume that the directions in which $X$ shows the most variation are the directions associated with variation in $Y$.
 - When assumption is true, PCR can do very well.
 - Note: PCR isn't feature selection, since PCs depend on all $p$s.
   - More like ridge than lasso.
