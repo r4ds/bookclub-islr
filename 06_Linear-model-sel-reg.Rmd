@@ -1,5 +1,6 @@
 # Linear Model Selection and Regularization
 
+
 **Learning objectives:**
 
 - Select a subset of features to include in a linear model.
@@ -56,7 +57,7 @@
 - Cons
   - Overfitting
   - I don't know how to incorporate polynomial terms and interactions (Go "Nike" and Just Do It?)
-  - Computationally expensive
+  - Computationally expensive, intractable for large $p$
 
 ## Forward Stepwise Subset Selection (FsSS) {.unnumbered}
 
