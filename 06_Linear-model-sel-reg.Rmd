@@ -224,12 +224,13 @@ $$\beta_j = \sum_{m=1}^M{\theta_m\phi_{jm}}$$
 
 ### Principal Components Regression {.unnumbered}
 
-- PCA chooses $\phi$s to capture as much variance as possible.
+- PCA chooses $\phi$s to capture as much variance as possible. 
 - Will be discussed in more detail in Chapter 12.
 - First principal component =   direction of the data is that along which the
 observations vary the most.
-- Second principal component = orthogonal to 1st, capture next most variance
+- Second principal component = orthogonal to 1st, capture next most variation
 - Etc
+- Create new 'predictors' that are more independent and potentially fewer, which improves test MSE,  but note that this doe not help improve interpretability (all $p$ predictors are still involved.)
 
 ![Figure 6.14](images/fig06-14.png)
 
