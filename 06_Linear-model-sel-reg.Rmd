@@ -251,7 +251,10 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
   - More like ridge than lasso.
 - Best to standardize variables before PCR.
 
-### Principal Components Regression {.unnumbered .unlisted}
+### Example {.unnumbered .unlisted}
+
+In the figures below, PCR fits on simulated data are shown.  Both were generated usign n=50 observations and p = 45 predictors.  First data set response uses all the predictors, while in seond it uses only two.  PCR improves over OLS at least in the first case.  In the second case the improvement is modest, perhaps because the assumption that the directions of maximal variations in predictors doesnt correlate well with variations in the response as assumed by PCR.
+
 
 ![Figure 6.18](images/06_pcr_simulated.png)
 
@@ -268,15 +271,10 @@ $$Z_1 = 0.839 \times (\mathrm{pop} - \overline{\mathrm{pop}}) + 0.544 \times (\m
 
 ## Considerations in High Dimensions
 
-- Modern data can have a *huge* number of predictors (eg: 500k SNPs, every word ever entered in a search)
-- When $n = p$, linear regression memorizes the training data...
-
 ![Figure 6.22](images/fig06-22.png)
 
-### Considerations in High Dimensions {.unnumbered .unlisted}
-
 - Modern data can have a *huge* number of predictors (eg: 500k SNPs, every word ever entered in a search)
-- When $n < p$, linear regression memorizes the training data, but can ***suck*** on test data.
+- When $n <= p$, linear regression memorizes the training data, but can ***suck*** on test data.
 
 ![Figure 6.23 - simulated data set with n = 20 training observations, all unrelated to outcome.](images/fig06-23.png)
 
