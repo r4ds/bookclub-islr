@@ -288,6 +288,51 @@ In the figures below, PCR fits on simulated data are shown.  Both were generated
 
 ![Figure 6.24](images/fig06-24.png)
 
+## Exercises 
+
+### Exercise 7 
+
+We take our model as :
+
+$$ y_i = \beta_0 + \sum_{j=1}^{p} x_{ij} \beta_j + \epsilon_i $$
+
+Here the $\epsilon_i$ are IID from a normal random distrubtion $N(0,\sigma^2)$
+The likelihood is simply a product of normal distributions with mean $\mu_i = \beta_0 + \sum_{j=1}^{p} x_{ij} \beta_j$ and standard deviation $\sigma$ :
+
+$$ L \propto e^{-\frac{1}{2\sigma^2}\sum_i{(y_i - (\beta_0 + \sum_{j=1}^{p} x_{ij} \beta_j))^2} }$$
+we only care about the parts that depends on the $\beta_i$ so dont worry about the normalization.
+
+The posterior is simply proportional to the product of $L$ and the prior
+
+$$ P(\beta | Data) \propto P(Data | \beta) P(\beta)$$
+
+$$ P(\beta | Data) \propto e^{-\frac{1}{2\sigma^2}\sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2} } \prod_{j=1}^{p}e^{-\vert \beta_i \rvert/b}$$
+again dropping any constants of proportionality that do not depend on the parameters.
+
+Now combine the exponentials:
+
+$$ P(\beta | Data) \propto e^{-\frac{1}{2\sigma^2}\sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2}  -\sum_{j=1}^{p}\vert \beta_i \rvert/b}$$
+
+The mode of this distribution is the value for the $\beta_i$ for which the exponent is maximized,  which means to find the mode we need to minimize:
+
+$$ \frac{1}{2\sigma^2}\sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2}  + \sum_{j=1}^{p}\vert \beta_i \rvert/b$$
+or after multiplying through by $2 \sigma^2$
+
+$$ \sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2}  + \sum_{j=1}^{p} 2\sigma^2 \vert  \beta_i \rvert/b$$
+
+
+This is the same form as 6.7
+
+I think it should be clear that if you work throuhg the exact same steps with prior (for each $\beta_i$) $e^{-\frac{\beta_i^2}{2 c}}$ you end up with the posterior:
+
+$$ e^{- \frac{1}{2\sigma^2}\sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2}  -\sum_{j=1}^{p} \frac{\beta_i^2}{2 c}}$$
+
+And to find the to find the mode of the posterior, to finding the minimum of:  
+
+$$ \sum_i{(y_i - \beta_0 - \sum_{j=1}^{p} x_{ij} \beta_j)^2}  + \sum_{j=1}^{p} \frac{\sigma^2}{c}\beta_i^2$$
+which is of the same form as 6.5.
+That this mode is also the mean follows since the posterior in this case is a multinormal distribution in $\beta_i$ (it's quadratic)
+
 ## Meeting Videos
 
 ### Cohort 1
