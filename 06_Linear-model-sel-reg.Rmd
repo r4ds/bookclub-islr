@@ -11,7 +11,7 @@
   - Compare and contrast the PCR and PLS methods of dimension reduction.
 - Explain the challenges that may occur when fitting linear models to high-dimensional data.
 
-### Context for This Chapter {.unnumbered}
+**Context for This Chapter**
 
 - `lm(y ~ ., data)`
 
@@ -45,7 +45,6 @@ This is a group of methods that directly reduces the number of predictors by rem
   - Let $\mathcal{M}_k$ denote the best of these $(^p_k)$ models, where *best* is defined as having the lowest RSS, lowest deviance, etc
 3. Choose the best model among $\mathcal{M}_0, ..., \mathcal{M}_p$, where *best* is defined as having the lowest $C_p$, $BIC$, $AIC$, cross-validated MSE, or, alternatively, *highest* adjusted $R^2$
 
- 
 
 ### Best Subset Selection (BSS) {.unnumbered}
 
@@ -108,8 +107,6 @@ This is a group of methods that directly reduces the number of predictors by rem
 
 
 ## Shrinkage Methods
-
-
 
 ### Overview {.unnumbered}
 
