@@ -19,6 +19,7 @@ Chapter 7 resources:
 1. [Author slides](https://hastie.su.domains/MOOC-Slides/nonlinear.pdf)
 1. [Emil Hvitfeldt's `Tidymodels` examples](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/moving-beyond-linearity.html)
 1. [Kim Larsen's GAM: The Predictive Modeling Silver Bullet](https://multithreaded.stitchfix.com/blog/2015/07/30/gam/)
+1. [Noam Ross' GAMs in R: A Free, Interactive Course using mgcv](https://noamross.github.io/gams-in-r-course/)
 
 ![Black motorcycle parked at road toward mountain](https://images.unsplash.com/photo-1518787289325-94c6917b88ef)
 
