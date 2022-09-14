@@ -652,15 +652,18 @@ x %>%
 
 ### Cohort 3
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/bfOfGLEO_GQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:43:40	Jeremy Selva:	https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006907
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/pTys5kfA6Yc")`
+
 
 ### Cohort 4
 

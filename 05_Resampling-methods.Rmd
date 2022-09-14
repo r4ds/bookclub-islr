@@ -594,11 +594,11 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/cMxQZnwf6VA")`
 
 <details>
 <summary>Meeting chat log</summary>
 ```
-ADD LOG HERE
+00:38:01	Ronald Legere:	https://stats.stackexchange.com/
 ```
 </details>

@@ -602,12 +602,23 @@ I'm going to try to use that now, at least 🙃
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/oVmyYeyenhQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:11:44	Kevin Kent:	https://stackoverflow.com/questions/29710525/symbol-in-r-lm
+00:49:09	Ron:	https://en.wikipedia.org/wiki/Smoothness
+00:50:55	shamsuddeen:	This chapter is so mathy
+00:51:04	Sandra Muroy:	:D
+01:14:29	Ron:	Are we doing "bring  your won questions" next week?
+01:14:30	Ron:	I hope?
+01:14:40	Ron:	*own
+01:18:07	Kevin Kent:	yup!
+01:22:05	Ron:	I was wrong Loess is briefly looked at in the Lab section .
+01:26:30	shamsuddeen:	I had to leave. See u next week.
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/Y-oEhx4HFvM")`

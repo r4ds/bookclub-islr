@@ -935,13 +935,28 @@ plot(Rs, FDRs, xlab = "Number of Rejections", type = "l",
 
 ### Cohort 3
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/_70M4_BGEZk")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:07:53	Mei Ling Soh:	https://github.com/sohmeiling/islr_chapter13_multiple-testing
+00:09:19	Mei Ling Soh:	https://github.com/sohmeiling/islr_chapter13_multiple-testing
+00:39:43	Fariborz Soroush:	Sorry IT pushed an update on my system :|
+00:39:54	Fariborz Soroush:	I just joined
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/B0QBc6FBM3o")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:45:34	Mei Ling Soh:	https://rpubs.com/Mei_Ling/938384
+00:45:35	Mei Ling Soh:	https://r4ds.github.io/bookclub-islr/a-re-sampling-approach.html
+00:45:54	Mei Ling Soh:	https://github.com/sohmeiling/islr_chapter13_multiple-testing
 ```
 </details>
 
