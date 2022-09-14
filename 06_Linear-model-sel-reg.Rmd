@@ -431,12 +431,23 @@ https://github.com/JauntyJJS/islr2-bookclub-cohort3-chapter6-lab
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+`r knitr::include_url("https://www.youtube.com/embed/cMxQZnwf6VA")`
+
+<details>
+<summary>Meeting chat log</summary>
+```
+00:38:01	Ronald Legere:	https://stats.stackexchange.com/
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/mTQD9KaymTw")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:06:57	Kevin Kent:	https://noamross.github.io/gams-in-r-course/
+00:27:23	Ronald Legere:	https://stats.stackexchange.com/questions/410849/when-does-partial-least-squares-provide-1-component-solutions
 ```
 </details>

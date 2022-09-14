@@ -390,13 +390,15 @@ https://www.merriam-webster.com/dictionary/minuend
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/ONEtOcZMoZY")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:51:05	Nilay Yönet:	https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch11-surv-lab.html
+00:51:14	Nilay Yönet:	https://bioconnector.github.io/workshops/handouts/r-survival-cheatsheet.pdf
+00:51:31	Nilay Yönet:	https://bioconnector.github.io/workshops/r-survival.html#survival_curves
 ```
 </details>
 

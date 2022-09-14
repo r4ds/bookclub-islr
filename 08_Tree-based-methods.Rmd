@@ -1252,13 +1252,15 @@ doParallel::stopImplicitCluster()
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/fi4p6a1LLNw")`
+
+`r knitr::include_url("https://www.youtube.com/embed/lgmQmtXcjRk")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:14:50	Ron:	https://www.youtube.com/watch?v=i5wGWV5H7oM&t=1s
+00:30:58	Ron:	https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full
 ```
 </details>
-
