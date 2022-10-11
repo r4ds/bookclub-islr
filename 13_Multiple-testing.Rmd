@@ -696,7 +696,7 @@ t.test(fund.mini[, 1], fund.mini[, 2], paired = T)
 Here, we use the `TukeyHSD()` function to apply Tukey's methodin order to adjust for multiple testing.
 
 ```{r chunk13}
-conflict_prefer("as.matrix", "base")
+conflicted::conflict_prefer("as.matrix", "base")
 returns <- as.vector(base::as.matrix(fund.mini))
 manager <- rep(c("1", "2", "3", "4", "5"), rep(50, 5))
 a1 <- aov(returns ~ manager)
