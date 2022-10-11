@@ -54,7 +54,7 @@ $$g(z)=(z)_+=\left\{ \begin{array}{ll}
           1 & \mbox{otherwise}.\end{array}\right.$$
 
 
-```{r echo=FALSE,fig.cap="Activation functions - Chap 10",fig.align='center'}
+```{r 10-Deep-learning-1, echo=FALSE,fig.cap="Activation functions - Chap 10",fig.align='center'}
 knitr::include_graphics("images/10_01_activation-functions.png")
 ```
 
@@ -63,7 +63,7 @@ knitr::include_graphics("images/10_01_activation-functions.png")
 
 This is the structure of a **single layer** neural network. Here we can see the layer inputs, the hidden layers and the output layer.
 
-```{r echo=FALSE,fig.cap="Single layer neural network - Chap 10",fig.align='center'}
+```{r 10-Deep-learning-2, echo=FALSE,fig.cap="Single layer neural network - Chap 10",fig.align='center'}
 knitr::include_graphics("images/10_02_single-layer.png")
 ```
 
@@ -76,7 +76,7 @@ $$f(X)=\beta_0+\sum_{k=1}^K{\beta_kg(w_{k0}+\sum_{wkj}^p{X_j})}$$
 
 
 
-```{r echo=FALSE,fig.cap="Neural network Pt.1 Inside the black box - Youtube video",fig.align='center'}
+```{r 10-Deep-learning-3, echo=FALSE,fig.cap="Neural network Pt.1 Inside the black box - Youtube video",fig.align='center'}
 knitr::include_graphics("images/10_03_nn_youtube_1.png")
 ```
 
@@ -84,7 +84,7 @@ knitr::include_graphics("images/10_03_nn_youtube_1.png")
 
 This is from the book pg.406, and you can see all the passages for calculating the estimated $f(X)$ supposing that we know the value of the parameters.
 
-```{r echo=FALSE,fig.cap="Neural network model fit calculation - Chap 10",fig.align='center'}
+```{r 10-Deep-learning-4, echo=FALSE,fig.cap="Neural network model fit calculation - Chap 10",fig.align='center'}
 knitr::include_graphics("images/10_04_calculations.png")
 ```
 
@@ -119,7 +119,7 @@ How to perform **deep learning** in RStudio:
 
 1.  Single Layer
 
-```{r}
+```{r 10-Deep-learning-5}
 library(ISLR2)
 Gitters <- na.omit(Hitters)
 n <- nrow(Gitters)
@@ -131,7 +131,7 @@ testid <- sample(1:n, ntest)
 
 Fit the model with **testid** selection
 
-```{r}
+```{r 10-Deep-learning-6}
 training <- Gitters[-testid, ]
 testing <- Gitters[testid, ]
 
@@ -146,7 +146,7 @@ mean(abs(pred_test$lpred-pred_test$Salary))
 
 Standardize the matrix and fit the lasso using **glmnet**
 
-```{r}
+```{r 10-Deep-learning-7}
 x <- scale(model.matrix(Salary ~ . - 1, data = Gitters))
 
 y <- Gitters$Salary
@@ -174,7 +174,7 @@ Fit the neural network with {keras}:
 
 
 Keras requires some [installation](https://hastie.su.domains/ISLR2/keras-instructions.html) on RStudio:
-```{r eval=FALSE}
+```{r 10-Deep-learning-8, eval=FALSE}
 library(ISLR2)
 tryCatch(
   remove.packages(c("keras", "tensorflow", "reticulate")),
@@ -197,7 +197,7 @@ tensorflow::install_tensorflow()
 ```
 
 
-```{r eval=FALSE}
+```{r 10-Deep-learning-9, eval=FALSE}
 library(tidyverse)
 library(keras)
 library(tensorflow)
@@ -216,7 +216,7 @@ Resources:
 
 The second way is to use {torch}:
 
-```{r eval=FALSE}
+```{r 10-Deep-learning-10, eval=FALSE}
 library(torch)
 library(luz) # high-level interface for torch
 library(torchvision) # for datasets and image transformation
@@ -225,7 +225,7 @@ library(zeallot)
 torch_manual_seed(13)
 ```
 
-```{r eval=FALSE}
+```{r 10-Deep-learning-11, eval=FALSE}
 modnn <- nn_module(
   initialize = function(input_size) {
     self$hidden <- nn_linear(input_size, 50)
@@ -257,7 +257,7 @@ Second hidden layer for $l=1,...,K_2$
 $$A_{k}^{(2)}=h_k^{2}(X)$$
 
 
-```{r echo=FALSE,fig.cap="Multilayer Neural Network - Chap 10",fig.align='center'}
+```{r 10-Deep-learning-12, echo=FALSE,fig.cap="Multilayer Neural Network - Chap 10",fig.align='center'}
 knitr::include_graphics("images/10_05_multilayer.png")
 ```
 
@@ -293,14 +293,14 @@ Loss function: $(Y-O_L)^2$
 
 
 
-```{r echo=FALSE,fig.cap="Recurrent Neural Network - Chap 10",fig.align='center'}
+```{r 10-Deep-learning-13, echo=FALSE,fig.cap="Recurrent Neural Network - Chap 10",fig.align='center'}
 knitr::include_graphics("images/10_06_recurrent_nn.png")
 ```
 
 ## Backpropagation
 
 
-```{r echo=FALSE,fig.cap="Backpropagation - youtube: https://www.youtube.com/watch?v=Ilg3gGewQ5U",fig.align='center'}
+```{r 10-Deep-learning-14, echo=FALSE,fig.cap="Backpropagation - youtube: https://www.youtube.com/watch?v=Ilg3gGewQ5U",fig.align='center'}
 knitr::include_graphics("images/10_06_recurrent_nn.png")
 ```
 

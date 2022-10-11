@@ -26,6 +26,7 @@ Imports:
     GGally,
     ggstatsplot,
     ggthemes,
+    glmnet,
     htmlTable,
     ISLR,
     ISLR2,
