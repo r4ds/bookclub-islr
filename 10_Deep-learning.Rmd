@@ -10,13 +10,300 @@
 - **Recognize** the process by which **neutral networks are fit.**
 - Explain the **double descent** phenomenon.
 
-## Slide 1
+## Introduction
 
-- Try to follow a slide-like format.
+Deep learning is an area of research in machine learning. It is the new name of neural network. Since late 1980s, when first arose, **neural network** improved in algorithms methodology, and was followed by other techniques such as SVMs, boosting, and random forests to then become deep learning. The structure of the model calculation is widely used for image/video classification, speech and text modeling.
 
-## Slide 2
+## Single Layer Neural Network
 
-- Use `##` to create new slides (sections).
+Let's consider a dataset made of $p$ predictors
+
+$$X=(X_1,X_2,X_3,...,X_p)$$
+
+and build a **non linear** function $f(X)$ to predict a response $Y$.
+
+$$f(X)=\beta_0+\sum_{k=1}^K{\beta_kh_k(X)}$$
+
+where $h_k(X)$ is the expression of the **hidden layers**, named as the $A_k$ function of $X$ with $K$ activations, $k=1,...,K$, which are not directly observed.
+
+$$A_k=h_k(X)$$
+and identify the **non linear activation function** $g(z)$
+
+$$A_k=h_k(X)=g(z)$$
+
+
+$$A_k=h_k(X)=g(w_{k0}+\sum_{j=1}^p{w_{kj}X_j})$$
+to obtain an output layer which is a **linear model** that uses these activations $A_k$ as inputs, resulting in a function $f(X)$.
+
+
+$$f(X)=\beta_0+\sum_{k=1}^K{\beta_kA_k}$$
+aech $A_k$ is a different transformation of $h_k(X)$
+
+$\beta_0,...,B_K$ and $w_{1,0},...,w_{K,p}$ need to be estimated from data.
+
+What about the **activation function** $g(z)$? There are various options, but the most used ones are:
+
+1.  sigmoid
+
+$$g(z)=\frac{e^z}{1+e^z}$$
+
+2.  ReLU rectified linear unit
+
+$$g(z)=(z)_+=\left\{ \begin{array}{ll}
+          0 & \mbox{if z<0};\\
+          1 & \mbox{otherwise}.\end{array}\right.$$
+
+
+```{r 10-Deep-learning-1, echo=FALSE,fig.cap="Activation functions - Chap 10",fig.align='center'}
+knitr::include_graphics("images/10_01_activation-functions.png")
+```
+
+
+
+
+This is the structure of a **single layer** neural network. Here we can see the layer inputs, the hidden layers and the output layer.
+
+```{r 10-Deep-learning-2, echo=FALSE,fig.cap="Single layer neural network - Chap 10",fig.align='center'}
+knitr::include_graphics("images/10_02_single-layer.png")
+```
+
+In this example, we see deep learning applied to dosage/efficacy study, the model parameters with the activation function in the middle.
+
+The parameters can be retrieved with **backpropagation** which optimizes **weights** for coefficients $w_{kj}$ and **biases** for the intercepts $w_{k0}$. We will see about that later on this notes. For now we suppose to know what is the value of the parameters, and we investigate the calculation of the deep learning model.
+
+
+$$f(X)=\beta_0+\sum_{k=1}^K{\beta_kg(w_{k0}+\sum_{wkj}^p{X_j})}$$
+
+
+
+```{r 10-Deep-learning-3, echo=FALSE,fig.cap="Neural network Pt.1 Inside the black box - Youtube video",fig.align='center'}
+knitr::include_graphics("images/10_03_nn_youtube_1.png")
+```
+
+[Neural network Pt.1 Inside the black box](https://www.youtube.com/watch?v=CqOfi41LfDw)
+
+This is from the book pg.406, and you can see all the passages for calculating the estimated $f(X)$ supposing that we know the value of the parameters.
+
+```{r 10-Deep-learning-4, echo=FALSE,fig.cap="Neural network model fit calculation - Chap 10",fig.align='center'}
+knitr::include_graphics("images/10_04_calculations.png")
+```
+
+Fitting a **quantitative** neural network to estimate the unknown parameters $w_{kj}$ and $\beta_{k}$ requires the squared-error loss function to be minimum.
+
+
+Mean squared-error:
+
+
+$$min\sum{i=1}^n{(y_i-f(x_i))^2}$$
+
+Or to train a **qualitative** neural network is to minimizing the negative multinomial log-likelihood or the $$cross-entrophy$$. We see this explained in the multilayer neural network section.
+
+Min of the negative multinomial log-likelyhood:
+
+
+$$-\sum_{i=1}^n{\sum_{m=0}^K{y_{im}log(f_m(x_i))}}$$
+
+As **deep learnig** models have the ability to fit a good squiggle lines to data, the estimated parameters can be applied to a special **softmax** function:
+
+$$f_{m}=Pr(Y=m|X)=\frac{e^{Z_m}}{\sum_{k=0}^K{e^{Z_k}}}$$
+
+
+## Lab: A Single Layer Network on the Hitters Data
+
+How to perform **deep learning** in RStudio:
+
+- [keras](https://cran.r-project.org/web/packages/keras/index.html)
+- [tensorflow](https://tensorflow.rstudio.com/)
+- [torch](https://cran.r-project.org/web/packages/torch/index.html)
+
+
+1.  Single Layer
+
+```{r 10-Deep-learning-5}
+library(ISLR2)
+Gitters <- na.omit(Hitters)
+n <- nrow(Gitters)
+
+set.seed(13)
+ntest <- trunc(n / 3) #rounding numbers
+testid <- sample(1:n, ntest)
+```
+
+Fit the model with **testid** selection
+
+```{r 10-Deep-learning-6}
+training <- Gitters[-testid, ]
+testing <- Gitters[testid, ]
+
+lfit <- lm(Salary ~ ., data = training)
+
+lpred <- predict(lfit, testing)
+
+pred_test <- cbind(testing,lpred)
+
+mean(abs(pred_test$lpred-pred_test$Salary))
+```
+
+Standardize the matrix and fit the lasso using **glmnet**
+
+```{r 10-Deep-learning-7}
+x <- scale(model.matrix(Salary ~ . - 1, data = Gitters))
+
+y <- Gitters$Salary
+
+library(glmnet)
+cvfit <- cv.glmnet(x[-testid, ], y[-testid], type.measure = "mae")
+cpred <- predict(cvfit, x[testid, ], s = "lambda.min")
+mean(abs(y[testid] - cpred))
+```
+
+
+There are two ways to fit the Neural Network:
+
+- using {keras} implies pyton
+- using {torch}
+
+
+[book-Lab-source](https://www.statlearning.com/resources-second-edition)
+
+Fit the neural network with {keras}:
+
+- `keras_model_sequential()`
+- `layer_dense()`
+- `layer-dropout()`
+
+
+Keras requires some [installation](https://hastie.su.domains/ISLR2/keras-instructions.html) on RStudio:
+```{r 10-Deep-learning-8, eval=FALSE}
+library(ISLR2)
+tryCatch(
+  remove.packages(c("keras", "tensorflow", "reticulate")),
+  error = function(e) "Some or all packages not previously installed, that's ok!"
+)
+
+install.packages("keras", repos = 'https://cloud.r-project.org')
+
+write('RETICULATE_AUTOCONFIGURE=FALSE', file = "~/.Renviron", append = TRUE)
+write(sprintf('RETICULATE_MINICONDA_PATH=%s',
+           normalizePath("~/islr-miniconda", winslash = "/", mustWork = FALSE)),
+   file = "~/.Renviron", append = TRUE)
+
+# restart R
+
+source(system.file("helpers", "install.R", package = "ISLR2"))
+
+reticulate::install_miniconda(force = TRUE)
+tensorflow::install_tensorflow()
+```
+
+
+```{r 10-Deep-learning-9, eval=FALSE}
+library(tidyverse)
+library(keras)
+library(tensorflow)
+
+modnn <- keras_model_sequential() %>%
+     layer_dense(units = 50, activation = "relu",
+        input_shape = ncol(x)) %>%
+     layer_dropout(rate = 0.4) %>%
+     layer_dense(units = 1)
+```
+
+Resources:
+
+- [example-tensorflow](https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-keras.Rmd)
+
+
+The second way is to use {torch}:
+
+```{r 10-Deep-learning-10, eval=FALSE}
+library(torch)
+library(luz) # high-level interface for torch
+library(torchvision) # for datasets and image transformation
+library(torchdatasets) # for datasets we are going to use
+library(zeallot)
+torch_manual_seed(13)
+```
+
+```{r 10-Deep-learning-11, eval=FALSE}
+modnn <- nn_module(
+  initialize = function(input_size) {
+    self$hidden <- nn_linear(input_size, 50)
+    self$activation <- nn_relu()
+    self$dropout <- nn_dropout(0.4)
+    self$output <- nn_linear(50, 1)
+  },
+  forward = function(x) {
+    x %>% 
+      self$hidden() %>% 
+      self$activation() %>% 
+      self$dropout() %>% 
+      self$output()
+  }
+)
+```
+
+[Torch Lab - html](https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-torch.html)
+
+
+## Multilayer Neural Network
+
+First hidden layer for $k=1,...,K_{1}$
+
+$$A_{k}^{(1)}=h_k^{1}(X)$$
+
+Second hidden layer for $l=1,...,K_2$
+
+$$A_{k}^{(2)}=h_k^{2}(X)$$
+
+
+```{r 10-Deep-learning-12, echo=FALSE,fig.cap="Multilayer Neural Network - Chap 10",fig.align='center'}
+knitr::include_graphics("images/10_05_multilayer.png")
+```
+
+## Convolutional Neural Network
+
+Convolutional neural network (CNNs) evolved for classifying images by recognizing specific features, distinguishing each particular object class.
+
+The network first identifies low-level features in the input image. These features are then combined to form higher-level features.
+
+**Convolutional filters** determine whether a local feature is present in the image.
+
+We can have:
+
+- K different convolution filters in the first hidden layer
+- typically apply the the ReLU activation function
+
+**Pooling Layers** reduce the size of the image by a factor of two in each direction and provide some location invariance.
+
+
+## Recurrent Neural Network
+
+Predictive models for sequential data in nature:
+
+- xX is a sequence
+- hidden-layer is a sequence $\left \{ A_l \right \}_1^L = \left \{ A_1, A_2,..., A_L \right \}$
+
+Each $A_l$ feeds into the output layer and produces a **prediction** $O_l$ for $Y$.
+
+$$O_l=\beta_0+\sum_{k=1}^K{\beta_kA_{Lk}}$$
+
+Loss function: $(Y-O_L)^2$
+
+
+
+
+```{r 10-Deep-learning-13, echo=FALSE,fig.cap="Recurrent Neural Network - Chap 10",fig.align='center'}
+knitr::include_graphics("images/10_06_recurrent_nn.png")
+```
+
+## Backpropagation
+
+
+```{r 10-Deep-learning-14, echo=FALSE,fig.cap="Backpropagation - youtube: https://www.youtube.com/watch?v=Ilg3gGewQ5U",fig.align='center'}
+knitr::include_graphics("images/10_06_recurrent_nn.png")
+```
+
 
 ## Meeting Videos
 
