@@ -305,19 +305,6 @@ knitr::include_graphics("images/10_06_recurrent_nn.png")
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Meeting Videos
 
 ### Cohort 1
@@ -371,13 +358,17 @@ knitr::include_graphics("images/10_06_recurrent_nn.png")
 
 ### Cohort 3
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/h3BUIkPniIw")`
+
+`r knitr::include_url("https://www.youtube.com/embed/CvCWbi6KnTk")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:10:25	Fariborz Soroush:	https://rfordatascience.slack.com/archives/C02CQ93F882/p1647029662583599
+00:10:42	Fariborz Soroush:	https://www.statlearning.com/resources-second-edition
+00:11:16	Fariborz Soroush:	https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-torch.html
 ```
 </details>
 
