@@ -10,7 +10,7 @@
 - Apply **shrinkage methods** to regularize the Cox model.
 - Calculate the generalized **AUC** for a survival model.
 
-```{r 11load_libraries, echo = FALSE}
+```{r 11load_libraries, echo = FALSE, message=FALSE}
 library(ISLR2)
 library(survival)
 library(dplyr)
@@ -119,7 +119,7 @@ legend("bottomleft", levels(BrainCancer$sex), col = c(2,4), lty = 1)
 ## Survminer package
 
 Using `survminer` package
-```{r 11survminer}
+```{r 11survminer, message=FALSE}
 library(survminer)
 ggsurvplot(fit.sex, data = BrainCancer, 
            pval = TRUE,
