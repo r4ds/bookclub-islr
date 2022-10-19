@@ -56,7 +56,7 @@ Examples:
 
 - Loss to follow-up
 
-- Withdrawl from study
+- Withdrawal from study
 
 - No event/outcome by end of fixed study period
 
@@ -64,13 +64,28 @@ These are examples of **right** censoring.
 
 Left censoring and interval censoring are also possible, but the most frequent is right censoring.
 
+Due to censoring, we don't actually observe the time T of the event (e.g. 'death') but rather a variable $Y$:
+
+$$ Y = min(T,C)$$
+
+where C is the time of censoring.  We also need to observe a status indicator:
+
+$$ \delta = 
+             \left\{ \begin{array}{c l}
+                1, & \text{if } T \leq C \\
+                0, & \text{if } T > C
+            \end{array} \right.
+$$
+
+These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
+
+
 ## Lab: Survival Analysis
 
-In this lab, we perform survival analyses on three separate data sets. In Section 11.8.1 we analyze the `BrainCancer` data that was  first described in Section 11.3.
+Rather then do the lab at the end, let's try a different approach and thread it through the chapter discussion.
 
-In Section 11.8.2, we examine the `Publication` data from Section 11.5.4. Finally, Section 11.8.3 explores a simulated call center data set.
+Hopefully this helps illustrate the main points of the text with examples worked out in R. 
 
-## Brain Cancer Data
 We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
 
 ```{r 11dataset}
@@ -81,10 +96,6 @@ head(BrainCancer)
 
 The rows index the 88 patients, while the columns contain the 8 predictors.
 
-```{r 11skim}
-skimr::skim_without_charts(BrainCancer)
-```
-
 ```{r 11count}
 BrainCancer %>% 
      count(status)
@@ -93,11 +104,23 @@ BrainCancer %>%
 
 Before beginning an analysis, it is important to know how the `status` variable has been coded.  Most software, including `R`, uses the convention that `status = 1` indicates an uncensored observation,  and `status = 0` indicates a censored observation. But some scientists might use the opposite coding. For the `BrainCancer` data set $35$ patients died before the end of the study.
 
+
 ## Kaplan-Meier survival curve
 
-To begin the analysis, we re-create  the Kaplan-Meier survival curve  shown in  Figure 11.2, using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
+The survival function / curve:
 
-![(11.2)](images/survival_function.png)
+$$
+S(t) = Pr(T>t)
+$$
+
+Here T is the time of 'death' or whatever is being considered, and $S(t)$ is the probability of surviving up to time t.  
+
+We can't directly use our data because we do not observe T!  However, consider instead the instantaneous rate of death at time $t$, this is something we might be able to estimate since it only depends on the number patients 'at risk' at that moment and how many of them die 'at' that moment.  This is the basic idea behind the construction on page  465 for estimating the survival curve directly from the data. 
+
+
+## Kaplan-Meier survival curve in R
+
+To begin the analysis, we re-create  the Kaplan-Meier survival curve  shown in  Figure 11.2, using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
 
 ```{r 11plot_KM_curve}
 fit.surv <- survfit(Surv(time, status) ~ 1, data = BrainCancer)
@@ -116,7 +139,21 @@ plot(fit.sex, xlab = "Months",
 legend("bottomleft", levels(BrainCancer$sex), col = c(2,4), lty = 1)
 ```
 
+## Log-Rank test
+
+As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
+
+```{r 11logrank_test}
+logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
+logrank.test
+```
+
+The resulting $p$-value is $0.23$, indicating  no evidence of a difference in survival between the two sexes.
+
+
 ## Survminer package
+
+- Survminer is a package that draws survival curves using ggplot, and can provide logrank p-values all in one go!
 
 Using `survminer` package
 ```{r 11survminer, message=FALSE}
@@ -129,24 +166,61 @@ ggsurvplot(fit.sex, data = BrainCancer,
            legend.labs = c("Female", "Male"))
 ```
 
-As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
 
-```{r 11logrank_test}
-logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
-logrank.test
-```
-
-The resulting $p$-value is $0.23$, indicating  no evidence of a difference in survival between the two sexes.
 
 ## Hazard Function
 
 The hazard function (11.9) is defined at a given moment *t* in time, the potential risk of having an event given you survived up to time *t*.
 
-![Source: https://tinyheero.github.io/2016/05/12/survival-analysis.html](images/hazard_function.png)
+$$h(t) = lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
+
 
 It’s important to note here that the hazard is **not a probability** because we are dividing the probability by a time interval. Instead what we get is a rate. And since we are dealing with the condition of survival up to time t, this is why sometimes the hazard function is referred to as conditional failure rate.
 
 Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
+
+How is the hazard rate related to the survival probability? It seems that the rate of death should be related to the rate of change of 'survival' in some way. Lets try this:
+
+$$
+\begin{align}
+\frac{d S}{d t} &= lim_{\Delta t \to 0} \frac{S(t+dt) - S(t)}{\Delta t} \\
+& = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - Pr(T > t)}{\Delta t}\\
+& = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - (Pr(T > t + \Delta t) + Pr(t+ \Delta t \geq T > t))}{\Delta t} \\
+& = lim_{\Delta t \to 0}  \frac{- Pr(t+ \Delta t \geq T > t)}{\Delta t} \\
+& = - f(t)  \text{  see book eqn 11.11}
+\end{align}
+$$
+
+$f(t)$ is the instantaneous death rate, close to what we want..  But we can relate $f(t)$ to $h(t)$ and $S(t)$ using Baye's rule:
+
+$$
+\begin{align}
+h(t) &= lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t} \\
+&=lim_{\Delta t \to 0}  \frac{ Pr((t+ \Delta t \geq T > t) \cap (T > t))/\Delta t}{P(T>t)} \\
+&=lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t)/\Delta t}{S(t)}\\
+&= \frac{ f(t)}{S(t)}
+\end{align}
+$$
+ 
+So we have finally:
+
+$$
+\frac{d S}{d t} = - S(t)h(t)
+$$
+
+or 
+
+$$
+\frac{d \text{ ln} S}{d t} = -h(t)
+$$
+
+so that the survival probability is the exponential of the 'cumulative' hazard:
+
+$$
+S = exp(-\int{h(t) dt})
+$$
+
+Note that the exponential of a sum is the same as the product of exponentials, so that this construction is structurally similar to that on page 465.
 
 ## Cumulative Hazard Function
 
