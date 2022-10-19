@@ -175,7 +175,7 @@ The hazard function (11.9) is defined at a given moment *t* in time, the potenti
 $$h(t) = lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
 
 
-It’s important to note here that the hazard is **not a probability** because we are dividing the probability by a time interval. Instead what we get is a rate. And since we are dealing with the condition of survival up to time t, this is why sometimes the hazard function is referred to as conditional failure rate.
+It’s important to note here that the hazard is **not a probability** because we are dividing the probability by a time interval. Instead what we get is a rate, so sthat $h(t) \Delta t$ is a probabililty. And since we are dealing with the condition of survival up to time t, this is why sometimes the hazard function is referred to as conditional failure rate.
 
 Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
 
@@ -191,16 +191,15 @@ $$
 \end{align}
 $$
 
-$f(t)$ is the instantaneous death rate, close to what we want..  But we can relate $f(t)$ to $h(t)$ and $S(t)$ using Baye's rule:
+$f(t)$ is the instantaneous death rate, close to what we want..  But we can relate $f(t)$ to $h(t)$ and $S(t)$ simply by observing that the probability of an event near (i.e. within $\delta t$) time $t$ should be equal to the probability of surviving until time $t$ multiplied by the probability of an event near time $t$ *given* that you have survived until time $t$. That is:
 
 $$
-\begin{align}
-h(t) &= lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t} \\
-&=lim_{\Delta t \to 0}  \frac{ Pr((t+ \Delta t \geq T > t) \cap (T > t))/\Delta t}{P(T>t)} \\
-&=lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t)/\Delta t}{S(t)}\\
-&= \frac{ f(t)}{S(t)}
-\end{align}
+f(t)  = h(t)S(t)
 $$
+
+The book gives a more rigorous derivation using Baye's rule, but this is the intuition.
+
+
  
 So we have finally:
 
@@ -214,7 +213,7 @@ $$
 \frac{d \text{ ln} S}{d t} = -h(t)
 $$
 
-so that the survival probability is the exponential of the 'cumulative' hazard:
+so that the survival probability is the exponential of the 'cumulative' hazard ($\int{h(t) dt}$)
 
 $$
 S = exp(-\int{h(t) dt})
@@ -222,20 +221,6 @@ $$
 
 Note that the exponential of a sum is the same as the product of exponentials, so that this construction is structurally similar to that on page 465.
 
-## Cumulative Hazard Function
-
-![Source: https://tinyheero.github.io/2016/05/12/survival-analysis.html](images/cum_hazard_function.png)
-
-Let's plot the cumulative hazard for the Brain cancer dataset with sex as covariate
-```{r 11cum_hazard_plot}
-ggsurvplot(fit.sex, 
-           data = BrainCancer, 
-           conf.int = TRUE, 
-           risk.table.col = "strata", 
-           legend.title = "Sex", 
-           legend.labs = c("Female", "Male"), 
-           fun = "cumhaz")
-```
 
 ## Proportional Hazards
 
