@@ -255,119 +255,56 @@ summary(fit.cox)
 
 Regardless of which test we use, we see that there is no clear evidence for a difference in survival between males and females.
 
+
+Now we fit a  model that makes use of additional predictors. 
+
+```{r chunk10}
+fit.all <- coxph(
+Surv(time, status) ~ sex + diagnosis + loc + ki + gtv +
+   stereo, data = BrainCancer)
+fit.all
+```
+
+The `diagnosis` variable has been coded so that the baseline
+corresponds to meningioma. The results indicate that the risk associated with HG glioma is more than eight times (i.e. $e^{2.15}=8.62$) the risk associated with meningioma. In other words, after adjusting for the other predictors, patients with HG glioma have much worse survival
+compared to those with meningioma.  In addition, larger values of the Karnofsky index, `ki`, are associated with lower risk, i.e. longer survival.
+
+Finally, we plot survival curves for each diagnosis category,  adjusting for the other predictors.
+To make these plots, we set the values of the other predictors equal
+to the mean for quantitative variables, and the modal value for
+factors. We first create a data frame with four rows, one for each
+level of diagnosis. The `survfit()` function will produce a curve for each of the rows in this data frame,
+and one call to `plot()` will display them all in the same plot.
+
+
+```{r chunk11}
+with(BrainCancer,{
+  modaldata <- data.frame(
+       diagnosis = levels(diagnosis),
+       sex = rep("Female", 4),
+       loc = rep("Supratentorial", 4),
+       ki = rep(mean(ki), 4),
+       gtv = rep(mean(gtv), 4),
+       stereo = rep("SRT", 4)
+       )
+  survplots <- survfit(fit.all, newdata = modaldata)
+  plot(survplots, xlab = "Months",
+      ylab = "Survival Probability", col = 2:5)
+  legend("bottomleft", levels(diagnosis), col = 2:5, lty = 1)
+})
+```
+
+The book says that the methods used are beyond the scope of the book, but I am curious about how it works, possibly based on something like Kaplan-Meier?
+
 Let's run the Cox PH model with all covariates.
 ```{r 11coxph_all}
 fit_all_cox <- coxph(Surv(time, status) ~ ., data = BrainCancer)
 summary(fit_all_cox)
 ```
+  
+ 
 
-## Visualizing the estimated distribution of survival times
-
-Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.
-```{r 11coxph_viz}
-# plot the baseline survival function
-ggsurvplot(survfit(fit_all_cox), data = BrainCancer, palette = "#2E9FDF",
-           ggtheme = theme_minimal())
-```
-
-Let's plot the Cox Proportional Hazards covariates coefficients estimates/CI
-```{r 11coxph_coef}
-library(ggstatsplot)
-ggcoefstats(fit_all_cox, 
-            title = "Cox PH Model Covariates Coefficients Estimates/CI"
-            )
-```
-
-## Cox Model Assumptions
-
-The Cox proportional hazards model makes several assumptions. Thus, it is important to assess whether a fitted Cox regression model adequately describes the data.
-
-Here, we’ll discuss three types of diagnostics for the Cox model:
-
-- Testing the proportional hazards assumption.
-
-- Examining influential observations (or outliers).
-
-- Detecting nonlinearity in relationship between the log hazard and the covariates.
-
-## Testing proportional Hazard assumptions
-
-The proportional hazards (PH) assumption can be checked using statistical tests and graphical diagnostics based on the *scaled Schoenfeld residuals*.
-
-In principle, the *Schoenfeld residuals* are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.
-```{r 11coxtest_1}
-test.ph <- cox.zph(fit_all_cox)
-test.ph
-```
-
-It’s possible to do a graphical diagnostic using the function *ggcoxzph()* [in the `survminer` package], which produces, for each covariate, graphs of the scaled Schoenfeld residuals against the transformed time.
-```{r 11coxtest_2}
-ggcoxzph(test.ph)
-```
-
-From the graphical inspection, there is no pattern with time. The assumption of proportional hazards appears to be supported for the model covariates.
-
-## Testing influential observations
-
-To test influential observations or outliers, we can visualize either:
-
-- the deviance residuals or
-
-- the dfbeta values
-
-The function *ggcoxdiagnostics()* [in `survminer` package] provides a convenient solution for checking influential observations.
-```{r 11cox_diag_dfbeta}
-ggcoxdiagnostics(fit_all_cox, type = "dfbeta", linear.predictions = FALSE, ggtheme = theme_bw())
-```
-
-It’s also possible to check outliers by visualizing the deviance residuals. The deviance residual is a normalized transform of the martingale residual. These residuals should be roughly symmetrically distributed about zero with a standard deviation of 1.
-
-- Positive values correspond to individuals that “died too soon” compared to expected survival times.
-
-- Negative values correspond to individual that “lived too long”.
-
-- Very large or small values are outliers, which are poorly predicted by the model.
-
-```{r 11cox_diag_deviance}
-ggcoxdiagnostics(fit_all_cox, type = "deviance", linear.predictions = FALSE, ggtheme = theme_bw())
-```
-
-The pattern looks fairly symmetric around 0.
-
-Testing non linearity
-
-Often, we assume that continuous covariates have a linear form. However, this assumption should be checked.
-
-Plotting the *Martingale residuals* against continuous covariates is a common approach used to detect *nonlinearity* or, in other words, to assess the functional form of a covariate. For a given continuous covariate, patterns in the plot may suggest that the variable is not properly fit.
-
-Nonlinearity is not an issue for categorical variables, so we only examine plots of martingale residuals and partial residuals against a continuous variable.
-
-Martingale residuals may present any value in the range (-INF, +1):
-
-- A value of martinguale residuals near 1 represents individuals that “died too soon”,
-
-- and large negative values correspond to individuals that “lived too long”.
-
-To assess the functional form of a continuous variable in a Cox proportional hazards model, we’ll use the function *ggcoxfunctional()* [in the `survminer` R package].
-
-The covariates must be numerical.
-
-To test `sex`, it is necessary to convert the covariate to numerical.
-```{r 11cox_functional_1}
-BC_sex <- BrainCancer %>% 
-     mutate(sex = sex %>% as.numeric())
-
-ggcoxfunctional(Surv(time, status) ~ sex + log(sex) + sqrt(sex), data = BC_sex)
-```
-
-The function *ggcoxfunctional()* displays graphs of continuous covariates against martingale residuals of null cox proportional hazards model. This might help to properly choose the functional form of continuous variable in the Cox model. Fitted lines with lowess function should be **linear** to satisfy the Cox proportional hazards model assumptions.  Inthis case, the covariate `sex` passes the test.
-
-Let's test `gtv`
-```{r 11cox_functional_2}
-ggcoxfunctional(Surv(time, status) ~ gtv + log(gtv) + sqrt(gtv), data = BrainCancer)
-```
-
-From the plot, the covariate `gtv` exhibits a nonlinear pattern.
+  
 
 ## Meeting Videos
 
