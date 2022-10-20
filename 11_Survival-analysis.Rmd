@@ -207,12 +207,11 @@ The hazard function (11.9) is defined at a given moment *t* in time, the potenti
 
 $$h(t) = lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
 
-
-It’s important to note here that the hazard is **not a probability** because we are dividing the probability by a time interval. Instead what we get is a rate, so sthat $h(t) \Delta t$ is a probabililty. And since we are dealing with the condition of survival up to time t, this is why sometimes the hazard function is referred to as conditional failure rate.
-
 Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
 
-How is the hazard rate related to the survival probability? It seems that the rate of death should be related to the rate of change of 'survival' in some way. Lets try this:
+> Note the following is basically Excercise 8.  But I think it is important to understand $h$, $S$, and $f$.
+
+How is the hazard rate related to the survival probability?  It seems that the rate of death should be related to the rate of change of 'survival' in some way. Lets try this:
 
 $$
 \begin{align}
@@ -265,21 +264,25 @@ TODO - discuss likely hood and simple constant hazard.
 
 ## Proportional Hazards
 
-The *proportional hazards assumption* states that
+The *proportional hazards assumption* states that (ISLR2 11.14):
 
-![Source: ISLR2 (11.14)](images/prop_hazard.png)
+$$
+h(t|x_i)= h_0(t) \exp\left(\sum_{j=1}^{p}x_{ij}\beta_k\right)
+$$
 
-It is important to emphasize that the *relative* risk does not depend on time, i.e. it is constant in time for the same pair of values of any feature, so hazards are proportional, independent of time.
+*Assumes* separate time dependence (baseline hazard $h_0$) from feature dependence.
 
-Although beyond the scope of the book, we can use some specific distribution for the baseline survival or hazard function – and then we get a **parametric PH model**, or do not make such assumptions about the baseline functions – and then get a **semi-parametric PH model**, often called simply the Cox PH model after its author. The book focuses on this method.
+![Source ISLR Fig 11.4](images/fig11_4.png)
 
 
 
 ## Cox Proportional Hazards Model
 
-The **Cox proportionalhazards model (Cox, 1972)** is essentially a regression model commonly used statistical in medical research for investigating the association between the survival time of patients and one or more predictor variables.
 
-The purpose of the model is to evaluate simultaneously the effect of several factors on survival. In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time. This rate is commonly referred as the hazard rate. Predictor variables (or factors) are usually termed *covariates* in the survival-analysis literature.
+- Because $h_0(t)$ is unknown we cannot just plug $h(t|x_i)$ into the likelihood function and apply maximum likelyhood
+
+- **Cox proportionalhazards model (Cox, 1972)** estimates $\beta$ without having to specify the form of $h_0(t)$ by using a partial (relative) likelihood.
+
 
 Let's fit the Cox proportional hazards models using the `coxph()`  function.
 To begin, we consider a model that uses `sex` as the only predictor.
@@ -300,17 +303,17 @@ Surv(time, status) ~ sex + diagnosis + loc + ki + gtv +
 fit.all
 ```
 
-The `diagnosis` variable has been coded so that the baseline
-corresponds to meningioma. The results indicate that the risk associated with HG glioma is more than eight times (i.e. $e^{2.15}=8.62$) the risk associated with meningioma. In other words, after adjusting for the other predictors, patients with HG glioma have much worse survival
-compared to those with meningioma.  In addition, larger values of the Karnofsky index, `ki`, are associated with lower risk, i.e. longer survival.
+- The `diagnosis` variable has been coded so that the baseline corresponds to meningioma.
 
-Finally, we plot survival curves for each diagnosis category,  adjusting for the other predictors.
-To make these plots, we set the values of the other predictors equal
-to the mean for quantitative variables, and the modal value for
-factors. We first create a data frame with four rows, one for each
-level of diagnosis. The `survfit()` function will produce a curve for each of the rows in this data frame,
-and one call to `plot()` will display them all in the same plot.
+- Results indicate that the risk associated with HG glioma is more than eight times (i.e. $e^{2.15}=8.62$) the risk associated with meningioma. In other words, after adjusting for the other predictors, patients with HG glioma have much worse survival compared to those with meningioma.  
 
+- In addition, larger values of the Karnofsky index, ki, are associated with lower risk, i.e. longer survival.
+
+## Surivival Curves
+
+- Plot (estimated) survival curves for each diagnosis category,  adjusting for the other predictors.
+
+- To make these plots, set the values of the other predictors equal to the mean for quantitative variables, and the modal value for factors. 
 
 ```{r chunk11}
 with(BrainCancer,{
@@ -329,15 +332,9 @@ with(BrainCancer,{
 })
 ```
 
-The book says that the methods used are beyond the scope of the book, but I am curious about how it works, possibly based on something like Kaplan-Meier?
+The book says that the methods used to estimate $h_0(t)$ are beyond the scope of the book. Documentation for  `survfit.coxph` mentions a 'Breslow estimator' which seems to be similar to Kaplan-Meier... something for future study! 
 
-Let's run the Cox PH model with all covariates.
-```{r 11coxph_all}
-fit_all_cox <- coxph(Surv(time, status) ~ ., data = BrainCancer)
-summary(fit_all_cox)
-```
  
-  
 ## Additional Topics Covered in Text:
 
 - Shrinkage for the Cox Model
