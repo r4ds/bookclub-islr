@@ -259,7 +259,20 @@ As a simple example, consider a constant hazard (e.g. radioactive decay) $h=\lam
 
 ## Regression models
 
-TODO - discuss likely hood and simple constant hazard.
+* The hazard function can be used to specify a likelihood (for maximum likelihood methods)
+
+$$
+L = \prod_{i=1}^{n}h(y_i)^{\delta_i}S(y_i)
+$$
+
+* For non-censored data, the factor is $h(y_i)S(y_i) = f(y_i)$ , the probability of dying in an tiny interval around $y_i$ 
+
+* For censored data, the factor is just $S(y_i)$, the likelihood of surviving at *least* until $y_i$.
+
+* This could  be used for some parameterized model of $h$, Exercise 9 looks at this for a simple (constant hazard) example.
+
+* But we really want to do regression, and one approach is to assume functional form like 
+$h(t|x_i) = exp \left(\beta_0 + \sum_{j=1}^{p}\beta_j x_{ij}\right)$.  This could be used in the likelihood to estimate the parameters, but the lack of time depenance is very restrictive.
 
 
 ## Proportional Hazards
@@ -279,7 +292,7 @@ $$
 ## Cox Proportional Hazards Model
 
 
-- Because $h_0(t)$ is unknown we cannot just plug $h(t|x_i)$ into the likelihood function and apply maximum likelyhood
+- Because $h_0(t)$ is unknown we cannot just plug $h(t|x_i)$ into the likelihood function and apply maximum likelihood
 
 - **Cox proportionalhazards model (Cox, 1972)** estimates $\beta$ without having to specify the form of $h_0(t)$ by using a partial (relative) likelihood.
 
