@@ -117,6 +117,37 @@ Here T is the time of 'death' or whatever is being considered, and $S(t)$ is the
 
 We can't directly use our data because we do not observe T!  However, consider instead the instantaneous rate of death at time $t$, this is something we might be able to estimate since it only depends on the number patients 'at risk' at that moment and how many of them die 'at' that moment.  This is the basic idea behind the construction on page  465 for estimating the survival curve directly from the data. 
 
+- $d_k$ are the 'death' times (ordered)
+
+- $r_k$ are the number of non-censored 'alive' cases at time $d_k$.  (at risk)
+
+- $q_k$ are the number that die at time $d_k$ (typically just 1!)
+
+Then we can (as shown in the text) decompose $S(d_k)$:
+
+$$
+S(d_k) = Pr(T> d_k | T> d_{k-1}) \times ... \times Pr(T > d_2 | T > d_1)Pr(T> d_1)
+$$
+
+The reason for this decomposition is that the conditional probability $Pr(T> d_j | T> d_{j-1})$ can be estimated by:
+
+$$
+(r_j - q_j)/r_j
+$$
+
+That is, it is just the fraction of at risk 'patients' that survive past time $q_j$.  This leads to the Kaplan-Meier estimator:
+
+$$
+\hat{S}(d_k) = \Pi_{j=1}^{k} (\frac{r_j- q_j}{r_j})
+$$
+
+Note also that:
+
+$$
+\ln\hat{S}(d_k) = \sum_{j=1}^{k} \ln (\frac{r_j- q_j}{r_j})
+$$
+
+
 
 ## Kaplan-Meier survival curve in R
 
@@ -213,13 +244,13 @@ $$
 \frac{d \text{ ln} S}{d t} = -h(t)
 $$
 
-so that the survival probability is the exponential of the 'cumulative' hazard ($\int{h(t) dt}$)
+so that the log of the survival probability is the negative of the 'cumulative' hazard ($\int{h(t) dt}$)
 
 $$
-S = \exp(-\int{h(t) dt})
+\ln S =  -\int{h(t) dt} 
 $$
 
-Note that the exponential of a sum is the same as the product of exponentials, so that this construction is structurally similar to that on page 465.
+Note that this construction is similar to that of the Kaplan-Meier curve, if we think of $\ln (\frac{r_j- q_j}{r_j})$ as the integrated hazard during the time between deaths. 
 
 As a simple example, consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ .  
 
