@@ -14,9 +14,8 @@ library(survival)
 library(dplyr)
 ```
 
-## What is survival (censored) data?
+## What is survival data?
 
-![Source: https://www.reddit.com/r/statisticsmemes/comments/u21swt/what_i_learned_in_survival_analysis_so_far/](images/survival_analysis_meme.jpg)
 
 Time-to-event data that consist of a distinct start time and end time
 
@@ -28,12 +27,6 @@ Examples:
 
 - Time to machine malfunction
 
-![Source: https://towardsdatascience.com/introduction-to-survival-analysis-6f7e19c31d96](images/time_to_event.png)
-
-Data can also be censored at other times (for example if a patient drops out of a study)
-
-## Aliases for survival analysis
-
 Survival analysis is common in many other fields, such as:
 
 - Reliability analysis
@@ -44,11 +37,18 @@ Survival analysis is common in many other fields, such as:
 
 - Time-to-event analysis
 
+
 ## Introduction to Survival Analysis (zedstatistics) ---
 
 `r knitr::include_url("https://www.youtube.com/embed/v1QqpG0rR1k")`
 
-## Types of censoring
+## Censored Data
+
+
+![Source: https://www.reddit.com/r/statisticsmemes/comments/u21swt/what_i_learned_in_survival_analysis_so_far/](images/survival_analysis_meme.jpg)
+
+![Source (slightly modified): https://towardsdatascience.com/introduction-to-survival-analysis-6f7e19c31d96](images/time_to_event2.png)
+
 
 Observations are __censored__ when the information about their survival time is incomplete.
 
@@ -56,28 +56,13 @@ Examples:
 
 - Loss to follow-up
 
-- Withdrawal from study
+- Withdrawal from study (line 5)
 
-- No event/outcome by end of fixed study period
+- No event/outcome by end of fixed study period (line 3 and 2)
 
 These are examples of **right** censoring.
 
 Left censoring and interval censoring are also possible, but the most frequent is right censoring.
-
-Due to censoring, we don't actually observe the time T of the event (e.g. 'death') but rather a variable $Y$:
-
-$$ Y = min(T,C)$$
-
-where C is the time of censoring.  We also need to observe a status indicator:
-
-$$ \delta = 
-             \left\{ \begin{array}{c l}
-                1, & \text{if } T \leq C \\
-                0, & \text{if } T > C
-            \end{array} \right.
-$$
-
-These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
 
 
 ## Lab: Brain Cancer survival analysis
@@ -115,7 +100,22 @@ $$
 
 Here T is the time of 'death' or whatever is being considered, and $S(t)$ is the probability of surviving up to time t.  
 
-We can't directly use our data because we do not observe T!  However, consider instead the instantaneous rate of death at time $t$, this is something we might be able to estimate since it only depends on the number patients 'at risk' at that moment and how many of them die 'at' that moment.  This is the basic idea behind the construction on page  465 for estimating the survival curve directly from the data. 
+However, due to censoring, we don't actually observe the time T of the event (e.g. 'death') but rather a variable $Y$:
+
+$$ Y = min(T,C)$$
+
+where C is the time of censoring.  We also need to observe a status indicator:
+
+$$ \delta = 
+             \left\{ \begin{array}{c l}
+                1, & \text{if } T \leq C \\
+                0, & \text{if } T > C
+            \end{array} \right.
+$$
+
+These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
+
+So we cannot just count up how many are alive at any given point in the study to estimate $S(t)$.  Instead, consider  the instantaneous rate of death at time $t$, this is something we might be able to estimate since it only depends on the number patients 'at risk' at that moment and how many of them die 'at' that moment.  This is the basic idea behind the construction on page  465 for estimating the survival curve directly from the data. 
 
 - $d_k$ are the 'death' times (ordered)
 
@@ -172,7 +172,9 @@ legend("bottomleft", levels(BrainCancer$sex), col = c(2,4), lty = 1)
 
 ## Log-Rank test
 
-As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
+As discussed in the book, Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
+
+> See also Exercise 7 to go into depth on this!
 
 ```{r 11logrank_test}
 logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
