@@ -301,8 +301,32 @@ Let's run the Cox PH model with all covariates.
 fit_all_cox <- coxph(Surv(time, status) ~ ., data = BrainCancer)
 summary(fit_all_cox)
 ```
-  
  
+  
+## Additional Topics Covered in Text:
+
+- Shrinkage for the Cox Model
+
+    Uses 'loss + penalty' formulation (11.17) to reduce variance.
+    
+- Area Under the Curve for Survival Analysis
+
+- Choice of Time Scale
+
+- Time-Dependent Covariates
+
+- Checking Proportional Hazard Assumptions
+
+- Survival Trees
+
+
+## Conclusions
+
+- Introduced Survival Analysis
+
+- Learned a few tools to apply
+
+- Much more out there to learn on this, only scratching the surface!
 
   
 
