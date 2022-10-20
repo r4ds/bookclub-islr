@@ -82,7 +82,7 @@ These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, th
 
 ## Lab: Survival Analysis
 
-Rather then do the lab at the end, let's try a different approach and thread it through the chapter discussion.
+Rather then do the lab at the end, let's try a different approach and thread (some of) it through the chapter discussion.
 
 Hopefully this helps illustrate the main points of the text with examples worked out in R. 
 
@@ -223,9 +223,9 @@ Note that the exponential of a sum is the same as the product of exponentials, s
 
 As a simple example, consider a constant hazard $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ .  
 
-## Likelihood
+## Regression models
 
-TODO
+TODO - discuss likely hood
 
 
 ## Proportional Hazards
@@ -234,15 +234,15 @@ The *proportional hazards assumption* states that
 
 ![Source: ISLR2 (11.14)](images/prop_hazard.png)
 
-It is important to emphasize that the relative risk does not depend on time, i.e. it is constant in time for the same pair of values of any feature, so hazards are proportional independent of time.
+It is important to emphasize that the *relative* risk does not depend on time, i.e. it is constant in time for the same pair of values of any feature, so hazards are proportional, independent of time.
 
-We can use some specific distribution for the baseline survival or hazard function – and then we get a **parametric PH model**, or do not make such assumptions about the baseline functions – and then get a **semi-parametric PH model**, often called a Cox PH model after its author.
+Although beyond the scope of the book, we can use some specific distribution for the baseline survival or hazard function – and then we get a **parametric PH model**, or do not make such assumptions about the baseline functions – and then get a **semi-parametric PH model**, often called simply the Cox PH model after its author. The book focuses on this method.
 
-## Regression Models
 
-### Cox Proportional Hazards-Hazards Model
 
-The **Cox proportional-hazards model (Cox, 1972)** is essentially a regression model commonly used statistical in medical research for investigating the association between the survival time of patients and one or more predictor variables.
+## Cox Proportional Hazards Model
+
+The **Cox proportionalhazards model (Cox, 1972)** is essentially a regression model commonly used statistical in medical research for investigating the association between the survival time of patients and one or more predictor variables.
 
 The purpose of the model is to evaluate simultaneously the effect of several factors on survival. In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time. This rate is commonly referred as the hazard rate. Predictor variables (or factors) are usually termed *covariates* in the survival-analysis literature.
 
