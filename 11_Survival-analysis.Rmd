@@ -250,7 +250,9 @@ $$
 \ln S =  -\int{h(t) dt} 
 $$
 
-Note that this construction is similar to that of the Kaplan-Meier curve, if we think of $\ln (\frac{r_j- q_j}{r_j})$ as the integrated hazard during the time between deaths. 
+ 
+> Note that this construction seems similar to that of the Kaplan-Meier curve, if we think of $\ln (\frac{r_j- q_j}{r_j})$ as the integrated hazard during the time between deaths.
+ 
 
 As a simple example, consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ .  
 
