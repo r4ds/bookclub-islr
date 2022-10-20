@@ -216,10 +216,16 @@ $$
 so that the survival probability is the exponential of the 'cumulative' hazard ($\int{h(t) dt}$)
 
 $$
-S = exp(-\int{h(t) dt})
+S = \exp(-\int{h(t) dt})
 $$
 
 Note that the exponential of a sum is the same as the product of exponentials, so that this construction is structurally similar to that on page 465.
+
+As a simple example, consider a constant hazard $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ .  
+
+## Likelihood
+
+TODO
 
 
 ## Proportional Hazards
