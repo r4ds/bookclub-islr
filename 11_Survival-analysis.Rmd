@@ -6,9 +6,7 @@
 - Calculate a **Kaplan-Meier survival curve.**
 - Compare the survival rates of two groups with the **log-rank test.**
 - Model survival data using **Cox's proportional hazards**
-- Cox model assumptions
-- Apply **shrinkage methods** to regularize the Cox model.
-- Calculate the generalized **AUC** for a survival model.
+ 
 
 ```{r 11load_libraries, echo = FALSE, message=FALSE}
 library(ISLR2)
@@ -31,6 +29,8 @@ Examples:
 - Time to machine malfunction
 
 ![Source: https://towardsdatascience.com/introduction-to-survival-analysis-6f7e19c31d96](images/time_to_event.png)
+
+Data can also be censored at other times (for example if a patient drops out of a study)
 
 ## Aliases for survival analysis
 
@@ -80,9 +80,9 @@ $$
 These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
 
 
-## Lab: Survival Analysis
+## Lab: Brain Cancer survival analysis
 
-Rather then do the lab at the end, let's try a different approach and thread (some of) it through the chapter discussion.
+Rather then do the lab at the end, let's try a different approach and thread the Brain Cancer lab  through the chapter discussion.
 
 Hopefully this helps illustrate the main points of the text with examples worked out in R. 
 
