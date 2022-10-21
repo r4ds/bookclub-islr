@@ -71,7 +71,7 @@ Rather then do the lab at the end, let's try a different approach and thread the
 
 - Hopefully this helps illustrate the main points of the text with examples worked out in R. 
 
-- We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
+- `BrainCancer` data set:
 
 ```{r 11dataset}
 data("BrainCancer")
@@ -132,7 +132,7 @@ $$
 
 - This fraction is an estimate of the probabilty $Pr(T> d_j | T> d_{j-1})$  
 
-> Note that this uses only uncensored data at time $d_k$ but the data could become censored later! It takes care of censoring 'automatically'.
+> Note that this uses only uncensored data at time $d_i$ but includes data that could become censored later! It takes care of censoring 'automatically'.
  
 - The text shows how one can decompose $S(d_k)$ into these more elemental probabilities:
 
@@ -267,7 +267,7 @@ $$
 $$
 
  
-> Note that this construction seems similar to that of the Kaplan-Meier curve, if we think of $\ln (\frac{r_j- q_j}{r_j})$ as the integrated hazard during the time between deaths.
+> Note that this construction is similar to that of the Kaplan-Meier curve, if $-\ln (\frac{r_j- q_j}{r_j}) \approx q_j/r_j$ is the integrated hazard during the time between deaths.
  
 
 *Example:* consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ . 
@@ -340,7 +340,7 @@ fit.all
 
 ## Surivival Curves
 
-- Plot (estimated) survival curves for each diagnosis category,  adjusting for the other predictors.
+- Possible to plot (estimated) survival curves for each diagnosis category,  adjusting for the other predictors.
 
 - To make these plots, set the values of the other predictors equal to the mean for quantitative variables, and the modal value for factors. 
 
@@ -361,7 +361,7 @@ with(BrainCancer,{
 })
 ```
 
-The book says that the methods used to estimate $h_0(t)$ are beyond the scope of the book. Documentation for  `survfit.coxph` mentions a 'Breslow estimator' which seems to be similar to Kaplan-Meier... something for future study! 
+>The book says that the methods used to estimate $h_0(t)$ are beyond the scope of the book. Documentation for  `survfit.coxph` mentions a 'Breslow estimator' which seems to be similar to Kaplan-Meier... something for future study! 
 
  
 ## Additional Topics Covered in Text:
