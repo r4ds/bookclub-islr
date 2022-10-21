@@ -69,9 +69,9 @@ Left censoring and interval censoring are also possible, but the most frequent i
 
 Rather then do the lab at the end, let's try a different approach and thread the Brain Cancer lab  through the chapter discussion.
 
-Hopefully this helps illustrate the main points of the text with examples worked out in R. 
+- Hopefully this helps illustrate the main points of the text with examples worked out in R. 
 
-We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
+- We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
 
 ```{r 11dataset}
 data("BrainCancer")
@@ -79,28 +79,28 @@ dim(BrainCancer)
 head(BrainCancer)
 ```
 
-The rows index the 88 patients, while the columns contain the 8 predictors.
-
 ```{r 11count}
 BrainCancer %>% 
      count(status)
 ```
 
 
-Before beginning an analysis, it is important to know how the `status` variable has been coded.  Most software, including `R`, uses the convention that `status = 1` indicates an uncensored observation,  and `status = 0` indicates a censored observation. But some scientists might use the opposite coding. For the `BrainCancer` data set $35$ patients died before the end of the study.
+ - Note: `status` = 1 indicates uncensored, which is the convention for `R`.
+ 
+ - For `BrainCancer` data set $35$ patients died before the end of the study (uncensored)
 
 
-## Kaplan-Meier survival curve
-
-The survival function / curve:
+## Survival Function
 
 $$
 S(t) = Pr(T>t)
 $$
 
-Here T is the time of 'death' or whatever is being considered, and $S(t)$ is the probability of surviving up to time t.  
+- $T$ is the time of 'death' or other event under consideration.
 
-However, due to censoring, we don't actually observe the time T of the event (e.g. 'death') but rather a variable $Y$:
+- $S(t)$ is the probability of surviving up to time $t$.  
+
+- But we dont observe $T$  !  Rather we observe $Y$:
 
 $$ Y = min(T,C)$$
 
@@ -113,35 +113,40 @@ $$ \delta =
             \end{array} \right.
 $$
 
-These together as pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
+ - These pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
+ 
 
-So we cannot just count up how many are alive at any given point in the study to estimate $S(t)$.  Instead, consider  the instantaneous rate of death at time $t$, this is something we might be able to estimate since it only depends on the number patients 'at risk' at that moment and how many of them die 'at' that moment.  This is the basic idea behind the construction on page  465 for estimating the survival curve directly from the data. 
+## Kaplan-Meier survival curve
 
-- $d_k$ are the 'death' times (ordered)
+- We don't have $T$ so cannot just count up how many are alive at any given point in the study to estimate $S(t)$.
 
-- $r_k$ are the number of non-censored 'alive' cases at time $d_k$.  (at risk)
+- Define:
+    
+    - $d_j$ : the times of death.
 
-- $q_k$ are the number that die at time $d_k$ (typically just 1!)
+    - $r_j$: the number of non-censored 'alive' cases at time $d_j$.  (at risk)
+    
+    - $q_j$:  the number that die at time $d_j$ (typically just 1!)
+    
+- The ratio $(r_j - q_j)/r_j$ is the fraction of those at risk that survive past time $d_k$
 
-Then we can (as shown in the text) decompose $S(d_k)$:
+- This fraction is an estimate of the probabilty $Pr(T> d_j | T> d_{j-1})$  
+
+> Note that this uses only uncensored data at time $d_k$ but the data could become censored later! It takes care of censoring 'automatically'.
+ 
+- The text shows how one can decompose $S(d_k)$ into these more elemental probabilities:
 
 $$
 S(d_k) = Pr(T> d_k | T> d_{k-1}) \times ... \times Pr(T > d_2 | T > d_1)Pr(T> d_1)
 $$
 
-The reason for this decomposition is that the conditional probability $Pr(T> d_j | T> d_{j-1})$ can be estimated by:
-
-$$
-(r_j - q_j)/r_j
-$$
-
-That is, it is just the fraction of at risk 'patients' that survive past time $q_j$.  This leads to the Kaplan-Meier estimator:
+- This leads to the Kaplan-Meier estimator:
 
 $$
 \hat{S}(d_k) = \Pi_{j=1}^{k} (\frac{r_j- q_j}{r_j})
 $$
 
-Note also that:
+- Note also that:
 
 $$
 \ln\hat{S}(d_k) = \sum_{j=1}^{k} \ln (\frac{r_j- q_j}{r_j})
@@ -151,7 +156,7 @@ $$
 
 ## Kaplan-Meier survival curve in R
 
-To begin the analysis, we re-create  the Kaplan-Meier survival curve  shown in  Figure 11.2, using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
+- K-M curves can be computed using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
 
 ```{r 11plot_KM_curve}
 fit.surv <- survfit(Surv(time, status) ~ 1, data = BrainCancer)
@@ -186,7 +191,7 @@ The resulting $p$-value is $0.23$, indicating  no evidence of a difference in su
 
 ## Survminer package
 
-- Survminer is a package that draws survival curves using ggplot, and can provide logrank p-values all in one go!
+Survminer is a package that draws survival curves using ggplot, and can provide logrank p-values all in one go!
 
 Using `survminer` package
 ```{r 11survminer, message=FALSE}
@@ -203,15 +208,35 @@ ggsurvplot(fit.sex, data = BrainCancer,
 
 ## Hazard Function
 
-The hazard function (11.9) is defined at a given moment *t* in time, the potential risk of having an event given you survived up to time *t*.
+- The hazard function is the risk of having an event given you survived up to time *t*.
 
-$$h(t) = lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
+$$h(t) = \lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
 
-Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
+>Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
 
-> Note the following is basically Excercise 8.  But I think it is important to understand $h$, $S$, and $f$.
+### How is the hazard rate related to the survival probability? 
 
-How is the hazard rate related to the survival probability?  It seems that the rate of death should be related to the rate of change of 'survival' in some way. Lets try this:
+Define the event ('death') rate:
+
+$$f(t) = \lim_{\Delta t \to 0}\frac{ Pr(t+ \Delta t \geq T > t)}{\Delta t}$$
+
+- $f(t)\Delta t$ is the probability of the event occurring near t, not conditioned like $h$.
+ 
+
+- the probability of an event near (i.e. within $\Delta t$) time $t$ should be equal to the probability of surviving until time $t$ multiplied by the probability of an event near time $t$ *given* that you have survived until time $t$. That is:
+
+$$
+f(t)  = h(t)S(t)
+$$
+
+>The book gives a more rigorous derivation using Baye's rule, but this an intuitive way to get there.   
+
+Now consider that if $S(t)$ is the survival probability, then $1-S(t)$ is the probability of the event occurring by time t. And intuitively we would expect that $1-S(t) = \int_{0}^{t}f(u)du$, i.e. the probability of the event occuring by time t is just the sum of the probabilities of all the times the event could have occurred. 
+
+
+Verification:
+
+> Note the following is basically Excercise 8.  Skip it if you have not done this yet!
 
 $$
 \begin{align}
@@ -219,33 +244,23 @@ $$
 & = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - Pr(T > t)}{\Delta t}\\
 & = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - (Pr(T > t + \Delta t) + Pr(t+ \Delta t \geq T > t))}{\Delta t} \\
 & = lim_{\Delta t \to 0}  \frac{- Pr(t+ \Delta t \geq T > t)}{\Delta t} \\
-& = - f(t)  \text{  see book eqn 11.11}
+& = - f(t)   
 \end{align}
 $$
 
-$f(t)$ is the instantaneous death rate, close to what we want..  But we can relate $f(t)$ to $h(t)$ and $S(t)$ simply by observing that the probability of an event near (i.e. within $\delta t$) time $t$ should be equal to the probability of surviving until time $t$ multiplied by the probability of an event near time $t$ *given* that you have survived until time $t$. That is:
-
-$$
-f(t)  = h(t)S(t)
-$$
-
-The book gives a more rigorous derivation using Baye's rule, but this is the intuition.
 
 
  
-So we have finally:
+- So we have finally:
 
 $$
-\frac{d S}{d t} = - S(t)h(t)
-$$
-
-or 
-
-$$
+\frac{d S}{d t} = - S(t)h(t)\\
+\text{or}\\
 \frac{d \text{ ln} S}{d t} = -h(t)
 $$
 
-so that the log of the survival probability is the negative of the 'cumulative' hazard ($\int{h(t) dt}$)
+
+- log of the survival probability is the negative of the 'cumulative' hazard ($\int{h(t) dt}$)
 
 $$
 \ln S =  -\int{h(t) dt} 
@@ -255,7 +270,8 @@ $$
 > Note that this construction seems similar to that of the Kaplan-Meier curve, if we think of $\ln (\frac{r_j- q_j}{r_j})$ as the integrated hazard during the time between deaths.
  
 
-As a simple example, consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ .  
+*Example:* consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ . 
+
 
 ## Regression models
 
@@ -265,14 +281,14 @@ $$
 L = \prod_{i=1}^{n}h(y_i)^{\delta_i}S(y_i)
 $$
 
-* For non-censored data, the factor is $h(y_i)S(y_i) = f(y_i)$ , the probability of dying in an tiny interval around $y_i$ 
+* For a non-censored data point, the factor is $h(y_i)S(y_i) = f(y_i)$ , the probability of dying in an tiny interval around $y_i$ 
 
-* For censored data, the factor is just $S(y_i)$, the likelihood of surviving at *least* until $y_i$.
+* For a censored data point, the factor is just $S(y_i)$, the likelihood of surviving at *least* until $y_i$.
 
 * This could  be used for some parameterized model of $h$, Exercise 9 looks at this for a simple (constant hazard) example.
 
 * But we really want to do regression, and one approach is to assume functional form like 
-$h(t|x_i) = exp \left(\beta_0 + \sum_{j=1}^{p}\beta_j x_{ij}\right)$.  This could be used in the likelihood to estimate the parameters, but the lack of time depenance is very restrictive.
+$h(t|x_i) = exp \left(\beta_0 + \sum_{j=1}^{p}\beta_j x_{ij}\right)$.  This could be used in the likelihood to estimate the parameters, but the lack of time dependence is very restrictive.
 
 
 ## Proportional Hazards
@@ -294,7 +310,7 @@ $$
 
 - Because $h_0(t)$ is unknown we cannot just plug $h(t|x_i)$ into the likelihood function and apply maximum likelihood
 
-- **Cox proportionalhazards model (Cox, 1972)** estimates $\beta$ without having to specify the form of $h_0(t)$ by using a partial (relative) likelihood.
+- **Cox proportionalhazards model (Cox, 1972)** estimates $\beta$ without having to specify the form of $h_0(t)$ by using a partial (relative) likelihood where $h_0(t)$ cancels out. (Details in text)
 
 
 Let's fit the Cox proportional hazards models using the `coxph()`  function.
