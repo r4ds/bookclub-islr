@@ -267,7 +267,7 @@ $$
 $$
 
  
-> Note that this construction is similar to that of the Kaplan-Meier curve, if $-\ln (\frac{r_j- q_j}{r_j}) \approx q_j/r_j$ is the integrated hazard during the time between deaths.
+> Note that this construction is similar to that of the Kaplan-Meier curve $\ln\hat{S}(d_k) = \sum_{j=1}^{k} \ln (\frac{r_j- q_j}{r_j}) \approx \sum_{j=1}^{k} (-q_j/r_j)$ where $q_i/r_j$ is the hazard at time $q_i$ 
  
 
 *Example:* consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ . 
@@ -283,7 +283,7 @@ $$
 
 * For a non-censored data point, the factor is $h(y_i)S(y_i) = f(y_i)$ , the probability of dying in an tiny interval around $y_i$ 
 
-* For a censored data point, the factor is just $S(y_i)$, the likelihood of surviving at *least* until $y_i$.
+* For a censored data point, the factor is just $S(y_i)$, the probability of surviving at *least* until $y_i$.
 
 * This could  be used for some parameterized model of $h$, Exercise 9 looks at this for a simple (constant hazard) example.
 
@@ -301,8 +301,14 @@ $$
 
 *Assumes* separate time dependence (baseline hazard $h_0$) from feature dependence.
 
-![Source ISLR Fig 11.4](images/fig11_4.png)
 
+- Important to check proportional assumption!
+
+    - Qualitative feature: plot the log hazard function for each level of the feature
+    
+    - Quantitative feature: stratify (`cut`) the feature and do the above.
+
+![Source ISLR Fig 11.4](images/fig11_4.png)
 
 
 ## Cox Proportional Hazards Model
@@ -375,8 +381,6 @@ with(BrainCancer,{
 - Choice of Time Scale
 
 - Time-Dependent Covariates
-
-- Checking Proportional Hazard Assumptions
 
 - Survival Trees
 
