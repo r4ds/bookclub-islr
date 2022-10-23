@@ -6,19 +6,16 @@
 - Calculate a **Kaplan-Meier survival curve.**
 - Compare the survival rates of two groups with the **log-rank test.**
 - Model survival data using **Cox's proportional hazards**
-- Cox model assumptions
-- Apply **shrinkage methods** to regularize the Cox model.
-- Calculate the generalized **AUC** for a survival model.
+ 
 
-```{r 11load_libraries, echo = FALSE}
+```{r 11load_libraries, echo = FALSE, message=FALSE}
 library(ISLR2)
 library(survival)
 library(dplyr)
 ```
 
-## What is survival (censored) data?
+## What is survival data?
 
-![Source: https://www.reddit.com/r/statisticsmemes/comments/u21swt/what_i_learned_in_survival_analysis_so_far/](images/survival_analysis_meme.jpg)
 
 Time-to-event data that consist of a distinct start time and end time
 
@@ -30,10 +27,6 @@ Examples:
 
 - Time to machine malfunction
 
-![Source: https://towardsdatascience.com/introduction-to-survival-analysis-6f7e19c31d96](images/time_to_event.png)
-
-## Aliases for survival analysis
-
 Survival analysis is common in many other fields, such as:
 
 - Reliability analysis
@@ -44,11 +37,18 @@ Survival analysis is common in many other fields, such as:
 
 - Time-to-event analysis
 
+
 ## Introduction to Survival Analysis (zedstatistics) ---
 
 `r knitr::include_url("https://www.youtube.com/embed/v1QqpG0rR1k")`
 
-## Types of censoring
+## Censored Data
+
+
+![Source: https://www.reddit.com/r/statisticsmemes/comments/u21swt/what_i_learned_in_survival_analysis_so_far/](images/survival_analysis_meme.jpg)
+
+![Source (slightly modified): https://towardsdatascience.com/introduction-to-survival-analysis-6f7e19c31d96](images/time_to_event2.png)
+
 
 Observations are __censored__ when the information about their survival time is incomplete.
 
@@ -56,33 +56,27 @@ Examples:
 
 - Loss to follow-up
 
-- Withdrawl from study
+- Withdrawal from study (line 5)
 
-- No event/outcome by end of fixed study period
+- No event/outcome by end of fixed study period (line 3 and 2)
 
 These are examples of **right** censoring.
 
 Left censoring and interval censoring are also possible, but the most frequent is right censoring.
 
-## Lab: Survival Analysis
 
-In this lab, we perform survival analyses on three separate data sets. In Section 11.8.1 we analyze the `BrainCancer` data that was  first described in Section 11.3.
+## Lab: Brain Cancer survival analysis
 
-In Section 11.8.2, we examine the `Publication` data from Section 11.5.4. Finally, Section 11.8.3 explores a simulated call center data set.
+Rather then do the lab at the end, let's try a different approach and thread the Brain Cancer lab  through the chapter discussion.
 
-## Brain Cancer Data
-We begin with the `BrainCancer` data set, which is part of the  `ISLR2` package.
+- Hopefully this helps illustrate the main points of the text with examples worked out in R. 
+
+- `BrainCancer` data set:
 
 ```{r 11dataset}
 data("BrainCancer")
 dim(BrainCancer)
 head(BrainCancer)
-```
-
-The rows index the 88 patients, while the columns contain the 8 predictors.
-
-```{r 11skim}
-skimr::skim_without_charts(BrainCancer)
 ```
 
 ```{r 11count}
@@ -91,13 +85,78 @@ BrainCancer %>%
 ```
 
 
-Before beginning an analysis, it is important to know how the `status` variable has been coded.  Most software, including `R`, uses the convention that `status = 1` indicates an uncensored observation,  and `status = 0` indicates a censored observation. But some scientists might use the opposite coding. For the `BrainCancer` data set $35$ patients died before the end of the study.
+ - Note: `status` = 1 indicates uncensored, which is the convention for `R`.
+ 
+ - For `BrainCancer` data set $35$ patients died before the end of the study (uncensored)
+
+
+## Survival Function
+
+$$
+S(t) = Pr(T>t)
+$$
+
+- $T$ is the time of 'death' or other event under consideration.
+
+- $S(t)$ is the probability of surviving up to time $t$.  
+
+- But we dont observe $T$  !  Rather we observe $Y$:
+
+$$ Y = min(T,C)$$
+
+where C is the time of censoring.  We also need to observe a status indicator:
+
+$$ \delta = 
+             \left\{ \begin{array}{c l}
+                1, & \text{if } T \leq C \\
+                0, & \text{if } T > C
+            \end{array} \right.
+$$
+
+ - These pairs $(y_n, \delta_n)$ represent the survival data. (In R, they are combined to make a survival object using `Surv`)
+ 
 
 ## Kaplan-Meier survival curve
 
-To begin the analysis, we re-create  the Kaplan-Meier survival curve  shown in  Figure 11.2, using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
+- We don't have $T$ so cannot just count up how many are alive at any given point in the study to estimate $S(t)$.
 
-![(11.2)](images/survival_function.png)
+- Define:
+    
+    - $d_j$ : the times of death.
+
+    - $r_j$: the number of non-censored 'alive' cases at time $d_j$.  (at risk)
+    
+    - $q_j$:  the number that die at time $d_j$ (typically just 1!)
+    
+- The ratio $(r_j - q_j)/r_j$ is the fraction of those at risk that survive past time $d_k$
+
+- This fraction is an estimate of the probabilty $Pr(T> d_j | T> d_{j-1})$  
+
+> Note that this uses only uncensored data at time $d_i$ but includes data that could become censored later! It takes care of censoring 'automatically'.
+ 
+- The text shows how one can decompose $S(d_k)$ into these more elemental probabilities:
+
+$$
+S(d_k) = Pr(T> d_k | T> d_{k-1}) \times ... \times Pr(T > d_2 | T > d_1)Pr(T> d_1)
+$$
+
+- This leads to the Kaplan-Meier estimator:
+
+$$
+\hat{S}(d_k) = \Pi_{j=1}^{k} (\frac{r_j- q_j}{r_j})
+$$
+
+- Note also that:
+
+$$
+\ln\hat{S}(d_k) = \sum_{j=1}^{k} \ln (\frac{r_j- q_j}{r_j})
+$$
+
+
+
+## Kaplan-Meier survival curve in R
+
+- K-M curves can be computed using the `survfit()` function within the `R` `survival` library. Here `time` corresponds to $y_i$, the time to the $i$th event (either censoring or death).
 
 ```{r 11plot_KM_curve}
 fit.surv <- survfit(Surv(time, status) ~ 1, data = BrainCancer)
@@ -116,10 +175,26 @@ plot(fit.sex, xlab = "Months",
 legend("bottomleft", levels(BrainCancer$sex), col = c(2,4), lty = 1)
 ```
 
+## Log-Rank test
+
+As discussed in the book, Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
+
+> See also Exercise 7 to go into depth on this!
+
+```{r 11logrank_test}
+logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
+logrank.test
+```
+
+The resulting $p$-value is $0.23$, indicating  no evidence of a difference in survival between the two sexes.
+
+
 ## Survminer package
 
+Survminer is a package that draws survival curves using ggplot, and can provide logrank p-values all in one go!
+
 Using `survminer` package
-```{r 11survminer}
+```{r 11survminer, message=FALSE}
 library(survminer)
 ggsurvplot(fit.sex, data = BrainCancer, 
            pval = TRUE,
@@ -129,57 +204,120 @@ ggsurvplot(fit.sex, data = BrainCancer,
            legend.labs = c("Female", "Male"))
 ```
 
-As discussed in Section 11.4, we can perform a log-rank test to compare the survival of males to females, using the `survdiff()` function.
 
-```{r 11logrank_test}
-logrank.test <- survdiff(Surv(time, status) ~ sex, data = BrainCancer)
-logrank.test
-```
-
-The resulting $p$-value is $0.23$, indicating  no evidence of a difference in survival between the two sexes.
 
 ## Hazard Function
 
-The hazard function (11.9) is defined at a given moment *t* in time, the potential risk of having an event given you survived up to time *t*.
+- The hazard function is the risk of having an event given you survived up to time *t*.
 
-![Source: https://tinyheero.github.io/2016/05/12/survival-analysis.html](images/hazard_function.png)
+$$h(t) = \lim_{\Delta t \to 0}  \frac{ Pr(t+ \Delta t \geq T > t | T > t)}{\Delta t}$$
 
-It’s important to note here that the hazard is **not a probability** because we are dividing the probability by a time interval. Instead what we get is a rate. And since we are dealing with the condition of survival up to time t, this is why sometimes the hazard function is referred to as conditional failure rate.
+>Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
 
-Why do we care about the hazard function? It turns out that a key approach for modeling survival data as a function of covariates (i.e., regressors) relies heavily on the hazard function.
+### How is the hazard rate related to the survival probability? 
 
-## Cumulative Hazard Function
+Define the event ('death') rate:
 
-![Source: https://tinyheero.github.io/2016/05/12/survival-analysis.html](images/cum_hazard_function.png)
+$$f(t) = \lim_{\Delta t \to 0}\frac{ Pr(t+ \Delta t \geq T > t)}{\Delta t}$$
 
-Let's plot the cumulative hazard for the Brain cancer dataset with sex as covariate
-```{r 11cum_hazard_plot}
-ggsurvplot(fit.sex, 
-           data = BrainCancer, 
-           conf.int = TRUE, 
-           risk.table.col = "strata", 
-           legend.title = "Sex", 
-           legend.labs = c("Female", "Male"), 
-           fun = "cumhaz")
-```
+- $f(t)\Delta t$ is the probability of the event occurring near t, not conditioned like $h$.
+ 
+
+- the probability of an event near (i.e. within $\Delta t$) time $t$ should be equal to the probability of surviving until time $t$ multiplied by the probability of an event near time $t$ *given* that you have survived until time $t$. That is:
+
+$$
+f(t)  = h(t)S(t)
+$$
+
+>The book gives a more rigorous derivation using Baye's rule, but this an intuitive way to get there.   
+
+Now consider that if $S(t)$ is the survival probability, then $1-S(t)$ is the probability of the event occurring by time t. And intuitively we would expect that $1-S(t) = \int_{0}^{t}f(u)du$, i.e. the probability of the event occuring by time t is just the sum of the probabilities of all the times the event could have occurred. 
+
+
+Verification:
+
+> Note the following is basically Excercise 8.  Skip it if you have not done this yet!
+
+$$
+\begin{align}
+\frac{d S}{d t} &= lim_{\Delta t \to 0} \frac{S(t+dt) - S(t)}{\Delta t} \\
+& = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - Pr(T > t)}{\Delta t}\\
+& = lim_{\Delta t \to 0}  \frac{Pr(T>t+\Delta t) - (Pr(T > t + \Delta t) + Pr(t+ \Delta t \geq T > t))}{\Delta t} \\
+& = lim_{\Delta t \to 0}  \frac{- Pr(t+ \Delta t \geq T > t)}{\Delta t} \\
+& = - f(t)   
+\end{align}
+$$
+
+
+
+ 
+- So we have finally:
+
+$$
+\frac{d S}{d t} = - S(t)h(t)\\
+\text{or}\\
+\frac{d \text{ ln} S}{d t} = -h(t)
+$$
+
+
+- log of the survival probability is the negative of the 'cumulative' hazard ($\int{h(t) dt}$)
+
+$$
+\ln S =  -\int{h(t) dt} 
+$$
+
+ 
+> Note that this construction is similar to that of the Kaplan-Meier curve $\ln\hat{S}(d_k) = \sum_{j=1}^{k} \ln (\frac{r_j- q_j}{r_j}) \approx \sum_{j=1}^{k} (-q_j/r_j)$ where $q_i/r_j$ is the hazard at time $q_i$ 
+ 
+
+*Example:* consider a constant hazard (e.g. radioactive decay) $h=\lambda$ (i.e. at any moment, the chance of an event is constant given no event up to that moment).  In that case the survival is exponential, as we expect,  $S(t) = \exp(-\lambda t)$ and $f(t) = \lambda \exp(-\lambda t)$ . 
+
+
+## Regression models
+
+* The hazard function can be used to specify a likelihood (for maximum likelihood methods)
+
+$$
+L = \prod_{i=1}^{n}h(y_i)^{\delta_i}S(y_i)
+$$
+
+* For a non-censored data point, the factor is $h(y_i)S(y_i) = f(y_i)$ , the probability of dying in an tiny interval around $y_i$ 
+
+* For a censored data point, the factor is just $S(y_i)$, the probability of surviving at *least* until $y_i$.
+
+* This could  be used for some parameterized model of $h$, Exercise 9 looks at this for a simple (constant hazard) example.
+
+* But we really want to do regression, and one approach is to assume functional form like 
+$h(t|x_i) = exp \left(\beta_0 + \sum_{j=1}^{p}\beta_j x_{ij}\right)$.  This could be used in the likelihood to estimate the parameters, but the lack of time dependence is very restrictive.
+
 
 ## Proportional Hazards
 
-The *proportional hazards assumption* states that
+The *proportional hazards assumption* states that (ISLR2 11.14):
 
-![Source: ISLR2 (11.14)](images/prop_hazard.png)
+$$
+h(t|x_i)= h_0(t) \exp\left(\sum_{j=1}^{p}x_{ij}\beta_k\right)
+$$
 
-It is important to emphasize that the relative risk does not depend on time, i.e. it is constant in time for the same pair of values of any feature, so hazards are proportional independent of time.
+*Assumes* separate time dependence (baseline hazard $h_0$) from feature dependence.
 
-We can use some specific distribution for the baseline survival or hazard function – and then we get a **parametric PH model**, or do not make such assumptions about the baseline functions – and then get a **semi-parametric PH model**, often called a Cox PH model after its author.
 
-## Regression Models
+- Important to check proportional assumption!
 
-### Cox Proportional Hazards-Hazards Model
+    - Qualitative feature: plot the log hazard function for each level of the feature
+    
+    - Quantitative feature: stratify (`cut`) the feature and do the above.
 
-The **Cox proportional-hazards model (Cox, 1972)** is essentially a regression model commonly used statistical in medical research for investigating the association between the survival time of patients and one or more predictor variables.
+![Source ISLR Fig 11.4](images/fig11_4.png)
 
-The purpose of the model is to evaluate simultaneously the effect of several factors on survival. In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time. This rate is commonly referred as the hazard rate. Predictor variables (or factors) are usually termed *covariates* in the survival-analysis literature.
+
+## Cox Proportional Hazards Model
+
+
+- Because $h_0(t)$ is unknown we cannot just plug $h(t|x_i)$ into the likelihood function and apply maximum likelihood
+
+- **Cox proportionalhazards model (Cox, 1972)** estimates $\beta$ without having to specify the form of $h_0(t)$ by using a partial (relative) likelihood where $h_0(t)$ cancels out. (Details in text)
+
 
 Let's fit the Cox proportional hazards models using the `coxph()`  function.
 To begin, we consider a model that uses `sex` as the only predictor.
@@ -190,119 +328,72 @@ summary(fit.cox)
 
 Regardless of which test we use, we see that there is no clear evidence for a difference in survival between males and females.
 
-Let's run the Cox PH model with all covariates.
-```{r 11coxph_all}
-fit_all_cox <- coxph(Surv(time, status) ~ ., data = BrainCancer)
-summary(fit_all_cox)
+
+Now we fit a  model that makes use of additional predictors. 
+
+```{r 11chunk10}
+fit.all <- coxph(
+Surv(time, status) ~ sex + diagnosis + loc + ki + gtv +
+   stereo, data = BrainCancer)
+fit.all
 ```
 
-## Visualizing the estimated distribution of survival times
+- The `diagnosis` variable has been coded so that the baseline corresponds to meningioma.
 
-Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.
-```{r 11coxph_viz}
-# plot the baseline survival function
-ggsurvplot(survfit(fit_all_cox), data = BrainCancer, palette = "#2E9FDF",
-           ggtheme = theme_minimal())
+- Results indicate that the risk associated with HG glioma is more than eight times (i.e. $e^{2.15}=8.62$) the risk associated with meningioma. In other words, after adjusting for the other predictors, patients with HG glioma have much worse survival compared to those with meningioma.  
+
+- In addition, larger values of the Karnofsky index, ki, are associated with lower risk, i.e. longer survival.
+
+## Surivival Curves
+
+- Possible to plot (estimated) survival curves for each diagnosis category,  adjusting for the other predictors.
+
+- To make these plots, set the values of the other predictors equal to the mean for quantitative variables, and the modal value for factors. 
+
+```{r 11chunk11}
+with(BrainCancer,{
+  modaldata <- data.frame(
+       diagnosis = levels(diagnosis),
+       sex = rep("Female", 4),
+       loc = rep("Supratentorial", 4),
+       ki = rep(mean(ki), 4),
+       gtv = rep(mean(gtv), 4),
+       stereo = rep("SRT", 4)
+       )
+  survplots <- survfit(fit.all, newdata = modaldata)
+  plot(survplots, xlab = "Months",
+      ylab = "Survival Probability", col = 2:5)
+  legend("bottomleft", levels(diagnosis), col = 2:5, lty = 1)
+})
 ```
 
-Let's plot the Cox Proportional Hazards covariates coefficients estimates/CI
-```{r 11coxph_coef}
-library(ggstatsplot)
-ggcoefstats(fit_all_cox, 
-            title = "Cox PH Model Covariates Coefficients Estimates/CI"
-            )
-```
+>The book says that the methods used to estimate $h_0(t)$ are beyond the scope of the book. Documentation for  `survfit.coxph` mentions a 'Breslow estimator' which seems to be similar to Kaplan-Meier... something for future study! 
 
-## Cox Model Assumptions
+ 
+## Additional Topics Covered in Text:
 
-The Cox proportional hazards model makes several assumptions. Thus, it is important to assess whether a fitted Cox regression model adequately describes the data.
+- Shrinkage for the Cox Model
 
-Here, we’ll discuss three types of diagnostics for the Cox model:
+    Uses 'loss + penalty' formulation (11.17) to reduce variance.
+    
+- Area Under the Curve for Survival Analysis
 
-- Testing the proportional hazards assumption.
+- Choice of Time Scale
 
-- Examining influential observations (or outliers).
+- Time-Dependent Covariates
 
-- Detecting nonlinearity in relationship between the log hazard and the covariates.
+- Survival Trees
 
-## Testing proportional Hazard assumptions
 
-The proportional hazards (PH) assumption can be checked using statistical tests and graphical diagnostics based on the *scaled Schoenfeld residuals*.
+## Conclusions
 
-In principle, the *Schoenfeld residuals* are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.
-```{r 11coxtest_1}
-test.ph <- cox.zph(fit_all_cox)
-test.ph
-```
+- Introduced Survival Analysis
 
-It’s possible to do a graphical diagnostic using the function *ggcoxzph()* [in the `survminer` package], which produces, for each covariate, graphs of the scaled Schoenfeld residuals against the transformed time.
-```{r 11coxtest_2}
-ggcoxzph(test.ph)
-```
+- Learned a few tools to apply
 
-From the graphical inspection, there is no pattern with time. The assumption of proportional hazards appears to be supported for the model covariates.
+- Much more out there to learn on this, only scratching the surface!
 
-## Testing influential observations
-
-To test influential observations or outliers, we can visualize either:
-
-- the deviance residuals or
-
-- the dfbeta values
-
-The function *ggcoxdiagnostics()* [in `survminer` package] provides a convenient solution for checking influential observations.
-```{r 11cox_diag_dfbeta}
-ggcoxdiagnostics(fit_all_cox, type = "dfbeta", linear.predictions = FALSE, ggtheme = theme_bw())
-```
-
-It’s also possible to check outliers by visualizing the deviance residuals. The deviance residual is a normalized transform of the martingale residual. These residuals should be roughly symmetrically distributed about zero with a standard deviation of 1.
-
-- Positive values correspond to individuals that “died too soon” compared to expected survival times.
-
-- Negative values correspond to individual that “lived too long”.
-
-- Very large or small values are outliers, which are poorly predicted by the model.
-
-```{r 11cox_diag_deviance}
-ggcoxdiagnostics(fit_all_cox, type = "deviance", linear.predictions = FALSE, ggtheme = theme_bw())
-```
-
-The pattern looks fairly symmetric around 0.
-
-Testing non linearity
-
-Often, we assume that continuous covariates have a linear form. However, this assumption should be checked.
-
-Plotting the *Martingale residuals* against continuous covariates is a common approach used to detect *nonlinearity* or, in other words, to assess the functional form of a covariate. For a given continuous covariate, patterns in the plot may suggest that the variable is not properly fit.
-
-Nonlinearity is not an issue for categorical variables, so we only examine plots of martingale residuals and partial residuals against a continuous variable.
-
-Martingale residuals may present any value in the range (-INF, +1):
-
-- A value of martinguale residuals near 1 represents individuals that “died too soon”,
-
-- and large negative values correspond to individuals that “lived too long”.
-
-To assess the functional form of a continuous variable in a Cox proportional hazards model, we’ll use the function *ggcoxfunctional()* [in the `survminer` R package].
-
-The covariates must be numerical.
-
-To test `sex`, it is necessary to convert the covariate to numerical.
-```{r 11cox_functional_1}
-BC_sex <- BrainCancer %>% 
-     mutate(sex = sex %>% as.numeric())
-
-ggcoxfunctional(Surv(time, status) ~ sex + log(sex) + sqrt(sex), data = BC_sex)
-```
-
-The function *ggcoxfunctional()* displays graphs of continuous covariates against martingale residuals of null cox proportional hazards model. This might help to properly choose the functional form of continuous variable in the Cox model. Fitted lines with lowess function should be **linear** to satisfy the Cox proportional hazards model assumptions.  Inthis case, the covariate `sex` passes the test.
-
-Let's test `gtv`
-```{r 11cox_functional_2}
-ggcoxfunctional(Surv(time, status) ~ gtv + log(gtv) + sqrt(gtv), data = BrainCancer)
-```
-
-From the plot, the covariate `gtv` exhibits a nonlinear pattern.
+  
 
 ## Meeting Videos
 
