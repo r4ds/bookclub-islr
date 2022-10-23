@@ -331,7 +331,7 @@ Regardless of which test we use, we see that there is no clear evidence for a di
 
 Now we fit a  model that makes use of additional predictors. 
 
-```{r chunk10}
+```{r 11chunk10}
 fit.all <- coxph(
 Surv(time, status) ~ sex + diagnosis + loc + ki + gtv +
    stereo, data = BrainCancer)
@@ -350,7 +350,7 @@ fit.all
 
 - To make these plots, set the values of the other predictors equal to the mean for quantitative variables, and the modal value for factors. 
 
-```{r chunk11}
+```{r 11chunk11}
 with(BrainCancer,{
   modaldata <- data.frame(
        diagnosis = levels(diagnosis),
