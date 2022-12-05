@@ -445,12 +445,26 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/Lp15fbaohww")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+01:02:33	shamsuddeen:	Thank you
+01:02:37	shamsuddeen:	Kevin
+01:02:50	shamsuddeen:	Yes
+01:03:08	shamsuddeen:	I am rusty also in Linear Algebra
+01:05:18	shamsuddeen:	I need to go. See you next week. Bye and thanks Kevin
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/TllKjSTVeqU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:37:36	Sandra Muroy:	https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5
 ```
 </details>
