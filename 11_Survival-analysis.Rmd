@@ -495,12 +495,14 @@ https://www.merriam-webster.com/dictionary/minuend
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/LL86xwJ8qx8")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:11:02	Ron:	https://youtu.be/v1QqpG0rR1k
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/REshRlsPf4U")`

@@ -963,12 +963,26 @@ plot(Rs, FDRs, xlab = "Number of Rejections", type = "l",
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/ajoJyZM4cws")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:53:00	Ron:	FROM "Regression and Other Stories": 
+
+The three challenges of statistical inference are:
+1. Generalizing from sample to population, a problem that is associated with survey sampling but
+actually arises in nearly every application of statistical inference;
+
+
+2. Generalizing from treatment to control group, a problem that is associated with causal inference,
+which is implicitly or explicitly part of the interpretation of most regressions we have seen; and
+
+3. Generalizing from observed measurements to the underlying constructs of interest, as most of the
+time our data do not record exactly what we would ideally like to study.
+01:00:11	Ron:	Might be of interest, Gelman on multiple comparisons in Bayesian methods : http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf
+01:03:45	kevin_kent:	https://linear.axler.net/
+01:06:14	Ron:	"Down with determinants" lol
 ```
 </details>

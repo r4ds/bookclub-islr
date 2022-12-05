@@ -13,7 +13,7 @@ If you would like to present, please see the sign-up sheet for your cohort (link
 - Cohort 1 (started 2021-09-21, ended 2022-05-24): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGibdB0i2wveuFRDlXHbWaPD)
 - Cohort 2 (started 2021-12-02, ended 2022-07-14): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGhO5S1v53nQzil-OSRZIweH)
 - Cohort 3 (started 2022-02-07, ended 2022-09-05): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGisLSs09v1NQUQaxuE8nbOO)
-- [Cohort 4](https://docs.google.com/spreadsheets/d/1YA6MUJAtdoaelXrBqbYEeVvz1gi2e-GLZH02Po___ro/edit?usp=sharing) (started 2022-05-01): [Sundays, 3:00pm CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220501T200000&p1=24&p2=179) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi9LAXM5kcyuN_bkN66TzUD)
+- Cohort 4 (started 2022-05-01, ended 2022-12-04): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi9LAXM5kcyuN_bkN66TzUD)
 
 <hr>
 
@@ -25,13 +25,8 @@ To present, follow these instructions:
 
 Do these steps once:
 
-1. [Setup Github Locally](https://www.youtube.com/watch?v=hNUNPkoledI) (also see [_Happy Git and GitHub for the useR_](https://happygitwithr.com/github-acct.html))
-2. Install {usethis} and {devtools} `install.packages(c("usethis", "devtools"))`
-3. Set up a default {usethis} directory:
-  - `usethis::edit_r_profile()` to open your profile for editing.
-  - Add this line: `options(usethis.destdir = "YOURDIR")` (replace `YOURDIR` with the root directory under which you want your R projects to appear; or you can skip these steps, and the project will be saved to your Desktop).
-  - Restart your R session (Session/Restart R in Rstudio).
-4. `usethis::create_from_github("r4ds/bookclub-islr")` (cleanly creates your own copy of this repository).
+1. [Setup Git and GitHub to work with RStudio](https://github.com/r4ds/bookclub-setup) (click through for detailed, step-by-step instructions; I recommend checking this out even if you're pretty sure you're all set).
+2. `usethis::create_from_github("r4ds/bookclub-islr")` (cleanly creates your own copy of this repository).
 
 Do these steps each time you present another chapter:
 
@@ -47,4 +42,4 @@ Do these steps each time you present another chapter:
 10. When your PR has been accepted ("merged"), `usethis::pr_finish()` to close out your branch and prepare your local repository for future work.
 11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push("origin")` or click the `Push` button on the `Git` tab of Rstudio.
 
-When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.github.io/bookclub-islr/).
+When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.io/islr).

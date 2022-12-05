@@ -667,12 +667,15 @@ x %>%
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/eVub95ivy2Y")`
+
+`r knitr::include_url("https://www.youtube.com/embed/_Ycna0Kf1h0")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:19:10	Sandra Muroy:	https://hastie.su.domains/Papers/gap.pdf
+00:19:16	Sandra Muroy:	gap statistic original paper
 ```
 </details>

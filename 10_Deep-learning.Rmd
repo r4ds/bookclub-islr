@@ -374,12 +374,42 @@ knitr::include_graphics("images/10_06_recurrent_nn.png")
 
 ### Cohort 4
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/afMkOcWNiDc")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-ADD LOG HERE
+00:25:11	kevin_kent:	For dropout I believe the nodes themselves are dropped
+00:26:50	Ron:	They mention that lasso can be used too
+00:35:16	Ron:	like that animation!
+00:35:38	Sandra Muroy:	yes! very cool!
+00:42:54	Ron:	It's exercise 4 I was thinking of ;)
+00:42:56	Ron:	Sorry
+00:47:43	Ron:	max/ avg pooling == downsampling  for sure
+00:50:41	Ron:	https://medium.com/@bdhuma/which-pooling-method-is-better-maxpooling-vs-minpooling-vs-average-pooling-95fb03f45a9
+01:03:15	Ron:	can you link the book?
+01:04:00	kevin_kent:	https://course.fast.ai/Resources/book.html
+01:05:54	Ron:	Deep learning libraries are python focused so I think it is easier (less impedance mismatch) to use python
+01:08:18	kevin_kent:	Jeremy Howard has really worked hard at that course and book the teaching approach and has consulted materials about the science of learning. I find his stuff really inspirational
+01:11:47	Ron:	https://www.manning.com/books/deep-learning-and-the-game-of-go
+01:12:10	Sandra Muroy:	cool
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/zMqelxtBt_4")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:47:28	kevin_kent:	The term “gradient boosting” comes from the idea of “boosting” or improving a single weak model by combining it with a number of other weak models in order to generate a collectively strong model. Gradient boosting is an extension of boosting where the process of additively generating weak models is formalized as a gradient descent algorithm over an objective function. Gradient boosting sets targeted outcomes for the next model in an effort to minimize errors. Targeted outcomes for each case are based on the gradient of the error (hence the name gradient boosting) with respect to the prediction.
+
+GBDTs iteratively train an ensemble of shallow decision trees, with each iteration using the error residuals of the previous model to fit the next model. The final prediction is a weighted sum of all of the tree predictions. Random forest “bagging” minimizes the variance and overfitting, while GBDT “boosting” minimizes the bias and underfitting.
+
+XGBoost is a scalable and highly accurate implementatio
+00:53:53	Ron:	I have some reading to do ^^^ thanks!
+01:09:13	shamsuddeen:	I need to hop off now. See you all next week.
+01:14:03	Ron:	I am going to hop off as well, see you next time!
 ```
 </details>
