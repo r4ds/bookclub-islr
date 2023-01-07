@@ -1,4 +1,3 @@
-name: pr_check
 on:
   pull_request:
     branches: main
@@ -7,8 +6,5 @@ on:
   workflow_dispatch:
 
 jobs:
-  bookdown:
-    name: pr_check_book
-    runs-on: ubuntu-latest
-    steps:
-      - run: 'echo "No build required" '
+  pr_check:
+    uses: r4ds/r4dsactions/.github/workflows/render_check_readme.yml@main
