@@ -1,5 +1,26 @@
 # Moving Beyond Linearity
 
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\ds}{\displaystyle}
+
+```{css, echo=FALSE, eval = FALSE}
+.summary {
+  padding: 4px;
+  width: 200px;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 1px 1px 2px #bbbbbb;
+  cursor: pointer;
+}
+
+.p {
+  background-color: #eeeeee;
+  padding: 4px;
+  margin: 0;
+  box-shadow: 1px 1px 2px #bbbbbb;
+}
+```
+
 **Learning objectives:**
 
 Model relationships between a predictor and an outcome with
@@ -20,6 +41,7 @@ Chapter 7 resources:
 1. [Emil Hvitfeldt's `Tidymodels` examples](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/07-moving-beyond-linearity.html)
 1. [Kim Larsen's GAM: The Predictive Modeling Silver Bullet](https://multithreaded.stitchfix.com/blog/2015/07/30/gam/)
 1. [Noam Ross' GAMs in R: A Free, Interactive Course using mgcv](https://noamross.github.io/gams-in-r-course/)
+1. [onmee's ISLR solutions](https://onmee.github.io/assets/docs/ISLR/Moving-Beyond-Linearity.pdf) for Chapter 7
 
 ![Black motorcycle parked at road toward mountain](https://images.unsplash.com/photo-1518787289325-94c6917b88ef)
 
@@ -30,9 +52,20 @@ Chapter 7 resources:
 suppressPackageStartupMessages({
   library(splines)
   library(tidymodels)
+  
+  library(ISLR)
+  library(boot)
+  library(MASS)
+  library(leaps)
+  library(gam)
+  library(ggplot2)
 })
 
 tidymodels_prefer()
+
+#require(caTools)
+attach(Wage)
+attach(Auto)
 ```
 
 </details>
@@ -522,6 +555,615 @@ mgcv::plot.gam(
 )
 
 ```
+
+## Conceptual Exercises
+
+1. ... cubic regression spline with a knot at $x = \xi$ with basis functions
+
+$$x, x^{2}, x^{3}, (x-\xi)_{+}^{3}$$
+where
+$$(x-\xi)_{+}^{3} = \begin{cases}
+  (x-\xi)^{3} & x > \xi \\ 0 & \text{otherwise} \\
+\end{cases}$$
+
+We will show that a function of the form
+
+$$f(x) = \beta_{0} + \beta_{1}x + \beta_{2}x^{2} + \beta_{3}x^{3} + \beta_{4}(x-\xi)_{+}^{3}$$
+
+is indeed a cubic regression spline.
+
+a. Find a cubic polynomial
+
+$$f_{1}(x) = a_{1} + b_{1}x + c_{1}x^{2} + d_{1}x^{3}$$
+
+such that $f_{1}(x) = f(x)$ for all $x \leq \xi$.
+
+<details><summary>Answer</summary>
+
+$$\begin{array}{rcl}
+  a_{1} & = & \beta_{0} \\ b_{1} & = & \beta_{1} \\ c_{1} & = & \beta_{2} \\ d_{1} & = & \beta_{3} \\
+\end{array}$$
+
+</details>
+
+b. Find a cubic polynomial
+
+$$f_{2}(x) = a_{2} + b_{2}x + c_{2}x^{2} + d_{2}x^{3}$$
+
+such that $f_{2}(x) = f(x)$ for all $x > \xi$.
+
+<details><summary>Answer</summary>
+
+$$\begin{array}{rcl}
+  a_{2} & = & \beta_{0} - \beta_{4}\xi^{3} \\ b_{2} & = & \beta_{1} + 3\beta_{4}\xi^{2} \\ c_{2} & = & \beta_{2} - 3\beta_{4}\xi \\ d_{2} & = & \beta_{3} + \beta_{4} \\
+\end{array}$$
+
+</details>
+
+We have now shown that $f(x)$ is a piecewise polynomial.
+
+c. Show that $f(x)$ is continuous at $\xi$
+    
+<details><summary>Answer</summary>
+
+$$\begin{array}{rcl}
+  f_{1}(\xi) & = & f_{2}(\xi) \\
+  \beta_{0} + \beta_{1}\xi + \beta_{2}\xi^{2} + \beta_{3}\xi^{3} & = & \beta_{0} + \beta_{1}\xi + \beta_{2}\xi^{2} + \beta_{3}\xi^{3} \\
+\end{array}$$
+
+</details>
+
+d. Show that $f'(x)$ is continuous at $\xi$
+    
+<details><summary>Answer</summary>
+
+$$\begin{array}{rcl}
+  f_{1}'(\xi) & = & f_{2}'(\xi) \\
+  \beta_{1} + 2\beta_{2}\xi + 3\beta_{3}\xi^{2} & = & \beta_{1} + 2\beta_{2}\xi + 3\beta_{3}\xi^{2} \\
+\end{array}$$
+
+</details>
+
+e. Show that $f''(x)$ is continuous at $\xi$
+    
+<details><summary>Answer</summary>
+
+$$\begin{array}{rcl}
+  f_{1}''(\xi) & = & f_{2}''(\xi) \\
+  2\beta_{2} + 6\beta_{3}\xi & = & 2\beta_{2} + 6\beta_{3}\xi \\
+\end{array}$$
+
+</details>
+
+
+2. Suppose that a curve $\hat{g}$ is computed to smoothly fit a set of $n$ points using the following formula:
+
+$$\hat{g} = \argmin_{g} \left( \ds\sum_{i=1}^{n} (y_{i}-g(x_{i}))^{2} + \lambda\ds\int \left[g^{(m)}(x)\right]^{2} \, dx \right)$$
+
+where $g^{(m)}$ is the $m^{\text{th}}$ derivative of $g$ (and $g^{(0)} = g$).  Describe $\hat{g}$ in each of the following situations.
+
+a. $\lambda = \infty, \quad m = 0$
+
+<details><summary>Answer</summary>
+heavy penalization of all functions except constants (i.e. horizontal lines)
+</details>
+
+b. $\lambda = \infty, \quad m = 1$
+
+<details><summary>Answer</summary>
+heavy penalization of all functions except linear functions---i.e.
+$$\hat{g} = a + bx$$
+</details>
+
+c. $\lambda = \infty, \quad m = 2$
+
+<details><summary>Answer</summary>
+heavy penalization of all functions except degree-2 polynomials
+$$\hat{g} = a + bx + cx^{2}$$
+</details>
+
+d. $\lambda = \infty, \quad m = 3$
+
+<details><summary>Answer</summary>
+heavy penalization of all functions except degree-3 polynomials
+$$\hat{g} = a + bx + cx^{2} + dx^{3}$$
+</details>
+
+e. $\lambda = 0, \quad m = 2$
+
+<details><summary>Answer</summary>
+No penalization implies perfect fit of training data.
+</details>
+
+![](images/prob_7_3_a.png)
+
+<details><summary>Answer</summary>
+$$f(x) = \begin{cases}
+  1 + x, & -2 \leq x \leq 1 \\ 1 + x - 2(x-1)^{2}, & 1 \leq x \leq 2 \\
+\end{cases}$$
+</details>
+
+![](images/prob_7_3_b.png)
+![](images/prob_7_4_a.png)
+<details><summary>Answer</summary>
+$$f(x) = \begin{cases}
+  0, & -2 \leq x < 0 \\ 
+  1, & 0 \leq x \leq 1 \\
+  x, & 1 \leq x \leq 2 \\
+  0, & 2 < x < 3 \\
+  3x-3, & 3 \leq x \leq 4 \\
+  1, & 4 < x \leq 5 \\
+\end{cases}$$
+</details>
+
+5. Consider two curves $\hat{g}_{1}$ and $\hat{g}_{2}$
+
+$$\hat{g}_{1} = \argmin_{g} \left( \ds\sum_{i=1}^{n} (y_{i}-g(x_{i}))^{2} + \lambda\ds\int \left[g^{(3)}(x)\right]^{2} \, dx \right)$$
+$$\hat{g}_{2} = \argmin_{g} \left( \ds\sum_{i=1}^{n} (y_{i}-g(x_{i}))^{2} + \lambda\ds\int \left[g^{(4)}(x)\right]^{2} \, dx \right)$$
+where $g^{(m)}$ is the $m^{\text{th}}$ derivative of $g$
+
+a. As $\lambda \rightarrow\infty$, will $\hat{g}_{1}$ or $\hat{g}_{2}$ have the smaller training RSS?
+
+<details><summary>Answer</summary>
+$\hat{g}_{2}$ is more flexible due to the higher order of the penalty term than $\hat{g}_{1}$, so $\hat{g}_{2}$ will likely have a lower training RSS.
+</details>
+
+b. As $\lambda \rightarrow\infty$, will $\hat{g}_{1}$ or $\hat{g}_{2}$ have the smaller testing RSS?
+
+<details><summary>Answer</summary>
+Generally, $\hat{g}_{1}$ will perform better on less flexible functions, and $\hat{g}_{2}$ will perform better on more flexible functions.
+</details>
+
+c. For $\lambda = 0$, will $\hat{g}_{1}$ or $\hat{g}_{2}$ have the smaller training RSS?
+
+<details><summary>Answer</summary>
+The penalty terms will be zero for both equations, so training and test terms will be equal.
+</details>
+
+
+## Applied Exercises
+
+6. For the `Wage` data
+
+a. polynomial regression
+
+```{r}
+# Cross validation to choose degree of polynomial.
+set.seed(1)
+cv.error.10 = rep(0,10)
+for (i in 1:10) {
+glm.fit=glm(wage~poly(age,i),data=Wage)
+cv.error.10[i]=cv.glm(Wage,glm.fit,K=10)$delta[1]
+}
+plot(cv.error.10, type="b", xlab="Degree", ylab="CV Error")
+```
+
+The cross-validation error seems stagnant after degree-4 use.
+
+```{r}
+lm.fit = glm(wage ~ poly(age,4), data = Wage)
+summary(lm.fit)
+```
+
+```{r}
+# Using Anova() to compare degree 4 model with others.
+fit.1 = lm(wage~age ,data=Wage)
+fit.2 = lm(wage~poly(age ,2) ,data=Wage)
+fit.3 = lm(wage~poly(age ,3) ,data=Wage)
+fit.4 = lm(wage~poly(age ,4) ,data=Wage)
+fit.5 = lm(wage~poly(age ,5) ,data=Wage)
+anova(fit.1,fit.2,fit.3,fit.4,fit.5)
+```
+
+ANOVA check shows significance between models stops after degree-4.
+
+```{r}
+# Grid of values for age at which we want predictions.
+agelims=range(age)
+age.grid=seq(from=agelims[1],to=agelims[2])
+# Predictions.
+preds=predict(lm.fit,newdata=list(age=age.grid),se=TRUE)
+se.bands=cbind(preds$fit+2*preds$se.fit,preds$fit-2*preds$se.fit)
+# Plot of polynomial fit onto data including SE bands.
+plot(age,wage,xlim=agelims,cex=.5,col="darkgrey")
+title("Polynomial fit using degree 4")
+lines(age.grid,preds$fit,lwd=2,col="blue")
+matlines(age.grid,se.bands,lwd =1,col="blue",lty =3)
+```
+
+b. For step functions
+
+```{r}
+# Cross validation to choose optimal number of cuts.
+set.seed(1)
+cv.error.20 = rep(NA,19)
+for (i in 2:20) {
+Wage$age.cut = cut(Wage$age,i)
+step.fit=glm(wage~age.cut,data=Wage)
+cv.error.20[i-1]=cv.glm(Wage,step.fit,K=10)$delta[1] # [1]: Std [2]: Bias corrected.
+}
+plot(cv.error.20,type='b',ylab="CV Error")
+```
+
+We are advised to use 8 = index + 1 cuts.
+
+```{r}
+step.fit = glm(wage~cut(age,8), data=Wage)
+preds2=predict(step.fit,newdata=list(age=age.grid), se=T)
+se.bands2=cbind(preds2$fit+2*preds2$se.fit,preds2$fit-2*preds2$se.fit)
+plot(age,wage,xlim=agelims,cex=.5,col="darkgrey")
+title("Step function using 8 cuts")
+lines(age.grid,preds2$fit,lwd=2,col="blue")
+matlines(age.grid,se.bands2,lwd =1,col="blue",lty =3)
+```
+
+7.
+
+a. marital status
+
+```{r}
+Wage |>
+  ggplot(aes(x = maritl, y = wage)) +
+  geom_boxplot(aes(fill = maritl)) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+The highest median wage is among married people.
+
+```{r}
+gam.model = gam(wage~maritl, data=Wage)
+plot(gam.model, col="blue", se=T)
+```
+
+b. job class
+
+```{r}
+Wage |>
+  ggplot(aes(x = jobclass, y = wage)) +
+  geom_boxplot(aes(fill = jobclass)) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+gam_model_2 = gam(wage~jobclass, data=Wage)
+plot(gam_model_2, col="blue", se=T)
+```
+
+
+8. For the `Auto` data set with the `mpg` response variable, let us explore nonlinear behavior.
+
+```{r}
+pairs(Auto[1:7])
+```
+
+* `mpg` appears to have a non-linear relationship with `horsepower`, `displacement`, and `weight`
+
+```{r}
+fit.1 = lm(mpg~horsepower ,data=Auto)
+fit.2 = lm(mpg~poly(horsepower ,2) ,data=Auto)
+fit.3 = lm(mpg~poly(horsepower ,3) ,data=Auto)
+fit.4 = lm(mpg~poly(horsepower ,4) ,data=Auto)
+fit.5 = lm(mpg~poly(horsepower ,5) ,data=Auto)
+fit.6 = lm(mpg~poly(horsepower ,6) ,data=Auto)
+anova(fit.1,fit.2,fit.3,fit.4,fit.5,fit.6)
+```
+
+* The p-value comparing `fit.1` (linear) to `fit.2` (quadratic) is statistically significant, and the p-value comparing `fit.2` to `fit.3` (cubic) is not significant. This indicates that a linear or cubic fit is not suﬀicient, but a quadratic fit should suﬀice.
+
+```{r}
+hplim = range(Auto$horsepower)
+hp.grid = seq(from=hplim[1],to=hplim[2])
+preds1=predict(fit.1,newdata=list(horsepower=hp.grid))
+preds2=predict(fit.2,newdata=list(horsepower=hp.grid))
+preds5=predict(fit.5,newdata=list(horsepower=hp.grid))
+# Plot of linear and polynomial fits.
+plot(horsepower,mpg,xlim=hplim,cex.lab=1.5)
+lines(hp.grid,preds1,lwd=3,col="blue",lty=2)
+lines(hp.grid,preds2,lwd=3,col="red")
+lines(hp.grid,preds5,lwd=3,col="green",lty=2)
+legend(180,40,legend=c("Linear fit", "Quadratic fit", "Quintic fit"),
+col=c("blue", "red", "green"),lty=c(2,1,2), lwd=c(3,3,3),cex=1.5)
+```
+
+9. `Boston` data
+
+* predictor variable: `nox` (nitrogen oxide concentration)
+* response variable: `dis` (distance to employment centers)
+
+a. cubic polynomial regression
+
+```{r}
+Boston <- ISLR2::Boston #avoid ambiguity with MASS::Boston
+model.1 = glm(nox~poly(dis,3), data=Boston)
+plot(Boston$dis,Boston$nox, xlab="Distance", ylab="Nox values")
+dis.grid = seq(from=min(Boston$dis),to=max(Boston$dis),0.2)
+preds=predict(model.1,newdata=list(dis=dis.grid), se=T)
+lines(dis.grid,preds$fit,col="blue",lwd=3)
+lines(dis.grid,preds$fit+2*preds$se,col="blue",lwd=3,lty=2)
+lines(dis.grid,preds$fit-2*preds$se,col="blue",lwd=3,lty=2)
+```
+
+```{r}
+summary(model.1)
+```
+
+b. other polynomials
+
+```{r}
+set.seed(2)
+boston_df = Boston
+# boston_sample = sample.split(boston_df$dis, SplitRatio = 0.80)
+boston_sample = sample(c(TRUE, FALSE), 
+                       replace = TRUE, size = nrow(boston_df), 
+                       prob = c(0.8, 0.2))
+boston_train = subset(boston_df, boston_sample==TRUE)
+boston_test = subset(boston_df, boston_sample==FALSE)
+
+rss = rep(0,10)
+colours = rainbow(10)
+plot(Boston$dis,Boston$nox,xlab="Distance", ylab="Nox values",
+main="Polynomial fits from degree 1-10.")
+for (i in 1:10){
+model = glm(nox~poly(dis,i), data=boston_train)
+rss[i] = sum((boston_test$nox - predict(model,newdata=list(dis=boston_test$dis)))^2)
+preds=predict(model,newdata=list(dis=dis.grid))
+lines(dis.grid,preds,col=colours[i], lwd=2, lty=1)
+}
+legend(10,0.8,legend=1:10, col= colours[1:10],lty=1,lwd=2)
+```
+
+```{r}
+# RSS on the test set.
+plot(1:10,rss,xlab="Polynomial degree", ylab="RSS",
+main="RSS on test set vs polynomial degree", type='b')
+```
+
+c. cross-validation to find polynomial degreee
+
+```{r}
+# Cross validation to choose degree of polynomial.
+set.seed(1)
+cv.error.10 = rep(0,10)
+for (i in 1:10) {
+glm.fit=glm(nox~poly(dis,i),data=Boston)
+cv.error.10[i]=cv.glm(Boston,glm.fit,K=10)$delta[1]
+}
+plot(cv.error.10, type="b", xlab="Degree", ylab="CV Error")
+```
+
+d. regression splines
+
+```{r}
+# Regression spline with four degrees of freedom.
+spline.fit = lm(nox~bs(dis,df=4), data=Boston)
+summary(spline.fit)
+```
+
+```{r}
+attr(bs(Boston$dis,df=4),"knots")
+```
+
+We have a single knot at the 50th percentile of `dis`.
+
+```{r}
+plot(Boston$dis,Boston$nox,xlab="Distance", ylab="Nox values")
+preds = predict(spline.fit, newdata=list(dis=dis.grid), se=T)
+lines(dis.grid, preds$fit,col="red",lwd=3)
+lines(dis.grid, preds$fit+2*preds$se,col="blue",lwd=3,lty=2)
+lines(dis.grid, preds$fit-2*preds$se,col="blue",lwd=3,lty=2)
+```
+
+e. regression splines over several degrees of freedom
+
+```{r, message = FALSE, warning = FALSE}
+rss = rep(0,18)
+colours = rainbow(18)
+plot(Boston$dis,Boston$nox,xlab="Distance", ylab="Nox values",
+main="Regression splines using degrees from 3-10")
+# Degree of freedom starts from 3, anything below is too small.
+for (i in 3:20){
+spline.model = lm(nox~bs(dis,df=i), data=boston_train)
+rss[i-2] = sum((boston_test$nox - predict(spline.model,newdata=list(dis=boston_test$dis)))^2)
+preds=predict(spline.model,newdata=list(dis=dis.grid))
+lines(dis.grid,preds,col=colours[i-2], lwd=2, lty=1)
+}
+legend(10,0.8,legend=3:20, col=colours[1:18],lty=1,lwd=2)
+```
+
+f. cross-validation to find the optimal number of degrees of freedom
+
+```{r, message = FALSE, warning = FALSE}
+k=10
+set.seed(3)
+folds = sample(1:k, nrow(Boston), replace=T)
+cv.errors = matrix(NA,k,18, dimnames = list(NULL, paste(3:20))) #CV errors for degrees 3 to 20.
+# Create models (total=k) for each degree using the training folds.
+# Predict on held out folds and calculate their MSE's(total=k).
+# Continue until all j degrees have been used.
+# Take the mean of MSE's for each degree.
+for(j in 3:20){
+for(i in 1:k){
+spline.model=lm(nox~bs(dis,df=j), data=Boston[folds!=i,])
+pred=predict(spline.model,Boston[folds==i,],id=i)
+cv.errors[i,j-2]=mean((Boston$nox[folds==i] - pred)^2)
+}
+}
+mean.cv.errors = apply(cv.errors,2,mean)
+mean.cv.errors[which.min(mean.cv.errors)]
+```
+Our calculations point toward a degree-8 polynomial.
+
+
+10. For the `College` data set
+
+* response variable: `Outstate`
+* predictor variables: [all other variables]
+
+a. forward stepwise selection
+
+```{r}
+set.seed(4)
+college_df = College
+# college_sample = sample.split(college_df$Outstate, SplitRatio = 0.80)
+college_sample = sample(c(TRUE, FALSE), 
+                        replace = TRUE, size = nrow(college_df), 
+                        prob = c(0.8, 0.2))
+college_train = subset(college_df, college_sample==TRUE)
+college_test = subset(college_df, college_sample==FALSE)
+
+# Forward stepwise on the training set using all variables.
+fit.fwd = regsubsets(Outstate~., data=college_train, nvmax=17, method="forward")
+fit.summary = summary(fit.fwd)
+# Some Statistical metrics.
+which.min(fit.summary$bic) #Estimate of the test error, lower is better.
+```
+```{r}
+par(mfrow=c(2,2))
+plot(1:17, fit.summary$cp,xlab="Variables",ylab="Cp",main="Cp", type='b')
+plot(1:17, fit.summary$bic,xlab="Variables",ylab="BIC",main="BIC", type='b')
+plot(1:17, fit.summary$adjr2,xlab="Variables",ylab="Adjusted R2",main="Adjusted R2", type='b')
+```
+
+```{r}
+coef(fit.fwd,6)
+```
+
+b. GAM (generalized additive model)
+
+```{r}
+gam.m1 = gam(Outstate~Private+
+               s(Room.Board,4)+
+               s(PhD,4)+
+               s(perc.alumni,2)+
+               s(Expend,4)+
+               s(Grad.Rate,5), data=college_train)
+par(mfrow=c(2,3))
+plot(gam.m1, col="blue", se=T)
+```
+
+c. model statistics
+
+```{r}
+gam.m2 = gam(Outstate~Private+s(Room.Board,4)+s(PhD,4)+s(perc.alumni,2)
++s(Expend,4), data=college_train) # No Grad.Rate
+gam.m3 = gam(Outstate~Private+s(Room.Board,4)+s(PhD,4)+s(perc.alumni,2)
++s(Expend,4)+Grad.Rate, data=college_train) # Linear Grad rate
+gam.m4 = gam(Outstate~Private+s(Room.Board,4)+s(PhD,4)+s(perc.alumni,2)
++s(Expend,4)+s(Grad.Rate,4), data=college_train) # Spline with 4 degrees
+anova(gam.m2,gam.m3,gam.m4,gam.m1, test="F")
+```
+
+
+11. Here we explore backfitting i the context of multiple linear regression.  Suppose that we build an approach below and converge on coefficients.
+
+a. Generate a response $Y$ from two predictors $X_{1}$ and $X_{2}$ with $n = 100$
+
+```{r}
+set.seed(5)
+# Generated dataset
+X1 = rnorm(100, sd=2)
+X2 = rnorm(100, sd=sqrt(2))
+eps = rnorm(100, sd = 1)
+b0 = 5; b1=2.5 ; b2=11.5
+Y = b0 +b1*X1 + b2*X2 + eps
+```
+
+b. Initialize $\hat{\beta}_{1}$ with some value, then with $\hat{\beta}_{1}$ fixed, fit the model
+
+$$Y - \hat{\beta}_{1}X_{1} = \beta_{0} + \beta_{2}X_{2} + \epsilon$$
+
+```{r}
+beta1 = 0.1
+a=Y-beta1*X1
+beta2=lm(a~X2)$coef[2]
+beta2
+```
+
+d. Keeping $\hat{\beta}_{2}$ fixed, fit the model
+
+$$Y - \hat{\beta}_{2}X_{2} = \beta_{0} + \beta_{1}X_{1} + \epsilon$$
+
+```{r}
+a=Y-beta2*X2
+beta1 = lm(a~X1)$coef[2]
+beta1
+```
+
+e. loop
+
+```{r}
+beta.df = data.frame("beta0"=rep(0,1000),"beta1"=rep(0,1000),"beta2"=rep(0,1000))
+beta1 = 0.1
+for (i in 1:1000){
+a=Y-beta1*X1
+model = lm(a~X2)
+beta2 = model$coef[2]
+beta.df$beta2[i]= beta2
+a=Y-beta2*X2
+model = lm(a~X1)
+beta1 = model$coef[2]
+beta.df$beta1[i]=beta1
+beta.df$beta0[i]=model$coef[1]
+}
+# Beta values after 5 iterations.
+print(c(beta.df$beta0[5], beta.df$beta1[5], beta.df$beta2[5]))
+```
+
+f. compare to multiple linear regression
+
+```{r}
+lm.fit = lm(Y~X1+X2)
+coef(lm.fit)
+```
+
+
+12. Here we approximate multiple linear regression by repeatedly performing simple linear regression in a backfitting procedure.
+
+```{r}
+set.seed(6)
+n = 1000 # Number of examples
+p = 100 # Number of predictors
+# Generated dataset
+X = matrix(rnorm(n*p),n,p)
+beta0 = 8
+betas = rnorm(100, sd = 2)
+eps = rnorm(100, sd = 1)
+
+Y = beta0 + X%*%betas + eps
+
+bhats = matrix(0,nrow=25,ncol=100)
+intercepts = matrix(0,25,1)
+# For loop to create models(M) that excludes the predictors that are 'fixed',
+# and uses lm() to estimate the coefficent of the unfixed predictor.
+# Estimates are stored such that the values can be used for the next set of calculations.
+for (i in 1:25){
+for(j in 1:100){
+# Matrix multiplication of the fixed predictors and their respective coefficient estimates.
+M = Y - (X[,-j] %*% bhats[i,-j])
+# Linear regression with results stored in all rows from row(i):row(end).
+bhats[i:25,j] = lm(M~X[,j])$coef[2]
+intercepts[i] = lm(M~X[,j])$coef[1]
+}
+}
+```
+
+* via base-R multiple linear regression
+
+```{r}
+lm.fit = lm(Y~X)
+# Intercept and selected coefficient values.
+print(c(coef(lm.fit)[1], coef(lm.fit)[2], coef(lm.fit)[10], coef(lm.fit)[20]))
+```
+
+* via the improvised algorithm
+
+```{r}
+# Intercept, and selected coefficient values after iterating 25 times.
+print(c(intercepts[25], bhats[25,1], bhats[25,9], bhats[25,19]))
+```
+
 
 ## Meeting Videos
 
