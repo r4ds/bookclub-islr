@@ -24,10 +24,10 @@ and build a **non linear** function $f(X)$ to predict a response $Y$.
 
 $$f(X)=\beta_0+\sum_{k=1}^K{\beta_kh_k(X)}$$
 
-where $h_k(X)$ is the expression of the **hidden layers**, named as the $A_k$ function of $X$ with $K$ activations, $k=1,...,K$, which are not directly observed.
+where $h_k(X)$ is the expression of the **hidden layers**, a transformation of the input, named as the $A_k$ function of $X$ with $K$ activation, $k=1,...,K$, which are not directly observed.
 
 $$A_k=h_k(X)$$
-and identify the **non linear activation function** $g(z)$
+and identify the activation: a **non linear transformation of a linear function** $g(z)$
 
 $$A_k=h_k(X)=g(z)$$
 
@@ -303,6 +303,391 @@ knitr::include_graphics("images/10_06_recurrent_nn.png")
 ```{r 10-Deep-learning-14, echo=FALSE,fig.cap="Backpropagation - youtube: https://www.youtube.com/watch?v=Ilg3gGewQ5U",fig.align='center'}
 knitr::include_graphics("images/10_06_recurrent_nn.png")
 ```
+
+
+## Deep Learning part 2
+
+
+**Learning objectives:**
+
+- Multilayer neural network
+- Convolutional neural network
+- Recurrent neural network
+  - Case Study: Time series 
+  
+
+  
+## Introduction  
+  
+We will be exploring three powerful types of neural networks:
+
+
+- multilayer neural networks
+- convolutional neural networks (CNNs)
+- recurrent neural networks (RNNs). 
+
+
+These networks have revolutionized various fields by their ability to learn complex patterns and make intelligent predictions.
+
+
+### Multilayer neural networks
+
+
+Let's begin with **multilayer neural networks**. These networks represent a fundamental building block in the field of deep learning. Unlike their simpler counterparts with only one hidden layer, multilayer neural networks consist of multiple hidden layers, each containing numerous interconnected units called neurons. This architecture enables them to learn intricate representations of data and make highly accurate predictions.
+
+
+
+The power of multilayer neural networks lies in their capability to approximate almost any function. With just a single hidden layer containing a large number of neurons, they can effectively model complex relationships between input data and output predictions. However, the learning process becomes more manageable when we employ multiple hidden layers, each with a more modest number of neurons. This layered structure allows the network to gradually learn and extract abstract features from the input data, leading to enhanced performance and improved generalization.
+
+In practice, multilayer neural networks have demonstrated remarkable success in a wide range of applications, including image and speech recognition, **natural language processing**, and even **autonomous driving**. By leveraging their ability to learn from vast amounts of labeled data, these networks excel at recognizing intricate patterns, providing invaluable insights, and making accurate predictions.
+
+Now that we have a solid understanding of multilayer neural networks, let's move on to the next topic: convolutional neural networks.
+
+
+
+### Convolutional Neural Networks (CNNs):
+
+Convolutional neural networks, or CNNs, represent a **specialized type of neural network architecture** that has revolutionized the field of **computer vision**. Inspired by the human visual system, CNNs are designed to process and **understand visual data**, such as images and videos, with exceptional accuracy.
+
+What sets CNNs apart from other neural network architectures is their ability to exploit the spatial structure of visual data. They achieve this by employing a unique operation called convolution, which involves the application of filters or kernels to extract local features from the input. These filters act as feature detectors, capturing patterns such as edges, textures, and shapes at different scales.
+
+CNNs also incorporate other essential components, such as **pooling layers**, which downsample the extracted features, reducing the network's spatial dimensionality while retaining important information. Additionally, fully connected layers at the end of the network utilize these extracted features to make high-level predictions.
+
+One remarkable application of CNNs is in **image classification**. By training on large datasets, CNNs can learn to distinguish between thousands of object classes with impressive accuracy. They can identify specific objects in images, recognize faces, detect anomalies in medical images, and even analyze intricate details in satellite imagery.
+
+The versatility and power of CNNs extend beyond image classification. They have also made significant contributions to other tasks, including **object detection**, **semantic segmentation**, and **image generation**. CNNs continue to push the boundaries of what is possible in computer vision and have become an indispensable tool in various industries, ranging from healthcare to self-driving cars.
+
+Having explored the wonders of CNNs, let's now dive into the world of recurrent neural networks.
+
+### Recurrent Neural Networks (RNNs):
+
+Recurrent neural networks, or RNNs, have emerged as a groundbreaking type of neural network capable of **modeling sequential data and capturing temporal dependencies**. This makes them highly effective in analyzing and generating sequences, such as natural language text, speech, and time series data.
+
+Unlike feedforward neural networks, where information flows in a single direction from input to output, RNNs introduce **feedback connections** that allow information to persist over time.
+
+
+## Case Study: RNN - Time Series
+
+The idea is to extract many short mini-series of input sequences $X=X_1,X_2,...,X_L$ with a predefined length L (called the lag) and a corresponding target Y.
+
+The target Y is the value of the log volume $v_t$ at a single timepoint $t$, and the input sequence X is the series of 3-vectors ${X_ℓ}^L$ each consisting of the three measurements log volume, DJ return and log volatility from day $t−L, t−L+1, ... t−1$. Each value of time $t$ makes a separate $(X,Y)$ pair, for $t$ running from $L+1$ to $T$.
+
+
+##### Autoregression
+
+The RNN fit has much in common with a traditional **autoregression (AR)** linear model. They both use the same response $Y$ and input sequences $X$ of length $L=5$ and dimension $p=3$ in this case. 
+
+The RNN processes this sequence from left to right with the same weights $W$ (for the input layer), while the AR model simply treats all L elements of the sequence equally as a vector of $L×p$ predictors, a process called **flattening** in the neural network literature. 
+
+> The RNN also includes the hidden layer activations $A$ which transfer information along the sequence, and introduces additional non-linearity.
+
+
+
+```{r message=FALSE,warning=FALSE}
+library(tidyverse)
+library(ISLR2)
+NYSE%>%head
+```
+
+
+```{r}
+xdata <- data.matrix(
+    NYSE[, c("DJ_return", 
+             "log_volume",
+             "log_volatility")]
+    )
+
+xdata %>% head
+```
+
+
+```{r}
+istrain <- NYSE[, "train"]
+xdata <- scale(xdata)
+```
+
+
+
+Make a function to create **lagged** versions of the three time series. 
+
+```{r}
+lagm <- function(x, k = 1) {
+  n <- nrow(x)
+  pad <- matrix(NA, k, ncol(x))
+  rbind(pad, x[1:(n - k), ])
+}
+```
+
+
+Apply the lags:
+```{r}
+arframe <- data.frame(log_volume = xdata[, "log_volume"],
+   L1 = lagm(xdata, 1), L2 = lagm(xdata, 2),
+   L3 = lagm(xdata, 3), L4 = lagm(xdata, 4),
+   L5 = lagm(xdata, 5)
+ )
+
+arframe %>% head(3,3)
+```
+
+```{r}
+arframe <- arframe[-(1:5), ]
+istrain <- istrain[-(1:5)]
+```
+
+
+#### Linear AR model
+
+The “AR” stands for **autoregression**, indicating that the model uses the dependent relationship between current data and its past values.
+
+Fit the **linear AR model** to the training data using lm(), and predict on the test data. 
+
+```{r}
+arfit <- lm(log_volume ~ ., 
+            data = arframe[istrain, ])
+
+summary(arfit)
+```
+
+
+```{r}
+arpred <- predict(arfit, arframe[!istrain, ])
+```
+
+
+```{r}
+full_arpred <- data.frame(pred=arpred,
+                          log_volume=arframe[!istrain, "log_volume"])
+
+full_arpred %>%
+  ggplot(aes(x=log_volume,y=pred))+
+  geom_point(alpha=0.5)+
+  geom_smooth(method = "lm")
+```
+
+##### $R^2$
+
+$$V_0=1.054108$$
+
+$$R^2=0.413223$$
+
+```{r}
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+#### Add day_of_week in the model
+
+Re-fit this model, including the factor variable `day_of_week`.
+
+```{r}
+arframed <- data.frame(day = NYSE[-(1:5), "day_of_week"], arframe)
+
+arframed%>%head
+```
+
+
+```{r}
+arfitd <- lm(log_volume ~ ., 
+             data = arframed[istrain, ])
+```
+
+
+```{r}
+arpredd <- predict(arfitd, arframed[!istrain, ])
+```
+
+```{r}
+full_arpredd <- data.frame(pred=arpredd,
+                           log_volume=arframed[!istrain, "log_volume"])
+
+full_arpred %>%
+  mutate(type="arpred")%>%
+  rbind(full_arpredd%>%mutate(type="arpredd")) %>%
+  ggplot(aes(x=log_volume,y=pred,group=type,color=type))+
+  geom_point(alpha=0.5)+
+  geom_smooth(method = "lm")+
+  scale_color_viridis_d()+
+  theme_bw()
+```
+
+$$R^2(\text{+day of week})=0.4598616$$
+
+```{r}
+1 - mean((arpredd - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+#### Preprocessing
+
+To fit the **RNN** reshape the data sequencing `L=5` feature vectors $X=(Xℓ)_1^L$ for each observation.
+
+(book source (10.20) on page 428)
+
+These are lagged versions of the time series going back L time points.
+
+
+Preprocessing step transoforming data into a matrix.
+```{r}
+n <- nrow(arframe)
+xrnn <- data.matrix(arframe[, -1])
+xrnn <- array(xrnn, c(n, 3, 5))
+xrnn <- xrnn[,, 5:1]
+xrnn <- aperm(xrnn, c(1, 3, 2))
+```
+
+
+```{r}
+dim(xrnn)
+```
+
+#### RNN Model 
+
+
+To start using **Keras**, follow this order:
+```{r eval=FALSE}
+library(reticulate)
+virtualenv_create("r-reticulate", python = path_to_python)
+library(tensorflow)
+use_virtualenv("r-reticulate")
+```
+
+```{r eval=FALSE}
+library(keras)
+```
+
+
+
+Set the model specidfications:
+```{r results='hide',eval=FALSE}
+model <- keras_model_sequential() %>%
+  layer_simple_rnn(
+    units = 12,
+    input_shape = list(5, 3),
+    dropout = 0.1,
+    recurrent_dropout = 0.1
+  ) %>%
+  layer_dense(units = 1)
+```
+
+
+```{r eval=FALSE}
+model
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("images/10_model_ts_keras.png")
+```
+
+
+Compile the model with adding specification of parameters optimization:
+
+```{r eval=FALSE}
+model %>% 
+  compile(optimizer = optimizer_rmsprop(),
+    loss = "mse")
+```
+
+
+
+#### History (RNN model fit)
+
+```{r eval=FALSE}
+history <- model %>% 
+  fit(
+    # training set
+    xrnn[istrain,, ], 
+    arframe[istrain, "log_volume"],
+    batch_size = 64, 
+    epochs = 200,
+    # testing set
+    validation_data = list(xrnn[!istrain,, ], 
+                           arframe[!istrain, "log_volume"])
+    )
+```
+
+
+
+
+```{r}
+knitr::include_graphics("images/10_history_ts_plot.png")
+```
+
+
+
+```{r eval=FALSE}
+kpred <- predict(model, xrnn[!istrain,, ])
+```
+
+
+
+
+
+This value varies if the model runs more than one time on the same training set, for reproducibility the history need to be run anytime before the `predict()` function. This assures that the $R^2$ calculation below releases consistent results.
+
+$$R^2(\text{keras})=0.4102655$$
+```{r eval=FALSE}
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+#### Model 2
+
+Set a **nonlinear AR model** extracting the model matrix x from `arframed`, which includes the `day_of_week` variable.
+
+```{r}
+x <- model.matrix(log_volume ~ . - 1, 
+                  data = arframed)
+
+colnames(x)
+```
+
+```{r eval=FALSE}
+arnnd <- keras_model_sequential() %>%
+  layer_dense(units = 32, activation = 'relu',
+      input_shape = ncol(x)) %>%
+  layer_dropout(rate = 0.5) %>%
+  layer_dense(units = 1)
+```
+
+```{r eval=FALSE}
+arnnd %>% 
+  compile(loss = "mse",
+    optimizer = optimizer_rmsprop())
+```
+
+#### History 2 (RNN model2 fit)
+
+```{r eval=FALSE}
+history2 <- arnnd %>% 
+  fit(
+    x[istrain, ], arframe[istrain, "log_volume"], 
+    epochs = 100,
+    batch_size = 32, 
+    validation_data =
+      list(x[!istrain, ], arframe[!istrain, "log_volume"])
+  )
+```
+
+
+
+
+
+```{r}
+knitr::include_graphics("images/10_history2_ts_plot.png")
+```
+
+
+```{r eval=FALSE}
+npred <- predict(arnnd, x[!istrain, ])
+```
+
+
+
+$$R^2=0.4675589$$
+
+```{r eval=FALSE}
+1 - mean((arframe[!istrain, "log_volume"] - npred)^2) / V0
+```
+
 
 
 ## Meeting Videos
