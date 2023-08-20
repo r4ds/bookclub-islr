@@ -1179,3 +1179,20 @@ custom_metrics <- metric_set (accuracy, sens, spec)
 `r knitr::include_url("https://www.youtube.com/embed/gMQ22j5VYTg")`
 
 `r knitr::include_url("https://www.youtube.com/embed/a-NVS5-SRe0")`
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/w-2uGV_JfHA")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:37:05	Derek Sollberger (he/him): Yes, you are describing the English and Greek letters correctly
+00:50:26	Derek Sollberger (he/him): true positive rate = (# of true positives) / (# of all positives)
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/QE9Rjw11y7g")`
+
+`r knitr::include_url("https://www.youtube.com/embed/db2N1Bbv1Fc")`

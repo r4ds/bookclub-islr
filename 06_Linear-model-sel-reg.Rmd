@@ -451,3 +451,24 @@ https://github.com/JauntyJJS/islr2-bookclub-cohort3-chapter6-lab
 00:27:23	Ronald Legere:	https://stats.stackexchange.com/questions/410849/when-does-partial-least-squares-provide-1-component-solutions
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/adZlCJyNnls")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:47	Lucio Cornejo:	Hello Angel
+00:07:22	Lucio Cornejo:	Arnab, can you hear us?
+00:07:48	Arnab:	No :/
+00:08:14	Arnab:	Can anyone hear me?
+00:08:43	Arnab:	I am getting a lot of echo
+00:44:58	Derek Sollberger (he/his):	Fig. 6.7: Lasso (L1 norm, left picture) coefficients will meet RSS on the axes … while ridge (L2 norm, right picture) RSS will intersect at a combination of coefficients (i.e. reinforcing why lasso forces some coefficients to be zero, while ridge does not)
+00:45:39	Lucio Cornejo:	https://stats.stackexchange.com/questions/318322/lp-regularization-with-p-1
+01:02:45	Lucio Cornejo:	no comments from me. Great presentation, thanks
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/zVj3KxFegXg")`

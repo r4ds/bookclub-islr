@@ -986,3 +986,17 @@ time our data do not record exactly what we would ideally like to study.
 01:06:14	Ron:	"Down with determinants" lol
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/wx6vqcbg-qI")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:26	Lucio Cornejo:	start
+00:39:32	Derek Sollberger (he/his):	It may be the case that the *proof* of the Benjamini-Hochberg procedure is easier if the underlying variables are independent
+00:43:25	Lucio Cornejo:	end
+```
+</details>

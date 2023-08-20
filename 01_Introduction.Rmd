@@ -428,3 +428,27 @@ knitr::include_graphics("images/fig1_2.png")
 01:06:47	Lydia Gibson:	Spam always says free or has an exclamation point lol
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/z9-V3IapJBc")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:04:33	Lucio Cornejo:	Hello
+00:04:52	Derek Sollberger (he/him):	good afternoon
+00:05:00	Lucio Cornejo:	Let's wait 5 minutes, in case more people connect.
+00:11:25	Lucio Cornejo:	https://r4ds.github.io/bookclub-islr/
+00:20:00	Phoebe Chapman:	Hi everyone, it’s 9am Monday here in NZ and I’m in a shared office so I’ll intro myself in the chat to avoid suturing others int he office. I’m a postdoc working on microbiomes at Uni of Otago and I’m interested in increasing my broad statistical knowledge
+00:20:23	Phoebe Chapman:	*disturbing
+00:31:32	Lucio Cornejo:	https://botlnec.github.io/islp/
+00:39:32	Lucio Cornejo:	https://docs.google.com/spreadsheets/d/1QVH6GEusEFUNEsFj3idxGH7XFq8hDC7jFaCWdx0q164/edit#gid=0
+00:42:07	Derek Sollberger (he/him):	Thank you for facilitating :-D
+00:42:18	Phoebe Chapman:	All good. Look forward to next week! thanks
+00:42:23	Caroline Schreiber:	Appreciate the really good introduction, Lucio!
+00:42:31	Darcé:	Thanks, sorry again for being late
+00:42:59	Caroline Schreiber:	Bye everyone, see you next week 🙂
+```
+</details>

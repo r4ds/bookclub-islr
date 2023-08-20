@@ -14,7 +14,7 @@ If you would like to present, please see the sign-up sheet for your cohort (link
 - Cohort 2 (started 2021-12-02, ended 2022-07-14): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGhO5S1v53nQzil-OSRZIweH)
 - Cohort 3 (started 2022-02-07, ended 2022-09-05): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGisLSs09v1NQUQaxuE8nbOO)
 - Cohort 4 (started 2022-05-01, ended 2022-12-04): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi9LAXM5kcyuN_bkN66TzUD)
-- [Cohort 5](https://docs.google.com/spreadsheets/d/1QVH6GEusEFUNEsFj3idxGH7XFq8hDC7jFaCWdx0q164/edit#gid=0) (started 2023-01-15): [Sundays, 14:00 CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20230115T200000&p1=24&p2=131&p3=1440) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGjbefZellBVB306_z8Wz1Xd)
+- Cohort 5 (started 2023-01-15, ended 2023-07-30): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGjbefZellBVB306_z8Wz1Xd)
 
 <hr>
 

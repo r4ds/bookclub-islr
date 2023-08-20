@@ -506,3 +506,35 @@ https://www.merriam-webster.com/dictionary/minuend
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/REshRlsPf4U")`
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/rQ9p9qawq1E")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:06:00	Lucio Cornejo:	Hello, Ángel, Derek
+00:06:21	Ángel Féliz Ferreras:	start
+00:31:30	Lucio Cornejo:	not so far, thanks
+00:55:54	Derek Sollberger (he/his):	Thank you for tracking down the C-index function in the dynpred package
+00:56:31	Lucio Cornejo:	thanks chat gpt as well
+00:56:35	Ángel Féliz Ferreras:	end
+00:57:10	Derek Sollberger (he/his):	Is this survival analysis new in the second edition of ISLR?
+00:58:02	Ángel Féliz Ferreras:	https://angelfelizr.github.io/ISL-Solution-Book/survival-analysis.html
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/iu9TGW4f94E")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:04:20	Ángel Féliz Ferreras:	start
+00:26:58	Derek Sollberger:	haha, whatever parameterization is preferred :-)
+00:29:21	Ángel Féliz Ferreras:	end
+00:29:30	Derek Sollberger:	thanks!
+```
+</details>

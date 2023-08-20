@@ -538,3 +538,19 @@ Now that we've seen one that's comparable, I want to focus on the tidymodels ver
 00:37:36	Sandra Muroy:	https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/mpnBWjgzunw")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:04:14	Derek Sollberger (he/him):	start
+00:59:44	Lucio Cornejo:	https://link.springer.com/chapter/10.1007/3-540-45665-1_31
+01:01:38	Derek Sollberger (he/him):	end
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/lHD82la2uvU")`
