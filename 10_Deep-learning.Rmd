@@ -798,3 +798,36 @@ XGBoost is a scalable and highly accurate implementatio
 01:14:03	Ron:	I am going to hop off as well, see you next time!
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/PXcKjeVv5Wg")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:12:08	Federica Gazzelloni:	start
+00:15:39	Federica Gazzelloni:	https://github.com/tristanoprofetto/neural-networks/blob/main/ANN/Regressor/feedforward.R
+00:33:45	Federica Gazzelloni:	https://www.youtube.com/watch?v=CqOfi41LfDw
+01:09:11	Federica Gazzelloni:	end
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/c-4eXkKrlvo")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:07:17	Lucio Cornejo:	Hello, everyone
+00:07:40	Derek Sollberger (he/him):	Good afternoon
+00:09:11	Federica Gazzelloni:	start
+00:26:20	Federica Gazzelloni:	https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-torch.html
+00:27:28	Federica Gazzelloni:	https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-keras.html
+00:44:30	Federica Gazzelloni:	(book source (10.20) on page 428)
+00:44:47	Derek Sollberger (he/him):	The keras workflow and pipes are interesting
+00:53:54	Lucio Cornejo:	no questions from me
+00:57:52	Federica Gazzelloni:	end
+```
+</details>

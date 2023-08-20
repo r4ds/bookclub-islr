@@ -1224,3 +1224,47 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:37:37	Sandra Muroy:	:)
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/SY_t6zkh-0I")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:06:29	Caroline Schreiber:	Yes 🙂
+00:15:40	Jeffrey Stevens:	Does 'reducible error' map onto the concept of 'bias' that we visit later in the chapter?
+00:16:46	Jeffrey Stevens:	Thanks
+01:03:44	Jeffrey Stevens:	I need to go
+01:03:54	Jeffrey Stevens:	+
+01:04:43	Jeffrey Stevens:	Thank you!
+01:04:48	Phoebe Chapman:	Thanks!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/FYkp18MLycs")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:04:33	Derek Sollberger (he/him):	good afternoon!
+00:04:55	Lucio Cornejo:	Helloo
+00:06:17	Lucio Cornejo:	What do you think about Jeffrey's previous question?
+00:06:23	Lucio Cornejo:	"Does 'reducible error' map onto the concept of 'bias' that we visit later in the chapter?"
+00:08:46	Phoebe Chapman:	Sorry, have muted
+00:29:02	Lucio Cornejo:	everything clear so far
+00:33:40	Lucio Cornejo:	oooh, yeah, yes, you are right
+00:33:43	Lucio Cornejo:	it's clear now
+00:33:43	Lucio Cornejo:	thanks
+00:42:41	Ángel Féliz Ferreras:	Here is my figure
+00:42:54	Derek Sollberger (he/him):	Reacted to "Here is my figure" with 👍
+00:43:14	Lucio Cornejo:	Reacted to "Here is my figure" with 👍
+00:44:18	Phoebe Chapman:	Reacted to "Here is my figure" with 👍
+00:44:38	Derek Sollberger (he/him):	"Describe three real-life applications in which classification might be useful"
+00:49:57	Lucio Cornejo:	cool, thanks
+00:50:08	Derek Sollberger (he/him):	"Describe three real-life applications in which cluster analysis"
+01:00:42	Phoebe Chapman:	Thanks Derek
+```
+</details>

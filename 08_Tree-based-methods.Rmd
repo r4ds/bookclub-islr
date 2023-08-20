@@ -1264,3 +1264,27 @@ doParallel::stopImplicitCluster()
 00:30:58	Ron:	https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/acXCrwkv_SU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:33:16	Lucio Cornejo:	https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/oovisIM4RqM")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:48	Lucio Cornejo:	https://rpubs.com/lmorgan95/ISLR_CH8_Solutions
+00:28:14	Lucio Cornejo:	https://www.youtube.com/watch?v=D0efHEJsfHo
+01:00:39	Lucio Cornejo:	end
+```
+</details>

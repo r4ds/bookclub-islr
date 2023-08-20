@@ -679,3 +679,22 @@ x %>%
 00:19:16	Sandra Muroy:	gap statistic original paper
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/Q7cBNFI57uc")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:09	Ángel Féliz Ferreras:	start
+00:40:12	Ángel Féliz Ferreras:	end
+01:31:19	Ángel Féliz Ferreras:	https://angelfeliz.com/posts/01-readiable-code/main.html#code-style
+01:35:45	Lucio Cornejo:	True
+01:35:50	Lucio Cornejo:	!!0
+01:47:07	Lucio Cornejo:	https://www.youtube.com/watch?v=prc4_l2SIbw
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/WBRc5BZIYzg")`

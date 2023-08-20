@@ -602,3 +602,32 @@ summary(lm(mpg ~ horsepower + I(horsepower^2), data = Auto))$coef
 00:38:01	Ronald Legere:	https://stats.stackexchange.com/
 ```
 </details>
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/MkdSnkMncCU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:03:36	Angel Feliz:	Resampling summary
+
+https://angelfelizr.github.io/ISL-Solution-Book/resampling-methods.html
+00:29:20	Angel Feliz:	https://github.com/AngelFelizR/ISL-Solution-Book
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/vbBZ8Ux1iUk")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:03:04	Ángel Féliz Ferreras:	Exercises
+https://angelfelizr.github.io/ISL-Solution-Book/05-execises.html
+00:03:46	Derek Sollberger:	I love this first exercise; I added it to my textbook :-)
+00:18:03	Derek Sollberger:	Did you find any advantages/convenience to using the tidymodels workflows here?
+00:36:34	Ángel Féliz Ferreras:	https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/06-regularization.html
+```
+</details>

@@ -482,3 +482,35 @@ $$VIF(\hat{\beta_j}) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
 `r knitr::include_url("https://www.youtube.com/embed/nD7n0PqK26Y")`
 
 `r knitr::include_url("https://www.youtube.com/embed/ZAXtHeALvQU")`
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/gxbBSpvw2zQ")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:07	Derek Sollberger (he/him):	good afternoon
+00:05:32	Lucio Cornejo:	hello, everyone
+00:05:38	Caroline Schreiber:	Hi all 😄
+00:06:27	Lucio Cornejo:	maybe we can wait 2 more minutes for the rest to join
+00:06:43	Caroline Schreiber:	👍 sounds good
+00:44:38	Ángel Féliz Ferreras:	Do you know any R package to apply any selection strategy?
+00:45:43	Lucio Cornejo:	the olsrr package
+00:47:42	Ángel Féliz Ferreras:	thanks
+00:55:46	Derek Sollberger (he/him):	Thank you Caroline for the great explanations!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/168nryRVTSc")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:35:49	Ángel Féliz Ferreras:	https://github.com/AngelFelizR/ISL-Practice
+01:01:56	Derek Sollberger (he/him):	Thank you Angel!
+01:02:18	Lucio Cornejo:	No questions, Thanks for the presentation, I learnt insterenting stuff, like ":="
+```
+</details>
