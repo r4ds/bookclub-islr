@@ -55,4 +55,5 @@ Imports:
     xgboost
 Remotes:
     hadley/emo,
-    njtierney/broomstick
+    njtierney/broomstick,
+    koalaverse/vip
