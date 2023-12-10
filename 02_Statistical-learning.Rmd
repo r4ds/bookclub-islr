@@ -244,6 +244,8 @@ Quantitative variables take on numerical values.
 
 In contrast, qualitative variables take on values in <mark>*classes*</mark>, or categories.
 
+Generally, regression is used when the response variable is quantitative. Classification is use when the response variable is qualitative. There is some overlap in methods, since some methods can perform regression or classification.
+
 ## Assessing Model Accuracy
 
 There is no free lunch in statistics: no one method dominates all others over all possible problems.
@@ -485,7 +487,7 @@ Y-axis: increasing Error, Variance, and Bias
 
 <span style="color: brown;">Brown</span>: Variance
 
-<span style="color: green;">Yellow</span>: Training set MSE
+<span style="color: yellow;">Yellow</span>: Training set MSE
 
 <span style="color: green;">Green</span>: Testing set MSE
 
@@ -495,7 +497,7 @@ Black: Irreducibile error (Bayes)
 (b) Explain why each of the five curves has the shape displayed in
 part (a).</span>
 
-<span style="color: green;">Yellow</span>: As models become more flexible and complex, the training error is reduced, but with diminishing benefit.
+<span style="color: yellow;">Yellow</span>: As models become more flexible and complex, the training error is reduced, but with diminishing benefit.
 
 <span style="color: green;">Green</span>: We often observe a U-shaped error in the holdout training error. This is a combination of the Bias error above the least flexible model and the Variance error from over-fitting the most flexible models and the irreducible error component.
 
@@ -742,13 +744,13 @@ Auto %>%
 ```{r}
 Auto %>%
   select(where(is.numeric)) %>%
-  summarize(across(everything(), mean, na.rm = TRUE)) %>% pivot_longer(everything(),
-                                                                       values_to = "mean")
+  summarize(across(everything(), mean, na.rm = TRUE)) %>%
+  pivot_longer(everything(), values_to = "mean")
 
 Auto %>%
   select(where(is.numeric)) %>%
-  summarize(across(everything(), sd, na.rm = TRUE)) %>% pivot_longer(everything(),
-                                                                     values_to = "sd")
+  summarize(across(everything(), sd, na.rm = TRUE)) %>%
+  pivot_longer(everything(), values_to = "sd")
 ```
 
 <span style="color: red;">(d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?</span>
