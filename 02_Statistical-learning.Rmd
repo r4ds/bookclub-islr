@@ -800,6 +800,27 @@ Yes, a predictive model is certainly possible with this data set.
 <span style="color: red;">2.4 Exercises 57
 10. This exercise involves the Boston housing data set. (a) To begin, load in the Boston data set. The Boston data set is part of the ISLR2 library.</span>
 
+Notes on Boston housing data set:
+
+The "black" variable is available in the original dataset from the MASS package. It appears that the authors of ISLR removed this column before importing it into their package.
+
+From the ISLR2 package documentation:
+
+>>This dataset was obtained from, and is slightly modified from, the Boston dataset that is part of the
+MASS library. References are available in the MASS library.
+
+Definition of "black" in the MASS dataset: "1000(Bk−0.63) where Bk is the proportion of blacks by town."
+
+Criticisms of original dataset:
+
+-   <https://fairlearn.org/main/user_guide/datasets/boston_housing_data.html>
+
+>>"...Harrison and Rubenfield developed the feature B (result of the formula 1000(B_k - 0.63)^2k) under the assumption that racial self-segregation had a positive impact on house prices. B then encodes systemic racism as a factor in house pricing. Thus, any models trained using this data that do not take special care to process B will learn to use mathematically encoded racism as a factor in house price prediction."
+
+-   <https://medium.com/@docintangible/racist-data-destruction-113e3eff54a8>
+
+-   <https://github.com/odsti/datasets/tree/master/boston_housing#the-black_index-variable-is-odd-and-probably-wrong>
+
 <span style="color: red;">How many rows are in this data set?</span>
 
 ```{r}
