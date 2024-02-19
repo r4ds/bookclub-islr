@@ -85,7 +85,7 @@ knitr::include_graphics("./images/fig4_2.jpg", error = FALSE)
 
 $$p(X) = β_0 + β_1X \space \Longrightarrow {Linear \space regression}$$
 $$p (X) =  \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}} \space \Longrightarrow {Logistic \space function}$$
-$$odds = \frac{p (X)}{1 - p (X)} =  e^{\beta_{0} + \beta_{1}X}} \Longrightarrow {odds \space value [0, ∞]}$$
+$$odds = \frac{p (X)}{1 - p (X)} =  e^{\beta_{0} + \beta_{1}X} \Longrightarrow {odds \space value [0, ∞]}$$
 
 By logging the whole equation, we get
 

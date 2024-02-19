@@ -343,7 +343,7 @@ tune_res <- tune_grid(
 tune_res <- readRDS("data/09-tune_res.rds")
 ```
 
-```{r 09-autoplot-tune_res}
+```{r 09-autoplot-tune_res, eval = FALSE}
 autoplot(tune_res)
 ```
 
