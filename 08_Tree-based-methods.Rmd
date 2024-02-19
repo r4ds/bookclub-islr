@@ -690,7 +690,7 @@ tune_res %>%
 
 
 Using `autoplot()` shows which values of `cost_complexity` appear to produce the highest accuracy.
-```{r, plot_tuning_results_class}
+```{r, plot_tuning_results_class, eval = FALSE}
 autoplot(tune_res)
 ```
 
