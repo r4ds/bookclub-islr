@@ -984,7 +984,7 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:16:11	Keuntae Kim:	awesome!!! I need this!!!
 00:16:22	Ryan Metcalf:	This is great. Thank you!
 00:16:30	Kim Martin:	Ah - found it: https://r4ds.github.io/bookclub-islr/statistical-learning.html
-00:16:43	Jon Harmon (jonthegeek):	r4ds.io/islr is the shortcut
+00:16:43	Jon Harmon (jonthegeek):	dslc.io/islr is the shortcut
 00:17:28	Stijn:	dependent and independent variables is what I'm used to
 00:17:44	Fran Barton:	I'm pretty new to all of this so I'll just take whatever terminology I'm given for now
 00:17:52	Jon Harmon (jonthegeek):	Note to self: I should increase the default font size in this notes-book.
@@ -1030,7 +1030,7 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:46:36	Ryan Metcalf:	Ive tried this 3D in Python. (But that doesn’t apply to R.)
 00:47:10	Stijn:	And let's give rayshader an honourable mention for 3D stuff!
 00:48:09	Rahul T:	I am not sure if this has the code - it’s listed on the book site as a resource https://web.stanford.edu/~hastie/ISLR2/Labs/
-00:49:06	Jon Harmon (jonthegeek):	A long, unfinished thread about surface in R: https://rfordatascience.slack.com/archives/C8JRJSW4S/p1627573385008700
+00:49:06	Jon Harmon (jonthegeek):	A long, unfinished thread about surface in R: https://dslcio.slack.com/archives/C8JRJSW4S/p1627573385008700
 00:49:54	Jon Harmon (jonthegeek):	@rahul That's just the labs (~1/2 of each chapter).
 00:51:35	Rahul T:	Got it, thanks!
 00:51:38	Kim Martin:	Super cynical, Raymond 😂
@@ -1097,7 +1097,7 @@ Again, the oldest homes have more than 8 rooms per dwelling. They have the lowes
 00:09:45	David Severski:	😄
 00:12:11	Ryan Metcalf:	Ryan S.
 00:19:33	A. S. Ghatpande:	How would you calculate bias in the example given?
-00:19:48	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:19:48	Jon Harmon (jonthegeek):	dslc.io/islr
 00:22:40	shamsuddeen:	We do have validation test also sometimes. Is that called validation error ?
 00:24:00	shamsuddeen:	The chapter seems not discuss anything about validation set
 00:25:14	SriRam:	K is number of neighbors to consider I think

@@ -1,14 +1,14 @@
-# R4DS Introduction to Statistical Learning Using R Book Club
+# DSLC Introduction to Statistical Learning Using R Book Club
 
-Welcome to the R4DS Introduction to Statistical Learning Using R Book Club!
+Welcome to the DSLC Introduction to Statistical Learning Using R Book Club!
 
 We are working together to read [_Introduction to Statistical Learning Using R_](https://www.statlearning.com) by Gareth James, Daniela Witten, Trevor Hastie, and Rob Tibshirani (Springer Science+Business Media, LLC, part of Springer Nature, copyright 2021, 978-1-0716-1418-1_1).
-Join the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on the [R4DS Slack](https://r4ds.io/join) to participate.
+Join the [#book_club-islr](https://dslcio.slack.com/archives/C02CQ93F882) channel on the [DSLC Slack](https://dslc.io/join) to participate.
 As we read, we are producing [notes about the book](https://r4ds.github.io/bookclub-islr/).
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-islr](https://rfordatascience.slack.com/archives/C02CQ93F882) channel on Slack)!
+If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-islr](https://dslcio.slack.com/archives/C02CQ93F882) channel on Slack)!
 
 - Cohort 1 (started 2021-09-21, ended 2022-05-24): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGibdB0i2wveuFRDlXHbWaPD)
 - Cohort 2 (started 2021-12-02, ended 2022-07-14): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGhO5S1v53nQzil-OSRZIweH)
@@ -43,4 +43,4 @@ Do these steps each time you present another chapter:
 10. When your PR has been accepted ("merged"), `usethis::pr_finish()` to close out your branch and prepare your local repository for future work.
 11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push("origin")` or click the `Push` button on the `Git` tab of Rstudio.
 
-When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.io/islr).
+When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://dslc.io/islr).

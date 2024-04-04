@@ -310,7 +310,7 @@ knitr::include_graphics("images/fig1_2.png")
 00:23:17	Raymond Balise:	👍🏼
 00:23:17	Kim Martin:	https://github.com/r4ds/bookclub-islr
 00:23:23	David Severski:	To be clear, we’re talking tidymodels vs base, not tidyverse v base.
-00:23:31	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:23:31	Jon Harmon (jonthegeek):	dslc.io/islr
 00:28:03	Fran Barton (he/him):	do we know why they are called "supervised" and "unsupervised"? interesting terminology and I think it would help me to understad better if I could grasp what they have to do with whether you're looking for outputs or not
 00:28:35	August:	supervised has a target/output to be predicted.
 00:29:02	Fran Barton (he/him):	"letting the machine go play" is great - that helps thx
@@ -333,7 +333,7 @@ knitr::include_graphics("images/fig1_2.png")
 00:33:33	Kim Martin:	Math notation as bird spotting hobby alternative...
 00:33:42	August:	sorry you're right euler is more like e
 00:34:05	Ryan Metcalf:	Latex: \in
-00:34:18	Jon Harmon (jonthegeek):	r4ds.io/islr
+00:34:18	Jon Harmon (jonthegeek):	dslc.io/islr
 00:34:21	Jon Harmon (jonthegeek):	statlearning.com
 00:34:23	Raymond Balise:	the notation book reference plz
 00:34:29	Kim Martin:	https://www.amazon.com/Mathematical-Notation-Guide-Engineers-Scientists/dp/1466230525
@@ -387,7 +387,7 @@ knitr::include_graphics("images/fig1_2.png")
 00:20:38	Nilay Yönet:	👋☺️
 00:20:40	Fariborz Soroush:	Hi Amber :)
 00:21:46	Mounika [Monika]:	Hi Amber :)
-00:25:15	Mounika [Monika]:	Mei, could you please post also the link to the R4DS GitHub resource?
+00:25:15	Mounika [Monika]:	Mei, could you please post also the link to the DSLC GitHub resource?
 00:25:24	Rose Franzen (she/her):	https://r4ds.github.io/bookclub-islr/book-club-meetings.html
 00:25:34	Mounika [Monika]:	Thank you !
 00:36:28	Rose Hartman (she/her):	Did you get the capitals? install.packages(“ISLR2”)?

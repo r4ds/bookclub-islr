@@ -1,6 +1,6 @@
 --- 
 title: "Introduction to Statistical Learning Using R Book Club"
-author: "The R4DS Online Learning Community"
+author: "The Data Science Learning Community"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,17 +8,17 @@ bibliography: book.bib
 biblio-style: apalike
 link-citations: yes
 github-repo: r4ds/bookclub-islr
-description: "This is the product of the R4DS Online Learning Community's Introduction to Statistical Learning Using R Book Club."
+description: "This is the product of the Data Science Learning Community's Introduction to Statistical Learning Using R Book Club."
 ---
 
 # Welcome {-}
 
 This is a companion for the book [_Introduction to Statistical Learning Using R_](https://www.statlearning.com) by Gareth James, Daniela Witten, Trevor Hastie, and Rob Tibshirani (Springer Science+Business Media, LLC, part of Springer Nature, copyright 2021, 978-1-0716-1418-1_1).
-This companion is available at [r4ds.io/islr](https://r4ds.io/islr).
+This companion is available at [dslc.io/islr](https://dslc.io/islr).
 
-This website is being developed by the [R4DS Online Learning Community](https://rfordatasci.com). Follow along, and [join the community](https://r4ds.io/join) to participate.
+This website is being developed by the [Data Science Learning Community](https://dslc.io). Follow along, and [join the community](https://dslc.io/join) to participate.
 
-This companion follows the [R4DS Online Learning Community Code of Conduct](https://r4ds.io/conduct).
+This companion follows the [Data Science Learning Community Code of Conduct](https://dslc.io/conduct).
 
 ## Book club meetings {-}
 
@@ -26,7 +26,7 @@ This companion follows the [R4DS Online Learning Community Code of Conduct](http
   - **This is the best way to learn the material.**
 - Presentations will usually consist of a review of the material, a discussion, and/or a demonstration of the principles presented in that chapter.
 - More information about how to present is available in the [github repo](https://github.com/r4ds/bookclub-islr).
-- Presentations will be recorded, and will be available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
+- Presentations will be recorded, and will be available on the [Data Science Learning Community YouTube Channel](https://dslc.io/youtube).
 
 ## 1st edition vs 2nd edition {-}
 

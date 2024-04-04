@@ -3,7 +3,7 @@ Title: Introduction to Statistical Learning Using R Book Club
 Version: 0.0.0.9000
 Authors@R: c(
   person(
-    "R4DS Online Learning Community",
+    "Data Science Learning Community",
     email = "rfordatasci@gmail.com",
     role = c("aut", "cre", "cph")
   )
