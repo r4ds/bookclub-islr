@@ -250,7 +250,7 @@ sim_data %>%
   geom_point() +
   labs(title = "Trying to make a hyperplane classifier",
        subtitle = "simulated data",
-       caption = "R4DS book club") +
+       caption = "DSLC book club") +
   theme_minimal()
 ```
 
@@ -265,7 +265,7 @@ test_data %>%
   geom_point() +
   labs(title = "Trying to make a hyperplane classifier",
        subtitle = "simulated data",
-       caption = "R4DS book club") +
+       caption = "DSLC book club") +
   theme_minimal()
 ```
 
