@@ -44,3 +44,7 @@ Do these steps each time you present another chapter:
 11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push("origin")` or click the `Push` button on the `Git` tab of Rstudio.
 
 When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://dslc.io/islr).
+
+## License
+
+These slides are licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/). This license applies to the original content created by the contributors. Quotes, excerpts, and figures from [_Introduction to Statistical Learning Using R_](https://www.statlearning.com) are included under fair use for educational purposes and remain the property of their respective copyright holders.
